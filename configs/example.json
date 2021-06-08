@@ -1,0 +1,8 @@
+{
+    "main": {
+        "database": {
+            "username": "wordpress",
+            "password": "MySecureSecretPassword!"
+        }
+    }
+}
