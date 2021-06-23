@@ -3,7 +3,7 @@
 Custom Secret Scanning Repo - @GeekMasher
 
 
-## Samples
+## Samples
 
 ### SSH (private keys)
 
@@ -11,22 +11,22 @@ Custom Secret Scanning Repo - @GeekMasher
 --BEGIN OPENSSH PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END OPENSSH PRIVATE KEY--
 ```
 
-### GPG (private key)
+### GPG (private key)
 
 ```
 --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
 ```
 
 
-### SendGrid
+### SendGrid
 
 ```
 SG\.[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*
 ```
 
-## Experimental
+## Experimental
 
-### YAML
+### YAML
 
 **Secret Format**
 
