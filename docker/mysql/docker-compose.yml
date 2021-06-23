@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SecretMySQLR00tPassword
+      MYSQL_USER: wordpress
+      # ISSUE
+      MYSQL_PASSWORD: MySQLPassword
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
