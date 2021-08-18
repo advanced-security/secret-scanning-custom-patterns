@@ -1,2 +1,5 @@
 # MySQL
 mysql://sandy:secret@myhost1:1111/db
+
+# SMTP (encoded values)
+smtp://foobar%40example.com:password@smtp.example.com:465
