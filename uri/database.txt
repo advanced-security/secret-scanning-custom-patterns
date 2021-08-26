@@ -4,6 +4,11 @@ mysql://sandy:secret@myhost1:1111/db
 # SMTP (encoded values)
 smtp://foobar%40example.com:password@smtp.example.com:465
 
+# FTP (random)
+ftp://test:hN6nQYPpsja3@example.com:22
+# FTP (URL encoded password)
+ftp://test:g%40hxUFb-3aA!@example.com:22
+
 # ====================
 # False Positives
 # ====================
