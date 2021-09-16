@@ -17,6 +17,23 @@ Custom Secret Scanning Repo - @GeekMasher
 --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
 ```
 
+### URI Strings
+
+```
+[0-9A-Za-z]+
+```
+
+**Before Secret**
+
+```
+\A|(A-Za-z0-9)?://[^/?#:]*:
+```
+
+**After Secret**
+
+```
+\z|[@]
+```
 
 ### SendGrid
 
