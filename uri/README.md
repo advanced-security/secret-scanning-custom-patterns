@@ -1,6 +1,10 @@
 # URI Strings
 
+## Hardcoded Password
+
 **⚠️ WARNING: THIS URI STRING RULE IS STILL UNDER CONSTRUCTION ⚠️**
+
+Find passwords in URI/URL strings.
 
 **Main Pattern:**
 
