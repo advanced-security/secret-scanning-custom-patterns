@@ -1,6 +1,6 @@
-# demo-secrets-geekmasher
+# custom-pattern-secrets
 
-Custom Secret Scanning Repo - @GeekMasher
+Custom Secret Scanning Repo - Created by [@GeekMasher](https://github.com/geekmasher)
 
 
 ## Samples
