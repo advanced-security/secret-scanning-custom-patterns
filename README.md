@@ -5,6 +5,14 @@ Custom Secret Scanning Repo - Created by [@GeekMasher](https://github.com/geekma
 
 ## Samples
 
+### RSA (private keys)
+
+Generic RSA keys
+
+```
+--BEGIN (?:[A-Z]+ )?PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END (?:[A-Z]+ )?PRIVATE KEY--
+```
+
 ### SSH (private keys)
 
 ```
