@@ -1,5 +1,9 @@
 # URI Strings
 
+**⚠️ WARNING: THIS URI STRING RULE IS STILL UNDER CONSTRUCTION ⚠️**
+
+**Main Pattern:**
+
 ```
 [0-9A-Za-z]+
 ```
