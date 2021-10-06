@@ -29,5 +29,5 @@ Find passwords in URI/URL strings.
 Replacing `(example.com|internal.example.com)` with a list on organisation domains will allow users to find hardcoded org emails.
 
 ```
-[A-Za-z0-9]+@(example.com|internal.example.com)
+[A-Za-z0-9_-]+@(example.com|internal.example.com)
 ```
