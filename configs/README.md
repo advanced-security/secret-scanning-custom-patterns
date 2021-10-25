@@ -18,6 +18,7 @@
 \z|[^0-9A-Za-z]|'
 ```
 
+<!--
 ### YAML
 
 :warning: **THESE ARE EXPERIMENTAL PATTERNS** :warning:
@@ -38,3 +39,4 @@
 ```
 \z|[^0-9A-Za-z]|\"
 ```
+-->
