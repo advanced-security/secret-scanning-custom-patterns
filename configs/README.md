@@ -3,7 +3,7 @@
 ### Hardcoded Spring SQL passwords
 
 ```
-[a-zA-Z0-9!$%&'*+?^_`{|}~-]+
+[a-zA-Z0-9!$%&*+?^_`{|}~-]+
 ```
 
 **Before secret:**
