@@ -32,7 +32,7 @@ Find passwords in URI/URL strings.
 **Main Pattern:**
 
 ```
-[a-zA-Z0-9%!#$%&'*+/=?^_{|}~-]+
+[a-zA-Z0-9%!#$%&'*+=?^_{|}~-]+
 ```
 
 **Before Secret**
