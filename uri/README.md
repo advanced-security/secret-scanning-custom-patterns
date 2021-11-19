@@ -44,5 +44,5 @@ Find passwords in URI/URL strings.
 **After Secret**
 
 ```
-\z|[@]
+[@]
 ```
