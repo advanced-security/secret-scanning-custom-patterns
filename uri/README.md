@@ -25,8 +25,6 @@ Replacing `example.com|internal.example.com` with a list on organisation domains
 
 ## Hardcoded URI Passwords
 
-**⚠️ WARNING: THIS URI STRING RULE IS STILL UNDER CONSTRUCTION ⚠️**
-
 Find passwords in URI/URL strings.
 
 **Main Pattern:**
