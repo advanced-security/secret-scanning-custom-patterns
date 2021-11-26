@@ -7,6 +7,10 @@ Custom Secret Scanning Repo - Created by [@GeekMasher](https://github.com/geekma
 - Hardcoded Spring SQL passwords
 - YAML Static Password Fields
 
+### JWT
+
+- Generic JWT
+
 ### [RSA](./rsa)
 
 - Generic RSA keys
