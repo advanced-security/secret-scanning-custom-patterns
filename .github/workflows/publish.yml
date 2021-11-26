@@ -19,7 +19,7 @@ jobs:
       - name: Publish Public to Private
         # if: ${{ env.GITHUB_REPOSITORY == 'octodemo/custom-pattern-secrets' }}
         run: |
-          echo "[+] ${{ env.GITHUB_REPOSITORY }} -> ${{ env.PRIVATE_REPOSITORY }} (${{ env.GITHUB_REF_NAME }})"
+          echo "[+] ${{ github.repository }} -> ${{ env.PRIVATE_REPOSITORY }} (${{ github.ref_name }})"
           git config --global user.name "repository-sync"
           git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PRIVATE_REPOSITORY }}.git" \
-              --set-upstream "${{ env.GITHUB_REF_NAME }}"
+              --set-upstream "${{ github.ref_name }}"
