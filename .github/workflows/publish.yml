@@ -1,0 +1,24 @@
+name: Publish
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  PUBLIC_REPOSITORY: octodemo/custom-pattern-secrets
+  PRIVATE_REPOSITORY: octodemo/custom-pattern-secrets-private
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Publish Private to Public
+        if: ${{ env.GITHUB_REPOSITORY == 'octodemo/custom-pattern-secrets-private' }}
+        run: |
+          git config --global user.name "repository-sync"
+          git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PUBLIC_REPOSITORY }}.git" \
+              --set-upstream "${{ env.GITHUB_REF_NAME }}"
