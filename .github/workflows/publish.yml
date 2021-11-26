@@ -2,7 +2,7 @@ name: Publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   workflow_dispatch:
 
 env:
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Publish Public to Private
-        if: ${{ env.GITHUB_REPOSITORY == env.PUBLIC_REPOSITORY  }}
+        if: ${{ env.GITHUB_REPOSITORY == 'octodemo/custom-pattern-secrets'  }}
         run: |
           git config --global user.name "repository-sync"
           git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PRIVATE_REPOSITORY }}.git" \
