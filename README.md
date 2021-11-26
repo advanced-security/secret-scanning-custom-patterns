@@ -25,4 +25,4 @@ Custom Secret Scanning Repo - Created by [@GeekMasher](https://github.com/geekma
 
 ### [Vendors](./vendors)
 
-- SendGrid
+- SendGrid (deprecated)
