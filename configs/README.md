@@ -1,6 +1,6 @@
 # Configuation Files
 
-### Hardcoded Spring SQL passwords
+## Hardcoded Spring SQL passwords
 
 ```
 [a-zA-Z0-9!$%&*+?^_`{|}~-]+
@@ -19,7 +19,7 @@
 ```
 
 
-### YAML Static Password Fields
+## YAML Static Password Fields
 
 **⚠️ WARNING: THIS RULE HAS A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 
