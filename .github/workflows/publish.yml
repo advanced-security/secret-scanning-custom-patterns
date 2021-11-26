@@ -16,9 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Publish Private to Public
-        if: ${{ env.GITHUB_REPOSITORY == 'octodemo/custom-pattern-secrets-private' }}
+      - name: Publish Public to Private
+        if: ${{ env.GITHUB_REPOSITORY == env.PUBLIC_REPOSITORY  }}
         run: |
           git config --global user.name "repository-sync"
-          git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PUBLIC_REPOSITORY }}.git" \
+          git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PRIVATE_REPOSITORY }}.git" \
               --set-upstream "${{ env.GITHUB_REF_NAME }}"
