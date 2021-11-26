@@ -21,5 +21,4 @@ jobs:
         run: |
           echo "[+] ${{ github.repository }} -> ${{ env.PRIVATE_REPOSITORY }} (${{ github.ref_name }})"
           git config --global user.name "repository-sync"
-          git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PRIVATE_REPOSITORY }}.git" \
-              --set-upstream "${{ github.ref_name }}"
+          git push "https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PRIVATE_REPOSITORY }}.git" ${{ github.ref_name }}
