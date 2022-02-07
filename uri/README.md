@@ -4,6 +4,8 @@
 
 Replacing `example.com|internal.example.com` with a list on organisation domains (separated by pipes `|`) will allow users to find hardcoded org emails.
 
+### Pattern
+
 ```
 [^/'"`][a-z0-9!#$%&'*+/=?^_`{|}~-]+@(example.com|internal.example.com)
 ```
@@ -11,6 +13,8 @@ Replacing `example.com|internal.example.com` with a list on organisation domains
 ## Hardcoded Internal URLs
 
 Replacing `example.com|internal.example.com` with a list on organisation domains (separated by pipes `|`) will allow users to find hardcoded org urls.
+
+### Pattern
 
 ```
 [A-Za-z0-9+-_]+://[a-zA-Z0-9!@:#$%&'*+/=?^_`{|}~-]?(example.com|internal.example.com)[^/#?"']?
@@ -27,19 +31,24 @@ Replacing `example.com|internal.example.com` with a list on organisation domains
 
 Find passwords in URI/URL strings.
 
-**Main Pattern:**
+### Pattern
 
 ```
 [^$][a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]+
 ```
 
-**Before Secret**
+**Notes:**
+
+- `[^$]`: Reduce false positives that are env vars
+
+
+#### Before Secret
 
 ```
 (A-Za-z0-9)?://[^/?#:]*:
 ```
 
-**After Secret**
+#### After Secret
 
 ```
 \z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
