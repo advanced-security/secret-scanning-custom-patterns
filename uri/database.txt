@@ -13,5 +13,10 @@ ftp://test:g%40hxUFb-3aA!@example.com:22
 # False Positives
 # ====================
 
+# Actions Env Vars
+https://repository-sync:${{ secrets.ALL_REPOSITORIES_SECRET }}@github.com/${{ env.PRIVATE_REPOSITORY }}.git
+# Env Vars
+https://repository-sync:$ALL_REPOSITORIES_SECRET@github.com/test.git
+
 # FTP (no password in string)
 ftp://test@example.com:22
