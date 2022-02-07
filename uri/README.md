@@ -30,17 +30,17 @@ Find passwords in URI/URL strings.
 **Main Pattern:**
 
 ```
-[a-zA-Z0-9%!#$%&'*+=?^_{|}~-]+
+[a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]+
 ```
 
 **Before Secret**
 
 ```
-\A|(A-Za-z0-9)?://[^/?#:]*:
+(A-Za-z0-9)?://[^/?#:]*:
 ```
 
 **After Secret**
 
 ```
-[@]
+\z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
 ```
