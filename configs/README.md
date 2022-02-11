@@ -1,5 +1,31 @@
 # Configuation Files
 
+## Generic Passwords
+
+- `password`, `secret`, `key`, or password like prefix (fuzzy)
+  - Along with possible addition prefixes
+- Delimiters like `=` or `:` (with padding)
+- String with a number of chars until a breaking char
+  - Newline, `"`, or `'`
+
+### Pattern
+
+```
+[^\s"'(${{)][a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]+
+```
+
+### Before secret
+
+```
+(?i)((api|jwt)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))(\s+|)(=|:)(\s+|)("|'|\s|)
+```
+
+### After secret
+
+```
+\z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]|'|"
+```
+
 ## Hardcoded Spring SQL passwords
 
 ```
