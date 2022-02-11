@@ -4,6 +4,7 @@ Custom Secret Scanning Repo - Created by [@GeekMasher](https://github.com/geekma
 
 ### [Configuration Files](./configs)
 
+- Generic Passwords
 - Hardcoded Spring SQL passwords
 - YAML Static Password Fields
 
