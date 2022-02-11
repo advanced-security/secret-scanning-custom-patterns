@@ -17,7 +17,7 @@
 ### Before secret
 
 ```
-(?i)((api|jwt)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))(\s+|)(=|:)(\s+|)("|'|\s|)
+(?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))(\s+|)(=|:)(\s+|)("|'|\s|)
 ```
 
 ### After secret
