@@ -1,2 +1,11 @@
 Test JWT
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+
+# ====================
+# False Positives
+# ====================
+
+# Random Python snippet
+error_handler=settings.error_encoding_error_handler
+
