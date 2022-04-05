@@ -1,6 +1,9 @@
 # custom-pattern-secrets
 
-Custom Secret Scanning Repo - Created by [@GeekMasher](https://github.com/geekmasher)
+Custom Secret Scanning Patterns repopository created and maintained by the GitHub Field Services.
+
+> :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives 
+
 
 ### [Configuration Files](./configs)
 
