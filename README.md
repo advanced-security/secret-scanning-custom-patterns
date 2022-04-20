@@ -15,6 +15,14 @@ Custom Secret Scanning Patterns repopository created and maintained by the GitHu
 
 - Generic JWT
 
+### [Personally identifiable information (PII)](./pii)
+
+- Credit Cards
+- Credit Cards - Visa
+- Credit Cards - MasterCard
+- Credit Cards - American Express
+- Credit Cards - Discovery
+
 ### [RSA](./rsa)
 
 - Generic RSA keys
