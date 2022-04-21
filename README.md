@@ -17,6 +17,7 @@ Custom Secret Scanning Patterns repopository created and maintained by the GitHu
 
 ### [Personally identifiable information (PII)](./pii)
 
+- IBAN
 - Credit Cards
 - Credit Cards - Visa
 - Credit Cards - MasterCard
