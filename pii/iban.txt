@@ -1,0 +1,18 @@
+// https://stackoverflow.com/a/44657292
+
+DE89 3704 0044 0532 0130 00     // ok
+AT61 1904 3002 3457 3201        // ok
+GB82-WEST-1234-5698-7654-32     // ok
+NL20INGB0001234567              // ok
+
+GB33BUKB20201555555555
+DE75512108001245126199
+FR7630006000011234567890189
+
+# ====================
+# False Positives
+# ====================
+
+// wrong checksum
+FR14 2004 1010 0505 0001 3
+droid@i.ban' // This Is Not The IBAN You Are Looking For
