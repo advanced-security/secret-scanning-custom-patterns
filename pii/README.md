@@ -1,5 +1,15 @@
 # Personally identifiable information (PII)
 
+## IBAN
+
+```
+[A-Z]{2}[0-9]{2}( |-)?([0-9A-Z]{4})?(?:( |-)?[0-9]){14,20}
+```
+
+**Notes:**
+
+- It does not catch all cases but more
+
 ## Credit Cards
 
 - Only supports Visa, MasterCard, and American Express
