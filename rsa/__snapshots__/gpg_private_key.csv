@@ -1,0 +1,3 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"gpg_private_key","GPG Private Key","819009250e672a517ae045f9633d535015e922e996352dcfe41cf59e67820841","gpg/GeekMasher GPG.asc","1","106","4","33",
+"gpg_private_key","GPG Private Key","819009250e672a517ae045f9633d535015e922e996352dcfe41cf59e67820841","rsa/GeekMasher GPG.asc","1","106","4","33",

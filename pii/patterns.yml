@@ -1,0 +1,37 @@
+
+name: Personally identifiable information (PII)
+
+patterns:
+  - name: Credit Cards
+    type: credit_cards
+    regex:
+      pattern: |
+        (4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|(34|37)[0-9]{13})
+    comments:
+      - "Only supports Visa, MasterCard, and American Express"
+
+
+  - name: Credit Cards - Visa
+    type: credit_card_visa
+    regex:
+      pattern: |
+        4[0-9]{12}(?:[0-9]{3})?
+
+  - name: Credit Cards - MasterCard
+    type: credit_card_mastercard
+    regex:
+      pattern: |
+        (?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}
+
+  - name: Credit Cards - American Express
+    type: credit_cards_american_express
+    regex:
+      pattern: |
+        (34|37)[0-9]{13}
+
+
+  - name: Credit Cards - Discovery
+    type: credit_card_discovery
+    regex:
+      pattern: |
+        6(?:011|5[0-9]{2})[0-9]{12}

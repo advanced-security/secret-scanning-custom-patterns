@@ -1,0 +1,13 @@
+
+name: JWT
+
+patterns:
+  - name: JWT
+    type: jwt
+    regex:
+      pattern: |
+        e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
+      start: |
+        [^0-9A-Za-z-_\\.]|\A
+      end: |
+        [^0-9A-Za-z-_\\.]|\z

@@ -1,0 +1,32 @@
+name: Main
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Deps
+        run: python3 -m pip install pipenv && python3 -m pipenv install
+
+      # Run Validation
+      - name: Run Validation
+        run: |
+          pipenv run python ./.github/scripts/validate.py \
+            --token="${{ secrets.SECRET_SCANNING_TOKEN }}" \
+            --validate

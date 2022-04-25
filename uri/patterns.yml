@@ -1,0 +1,27 @@
+
+name: URI / URL Custom Patterns
+
+patterns:
+  - name: Hardcoded Internal Emails
+    type: hardcoded_internal_emails
+    regex:
+      pattern: |
+        [^/'"`][a-z0-9!#$%&'*+/=?^_`{|}~-]+@(example.com|internal.example.com)
+
+  - name: Hardcoded Internal URLs
+    type: hardcoded_internal_urls
+    regex:
+      pattern: |
+        [A-Za-z0-9+-_]+://[a-zA-Z0-9!@:#$%&'*+/=?^_`{|}~-]?(example.com|internal.example.com)[^/#?"']?
+
+  - name: Hardcoded URI Passwords
+    type: hardcoded_uri_passwords
+    regex:
+      pattern: |
+        [^$][a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]+
+      start: |
+        (A-Za-z0-9)?://[^/?#:]*:
+      end: |
+        \z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
+      additional_match:
+        - "[^0-9]"

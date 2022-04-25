@@ -1,0 +1,19 @@
+
+name: RSA Keys
+
+patterns:
+  - name: Generic RSA keys
+    type: generic_rsa_keys
+    regex:
+      pattern: |
+        --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END (?:[A-Z]+ )?PRIVATE KEY--
+  - name: SSH Private Keys
+    type: ssh_private_keys
+    regex:
+      pattern: |
+        --BEGIN OPENSSH PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END OPENSSH PRIVATE KEY--
+  - name: GPG Private Key
+    type: gpg_private_key
+    regex:
+      pattern: |
+        --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--

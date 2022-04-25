@@ -1,5 +1,6 @@
 
 .env
 .venv
+*-current.csv
 
 node_modules/

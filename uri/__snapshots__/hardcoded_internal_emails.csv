@@ -1,0 +1,5 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"hardcoded_internal_emails","Hardcoded Internal Emails","795bcb4bf560f9867afb3de2d0d3a94976324007c45ea099ec14e90231540547","uri/email.js","8","8","30","50",
+"hardcoded_internal_emails","Hardcoded Internal Emails","1e670f7a76058ba5edcb9cb0f58f167fc08569a44b5b983a91295c15b70c36e6","uri/email.js","5","5","33","55",
+"hardcoded_internal_emails","Hardcoded Internal Emails","786906db96ef646937f205d3e7398630ce2e97df5364baf31b81ef84f1386c3f","uri/email.js","4","4","31","51",
+"hardcoded_internal_emails","Hardcoded Internal Emails","973dfe463ec85785f5f95af5ba3906eedb2d931c24e69824a89ea65dba4e813b","uri/database.txt","12","12","7","23",
