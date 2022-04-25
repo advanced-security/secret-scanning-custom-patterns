@@ -16,6 +16,9 @@ from dataclasses import dataclass
 parser = argparse.ArgumentParser(description="Validate a directory of files.")
 parser.add_argument("--debug", action="store_true", help="Print debug messages")
 parser.add_argument("-p", "--path", default="./", help="Directory to scan")
+parser.add_argument(
+    "--token", default=os.environ.get("GITHUB_TOKEN"), help="GitHub token to use"
+)
 
 parser_modes = parser.add_argument_group("modes")
 parser_modes.add_argument("--validate", action="store_true")
@@ -223,7 +226,7 @@ if __name__ == "__main__":
         results = getSecretScanningResults(
             "advanced-security",
             "secret-scanning-custom-patterns",
-            os.environ.get("GITHUB_TOKEN"),
+            arguments.token,
             pattern.type,
         )
         logging.info(f"Found secrets :: {len(results)}")

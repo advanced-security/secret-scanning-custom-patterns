@@ -24,6 +24,9 @@ jobs:
       - name: Install Deps
         run: python3 -m pip install pipenv && python3 -m pipenv install
 
-      # Unit Validation
+      # Run Validation
       - name: Run Validation
-        run: pipenv run python ./.github/scripts/validate.py --validate
+        run: |
+          pipenv run python ./.github/scripts/validate.py \
+            --token="${{ secrets.SECRET_SCANNING_TOKEN }}" \
+            --validate
