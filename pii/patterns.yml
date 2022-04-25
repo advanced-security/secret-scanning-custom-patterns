@@ -1,5 +1,5 @@
 
-name: JWT
+name: Personally identifiable information (PII)
 
 patterns:
   - name: Credit Cards

@@ -1,5 +1,5 @@
 
-name: JWT
+name: RSA Keys
 
 patterns:
   - name: Generic RSA keys

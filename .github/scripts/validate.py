@@ -11,7 +11,7 @@ import requests
 import subprocess
 from ratelimit import limits, sleep_and_retry
 from typing import List, Dict, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 parser = argparse.ArgumentParser(description="Validate a directory of files.")
 parser.add_argument("--debug", action="store_true", help="Print debug messages")
@@ -30,7 +30,8 @@ class Regex:
     pattern: str
     start: Optional[str] = None
     end: Optional[str] = None
-    additionals: List[str] = None
+    additional_match: Optional[List[str]] = field(default_factory=list)
+    additional_not_match: Optional[List[str]] = field(default_factory=list)
 
 
 @dataclass
@@ -108,7 +109,7 @@ def getSecretScanningResults(
     - https://docs.github.com/en/enterprise-cloud@latest/rest/secret-scanning#list-secret-scanning-alerts-for-a-repository
     """
     secrets: List[SecretScanningAlert] = []
-    params = {}
+    params = {"state": "open"}
     if secret_type:
         params["secret_type"] = secret_type
     url = f"https://api.github.com/repos/{owner}/{repo}/secret-scanning/alerts"
@@ -122,6 +123,9 @@ def getSecretScanningResults(
         error = f"Failed to get secret scanning results: {response.status_code}"
         logging.error(error)
         raise Exception(error)
+
+    with open("./secrets.json", "w") as f:
+        json.dump(response.json(), f, indent=4)
 
     for secret in response.json():
         locations = getSecretScanningLocations(secret["locations_url"], token)
