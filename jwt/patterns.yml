@@ -11,3 +11,5 @@ patterns:
         [^0-9A-Za-z-_\\.]|\A
       end: |
         [^0-9A-Za-z-_\\.]|\z
+      additional_not_match:
+        - "(/|=)"

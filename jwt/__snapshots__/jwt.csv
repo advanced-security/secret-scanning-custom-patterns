@@ -1,4 +1,3 @@
 secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
-"jwt","JWT","a1f4d8625767e3a273b2f3d42c5b543208d8bc657c4adc20831e8b5a24f670bb","jwt/example.txt","10","10","1","52",
 "jwt","JWT","1676bd1c75bda462c41749835f9c65ca1fcf006c8dbaddfc4498f897a8cc068d","jwt/owasp-juice-shop.ts","264","264","79","775",
 "jwt","JWT","7f75367e7881255134e1375e723d1dea8ad5f6a4fdb79d938df1f1754a830606","jwt/example.txt","2","2","1","156",
