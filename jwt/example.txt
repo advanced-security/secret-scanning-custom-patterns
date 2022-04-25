@@ -8,4 +8,5 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 # ====================
 
 # false-positive: Random Python snippet
+exclude_editable=options.exclude_editable
 error_handler=settings.error_encoding_error_handler
