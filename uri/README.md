@@ -53,3 +53,9 @@ Find passwords in URI/URL strings.
 ```
 \z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
 ```
+
+#### Additional Match
+
+```
+[^0-9]
+```
