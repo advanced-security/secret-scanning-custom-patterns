@@ -1,0 +1,4 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"credit_card_visa","Credit Card (Visa)","253da55d8a05e361b2e41c28728129909ed9a235632f2c9100ea5e827e396db7","pii/credit-cards.txt","21","21","1","14",
+"credit_card_visa","Credit Card (Visa)","dd13cdf9af9dd3baf46ce96aecd7163cabf381ccb21e63f15f0fa10b1c663fa9","pii/credit-cards.txt","20","20","1","17",
+"credit_card_visa","Credit Card (Visa)","9bbef19476623ca56c17da75fd57734dbf82530686043a6e491c6d71befe8f6e","pii/credit-cards.txt","19","19","1","17",
