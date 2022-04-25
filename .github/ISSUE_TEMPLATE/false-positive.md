@@ -1,7 +1,7 @@
 ---
 name: Report False Positive
 about: Report False Positive using a custom Secret Scanning Pattern
-title: ''
+title: 'False Positive - {{ name }}'
 labels: false-positive
 assignees: 'GeekMasher'
 
