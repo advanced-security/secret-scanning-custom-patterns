@@ -206,6 +206,10 @@ if __name__ == "__main__":
 
     errors = []
 
+    if len(patterns) == 0:
+        logging.warning("No patterns found")
+        sys.exit(0)
+
     for pattern in patterns:
         logging.info(f"Checking {pattern.name}")
         pattern_path = os.path.dirname(pattern.path)

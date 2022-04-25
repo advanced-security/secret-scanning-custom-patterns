@@ -24,6 +24,6 @@ jobs:
       - name: Install Deps
         run: python3 -m pip install pipenv && python3 -m pipenv install
 
-      # Unit tests
-      - name: Run Unit tests
+      # Unit Validation
+      - name: Run Validation
         run: pipenv run python ./.github/scripts/validate.py --validate
