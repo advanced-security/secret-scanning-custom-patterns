@@ -7,6 +7,7 @@ name = "pypi"
 pyyaml = "*"
 requests = "*"
 ratelimit = "*"
+jinja2 = "*"
 
 [dev-packages]
 
