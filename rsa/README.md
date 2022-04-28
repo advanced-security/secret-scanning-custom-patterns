@@ -63,6 +63,8 @@
 ## SSH Public Key
 
 
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+
 <details>
 <summary>Pattern Format</summary>
 <p>

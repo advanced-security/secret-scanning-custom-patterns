@@ -39,7 +39,6 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Generic RSA keys
 - SSH Private Keys
 - GPG Private Key
-- SSH Public Key
 
 
 ### [URI / URL Custom Patterns](./uri)

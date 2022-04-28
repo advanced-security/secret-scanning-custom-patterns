@@ -24,6 +24,7 @@ patterns:
 
   - name: SSH Public Key
     type: shh_public_key
+    experimental: true
     regex:
       pattern: |
         ssh-rsa (.*|\n) [\S]*@?[\S]*
