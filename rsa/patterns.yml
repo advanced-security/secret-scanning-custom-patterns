@@ -21,3 +21,11 @@ patterns:
     regex:
       pattern: |
         --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
+
+  - name: SSH Public Key
+    type: shh_public_key
+    regex:
+      pattern: |
+        ssh-rsa (.*|\n) [\S]*@?[\S]*
+    comments:
+      - "SSH Public Key (not a secret)"

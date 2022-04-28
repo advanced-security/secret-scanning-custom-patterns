@@ -32,3 +32,15 @@
 **Comments / Notes:**
 
 - Current Version: v0.1
+
+
+## SSH Public Key
+
+```regex
+ssh-rsa (.*|\n) [\S]*@?[\S]*
+```
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+- SSH Public Key (not a secret)
