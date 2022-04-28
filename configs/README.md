@@ -2,6 +2,10 @@
 
 ## Generic Passwords
 
+<details>
+<summary>Pattern Format</summary>
+<p>
+
 ```regex
 [^\s"'(${{)][a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]+
 ```
@@ -12,6 +16,9 @@
 - `password`, `secret`, `key`, or password like prefix (fuzzy)
 - Delimiters like `=` or `:` (with padding)
 - String with a number of chars until a breaking char
+</p>
+</details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -36,6 +43,10 @@
 
 ## Hardcoded Spring SQL passwords
 
+<details>
+<summary>Pattern Format</summary>
+<p>
+
 ```regex
 [a-zA-Z0-9!$%&*+?^_`{|}~-]+
 ```
@@ -43,6 +54,9 @@
 **Comments / Notes:**
 
 - Current Version: v0.1
+</p>
+</details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -67,6 +81,10 @@
 
 ## Django Secret Key
 
+<details>
+<summary>Pattern Format</summary>
+<p>
+
 ```regex
 [^\s"'(${{)][a-zA-Z0-9!.,$%&*+?^_`{|}()~-]*
 ```
@@ -75,6 +93,9 @@
 
 - Current Version: v0.1
 - _If the secret is at the start of the file, its not picked up_
+</p>
+</details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -101,6 +122,10 @@
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 This secret pattern has a relative high false positive rate and should be tested on a number of repositories before running on an entire organisation.
 
+<details>
+<summary>Pattern Format</summary>
+<p>
+
 ```regex
 [a-zA-Z0-9%!#$%&*+=?^_-{|}~\.,]{12,32}
 ```
@@ -111,6 +136,9 @@ This secret pattern has a relative high false positive rate and should be tested
 - The hardcoded password is between 12 and 32 chars long
 - Some false positives in Code might appear
 - The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)
+</p>
+</details>
+
 
 <details>
 <summary>Start Pattern</summary>

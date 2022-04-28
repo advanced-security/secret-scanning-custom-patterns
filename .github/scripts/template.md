@@ -11,6 +11,10 @@
 {{ pattern.description }}
 {%- endif %}
 
+<details>
+<summary>Pattern Format</summary>
+<p>
+
 ```regex
 {{ pattern.regex.pattern }}
 ```
@@ -21,6 +25,9 @@
 {%- for comment in pattern.comments %}
 - {{ comment }}
 {%- endfor %}
+</p>
+</details>
+
 {% if pattern.regex.start %}
 <details>
 <summary>Start Pattern</summary>
@@ -51,11 +58,12 @@
 <details>
 <summary>Additional Matches</summary>
 <p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
-{%- for match in pattern.additional_match %}
+{% for match in pattern.regex.additional_match %}
 - Match: `{{ match }}`
 {%- endfor %}
-{%- for match in pattern.additional_not_match %}
+{%- for match in pattern.regex.additional_not_match %}
 - Not Match: `{{ match }}`
 {%- endfor %}
 
