@@ -9,9 +9,13 @@ import logging
 import argparse
 import requests
 import subprocess
+import collections
 from ratelimit import limits, sleep_and_retry
 from typing import List, Dict, Optional
 from dataclasses import dataclass, field
+from jinja2 import Environment, FileSystemLoader
+
+__here__ = os.path.dirname(os.path.realpath(__file__))
 
 parser = argparse.ArgumentParser(description="Validate a directory of files.")
 parser.add_argument("--debug", action="store_true", help="Print debug messages")
@@ -23,15 +27,30 @@ parser.add_argument(
 parser_modes = parser.add_argument_group("modes")
 parser_modes.add_argument("--validate", action="store_true")
 parser_modes.add_argument("--snapshot", action="store_true")
+parser_modes.add_argument("--markdown", action="store_true")
 
 
 @dataclass
 class Regex:
     pattern: str
+    version: Optional[str] = "0.1"
     start: Optional[str] = None
     end: Optional[str] = None
     additional_match: Optional[List[str]] = field(default_factory=list)
     additional_not_match: Optional[List[str]] = field(default_factory=list)
+
+    def __post_init__(self):
+        if self.version is not None:
+            if isinstance(self.version, (int, float)):
+                self.version = str(self.version)
+            if not self.version.startswith("v"):
+                self.version = "v" + self.version
+        if self.pattern:
+            self.pattern = self.pattern.strip()
+        if self.start:
+            self.start = self.start.strip()
+        if self.end:
+            self.end = self.end.strip()
 
 
 @dataclass
@@ -39,15 +58,35 @@ class Pattern:
     """A pattern to match against a file."""
 
     name: str
-    regex: Regex
-    path: str
+    description: Optional[str] = None
+    experimental: bool = False
+
+    regex: Regex = field(default_factory=Regex)
 
     type: Optional[str] = None
-    comments: Optional[List[str]] = None
+    comments: List[str] = field(default_factory=list)
 
     def __post_init__(self):
         if isinstance(self.regex, dict):
             self.regex = Regex(**self.regex)
+
+
+@dataclass
+class PatternsConfig:
+    """A configuration for a set of patterns."""
+
+    name: str
+
+    patterns: List[Pattern] = field(default_factory=list)
+
+    path: Optional[str] = field(default=None)
+
+    def __post_init__(self):
+        _tmp = self.patterns
+        self.patterns = []
+
+        for pattern in _tmp:
+            self.patterns.append(Pattern(**pattern))
 
 
 @dataclass
@@ -63,9 +102,22 @@ class SecretScanningAlert:
     end_column: Optional[int] = None
 
 
-def loadPatternFiles(path: str) -> List[Pattern]:
+def createMarkdown(path: str, template: str = "template.md", **data) -> str:
+    logging.info(f"Creating markdown :: {path}")
+    env = Environment(loader=FileSystemLoader(__here__))
+    template = env.get_template(template)
+
+    output_from_parsed_template = template.render(data)
+
+    with open(path, "w") as f:
+        f.write(output_from_parsed_template)
+    return output_from_parsed_template
+
+
+def loadPatternFiles(path: str) -> Dict[str, PatternsConfig]:
     """Find all files that match a pattern."""
-    patterns: List[Pattern] = []
+    patterns: Dict[PatternsConfig] = {}
+
     for root, dirs, files in os.walk(path):
         for file in files:
             if file == "patterns.yml":
@@ -75,10 +127,13 @@ def loadPatternFiles(path: str) -> List[Pattern]:
                 with open(path) as f:
                     data = yaml.safe_load(f)
 
-                    logging.debug(f"Loaded '{data.get('name')}'")
+                    config = PatternsConfig(path=path, **data)
 
-                    for pattern in data.get("patterns", []):
-                        patterns.append(Pattern(path=path, **pattern))
+                    logging.debug(
+                        f"Loaded :: PatternsConfig('{config.name}' patterns='{len(config.patterns)})'"
+                    )
+
+                    patterns[path] = config
     return patterns
 
 
@@ -209,49 +264,66 @@ if __name__ == "__main__":
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
-    patterns: List[Pattern] = loadPatternFiles(arguments.path)
+    configs: Dict[str, PatternsConfig] = loadPatternFiles(arguments.path)
+    # Sort by name
+    configs = collections.OrderedDict(sorted(configs.items()))
 
     errors = []
 
-    if len(patterns) == 0:
+    if len(configs) == 0:
         logging.warning("No patterns found")
         sys.exit(0)
 
-    for pattern in patterns:
-        logging.info(f"Checking {pattern.name}")
-        pattern_path = os.path.dirname(pattern.path)
+    for file_path, pattern_config in configs.items():
+        pattern_path = os.path.dirname(pattern_config.path)
 
-        snapshot_dir = f"{pattern_path}/__snapshots__"
-        if not os.path.exists(snapshot_dir):
-            os.mkdir(snapshot_dir)
+        # Markdown mode
+        if arguments.markdown:
+            createMarkdown(
+                os.path.join(pattern_path, "README.md"), config=pattern_config
+            )
+            continue
 
-        snapshot_path = f"{snapshot_dir}/{pattern.type}.csv"
+        for pattern in pattern_config.patterns:
+            logging.info(f"Checking {pattern.name}")
 
-        results = getSecretScanningResults(
-            "advanced-security",
-            "secret-scanning-custom-patterns",
-            arguments.token,
-            pattern.type,
-        )
-        logging.info(f"Found secrets :: {len(results)}")
+            snapshot_dir = f"{pattern_path}/__snapshots__"
+            if not os.path.exists(snapshot_dir):
+                os.mkdir(snapshot_dir)
 
-        if arguments.snapshot:
-            logging.info(f"Creating snapshot for {pattern.name} in {pattern_path}")
-            createSnapshot(snapshot_path, results)
-        else:
-            logging.debug(f"Creating current snapshot for {pattern.name}")
-            current_snapshot = snapshot_path.replace(".csv", "-current.csv")
-            createSnapshot(current_snapshot, results)
+            snapshot_path = f"{snapshot_dir}/{pattern.type}.csv"
 
-            diff = compareSnapshots(snapshot_path, current_snapshot)
-            if len(diff) > 0:
-                logging.info(f"Found differences")
-                for line in diff:
-                    print(line)
-                errors.append(f"{pattern.name}")
+            results = getSecretScanningResults(
+                "advanced-security",
+                "secret-scanning-custom-patterns",
+                arguments.token,
+                pattern.type,
+            )
+            logging.info(f"Found secrets :: {len(results)}")
+
+            if arguments.snapshot:
+                logging.info(f"Creating snapshot for {pattern.name} in {pattern_path}")
+                createSnapshot(snapshot_path, results)
             else:
-                logging.info(f"No differences found")
-                os.remove(current_snapshot)
+                logging.debug(f"Creating current snapshot for {pattern.name}")
+                current_snapshot = snapshot_path.replace(".csv", "-current.csv")
+                createSnapshot(current_snapshot, results)
+
+                diff = compareSnapshots(snapshot_path, current_snapshot)
+                if len(diff) > 0:
+                    logging.info(f"Found differences")
+                    for line in diff:
+                        print(line)
+                    errors.append(f"{pattern.name}")
+                else:
+                    logging.info(f"No differences found")
+                    os.remove(current_snapshot)
+
+    createMarkdown(
+        os.path.join("./", "README.md"),
+        template="main.md",
+        configs=configs,
+    )
 
     if errors:
         logging.error(f"Found {len(errors)} errors")

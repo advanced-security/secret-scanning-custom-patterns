@@ -7,11 +7,15 @@ patterns:
     regex:
       pattern: |
         --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END (?:[A-Z]+ )?PRIVATE KEY--
+
   - name: SSH Private Keys
     type: ssh_private_keys
     regex:
       pattern: |
         --BEGIN OPENSSH PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END OPENSSH PRIVATE KEY--
+    comments:
+      - "*SSH Password:* `MyPassword`"
+
   - name: GPG Private Key
     type: gpg_private_key
     regex:

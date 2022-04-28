@@ -2,60 +2,59 @@
 
 ## Hardcoded Internal Emails
 
-Replacing `example.com|internal.example.com` with a list on organisation domains (separated by pipes `|`) will allow users to find hardcoded org emails.
-
-### Pattern
-
-```
+```regex
 [^/'"`][a-z0-9!#$%&'*+/=?^_`{|}~-]+@(example.com|internal.example.com)
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
+
+
 ## Hardcoded Internal URLs
 
-Replacing `example.com|internal.example.com` with a list on organisation domains (separated by pipes `|`) will allow users to find hardcoded org urls.
-
-### Pattern
-
-```
+```regex
 [A-Za-z0-9+-_]+://[a-zA-Z0-9!@:#$%&'*+/=?^_`{|}~-]?(example.com|internal.example.com)[^/#?"']?
 ```
 
-**Notes:**
+**Comments / Notes:**
 
-- URIs/URLs need to have a schema / protocol
-  - `[A-Za-z0-9+-_]+://`
-- This Regex stops once a path / query / fragment is researched
-  - `[^/#?"']?`
+- Current Version: v0.1
+
 
 ## Hardcoded URI Passwords
 
-Find passwords in URI/URL strings.
-
-### Pattern
-
-```
+```regex
 [^$][a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]+
 ```
 
-**Notes:**
+**Comments / Notes:**
 
-- `[^$]`: Reduce false positives that are env vars
+- Current Version: v0.1
 
+<details>
+<summary>Start Pattern</summary>
+<p>
 
-#### Before Secret
-
-```
+```regex
 (A-Za-z0-9)?://[^/?#:]*:
 ```
 
-#### After Secret
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
 
-```
+```regex
 \z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
 ```
 
-#### Additional Match
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
 
-```
-[^0-9]
-```
+</p>
+</details>

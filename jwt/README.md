@@ -1,25 +1,38 @@
 # JWT
 
-## Generic JWT
+## JWT
 
-```
+```regex
 e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
 ```
 
-**Start Delimiter:**
+**Comments / Notes:**
 
-```
+- Current Version: v0.1
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
 [^0-9A-Za-z-_\\.]|\A
 ```
 
-**End Delimiter:**
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
 
-```
+```regex
 [^0-9A-Za-z-_\\.]|\z
 ```
 
-**Additional Not Match:**
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
 
-```
-(/|=)
-```
+</p>
+</details>
