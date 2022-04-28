@@ -1,7 +1,63 @@
-## Credit Card
+<!-- WARNING: This README is generated automatically
+-->
+# Generic Secrets / Passwords
 
-A custom pattern to find credit card information:
+## Generic Passwords
 
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[^\s"'(${{)][a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]+
 ```
-4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}
+
+**Comments / Notes:**
+
+- Current Version: v0.3
+- `password`, `secret`, `key`, or password like prefix (fuzzy)
+- Delimiters like `=` or `:` (with padding)
+- String with a number of chars until a breaking char
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+(?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))(\s+|)(=|:)(\s+|)("|'|\s|)
 ```
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]|'|"
+```
+
+</p>
+</details>
+
+## UUIDs
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+```
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+</p>
+</details>
+

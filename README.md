@@ -10,9 +10,14 @@ This repository extends the [list of supported Vendors out of the box](https://d
 
 ### [Configuration Secrets](./configs)
 
-- Generic Passwords
 - Hardcoded Spring SQL passwords
 - Django Secret Key
+
+
+### [Generic Secrets / Passwords](./generic)
+
+- Generic Passwords
+- UUIDs
 
 
 ### [JWT](./jwt)
