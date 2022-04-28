@@ -1,0 +1,16 @@
+name: Vendors
+
+patterns:
+  - name: Grafana API token
+    type: grafana_api_token
+    regex:
+      pattern: |
+        eyJrIjoi(?i)[a-z0-9-_=]{42}
+
+  - name: SendGrid (deprecated)
+    type: sendgrid
+    regex:
+      pattern: |
+        SG\.[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*
+    comments:
+      - "Deprecated (supported by Secret Scanning)"
