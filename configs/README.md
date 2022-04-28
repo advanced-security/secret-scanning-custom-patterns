@@ -1,6 +1,9 @@
+<!-- WARNING: This README is generated automatically
+-->
 # Configuration Secrets
 
 ## Generic Passwords
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -43,6 +46,7 @@
 
 ## Hardcoded Spring SQL passwords
 
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -80,6 +84,7 @@
 </details>
 
 ## Django Secret Key
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -119,8 +124,10 @@
 </details>
 
 ## YAML Static Password Fields
-**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+
 This secret pattern has a relative high false positive rate and should be tested on a number of repositories before running on an entire organisation.
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 
 <details>
 <summary>Pattern Format</summary>

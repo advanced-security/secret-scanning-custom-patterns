@@ -1,6 +1,9 @@
+<!-- WARNING: This README is generated automatically
+-->
 # Vendors
 
 ## Grafana API token
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -19,6 +22,7 @@ eyJrIjoi(?i)[a-z0-9-_=]{42}
 
 
 ## SendGrid (deprecated)
+
 
 <details>
 <summary>Pattern Format</summary>

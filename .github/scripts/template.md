@@ -1,16 +1,16 @@
+<!-- WARNING: This README is generated automatically
+-->
 # {{ config.name }}
 {%- for pattern in config.patterns %}
 
 ## {{ pattern.name }}
-
-{%- if pattern.experimental %}
-**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
-{%- endif %}
-
-{%- if pattern.description %}
+{% if pattern.description %}
 {{ pattern.description }}
 {%- endif %}
-
+{% if pattern.experimental %}
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+{# comment #}
+{%- endif %}
 <details>
 <summary>Pattern Format</summary>
 <p>

@@ -1,6 +1,9 @@
+<!-- WARNING: This README is generated automatically
+-->
 # Personally identifiable information (PII)
 
 ## Credit Cards
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -21,6 +24,7 @@
 
 ## Credit Cards - Visa
 
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -38,6 +42,7 @@
 
 
 ## Credit Cards - MasterCard
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -57,6 +62,7 @@
 
 ## Credit Cards - American Express
 
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -74,6 +80,7 @@
 
 
 ## Credit Cards - Discovery
+
 
 <details>
 <summary>Pattern Format</summary>

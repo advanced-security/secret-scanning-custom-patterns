@@ -1,6 +1,9 @@
+<!-- WARNING: This README is generated automatically
+-->
 # URI / URL Custom Patterns
 
 ## Hardcoded Internal Emails
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -20,6 +23,7 @@
 
 ## Hardcoded Internal URLs
 
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -37,6 +41,7 @@
 
 
 ## Hardcoded URI Passwords
+
 
 <details>
 <summary>Pattern Format</summary>

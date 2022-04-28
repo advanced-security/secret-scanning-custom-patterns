@@ -1,6 +1,9 @@
+<!-- WARNING: This README is generated automatically
+-->
 # RSA Keys
 
 ## Generic RSA keys
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -19,6 +22,7 @@
 
 
 ## SSH Private Keys
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -39,6 +43,7 @@
 
 ## GPG Private Key
 
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -56,6 +61,7 @@
 
 
 ## SSH Public Key
+
 
 <details>
 <summary>Pattern Format</summary>
