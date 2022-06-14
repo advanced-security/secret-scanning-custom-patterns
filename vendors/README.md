@@ -12,7 +12,12 @@
 ```regex
 (?i)[a-z][a-z0-9-]+\.database(?:\.secure)?\.(?:(?:windows|usgovcloudapi)\.net|chinacloudapi\.cn|cloudapi\.de)
 ```
-
+  
+**Sample**
+ ```
+  const db = "abc123.database.secure.windows.net"
+ ```
+  
 **Comments / Notes:**
 - Deprecated from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/
 - Current Version: v1.0
