@@ -6,7 +6,7 @@ patterns:
     regex:
       pattern: |
         (?i)[a-z][a-z0-9-]+\.database(?:\.secure)?\.(?:(?:windows|usgovcloudapi)\.net|chinacloudapi\.cn|cloudapi\.de)
-      comments:
+    comments:
       - "Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/"
 
   - name: Grafana API token
