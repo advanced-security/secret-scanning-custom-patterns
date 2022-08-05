@@ -21,12 +21,20 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Get Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v1
+        with:
+          application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
+          application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
+
       - name: Install Deps
         run: python3 -m pip install pipenv && python3 -m pipenv install
 
       # Run Validation
       - name: Run Validation
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         run: |
           pipenv run python ./.github/scripts/validate.py \
-            --token="${{ secrets.SECRET_SCANNING_TOKEN }}" \
             --validate
