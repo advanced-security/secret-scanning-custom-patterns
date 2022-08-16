@@ -49,7 +49,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 
 
 ### [Vendors](./vendors)
-
+- Azure SQL Connection String
 - Grafana API token
 - SendGrid (deprecated)
 
