@@ -79,7 +79,7 @@
 
 
 
-## Credit Cards - Discovery
+## Credit Cards - Discover
 
 
 <details>
