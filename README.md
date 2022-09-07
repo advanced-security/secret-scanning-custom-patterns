@@ -31,7 +31,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Credit Cards - Visa
 - Credit Cards - MasterCard
 - Credit Cards - American Express
-- Credit Cards - Discovery
+- Credit Cards - Discover
 
 
 ### [RSA Keys](./rsa)
