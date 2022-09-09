@@ -24,3 +24,12 @@ patterns:
         \z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
       additional_match:
         - "[^0-9]"
+
+  - name: Any IPv4 Addresses
+    type: any_ipv4_addresses
+    regex:
+      pattern: |
+        [^v][0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
+    comments:
+      - False Positives with build versions
+      - Use Internal IPv4 pattern if possible

@@ -1,0 +1,7 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"any_ipv4_addresses","Any IPv4 Addresses","12ca17b49af2289436f303e0166030a21e525d266e209267433801a8fd4071a0","uri/ipaddresses/ipv4_random.txt","7","8","8","10",
+"any_ipv4_addresses","Any IPv4 Addresses","f1412386aa8db2579aff2636cb9511cacc5fd9880ecab60c048508fbe26ee4d9","uri/ipaddresses/ipv4_random.txt","5","6","1","8",
+"any_ipv4_addresses","Any IPv4 Addresses","f5047344122f0dee9974ba6761e61c6b8649e1f3968d13a635ebbf7be53a3a0d","uri/ipaddresses/ipv4_private.txt","7","8","12","9",
+"any_ipv4_addresses","Any IPv4 Addresses","37d7a80604871e579850a658c7add2ae7557d0c6abcc9b31ecddc4424207eba3","uri/ipaddresses/ipv4_private.txt","6","7","1","12",
+"any_ipv4_addresses","Any IPv4 Addresses","ba6c3d2ea935310a36ed89824703fa08dea5099f5b653ef554d1c028b8e74dc6","uri/ipaddresses/ipv4_random.txt","11","11","17","30",
+"any_ipv4_addresses","Any IPv4 Addresses","0039ddd0438bbe79bf518a8b52ac3a6d9a99fc8c251e8d8cab102fb0482c42bb","uri/app.py","21","21","13","21",

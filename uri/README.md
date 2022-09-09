@@ -88,3 +88,22 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## Any IPv4 Addresses
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[^v][0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
+```
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+- False Positives with build versions
+- Use Internal IPv4 pattern if possible
+</p>
+</details>
