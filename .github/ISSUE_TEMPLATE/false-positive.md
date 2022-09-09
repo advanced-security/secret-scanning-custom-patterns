@@ -7,7 +7,7 @@ assignees: 'GeekMasher'
 
 ---
 
-### Pattern Name
+### Pattern Name / Description
 <!-- Provide the name or location of the pattern -->
 
 
@@ -17,10 +17,6 @@ assignees: 'GeekMasher'
 ```
 [snippet]
 ```
-
-### Description
-<!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
-
 
 ### [optional] Propose Solution
 <!-- Please provide a solution to the issue of the False Positives -->
