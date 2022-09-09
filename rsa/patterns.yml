@@ -5,8 +5,11 @@ patterns:
   - name: Generic RSA keys
     type: generic_rsa_keys
     regex:
+      version: 1.1
       pattern: |
-        --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END (?:[A-Z]+ )?PRIVATE KEY--
+        --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\r|\\n|)+[a-zA-Z0-9+/=\s]+(\\r|\\n|)+--+END (?:[A-Z]+ )?PRIVATE KEY--
+    comments:
+      - "Basic support for hardcoded strings in code with RSA private key"
 
   - name: SSH Private Keys
     type: ssh_private_keys
@@ -23,7 +26,7 @@ patterns:
         --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
 
   - name: SSH Public Key
-    type: shh_public_key
+    type: ssh_public_key
     experimental: true
     regex:
       pattern: |

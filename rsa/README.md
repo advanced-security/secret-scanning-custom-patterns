@@ -10,12 +10,13 @@
 <p>
 
 ```regex
---BEGIN (?:[A-Z]+ )?PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END (?:[A-Z]+ )?PRIVATE KEY--
+--BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\r|\\n|)+[a-zA-Z0-9+/=\s]+(\\r|\\n|)+--+END (?:[A-Z]+ )?PRIVATE KEY--
 ```
 
 **Comments / Notes:**
 
-- Current Version: v0.1
+- Current Version: v1.1
+- Basic support for hardcoded strings in code with RSA private key
 </p>
 </details>
 
