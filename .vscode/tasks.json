@@ -6,7 +6,17 @@
         {
             "label": "Validate / Test",
             "type": "shell",
-            "command": "pipenv run validate",
+            "command": "pipenv run validate ",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Validate / Test (current file)",
+            "type": "shell",
+            "command": "pipenv run validate -p ${file}",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
