@@ -71,13 +71,25 @@
 <p>
 
 ```regex
-ssh-rsa (.*|\n) [\S]*@?[\S]*
+ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
 ```
 
 **Comments / Notes:**
 
-- Current Version: v0.1
+- Current Version: v0.2
 - SSH Public Key (not a secret)
+- Ignores the name of the public key
 </p>
 </details>
 
+
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|(\s)+[a-zA-Z0-9@-]+
+```
+
+</p>
+</details>

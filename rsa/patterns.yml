@@ -29,7 +29,12 @@ patterns:
     type: ssh_public_key
     experimental: true
     regex:
+      version: 0.2
       pattern: |
-        ssh-rsa (.*|\n) [\S]*@?[\S]*
+        ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
+      end: |
+        \z|(\s)+[a-zA-Z0-9@-]+
+
     comments:
       - "SSH Public Key (not a secret)"
+      - Ignores the name of the public key
