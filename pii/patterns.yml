@@ -31,7 +31,7 @@ patterns:
         (34|37)[0-9]{13}
 
 
-  - name: Credit Cards - Discovery
+  - name: Credit Cards - Discover
     type: credit_card_discovery
     regex:
       pattern: |
