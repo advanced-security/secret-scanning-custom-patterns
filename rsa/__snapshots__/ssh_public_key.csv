@@ -1,0 +1,3 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"ssh_public_key","SSH Public Key","2d19538db131e38a5a60e9431dbdae2ca8cd74df0ccc5ca315dbd399997265e7","ssh/ssh_rsa.pub","1","1","1","553",
+"ssh_public_key","SSH Public Key","2d19538db131e38a5a60e9431dbdae2ca8cd74df0ccc5ca315dbd399997265e7","rsa/ssh_rsa.pub","1","1","1","553",
