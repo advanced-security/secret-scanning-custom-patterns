@@ -1,0 +1,2 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"grafana_api_token","Grafana API token","feb26c1fdafee077295232efc68397442bb9fc3d0d35bbbde6ec6d1fa049170e","vendors/grafana.txt","5","5","23","73",
