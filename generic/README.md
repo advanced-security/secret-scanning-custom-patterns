@@ -10,7 +10,7 @@
 <p>
 
 ```regex
-[^\s"'(${{)][a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]+
+[^\t "'(${{)][a-zA-Z0-9\t !.,$%&*+?^_`{|}()~-]+
 ```
 
 **Comments / Notes:**
@@ -28,7 +28,7 @@
 <p>
 
 ```regex
-(?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))(\s+|)(=|:)(\s+|)("|'|\s|)
+(?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))([\t ]+|)(=|:)([\t ]+|)("|'|[\t ]|)
 ```
 
 </p>
@@ -38,7 +38,7 @@
 <p>
 
 ```regex
-\z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]|'|"
+\z|[^a-zA-Z0-9\t !.,$%&*+?^_`{|}()~-]|'|"
 ```
 
 </p>
