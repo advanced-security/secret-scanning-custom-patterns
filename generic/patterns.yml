@@ -5,18 +5,21 @@ patterns:
   - name: Generic Passwords
     type: generic_passwords
     regex:
-      version: 0.3
+      version: 0.4
       pattern: |
         [^\t "'(${{)][a-zA-Z0-9\t !.,$%&*+?^_`{|}()~-]+
       start: |
         (?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))([\t ]+|)(=|:)([\t ]+|)("|'|[\t ]|)
       end: |
         \z|[^a-zA-Z0-9\t !.,$%&*+?^_`{|}()~-]|'|"
-    
+      additional_not_match:
+        - \b((?i)(pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token|write|read|on|off|true|false|placeholder|dummy)\b
+
     comments:
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
       - "Delimiters like `=` or `:` (with padding)"
       - "String with a number of chars until a breaking char"
+      - "Not matching variables, placeholders or common configuration constants such as 'read' and 'write'"
 
   - name: UUIDs
     type: uuids
