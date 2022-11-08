@@ -12,8 +12,8 @@ patterns:
         (?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))([\t ]+|)(=|:)([\t ]+|)("|'|[\t ]|)
       end: |
         \z|[^a-zA-Z0-9\t !.,$%&*+?^_`{|}()~-]|'|"
-      additional_not_match: |
-        \b((?i)(pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token|write|read|on|off|true|false|placeholder|dummy)\b
+      additional_not_match:
+        - \b((?i)(pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token|write|read|on|off|true|false|placeholder|dummy)\b
 
     comments:
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
