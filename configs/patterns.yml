@@ -3,15 +3,17 @@ name: Configuration Secrets
 
 patterns:
   - name: Hardcoded Spring SQL passwords
-    type: hardcoded_spring_sql_passwords
+    type: spring_sql_passwords
+    comments:
+      - "Does not account for 0 length passwords"
     regex:
-      version: 0.1
+      version: 0.2
       pattern: |
-        [a-zA-Z0-9!$%&*+?^_`{|}~-]+
+        [a-zA-Z0-9!$%&*+?^_`{}|~-]+
       start: |
-        [^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)
+        [^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)("|'|)
       end: |
-        \z|[^0-9A-Za-z]|'
+        \z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
 
   - name: Django Secret Key
     type: django_secret_key

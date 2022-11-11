@@ -10,12 +10,13 @@
 <p>
 
 ```regex
-[a-zA-Z0-9!$%&*+?^_`{|}~-]+
+[a-zA-Z0-9!$%&*+?^_`{}|~-]+
 ```
 
 **Comments / Notes:**
 
-- Current Version: v0.1
+- Current Version: v0.2
+- Does not account for 0 length passwords
 </p>
 </details>
 
@@ -25,7 +26,7 @@
 <p>
 
 ```regex
-[^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)
+[^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)("|'|)
 ```
 
 </p>
@@ -35,7 +36,7 @@
 <p>
 
 ```regex
-\z|[^0-9A-Za-z]|'
+\z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
 ```
 
 </p>
