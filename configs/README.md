@@ -5,6 +5,16 @@
 ## Hardcoded Database Passwords
 
 
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Checks if the password is null / length of 0
+- Supports quoted passwords
+- Not case sensative
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -13,15 +23,8 @@
 [a-zA-Z0-9!$%&*+?^_`{|}~-]{1,}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- Checks if the password is null / length of 0
-- Supports quoted passwords
-- Not case sensative
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -32,8 +35,7 @@
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
