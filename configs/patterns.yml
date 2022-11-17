@@ -3,7 +3,10 @@ name: Configuration Secrets
 
 patterns:
   - name: Hardcoded Spring SQL passwords
+    description: |
+      Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
     type: hardcoded_spring_sql_passwords
+    precision: 8.0
     regex:
       version: 0.1
       pattern: |
@@ -32,7 +35,8 @@ patterns:
 
   - name: YAML Static Password Fields
     type: yaml_static_password_fields
-    description: "This secret pattern has a relative high false positive rate and should be tested on a number of repositories before running on an entire organisation."
+    description: |
+      Pattern to find Static passwords in YAML configuration files
     experimental: true
     regex:
       version: 0.1

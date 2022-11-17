@@ -5,6 +5,12 @@
 ## Hardcoded Spring SQL passwords
 
 
+Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -13,12 +19,8 @@
 [a-zA-Z0-9!$%&*+?^_`{|}~-]+
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -29,8 +31,7 @@
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -44,6 +45,14 @@
 ## Django Secret Key
 
 
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- _If the secret is at the start of the file, its not picked up_
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -52,13 +61,8 @@
 [^\s"'(${{)][a-zA-Z0-9!.,$%&*+?^_`{|}()~-]*
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- _If the secret is at the start of the file, its not picked up_
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -69,8 +73,7 @@
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -83,9 +86,17 @@
 
 ## YAML Static Password Fields
 
-This secret pattern has a relative high false positive rate and should be tested on a number of repositories before running on an entire organisation.
-
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Pattern to find Static passwords in YAML configuration files
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- The hardcoded password is between 12 and 32 chars long
+- Some false positives in Code might appear
+- The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -95,15 +106,8 @@ This secret pattern has a relative high false positive rate and should be tested
 [a-zA-Z0-9%!#$%&*+=?^_-{|}~\.,]{12,32}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- The hardcoded password is between 12 and 32 chars long
-- Some false positives in Code might appear
-- The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -114,8 +118,7 @@ This secret pattern has a relative high false positive rate and should be tested
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
