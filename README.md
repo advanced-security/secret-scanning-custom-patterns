@@ -9,6 +9,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 
 ### [Configuration Secrets](./configs)
 
+- Hardcoded Database Passwords
 - Hardcoded Spring SQL passwords
 - Django Secret Key
 
