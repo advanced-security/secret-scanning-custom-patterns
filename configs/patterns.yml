@@ -18,6 +18,8 @@ patterns:
         \z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
 
   - name: Hardcoded Spring SQL passwords
+    description: |
+      Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
     type: hardcoded_spring_sql_passwords
     regex:
       version: 0.1
@@ -47,7 +49,8 @@ patterns:
 
   - name: YAML Static Password Fields
     type: yaml_static_password_fields
-    description: "This secret pattern has a relative high false positive rate and should be tested on a number of repositories before running on an entire organisation."
+    description: |
+      Pattern to find Static passwords in YAML configuration files
     experimental: true
     regex:
       version: 0.1

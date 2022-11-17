@@ -4,7 +4,11 @@
 
 ## JWT
 
+
 JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
+*version: v0.1*
+
+
 
 <details>
 <summary>Pattern Format</summary>
@@ -14,12 +18,8 @@ JSON Web Tokens are an open, industry standard RFC 7519 method for representing 
 e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -30,8 +30,7 @@ e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
