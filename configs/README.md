@@ -10,6 +10,7 @@
 
 **Comments / Notes:**
 
+- Only support for Postgres and MySQL password strings
 - Checks if the password is null / length of 0
 - Supports quoted passwords
 - Not case sensative
