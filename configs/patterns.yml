@@ -6,7 +6,6 @@ patterns:
     description: |
       Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
     type: hardcoded_spring_sql_passwords
-    precision: 8.0
     regex:
       version: 0.1
       pattern: |
