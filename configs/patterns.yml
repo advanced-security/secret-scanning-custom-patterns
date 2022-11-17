@@ -5,11 +5,11 @@ patterns:
   - name: Hardcoded Spring SQL passwords
     type: spring_sql_passwords
     comments:
-      - "Does not account for 0 length passwords"
+      - "Checks if the password is null / length of 0"
     regex:
       version: 0.2
       pattern: |
-        [a-zA-Z0-9!$%&*+?^_`{}|~-]+
+        [a-zA-Z0-9!$%&*+?^_`{}|~-]{1,}
       start: |
         [^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)("|'|)
       end: |

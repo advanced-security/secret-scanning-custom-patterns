@@ -10,13 +10,13 @@
 <p>
 
 ```regex
-[a-zA-Z0-9!$%&*+?^_`{}|~-]+
+[a-zA-Z0-9!$%&*+?^_`{}|~-]{1,}
 ```
 
 **Comments / Notes:**
 
 - Current Version: v0.2
-- Does not account for 0 length passwords
+- Checks if the password is null / length of 0
 </p>
 </details>
 
