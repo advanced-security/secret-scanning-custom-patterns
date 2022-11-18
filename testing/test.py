@@ -45,7 +45,7 @@ def parse_patterns(patterns_dir: str):
     patterns = []
 
     patterns_file: str = os.path.join(patterns_dir, PATTERNS_FILENAME)
-    data = yaml.load(open(patterns_file, "r"))
+    data = yaml.safe_load(open(patterns_file, "r"))
     name = data.get("name")
     
     for pattern in data["patterns"]:
@@ -54,25 +54,76 @@ def parse_patterns(patterns_dir: str):
 
         regex = pattern["regex"]
 
-        additional_not_match = pattern.get("additional_not_match")
-        additional_match = pattern.get("additional_match")
+        additional_not_matches = pattern.get("additional_not_match", [])
+        additional_matches = pattern.get("additional_match", [])
         
-        additional_not_matches = [additional_not_match] if additional_not_match is not None else None
-        additional_matches = [additional_match] if additional_match is not None else None
-
         patterns.append(Pattern(name, description, regex.get('start'), regex.get('pattern'), regex.get('end'), additional_matches, additional_not_matches))
 
     return patterns
 
 
-def report_scan_results(content, patterns, rule_id, start_offset, end_offset, flags, context):
-    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
-    LOG.debug("Content was: %s", content[start_offset:end_offset])
-    regex_string = patterns[rule_id].regex_string()
-    LOG.debug("Pattern was: %s", regex_string)
+def report_scan_results(patterns, content, rule_id, start_offset, end_offset, flags, context):
+    match_content = content[start_offset:end_offset]
+    pattern = patterns[rule_id]
     
-    # now match with Python RE (largely compatible)
-    # python_re = re.compile(regex_string)
+    LOG.debug("Matched '%s' id %d at %d:%d with flags %s and context %s", pattern.name, rule_id, start_offset, end_offset, flags, context)
+    LOG.debug("Matched: %s", match_content)
+     
+    regex_string = pattern.regex_string()
+    LOG.debug("Pattern was: %s", regex_string)
+
+    # now do the start/pattern/end matches in sequence to understand the boundaries of the pattern match
+    # it's a callback chain, from each db.scan(..., callback) call
+    db_start = hyperscan.Database()
+    db_start.compile([pattern.start.encode('utf-8')])  # TODO: add anchors?
+    db_start.scan(match_content, partial(handle_pattern_start, pattern, match_content))
+
+
+def handle_pattern_start(pattern, content, rule_id, start_offset, end_offset, flags, context):
+    match_content = content[start_offset:end_offset]
+    
+    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
+    LOG.debug("Matched start: %s", match_content)
+
+    if start_offset != 0:
+        raise ValueError("Start offset is not zero: %d", start_offset)
+
+    remaining_content = content[end_offset:]
+    
+    db_end = hyperscan.Database()
+    db_end.compile([b'(' + pattern.end.encode('utf-8') + b')$'])  # TODO: add anchors?
+    db_end.scan(remaining_content, partial(handle_pattern_end, pattern, remaining_content))
+
+
+def handle_pattern_end(pattern, content, rule_id, start_offset, end_offset, flags, context):
+    match_content = content[start_offset:end_offset]
+    
+    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
+    LOG.debug("Matched end: %s", match_content)
+
+    if end_offset != len(content):
+        raise ValueError("End offset is not the end of the content: %d != %d", end_offset, len(content))
+
+    remaining_content = content[:start_offset]
+
+    LOG.debug("Remaining content to match pattern on: %s", remaining_content)
+
+    db_pattern = hyperscan.Database()
+    db_pattern.compile([pattern.pattern.encode('utf-8')])  # TODO: add anchors?
+    db_pattern.scan(remaining_content, partial(handle_pattern_match, pattern, remaining_content))
+
+
+def handle_pattern_match(pattern, content, rule_id, start_offset, end_offset, flags, context):
+    match_content = content[start_offset:end_offset]
+    
+    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
+    LOG.info("Matched pattern: %s", match_content)
+    
+    if start_offset != 0:
+        raise ValueError("Start offset is not zero: %d", start_offset)
+
+    if end_offset != len(content):
+        raise ValueError("End offset is not the end of the content: %s", end_offset)
 
 
 def test_patterns(tests_path: str, db: hyperscan.Database):
@@ -84,7 +135,7 @@ def test_patterns(tests_path: str, db: hyperscan.Database):
             for filename in filenames:
                 with open(os.path.join(dirpath, filename), "rb") as f:
                     content = f.read()
-                    db.scan(content, partial(report_scan_results, content, patterns))
+                    db.scan(content, partial(report_scan_results, patterns, content))
 
 
 def add_args(parser: Namespace) -> None:
