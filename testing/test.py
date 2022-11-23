@@ -63,12 +63,26 @@ def parse_patterns(patterns_dir: str):
     return patterns
 
 
-def compile(db: hyperscan.Database, regex: Union[str|list[str]]) -> bool:
+def compile(db: hyperscan.Database, regex: Union[str|list[str]|bytes|list[bytes]]) -> bool:
     """Compile one or more hyperscan regexes into the given database."""
+    regex_bytes: list[bytes]
+
     if isinstance(regex, str):
         regex_bytes = [regex.encode('utf-8')]
+    elif isinstance(regex, bytes):
+        regex_bytes = [regex]
+    elif isinstance(regex, list):
+        if len(regex) == 0:
+            return False
+
+        if isinstance(regex[0], str):
+            regex_bytes = [r.encode('utf-8') for r in regex]
+        elif isinstance(regex[0], bytes):
+            regex_bytes = regex
+        else:
+            raise ValueError("Regex is not a str or bytes")
     else:
-        regex_bytes = [r.encode('utf-8') for r in regex]
+        raise ValueError("Regex is not a str or bytes")
     try:
         db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
     except hyperscan.error as err:
@@ -178,15 +192,8 @@ def test_patterns(tests_path: str, db: hyperscan.Database):
         if PATTERNS_FILENAME in filenames:
             LOG.debug("Found patterns in %s", dirpath)
             patterns = parse_patterns(dirpath)
-            try:
-                db.compile([pattern.regex_string() for pattern in patterns], flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
-            except hyperscan.error as err:
-                LOG.error("Hyperscan error: %s", err)
-                for pattern in patterns:
-                    try:
-                        db.compile([pattern.regex_string()], flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
-                    except hyperscan.error as err:
-                        LOG.error("Pattern error: %s", pattern.regex_string())
+            if not compile(db, [pattern.regex_string() for pattern in patterns]):
+                LOG.error("Hyperscan pattern compilation error")
                 exit
             for filename in filenames:
                 with open(os.path.join(dirpath, filename), "rb") as f:
