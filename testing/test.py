@@ -112,7 +112,7 @@ def double_check_match(pattern: str, flags: int, start_offset: int, content: str
     else:
         LOG.debug("This pattern may be over-matching, it does not report a start offset")
 
-        # fall back to Python regex engine. Have to replace \Z, \A etc. with Python equivalents
+        # fall back to Python PCRE-bindings. This supports \Z, \A etc. that the native Python engine does not, and is mostly compatible with hyperscan
         import pcre
         regex = pcre.compile(pattern)
         if not regex.match(content):
