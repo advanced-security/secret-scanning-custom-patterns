@@ -112,7 +112,7 @@ def handle_pattern_start(pattern, content, rule_id, start_offset, end_offset, fl
     LOG.debug("Matched start: %s", match_content)
 
     if start_offset != 0:
-        LOG.warning("Start offset is not zero: {:d}".format(start_offset))
+        LOG.debug("Start offset is not zero: {:d}".format(start_offset))
         return
 
     remaining_content = content[end_offset:]
@@ -131,7 +131,7 @@ def handle_pattern_match(pattern, content, rule_id, start_offset, end_offset, fl
     LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
  
     if start_offset != 0:
-        LOG.warning("Start offset is not zero: {:d}".format(start_offset))
+        LOG.debug("Start offset is not zero: {:d}".format(start_offset))
         return
 
     LOG.debug("Matched pattern: %s", match_content)
@@ -162,6 +162,13 @@ def handle_pattern_end(pattern, content, rule_id, start_offset, end_offset, flag
             return
     else:
         LOG.debug("This pattern may be over-matching, it does not report a start offset")
+
+        # fall back to Python regex engine. Have to replace \Z, \A etc. with Python equivalents
+        import pcre
+        end_regex = pcre.compile(pattern.end)
+        if not end_regex.match(content):
+            LOG.debug("False match")
+            return
 
     LOG.info("Total match!")
   
