@@ -99,13 +99,13 @@ def compile(db: hyperscan.Database, regex: Union[str|list[str]|bytes|list[bytes]
     return True
 
 
-def report_scan_results(patterns, content, rule_id, start_offset, end_offset, flags, context):
+def report_scan_results(patterns, content, rule_id, start_offset, end_offset, flags, context) -> None:
     match_content = content[start_offset:end_offset]
     pattern = patterns[rule_id]
-    
+
     LOG.debug("Matched '%s' id %d at %d:%d with flags %s and context %s", pattern.name, rule_id, start_offset, end_offset, flags, context)
     LOG.debug("Matched: %s", match_content)
-     
+
     regex_string = pattern.regex_string()
     LOG.debug("Pattern was: %s", regex_string)
 
