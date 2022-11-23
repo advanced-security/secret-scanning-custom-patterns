@@ -104,15 +104,31 @@ def report_scan_results(patterns, content, rule_id, start_offset, end_offset, fl
         LOG.error('Error with start regex: %s', regex) 
 
 
+def double_check_match(pattern: str, flags: int, start_offset: int, content: str) -> bool:
+    if flags & hyperscan.HS_FLAG_SOM_LEFTMOST:
+        if start_offset != 0:
+            LOG.debug("Start offset is not zero: {:d}".format(start_offset))
+            return False
+    else:
+        LOG.debug("This pattern may be over-matching, it does not report a start offset")
 
-def handle_pattern_start(pattern, content, rule_id, start_offset, end_offset, flags, context):
+        # fall back to Python regex engine. Have to replace \Z, \A etc. with Python equivalents
+        import pcre
+        regex = pcre.compile(pattern)
+        if not regex.match(content):
+            LOG.debug("False match")
+            return False
+
+    return True
+
+
+def handle_pattern_start(pattern, content, rule_id, start_offset, end_offset, flags, context) -> None:
     match_content = content[start_offset:end_offset]
     
     LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
     LOG.debug("Matched start: %s", match_content)
 
-    if start_offset != 0:
-        LOG.debug("Start offset is not zero: {:d}".format(start_offset))
+    if not double_check_match(pattern.start, flags, start_offset, content):
         return
 
     remaining_content = content[end_offset:]
@@ -125,13 +141,12 @@ def handle_pattern_start(pattern, content, rule_id, start_offset, end_offset, fl
         LOG.error('Error with pattern regex: %s', pattern.pattern) 
 
 
-def handle_pattern_match(pattern, content, rule_id, start_offset, end_offset, flags, context):
+def handle_pattern_match(pattern, content, rule_id, start_offset, end_offset, flags, context) -> None:
     match_content = content[start_offset:end_offset]
     
     LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
- 
-    if start_offset != 0:
-        LOG.debug("Start offset is not zero: {:d}".format(start_offset))
+
+    if not double_check_match(pattern.pattern, flags, start_offset, content):
         return
 
     LOG.debug("Matched pattern: %s", match_content)
@@ -140,35 +155,20 @@ def handle_pattern_match(pattern, content, rule_id, start_offset, end_offset, fl
     
     db_end = hyperscan.Database()
 
-    if len(remaining_content) == 0:
-        LOG.info("Total match!")
-        return
-
     if compile(db_end, pattern.end):
         db_end.scan(remaining_content, partial(handle_pattern_end, pattern, remaining_content))
     else:
         LOG.error('Error with end regex: %s', regex) 
 
  
-def handle_pattern_end(pattern, content, rule_id, start_offset, end_offset, flags, context):
+def handle_pattern_end(pattern, content, rule_id, start_offset, end_offset, flags, context) -> None:
     match_content = content[start_offset:end_offset]
     
     LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
     LOG.debug("Matched end: %s", match_content)
 
-    if flags & hyperscan.HS_FLAG_SOM_LEFTMOST:
-        if start_offset != 0:
-            LOG.warning("Start offset is not zero: {:d}".format(start_offset))
-            return
-    else:
-        LOG.debug("This pattern may be over-matching, it does not report a start offset")
-
-        # fall back to Python regex engine. Have to replace \Z, \A etc. with Python equivalents
-        import pcre
-        end_regex = pcre.compile(pattern.end)
-        if not end_regex.match(content):
-            LOG.debug("False match")
-            return
+    if not double_check_match(pattern.end, flags, start_offset, content):
+        return
 
     LOG.info("Total match!")
   
