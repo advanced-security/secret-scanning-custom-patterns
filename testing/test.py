@@ -16,8 +16,9 @@ import json
 import hyperscan
 from functools import partial
 from dataclasses import dataclass
-import re
-from typing import Union
+import pcre
+from typing import Union, Any
+#from asyncio import Future, run, get_event_loop
 
 
 LOG = logging.getLogger(__name__)
@@ -35,10 +36,13 @@ class Pattern():
         self.additional_not_matches = [add_match.strip() for add_match in additional_not_matches] if additional_not_matches is not None else []
         self.additional_matches = [add_match.strip() for add_match in additional_matches] if additional_matches is not None else []
 
-
     def regex_string(self) -> bytes:
         """Concatenate and UTF-8 encode."""
         return f"({self.start})({self.pattern})({self.end})".encode('utf-8')
+
+    def pcre_regex(self) -> pcre.Pattern:
+        """Concatenate, label capture groups, and UTF-8 encode."""
+        return pcre.compile(f"(?P<start>{self.start})(?P<pattern>{self.pattern})(?P<end>{self.end})".encode('utf-8'))
 
 
 def parse_patterns(patterns_dir: str):
@@ -109,85 +113,29 @@ def report_scan_results(patterns, content, rule_id, start_offset, end_offset, fl
     regex_string = pattern.regex_string()
     LOG.debug("Pattern was: %s", regex_string)
 
-    # now do the start/pattern/end matches in sequence to understand the boundaries of the pattern match
-    # it's a callback chain, from each db.scan(..., callback) call
-    db_start = hyperscan.Database()
-    if compile(db_start, pattern.start):
-        db_start.scan(match_content, partial(handle_pattern_start, pattern, match_content))
-    else:
-        LOG.error('Error with start regex: %s', regex) 
+    # extract separate parts of match using PCRE
+    pcre_result_match(pattern, match_content)
 
 
-def double_check_match(pattern: str, flags: int, start_offset: int, content: str) -> bool:
-    if flags & hyperscan.HS_FLAG_SOM_LEFTMOST:
-        if start_offset != 0:
-            LOG.debug("Start offset is not zero: {:d}".format(start_offset))
-            return False
-    else:
-        LOG.debug("This pattern may be over-matching, it does not report a start offset")
+def pcre_result_match(pattern, content) -> None:
+    """Use PCRE to extract start, pattern and end matches."""
+    if m := pattern.pcre_regex().match(content):
+        parts = {'start': m.group('start').decode('utf-8'), 'pattern': m.group('pattern').decode('utf-8'), 'end': m.group('end').decode('utf-8')}
 
-        # fall back to Python PCRE-bindings. This supports \Z, \A etc. that the native Python engine does not, and is mostly compatible with hyperscan
-        import pcre
-        regex = pcre.compile(pattern)
-        if not regex.match(content):
-            LOG.debug("False match")
-            return False
+        if pattern.additional_matches is not None:
+            if not all([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_matches]):
+                LOG.debug("One of the required additional pattern matches did not hold")
+                return
 
-    return True
+        if pattern.additional_not_matches is not None:
+            if any([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_not_matches]):
+                LOG.debug("One of the additional NOT pattern matches held")
+                return
 
-
-def handle_pattern_start(pattern, content, rule_id, start_offset, end_offset, flags, context) -> None:
-    match_content = content[start_offset:end_offset]
-    
-    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
-    LOG.debug("Matched start: %s", match_content)
-
-    if not double_check_match(pattern.start, flags, start_offset, content):
-        return
-
-    remaining_content = content[end_offset:]
-    
-    # pass on to the pattern match now
-    db_pattern = hyperscan.Database()
-    if compile(db_pattern, pattern.pattern):
-        db_pattern.scan(remaining_content, partial(handle_pattern_match, pattern, remaining_content))
-    else:
-        LOG.error('Error with pattern regex: %s', pattern.pattern) 
+        print(json.dumps({'name': pattern.name, 'groups': parts}))
 
 
-def handle_pattern_match(pattern, content, rule_id, start_offset, end_offset, flags, context) -> None:
-    match_content = content[start_offset:end_offset]
-    
-    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
-
-    if not double_check_match(pattern.pattern, flags, start_offset, content):
-        return
-
-    LOG.debug("Matched pattern: %s", match_content)
-    
-    remaining_content = content[end_offset:]
-    
-    db_end = hyperscan.Database()
-
-    if compile(db_end, pattern.end):
-        db_end.scan(remaining_content, partial(handle_pattern_end, pattern, remaining_content))
-    else:
-        LOG.error('Error with end regex: %s', regex) 
-
- 
-def handle_pattern_end(pattern, content, rule_id, start_offset, end_offset, flags, context) -> None:
-    match_content = content[start_offset:end_offset]
-    
-    LOG.debug("Matched id %s at %d:%d with flags %s and context %s", rule_id, start_offset, end_offset, flags, context)
-    LOG.debug("Matched end: %s", match_content)
-
-    if not double_check_match(pattern.end, flags, start_offset, content):
-        return
-
-    LOG.info("Total match!")
-  
-  
-def test_patterns(tests_path: str, db: hyperscan.Database):
+def test_patterns(tests_path: str, db: hyperscan.Database) -> None:
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
             LOG.debug("Found patterns in %s", dirpath)
@@ -198,7 +146,12 @@ def test_patterns(tests_path: str, db: hyperscan.Database):
             for filename in filenames:
                 with open(os.path.join(dirpath, filename), "rb") as f:
                     content = f.read()
-                    db.scan(content, partial(report_scan_results, patterns, content))
+                    scan(db, content, patterns)
+
+
+def scan(db: hyperscan.Database, content: bytes, patterns: list[dict[str, Any]]) -> None:
+    """Scan content with database. I wanted to have this be an async function with a Future, but it didn't work."""
+    db.scan(content, partial(report_scan_results, patterns, content))
 
 
 def add_args(parser: Namespace) -> None:
@@ -221,6 +174,7 @@ def main() -> None:
     db = hyperscan.Database()    
 
     test_patterns(args.tests, db)
+
 
 if __name__ == "__main__":
     main()
