@@ -104,6 +104,7 @@ def compile(db: hyperscan.Database, regex: Union[str|list[str]|bytes|list[bytes]
 
 
 def report_scan_results(patterns, content, rule_id, start_offset, end_offset, flags, context) -> None:
+    """Hyperscan callback."""
     match_content = content[start_offset:end_offset]
     pattern = patterns[rule_id]
 
@@ -135,7 +136,10 @@ def pcre_result_match(pattern, content) -> None:
         print(json.dumps({'name': pattern.name, 'groups': parts}))
 
 
-def test_patterns(tests_path: str, db: hyperscan.Database) -> None:
+def test_patterns(tests_path: str) -> None:
+    """Run all of the discovered patterns in the given path."""
+    db = hyperscan.Database()
+
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
             LOG.debug("Found patterns in %s", dirpath)
@@ -171,9 +175,7 @@ def main() -> None:
     if args.debug:
         LOG.setLevel(logging.DEBUG)
 
-    db = hyperscan.Database()    
-
-    test_patterns(args.tests, db)
+    test_patterns(args.tests)
 
 
 if __name__ == "__main__":
