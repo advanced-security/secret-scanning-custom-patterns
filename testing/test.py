@@ -104,12 +104,12 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
         try:
             db.compile(regex_bytes)
         except hyperscan.error:
-            LOG.error("Failed to compile rules")
+            LOG.debug("Failed to compile rules")
             for r in regex_bytes:
                 try:
                     db.compile(r)
                 except hyperscan.error as err:
-                    LOG.error("Hyperscan error with '%s': %s", r, err)
+                    LOG.error("❌ hyperscan error with '%s': %s", r, err)
             return False
     return True
 
@@ -190,8 +190,9 @@ def test_patterns(tests_path: str) -> bool:
             LOG.debug("Found patterns in %s", dirpath)
             patterns = parse_patterns(dirpath)
             if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
-                LOG.error("Hyperscan pattern compilation error")
-                exit
+                path = Path(dirpath).relative_to(tests_path)
+                LOG.error("❌ hyperscan pattern compilation error in '%s'", path)
+                exit(1)
             for filename in [f for f in filenames if f != PATTERNS_FILENAME]:
                 path = (Path(dirpath) / filename).relative_to(tests_path)
                 with (Path(tests_path) / path).open("rb") as f:
@@ -240,8 +241,8 @@ def check_platform() -> None:
     Exit if not.
     """
     if platform.machine() not in ("x86_64", "amd64"):
-        LOG.error("Cannot run hyperscan on non-Intel-compatible platform")
-        exit()
+        LOG.error("❌ cannot run hyperscan on non-Intel-compatible platform")
+        exit(1)
 
 
 def main() -> None:
