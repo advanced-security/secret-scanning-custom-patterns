@@ -2,6 +2,7 @@ all: requirements lint
 .PHONY: lint requirements
 
 requirements:
+	sudo apt-get -qq install libpcre3-dev
 	python3 -m pip install -r requirements.txt > /dev/null 
 
 lint:
