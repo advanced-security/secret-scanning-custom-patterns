@@ -14,7 +14,6 @@ patterns:
         [^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)
       end: |
         \z|[^0-9A-Za-z]|'
-
     expected:
       - name: application.properties
         start_offset: 314
@@ -35,19 +34,23 @@ patterns:
         start_offset: 1427
         end_offset: 1433
 
+
   - name: Django Secret Key
     type: django_secret_key
     regex:
       version: 0.1
       pattern: |
-        [^\s"'(${{)][a-zA-Z0-9!.,$%&*+?^_`{|}()~-]*
+        [^\s"'(${{)][a-zA-Z0-9!.,$%&*+?^_`{|}()~=#-]*
       start: |
-        [^0-9A-Za-z](SECRET_KEY)(\s+|)=(\s+|)("|')
+        [^0-9A-Za-z]SECRET_KEY\s*=\s*["']
       end: |
-        \z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]|'|"
-
+        \z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~=#-]|['"]
     comments:
       - "_If the secret is at the start of the file, its not picked up_"
+    expected:
+      - name: global_settings.py
+        start_offset: 59
+        end_offset: 109
 
 
   # Experimental
@@ -65,12 +68,10 @@ patterns:
         [^0-9A-Za-z](\s+|)(secret|service_pass(wd|word|code|phrase)|pass(wd|word|code|phrase)|key)(\s+|):(\s+|)
       end: |
         [^0-9A-Za-z'"\(\)]|\z
-
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
       - "The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)"
-
     expected:
       - name: example.yml
         start_offset: 57

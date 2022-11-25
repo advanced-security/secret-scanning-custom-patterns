@@ -120,7 +120,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
 
 
 # sideffect: writes to global RESULTS
-def report_scan_results(patterns: list[Pattern], path: str, content: bytes, verbose: bool, rule_id: int, start_offset: int, end_offset: int,
+def report_scan_results(patterns: list[Pattern], path: str, content: bytes, verbose: bool, quiet: bool, rule_id: int, start_offset: int, end_offset: int,
                         flags: int, context: Optional[Any]) -> None:
     """Hyperscan callback."""
     match_content: bytes = content[start_offset:end_offset]
@@ -134,7 +134,7 @@ def report_scan_results(patterns: list[Pattern], path: str, content: bytes, verb
     LOG.debug("Pattern was: %s", regex_string)
 
     # extract separate parts of match using PCRE
-    pcre_result_match(pattern, path, match_content, start_offset, end_offset, verbose=verbose)
+    pcre_result_match(pattern, path, match_content, start_offset, end_offset, verbose=verbose, quiet=quiet)
 
 
 def path_offsets_match(first, second) -> bool:
@@ -146,7 +146,7 @@ def path_offsets_match(first, second) -> bool:
 
 
 # sideffect: writes to global RESULTS
-def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int, end_offset: int, verbose: bool=False) -> None:
+def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int, end_offset: int, verbose: bool=False, quiet: bool=False) -> None:
     """Use PCRE to extract start, pattern and end matches."""
     if m := pattern.pcre_regex().match(content):
         parts = {
@@ -172,9 +172,11 @@ def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int,
         }
 
         if not any([path_offsets_match(file_details, loc) for loc in pattern.expected]):
-            LOG.log(logging.ERROR if pattern.expected else logging.INFO, "%s result '%s' for '%s' in path '%s'; %s:%d-%d", "❌ unexpected" if pattern.expected else "ℹ️  found", parts['pattern'], pattern.name, path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
+            if not quiet:
+                LOG.log(logging.ERROR if pattern.expected else logging.INFO, "%s result '%s' for '%s' in path '%s'; %s:%d-%d", "❌ unexpected" if pattern.expected else "ℹ️  found", parts['pattern'], pattern.name, path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
         else:
-            LOG.log(logging.INFO if verbose else logging.DEBUG, "✅ expected result '%s' for '%s' in path '%s'; %s:%d-%d", parts['pattern'], pattern.name, path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
+            if not quiet or LOG.level == logging.DEBUG:
+                LOG.log(logging.INFO if verbose else logging.DEBUG, "✅ expected result '%s' for '%s' in path '%s'; %s:%d-%d", parts['pattern'], pattern.name, path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
 
         if pattern.name not in RESULTS:
             RESULTS[pattern.name] = []
@@ -184,29 +186,33 @@ def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int,
         LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
 
 
-def test_patterns(tests_path: str, verbose: bool=False) -> bool:
+def test_patterns(tests_path: str, verbose: bool=False, quiet: bool=False) -> bool:
     """Run all of the discovered patterns in the given path."""
     result = True
 
     if not os.path.isdir(tests_path):
-        LOG.error("❌ testing directory not found: %s", tests_path)
+        if not quiet:
+            LOG.error("❌ testing directory not found: %s", tests_path)
+        exit(1)
 
     db = hyperscan.Database()
 
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
-            LOG.debug("Found patterns in %s", dirpath)
+            rel_dirpath = Path(dirpath).relative_to(tests_path)
+            LOG.debug("Found patterns in %s", rel_dirpath)
+
             patterns = parse_patterns(dirpath)
             if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
-                path = Path(dirpath).resolve().relative_to(tests_path)
-                LOG.error("❌ hyperscan pattern compilation error in '%s'", path)
-                exit(1)
+                if not quiet:
+                    LOG.error("❌ hyperscan pattern compilation error in '%s'", rel_dirpath)
+                    exit(1)
             for filename in [f for f in filenames if f != PATTERNS_FILENAME]:
                 path = (Path(dirpath) / filename).relative_to(tests_path)
                 with (Path(tests_path) / path).resolve().open("rb") as f:
                     content = f.read()
                     # sideffect: writes to global RESULTS
-                    scan(db, path, content, patterns, verbose)
+                    scan(db, path, content, patterns, verbose=verbose, quiet=quiet)
 
             for pattern in patterns:
                 # did we match everything we expected?
@@ -217,30 +223,33 @@ def test_patterns(tests_path: str, verbose: bool=False) -> bool:
                         if not any([path_offsets_match(expected, result.get('file', {})) for result in RESULTS.get(pattern.name, [])]):
                             with (Path(tests_path) / expected.get('name', '')).resolve().open("rb") as f:
                                 content = f.read()
-                                LOG.error("❌ unmatched expected location for: '%s'; %s:%d-%d; %s", pattern.name, expected.get('name'), expected.get('start_offset'), expected.get('end_offset'), content[expected.get('start_offset', 0):expected.get('end_offset', 0)])
+                                if not quiet:
+                                    LOG.error("❌ unmatched expected location for: '%s'; %s:%d-%d; %s", pattern.name, expected.get('name'), expected.get('start_offset'), expected.get('end_offset'), content[expected.get('start_offset', 0):expected.get('end_offset', 0)])
                             ok = False
 
                     # did we match anything unexpected?
                     if any([not any([path_offsets_match(expected, result.get('file', {})) for expected in pattern.expected]) for result in RESULTS.get(pattern.name, [])]):
-                        LOG.error("❌ matched unexpected results for: '%s'", pattern.name)
+                        if not quiet:
+                            LOG.error("❌ matched unexpected results for: '%s'", pattern.name)
                         ok = False
 
-                    if ok:
-                        LOG.info("✅ matches as expected for: '%s'", pattern.name)
+                    if ok and not quiet:
+                        LOG.info("✅ '%s' in '%s'", pattern.name, rel_dirpath)
 
                     if not ok:
                         result = False
 
                 else:
-                    LOG.info("ℹ️  no expected patterns for '%s'", pattern.name)
+                    if not quiet:
+                        LOG.info("ℹ️  '%s' in '%s': no expected patterns defined", pattern.name, rel_dirpath)
 
     return result
 
 
 # sideffect: writes to global RESULTS
-def scan(db: hyperscan.Database, path: str, content: bytes, patterns: list[Pattern], verbose: bool=False) -> None:
+def scan(db: hyperscan.Database, path: str, content: bytes, patterns: list[Pattern], verbose: bool=False, quiet: bool=False) -> None:
     """Scan content with database. I wanted to have this be an async function with a Future, but it didn't work."""
-    db.scan(content, partial(report_scan_results, patterns, path, content, verbose))
+    db.scan(content, partial(report_scan_results, patterns, path, content, verbose, quiet))
 
 
 def add_args(parser: ArgumentParser) -> None:
@@ -248,6 +257,7 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--tests", "-t", default="..", required=False, help="Root test directory")
     parser.add_argument("--debug", "-d", action="store_true", help="Debug output on")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show expected matches")
+    parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")
 
 
 def check_platform() -> None:
@@ -273,7 +283,7 @@ def main() -> None:
     if args.debug:
         LOG.setLevel(logging.DEBUG)
 
-    if not test_patterns(args.tests, verbose=args.verbose):
+    if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet):
         exit(1)
 
 

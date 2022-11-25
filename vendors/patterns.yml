@@ -33,5 +33,12 @@ patterns:
     regex:
       pattern: |
         SG\.[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*
+      end: |
+        \z|[^a-zA-Z0-9-]
     comments:
       - "Deprecated (supported by Secret Scanning)"
+    expected:
+      - name: sendgrid.py
+        start_offset: 20
+        end_offset: 89
+ 
