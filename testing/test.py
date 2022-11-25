@@ -44,11 +44,11 @@ class Pattern():
 
     def regex_string(self) -> bytes:
         """Concatenate and UTF-8 encode."""
-        return f"({self.start})({self.pattern})({self.end})".encode('utf-8')
+        return f"({self.start if self.start is not None else ''})({self.pattern})({self.end if self.end is not None else ''})".encode('utf-8')
 
     def pcre_regex(self) -> pcre.Pattern:
         """Concatenate, label capture groups, and UTF-8 encode."""
-        return pcre.compile(f"(?P<start>{self.start})(?P<pattern>{self.pattern})(?P<end>{self.end})".encode('utf-8'))
+        return pcre.compile(f"(?P<start>{self.start if self.start is not None else ''})(?P<pattern>{self.pattern})(?P<end>{self.end if self.end is not None else ''})".encode('utf-8'))
 
 
 def parse_patterns(patterns_dir: str) -> list[Pattern]:
@@ -98,17 +98,19 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
             raise ValueError("Regex is not a str or bytes")
     else:
         raise ValueError("Regex is not a str or bytes")
+
     try:
         db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
     except hyperscan.error:
         try:
             db.compile(regex_bytes)
-        except hyperscan.error:
+        except (hyperscan.error, TypeError):
             LOG.debug("Failed to compile rules")
+            LOG.debug(regex_bytes)
             for r in regex_bytes:
                 try:
                     db.compile(r)
-                except hyperscan.error as err:
+                except (hyperscan.error, TypeError) as err:
                     LOG.error("❌ hyperscan error with '%s': %s", r, err)
             return False
     return True
