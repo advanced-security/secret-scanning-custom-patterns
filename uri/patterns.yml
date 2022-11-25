@@ -6,12 +6,35 @@ patterns:
     regex:
       pattern: |
         [^/'"`][a-z0-9!#$%&'*+/=?^_`{|}~-]+@(example.com|internal.example.com)
+    expected:
+      - name: email.js
+        start_offset: 75
+        end_offset: 95
+      - name: email.js
+        start_offset: 130
+        end_offset: 152
+      - name: email.js
+        start_offset: 219
+        end_offset: 239
+      - name: email.js
+        start_offset: 274
+        end_offset: 294
+      - name: database.txt
+        start_offset: 571
+        end_offset: 587
+
+
 
   - name: Hardcoded Internal URLs
     type: hardcoded_internal_urls
     regex:
       pattern: |
         [A-Za-z0-9+-_]+://[a-zA-Z0-9!@:#$%&'*+/=?^_`{|}~-]?(example.com|internal.example.com)[^/#?"']?
+    expected:
+      - name: email.js
+        start_offset: 169
+        end_offset: 188
+
 
   - name: Hardcoded URI Passwords
     type: hardcoded_uri_passwords

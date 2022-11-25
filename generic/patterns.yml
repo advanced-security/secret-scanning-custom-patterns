@@ -36,3 +36,13 @@ patterns:
       version: 0.1
       pattern: |
         [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+    expected:
+      - name: uuids.txt
+        start_offset: 12
+        end_offset: 48
+      - name: uuids.txt
+        start_offset: 49
+        end_offset: 85
+      - name: uuids.txt
+        start_offset: 131
+        end_offset: 167

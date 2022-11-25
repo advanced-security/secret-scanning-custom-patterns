@@ -10,6 +10,14 @@ patterns:
         --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\r|\\n|)+[a-zA-Z0-9+/=\s]+(\\r|\\n|)+--+END (?:[A-Z]+ )?PRIVATE KEY--
     comments:
       - "Basic support for hardcoded strings in code with RSA private key"
+    expected:
+      - name: ssh_rsa
+        start_offset: 3
+        end_offset: 2631
+      - name: rsa.js
+        start_offset: 50
+        end_offset: 924
+
 
   - name: SSH Private Keys
     type: ssh_private_keys
@@ -18,12 +26,22 @@ patterns:
         --BEGIN OPENSSH PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END OPENSSH PRIVATE KEY--
     comments:
       - "*SSH Password:* `MyPassword`"
+    expected:
+      - name: ssh_rsa
+        start_offset: 3
+        end_offset: 2631
 
+ 
   - name: GPG Private Key
     type: gpg_private_key
     regex:
       pattern: |
         --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
+    expected:
+      - name: GeekMasher GPG.asc
+        start_offset: 3
+        end_offset: 6651
+
 
   - name: SSH Public Key
     type: ssh_public_key
@@ -34,7 +52,11 @@ patterns:
         ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
       end: |
         \z|(\s)+[a-zA-Z0-9@-]+
-
     comments:
       - "SSH Public Key (not a secret)"
       - Ignores the name of the public key
+    expected:
+      - name: ssh_rsa.pub
+        start_offset: 0
+        end_offset: 552
+

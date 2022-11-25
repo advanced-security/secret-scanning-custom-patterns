@@ -8,12 +8,25 @@ patterns:
         (?i)[a-z][a-z0-9-]+\.database(?:\.secure)?\.(?:(?:windows|usgovcloudapi)\.net|chinacloudapi\.cn|cloudapi\.de)
     comments:
       - "Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/"
+    expected:
+      - name: azure.js
+        start_offset: 27
+        end_offset: 61
+
 
   - name: Grafana API token
     type: grafana_api_token
     regex:
       pattern: |
         eyJrIjoi(?i)[a-z0-9-_=]{42}
+    expected:
+      - name: grafana.txt
+        start_offset: 107
+        end_offset: 157
+      - name: grafana.txt
+        start_offset: 159
+        end_offset: 209
+
 
   - name: SendGrid (deprecated)
     type: sendgrid
