@@ -23,11 +23,34 @@ patterns:
     type: hardcoded_internal_urls
     regex:
       pattern: |
-        [A-Za-z0-9+-_]+://[a-zA-Z0-9!@:#$%&'*+/=?^_`{|}~-]?(example.com|internal.example.com)[^/#?"']?
+        [A-Za-z0-9+_-]+://[^/?#]*(example.com|internal.example.com)[/?#]?[^\s"']*
+      start: |
+        \A|[^A-Za-z0-9+_-]
+      end: |
+        \z|[\s'"]
     expected:
       - name: email.js
         start_offset: 169
         end_offset: 188
+      - name: email.js
+        start_offset: 211
+        end_offset: 239
+      - name: email.js
+        start_offset: 266
+        end_offset: 299
+      - name: database.txt
+        start_offset: 72
+        end_offset: 129
+      - name: database.txt
+        start_offset: 147
+        end_offset: 185
+      - name: database.txt
+        start_offset: 216
+        end_offset: 256
+      - name: database.txt
+        start_offset: 565
+        end_offset: 590
+
 
 
   - name: Hardcoded URI Passwords
