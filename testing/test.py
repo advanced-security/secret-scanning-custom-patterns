@@ -148,6 +148,8 @@ def path_offsets_match(first, second) -> bool:
 # sideffect: writes to global RESULTS
 def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int, end_offset: int, verbose: bool=False, quiet: bool=False) -> None:
     """Use PCRE to extract start, pattern and end matches."""
+    LOG.debug("Matching with PCRE regex: %s", str(pattern.pcre_regex()))
+
     if m := pattern.pcre_regex().match(content):
         parts = {
             'start': m.group('start').decode('utf-8'),
@@ -221,9 +223,9 @@ def test_patterns(tests_path: str, verbose: bool=False, quiet: bool=False) -> bo
                 if pattern.expected:
                     for expected in pattern.expected:
                         if not any([path_offsets_match(expected, result.get('file', {})) for result in RESULTS.get(pattern.name, [])]):
-                            with (Path(tests_path) / expected.get('name', '')).resolve().open("rb") as f:
-                                content = f.read()
-                                if not quiet:
+                            if not quiet:
+                                with (Path(dirpath) / expected.get('name', '')).resolve().open("rb") as f:
+                                    content = f.read()
                                     LOG.error("❌ unmatched expected location for: '%s'; %s:%d-%d; %s", pattern.name, expected.get('name'), expected.get('start_offset'), expected.get('end_offset'), content[expected.get('start_offset', 0):expected.get('end_offset', 0)])
                             ok = False
 
