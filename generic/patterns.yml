@@ -9,11 +9,11 @@ patterns:
       pattern: |
         [a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]+
       start: |
-        (?i)(api|jwt|mysql)?[_.-]?(pass?(wo?r?d|code|phrase)?|pwd|secret|token)[\t ]*[=:][\t ]*["']?
+        (?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)?|pwd|secret|token)[\t ]*[=:][\t ]*["']?
       end: |
         (\z|[\r\n'"])
       additional_not_match:
-        - \b((?i)(pass?(wo?r?d|code|phrase)?|pwd|secret|token|write|read|on|off|true|false|placeholder|dummy)\b
+        - \b((?i)(?:pass?(wo?r?d|code|phrase)?|pwd|secret|token|write|read|on|off|true|false|placeholder|dummy)\b
         - ^[\t \r\n"'()${}].*
 
     comments:

@@ -8,6 +8,7 @@ Author: GitHub Advanced Security
 """
 
 import os
+from pathlib import Path
 from argparse import ArgumentParser
 import logging
 import yaml
@@ -49,7 +50,7 @@ class Pattern():
 
 
 def parse_patterns(patterns_dir: str) -> list[Pattern]:
-    """Test patterns found in this path against the files in this path."""
+    """Parse patterns found in YAML files."""
     patterns = []
 
     patterns_file: str = os.path.join(patterns_dir, PATTERNS_FILENAME)
@@ -108,7 +109,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
     return True
 
 
-def report_scan_results(patterns: list[Pattern], content: bytes, rule_id: int, start_offset: int, end_offset: int,
+def report_scan_results(patterns: list[Pattern], path: str, content: bytes, rule_id: int, start_offset: int, end_offset: int,
                         flags: int, context: Optional[Any]) -> None:
     """Hyperscan callback."""
     match_content: bytes = content[start_offset:end_offset]
@@ -122,10 +123,10 @@ def report_scan_results(patterns: list[Pattern], content: bytes, rule_id: int, s
     LOG.debug("Pattern was: %s", regex_string)
 
     # extract separate parts of match using PCRE
-    pcre_result_match(pattern, match_content)
+    pcre_result_match(pattern, path, match_content, start_offset, end_offset)
 
 
-def pcre_result_match(pattern: Pattern, content: bytes) -> None:
+def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int, end_offset: int) -> None:
     """Use PCRE to extract start, pattern and end matches."""
     if m := pattern.pcre_regex().match(content):
         parts = {
@@ -144,7 +145,13 @@ def pcre_result_match(pattern: Pattern, content: bytes) -> None:
                 LOG.debug("One of the additional NOT pattern matches held")
                 return
 
-        print(json.dumps({'name': pattern.name, 'groups': parts}))
+        file_details = {
+            'path': str(path),
+            'start_offset': start_offset + len(m.group('start')),
+            'end_offset': end_offset - len(m.group('end'))
+        } 
+
+        print(json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts}))
 
 
 def test_patterns(tests_path: str) -> None:
@@ -158,15 +165,16 @@ def test_patterns(tests_path: str) -> None:
             if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
                 LOG.error("Hyperscan pattern compilation error")
                 exit
-            for filename in filenames:
-                with open(os.path.join(dirpath, filename), "rb") as f:
+            for filename in [f for f in filenames if f != PATTERNS_FILENAME]:
+                path = (Path(dirpath) / filename).relative_to(tests_path)
+                with (Path(tests_path) / path).open("rb") as f:
                     content = f.read()
-                    scan(db, content, patterns)
+                    scan(db, path, content, patterns)
 
 
-def scan(db: hyperscan.Database, content: bytes, patterns: list[Pattern]) -> None:
+def scan(db: hyperscan.Database, path: str, content: bytes, patterns: list[Pattern]) -> None:
     """Scan content with database. I wanted to have this be an async function with a Future, but it didn't work."""
-    db.scan(content, partial(report_scan_results, patterns, content))
+    db.scan(content, partial(report_scan_results, patterns, path, content))
 
 
 def add_args(parser: ArgumentParser) -> None:
