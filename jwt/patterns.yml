@@ -14,3 +14,18 @@ patterns:
         [^0-9A-Za-z-_\\.]|\z
       additional_not_match:
         - "(/|=)"
+
+    expected:
+      - path: jwt/owasp-juice-shop.ts
+        start_offset: 8105
+        end_offset: 8801
+      - path: jwt/example.txt
+        start_offset: 16
+        end_offset: 171
+      - path: jwt/example.txt
+        start_offset: 279
+        end_offset: 320
+      - path: jwt/example.txt
+        start_offset: 321
+        end_offset: 372
+

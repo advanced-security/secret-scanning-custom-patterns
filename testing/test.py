@@ -23,13 +23,14 @@ import platform
 
 LOG = logging.getLogger(__name__)
 PATTERNS_FILENAME = "patterns.yml"
+RESULTS = {}
 
 
 class Pattern():
     """Store hyperscan patterns."""
 
     def __init__(self, name: str, description: str, start: str, pattern: str, end: str,
-                 additional_not_matches: list[str], additional_matches: list[str]) -> None:
+            additional_not_matches: list[str], additional_matches: list[str], expected: list[dict[str, Any]]) -> None:
         self.name = name.strip() if name is not None else None
         self.description = description.strip() if description is not None else None
         self.start = start.strip() if start is not None else None
@@ -39,6 +40,7 @@ class Pattern():
                                       ] if additional_not_matches is not None else []
         self.additional_matches = [add_match.strip() for add_match in additional_matches
                                   ] if additional_matches is not None else []
+        self.expected = expected
 
     def regex_string(self) -> bytes:
         """Concatenate and UTF-8 encode."""
@@ -55,10 +57,11 @@ def parse_patterns(patterns_dir: str) -> list[Pattern]:
 
     patterns_file: str = os.path.join(patterns_dir, PATTERNS_FILENAME)
     data = yaml.safe_load(open(patterns_file, "r"))
-    name = data.get("name")
 
     for pattern in data["patterns"]:
         LOG.debug("Pattern: %s", json.dumps(pattern, indent=2))
+
+        name = pattern.get("name")
         description = pattern.get("description")
 
         regex = pattern["regex"]
@@ -66,9 +69,11 @@ def parse_patterns(patterns_dir: str) -> list[Pattern]:
         additional_not_matches = pattern.get("additional_not_match", [])
         additional_matches = pattern.get("additional_match", [])
 
+        expected = pattern.get("expected", [])
+
         patterns.append(
             Pattern(name, description, regex.get('start'), regex.get('pattern'), regex.get('end'), additional_matches,
-                    additional_not_matches))
+                    additional_not_matches, expected))
 
     return patterns
 
@@ -109,6 +114,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
     return True
 
 
+# sideffect: writes to global RESULTS
 def report_scan_results(patterns: list[Pattern], path: str, content: bytes, rule_id: int, start_offset: int, end_offset: int,
                         flags: int, context: Optional[Any]) -> None:
     """Hyperscan callback."""
@@ -126,6 +132,15 @@ def report_scan_results(patterns: list[Pattern], path: str, content: bytes, rule
     pcre_result_match(pattern, path, match_content, start_offset, end_offset)
 
 
+def path_offsets_match(first, second) -> bool:
+    """Check file path and start and end offsets match."""
+    for key in ('path', 'start_offset', 'end_offset'):
+        if not first.get(key) == second.get(key):
+            return False
+    return True
+
+
+# sideffect: writes to global RESULTS
 def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int, end_offset: int) -> None:
     """Use PCRE to extract start, pattern and end matches."""
     if m := pattern.pcre_regex().match(content):
@@ -149,13 +164,25 @@ def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int,
             'path': str(path),
             'start_offset': start_offset + len(m.group('start')),
             'end_offset': end_offset - len(m.group('end'))
-        } 
+        }
 
-        print(json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts}))
+        if not any([path_offsets_match(file_details, loc) for loc in pattern.expected]):
+            LOG.error("❌ unexpected result for '%s'; %s:%d-%d", pattern.name, file_details['path'], file_details['start_offset'], file_details['end_offset'])
+        else:
+            LOG.debug("✅ expected result for '%s'", pattern.name)
+
+        if pattern.name not in RESULTS:
+            RESULTS[pattern.name] = []
+
+        RESULTS[pattern.name].append({'file': file_details, 'groups': parts})
+
+        LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
 
 
-def test_patterns(tests_path: str) -> None:
+def test_patterns(tests_path: str) -> bool:
     """Run all of the discovered patterns in the given path."""
+    result = True
+
     db = hyperscan.Database()
 
     for dirpath, dirnames, filenames in os.walk(tests_path):
@@ -169,9 +196,33 @@ def test_patterns(tests_path: str) -> None:
                 path = (Path(dirpath) / filename).relative_to(tests_path)
                 with (Path(tests_path) / path).open("rb") as f:
                     content = f.read()
+                    # sideffect: writes to global RESULTS
                     scan(db, path, content, patterns)
 
+            for pattern in patterns:
+                # did we match everything we expected?
 
+                if pattern.expected:
+                    for expected in pattern.expected:
+                        if not any([path_offsets_match(expected, result.get('file', {})) for result in RESULTS.get(pattern.name, [])]):
+                            LOG.error("❌ unmatched expected location for: '%s'; %s:%d-%d", pattern.name, expected.get('path'), expected.get('start_offset'), expected.get('end_offset'))
+                            result = False
+
+                    # did we match anything unexpected?
+                    if any([not any([path_offsets_match(expected, result.get('file', {})) for result in RESULTS.get(pattern.name, [])]) for expected in pattern.expected]):
+                        LOG.error("❌ matched unexpected results for: '%s'", pattern.name)
+                        result = False
+
+                    if result:
+                        LOG.info("✅ matches as expected for: '%s'", pattern.name)
+
+                else:
+                    LOG.info("ℹ️  no expected patterns for '%s'", pattern.name)
+
+    return result
+
+
+# sideffect: writes to global RESULTS
 def scan(db: hyperscan.Database, path: str, content: bytes, patterns: list[Pattern]) -> None:
     """Scan content with database. I wanted to have this be an async function with a Future, but it didn't work."""
     db.scan(content, partial(report_scan_results, patterns, path, content))
@@ -206,7 +257,8 @@ def main() -> None:
     if args.debug:
         LOG.setLevel(logging.DEBUG)
 
-    test_patterns(args.tests)
+    if not test_patterns(args.tests):
+        exit(1)
 
 
 if __name__ == "__main__":

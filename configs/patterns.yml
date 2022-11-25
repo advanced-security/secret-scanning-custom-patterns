@@ -15,6 +15,26 @@ patterns:
       end: |
         \z|[^0-9A-Za-z]|'
 
+    expected:
+      - path: configs/application.properties
+        start_offset: 314
+        end_offset: 318
+      - path: configs/application.properties
+        start_offset: 358
+        end_offset: 375
+      - path: configs/application.properties
+        start_offset: 640
+        end_offset: 646
+      - path: configs/application.properties
+        start_offset: 874
+        end_offset: 880
+      - path: configs/application.properties
+        start_offset: 1141
+        end_offset: 1147
+      - path: configs/application.properties
+        start_offset: 1427
+        end_offset: 1433
+
   - name: Django Secret Key
     type: django_secret_key
     regex:
@@ -50,3 +70,12 @@ patterns:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
       - "The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)"
+
+    expected:
+      - path: configs/example.yml
+        start_offset: 57
+        end_offset: 80
+      - path: configs/example.yml
+        start_offset: 57
+        end_offset: 80
+

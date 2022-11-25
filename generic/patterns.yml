@@ -16,6 +16,14 @@ patterns:
         - \b((?i)(?:pass?(wo?r?d|code|phrase)?|pwd|secret|token|write|read|on|off|true|false|placeholder|dummy)\b
         - ^[\t \r\n"'()${}].*
 
+    expected:
+      - path: generic/passwords.js
+        start_offset: 14
+        end_offset: 25
+      - path: generic/passwords.js
+        start_offset: 41
+        end_offset: 62
+
     comments:
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
       - "Delimiters like `=` or `:` (with padding)"
