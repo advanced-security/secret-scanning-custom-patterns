@@ -188,7 +188,7 @@ def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int,
         LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
 
 
-def test_patterns(tests_path: str, verbose: bool=False, quiet: bool=False) -> bool:
+def test_patterns(tests_path: str, verbose: bool=False, quiet: bool=False, extra_directory: str=None) -> bool:
     """Run all of the discovered patterns in the given path."""
     result = True
 
@@ -260,6 +260,7 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--debug", "-d", action="store_true", help="Debug output on")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show expected matches")
     parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")
+    parser.add_argument("--extra", "-e", default="..", required=False, help="Extra directory for running tests over all contents")
 
 
 def check_platform() -> None:
@@ -285,7 +286,7 @@ def main() -> None:
     if args.debug:
         LOG.setLevel(logging.DEBUG)
 
-    if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet):
+    if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet, extra_directory=args.extra):
         exit(1)
 
 
