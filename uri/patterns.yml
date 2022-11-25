@@ -25,25 +25,25 @@ patterns:
       additional_match:
         - "[^0-9]"
     expected:
-      - path: uri/app.py
+      - name: app.py
         start_offset: 160
         end_offset: 179
-      - path: uri/database.txt
+      - name: database.txt
         start_offset: 23
         end_offset: 29
-      - path: uri/database.txt
+      - name: database.txt
         start_offset: 100
         end_offset: 108
-      - path: uri/database.txt
+      - name: database.txt
         start_offset: 158
         end_offset: 170
-      - path: uri/database.txt
+      - name: database.txt
         start_offset: 227
         end_offset: 241
-      - path: uri/database.txt
+      - name: database.txt
         start_offset: 588
         end_offset: 590
-      - path: uri/README.md
+      - name: README.md
         start_offset: 428
         end_offset: 432
 

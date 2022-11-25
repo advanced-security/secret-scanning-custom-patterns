@@ -134,7 +134,7 @@ def report_scan_results(patterns: list[Pattern], path: str, content: bytes, rule
 
 def path_offsets_match(first, second) -> bool:
     """Check file path and start and end offsets match."""
-    for key in ('path', 'start_offset', 'end_offset'):
+    for key in ('name', 'start_offset', 'end_offset'):
         if not first.get(key) == second.get(key):
             return False
     return True
@@ -161,13 +161,13 @@ def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int,
                 return
 
         file_details = {
-            'path': str(path),
+            'name': path.name,
             'start_offset': start_offset + len(m.group('start')),
             'end_offset': end_offset - len(m.group('end'))
         }
 
         if not any([path_offsets_match(file_details, loc) for loc in pattern.expected]):
-            LOG.error("❌ unexpected result for '%s'; %s:%d-%d", pattern.name, file_details['path'], file_details['start_offset'], file_details['end_offset'])
+            LOG.error("❌ unexpected result for '%s'; %s:%d-%d", pattern.name, file_details['name'], file_details['start_offset'], file_details['end_offset'])
         else:
             LOG.debug("✅ expected result for '%s'", pattern.name)
 
@@ -182,6 +182,9 @@ def pcre_result_match(pattern: Pattern, path, content: bytes, start_offset: int,
 def test_patterns(tests_path: str) -> bool:
     """Run all of the discovered patterns in the given path."""
     result = True
+
+    if not os.path.isdir(tests_path):
+        LOG.error("❌ testing directory not found: %s", tests_path)
 
     db = hyperscan.Database()
 

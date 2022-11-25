@@ -17,10 +17,10 @@ patterns:
         - ^[\t \r\n"'()${}].*
 
     expected:
-      - path: generic/passwords.js
+      - name: passwords.js
         start_offset: 14
         end_offset: 25
-      - path: generic/passwords.js
+      - name: passwords.js
         start_offset: 41
         end_offset: 62
 
