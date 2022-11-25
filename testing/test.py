@@ -22,7 +22,7 @@ import platform
 
 LOG = logging.getLogger(__name__)
 PATTERNS_FILENAME = "patterns.yml"
-RESULTS = {}
+RESULTS: dict[str, list[dict[str, Any]]] = {}
 
 
 class Pattern():
@@ -123,7 +123,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
 
 
 # sideffect: writes to global RESULTS
-def report_scan_results(patterns: list[Pattern], path: str, content: bytes, verbose: bool, quiet: bool, rule_id: int,
+def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, verbose: bool, quiet: bool, rule_id: int,
                         start_offset: int, end_offset: int, flags: int, context: Optional[Any]) -> None:
     """Hyperscan callback."""
     match_content: bytes = content[start_offset:end_offset]
@@ -140,7 +140,7 @@ def report_scan_results(patterns: list[Pattern], path: str, content: bytes, verb
     pcre_result_match(pattern, path, match_content, start_offset, end_offset, verbose=verbose, quiet=quiet)
 
 
-def path_offsets_match(first, second) -> bool:
+def path_offsets_match(first: dict[str, Any], second: dict[str, Any]) -> bool:
     """Check file path and start and end offsets match."""
     for key in ('name', 'start_offset', 'end_offset'):
         if not first.get(key) == second.get(key):
@@ -150,7 +150,7 @@ def path_offsets_match(first, second) -> bool:
 
 # sideffect: writes to global RESULTS
 def pcre_result_match(pattern: Pattern,
-                      path,
+                      path: Path,
                       content: bytes,
                       start_offset: int,
                       end_offset: int,
@@ -202,7 +202,10 @@ def pcre_result_match(pattern: Pattern,
         LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
 
 
-def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False, extra_directory: str = None) -> bool:
+def test_patterns(tests_path: str,
+                  verbose: bool = False,
+                  quiet: bool = False,
+                  extra_directory: Optional[str] = None) -> bool:
     """Run all of the discovered patterns in the given path."""
     result = True
 
@@ -275,7 +278,7 @@ def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False, e
 
 # sideffect: writes to global RESULTS
 def scan(db: hyperscan.Database,
-         path: str,
+         path: Path,
          content: bytes,
          patterns: list[Pattern],
          verbose: bool = False,
