@@ -17,6 +17,8 @@ from functools import partial
 import pcre
 from typing import Union, Any, Optional
 # from asyncio import Future, run, get_event_loop
+import platform
+
 
 LOG = logging.getLogger(__name__)
 PATTERNS_FILENAME = "patterns.yml"
@@ -173,8 +175,20 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--debug", "-d", action="store_true", help="Debug output on")
 
 
+def check_platform() -> None:
+    """Check we are on an Intel-compatible machine.
+
+    Exit if not.
+    """
+    if platform.machine() not in ("x86_64", "amd64"):
+        LOG.error("Cannot run hyperscan on non-Intel-compatible platform")
+        exit()
+
+
 def main() -> None:
     """Main command line entrypoint."""
+    check_platform()
+
     parser = ArgumentParser(description="Test Secret Scanning Custom Patterns")
     add_args(parser)
     args = parser.parse_args()
