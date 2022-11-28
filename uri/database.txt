@@ -1,8 +1,8 @@
 # MySQL
-mysql://sandy:secret@myhost1:1111/db
+mysql://sandy:seKr1t@myhost1:1111/db
 
 # SMTP (encoded values)
-smtp://foobar%40example.com:password@smtp.example.com:465
+smtp://foobar%40example.com:p4ssw0rd@smtp.example.com:465
 
 # FTP (random)
 ftp://test:hN6nQYPpsja3@example.com:22

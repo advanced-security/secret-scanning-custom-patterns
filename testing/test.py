@@ -35,7 +35,7 @@ class Pattern():
     default_end = r'\z|[^0-9A-Za-z]'
 
     def __init__(self, name: str, description: str, start: str, pattern: str, end: str,
-                 additional_not_matches: list[str], additional_matches: list[str], expected: list[dict[str,
+                 additional_matches: list[str], additional_not_matches: list[str], expected: list[dict[str,
                                                                                                        Any]]) -> None:
         self.name = name.strip() if name is not None else None
         self.description = description.strip() if description is not None else None
@@ -181,12 +181,12 @@ def pcre_result_match(pattern: Pattern,
                 'end': str(m.group('end'))
             }
 
-        if pattern.additional_matches is not None:
+        if pattern.additional_matches:
             if not all([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_matches]):
                 LOG.debug("One of the required additional pattern matches did not hold")
                 return
 
-        if pattern.additional_not_matches is not None:
+        if pattern.additional_not_matches:
             if any([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_not_matches]):
                 LOG.debug("One of the additional NOT pattern matches held")
                 return

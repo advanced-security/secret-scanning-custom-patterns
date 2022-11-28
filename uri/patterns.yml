@@ -23,7 +23,7 @@ patterns:
     type: hardcoded_internal_urls
     regex:
       pattern: |
-        [A-Za-z0-9+_-]+://([^/?#\s]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
+        [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
       start: |
         \A|[^A-Za-z0-9+_-]
       end: |
@@ -58,9 +58,12 @@ patterns:
       pattern: |
         [^$][^/?#@\s]+
       start: |
-        (A-Za-z0-9)?://[^/?#:\s]*:
+        [A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s]*:
       end: |
         @
+    additional_not_match:
+      - ^<?(?:password|passwd|secret)>?$
+
     expected:
       - name: app.py
         start_offset: 160
@@ -77,4 +80,4 @@ patterns:
       - name: database.txt
         start_offset: 227
         end_offset: 241
-
+        
