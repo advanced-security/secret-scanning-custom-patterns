@@ -22,9 +22,10 @@ patterns:
       - ^(?i)(?:[a-zA-Z0-9_.]*,\s*)?[[<(]?(?:write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git),?[\]>)]?(?:\)\s*\{)?\\?$
       - ^\s*%[sr]\s*$                 # format string placeholder
       - ^\s*$                         # whitespace
-      - ^\s*(?:int|str|Any|None|bytes|bool)\s*([,|].*)?\s*$  # Python basic type hints
+      # Python type hints
+      - ^\s*(?:int|str|Any|None|bytes|bool|ReadableBuffer)\s*([,|].*)?\s*$  
       # Python container type hints
-      - ^\s*(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional)\[.*\]\s*$
+      - ^\s*(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional)\[.*$
       - ^\s*\.\.\.\s*$                # ...
       - ^\s*\\\s*$                    # a bare backslash
       - ^\s*,s*$                      # a bare comma

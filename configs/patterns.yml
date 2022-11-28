@@ -9,11 +9,11 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [a-zA-Z0-9!$%&*+?^_`{|}~-]+
+        [^\r\n']+
       start: |
-        [^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)
+        \b(spring\.datasource\.password|jdbc\.password)[ \t]*=[ \t]*'?
       end: |
-        \z|[^0-9A-Za-z]|'
+        \z|['\r\n]
     expected:
       - name: application.properties
         start_offset: 314
@@ -22,8 +22,8 @@ patterns:
         start_offset: 358
         end_offset: 375
       - name: application.properties
-        start_offset: 640
-        end_offset: 646
+        start_offset: 422
+        end_offset: 439
       - name: application.properties
         start_offset: 874
         end_offset: 880
@@ -65,13 +65,13 @@ patterns:
       pattern: |
         [a-zA-Z0-9%!#$%&*+=?^_-{|}~\.,]{12,32}
       start: |
-        [^0-9A-Za-z](\s+|)(secret|service_pass(wd|word|code|phrase)|pass(wd|word|code|phrase)|key)(\s+|):(\s+|)
+        [^0-9A-Za-z]\s*(secret|service_pass(wd|word|code|phrase)|pass(wd|word|code|phrase)|key)s*:\s*
       end: |
         [^0-9A-Za-z'"\(\)]|\z
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
-      - "The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)"
+      - "The pattern only checks for certain key words to begin the pattern (`secret:`, `password:`, etc.)"
     expected:
       - name: example.yml
         start_offset: 57
