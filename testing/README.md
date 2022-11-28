@@ -15,7 +15,7 @@ By default it searches the directory above the `testing` directory for `pattern.
 or
 
 ``` bash
-./test.py <directory>
+./test.py --tests <directory>
 ```
 
 For full usage use `./test.py --help`
