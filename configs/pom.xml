@@ -15,6 +15,10 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+        <jdbc.url>jdbc:mysql://localhost:3306/development_db</jdbc.url>
+        <jdbc.username>dev_user</jdbc.username>
+        <jdbc.password>s3cr3tw0rd</jdbc.password>
     </properties>
     <servers>
       <server>
