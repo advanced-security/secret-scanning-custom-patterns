@@ -23,7 +23,7 @@ patterns:
     type: hardcoded_internal_urls
     regex:
       pattern: |
-        [A-Za-z0-9+_-]+://[^/?#]*(example.com|internal.example.com)[/?#]?[^\s"']*
+        [A-Za-z0-9+_-]+://([^/?#]*\.)?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
       start: |
         \A|[^A-Za-z0-9+_-]
       end: |
@@ -50,7 +50,6 @@ patterns:
       - name: database.txt
         start_offset: 565
         end_offset: 590
-
 
 
   - name: Hardcoded URI Passwords

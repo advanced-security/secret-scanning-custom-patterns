@@ -25,7 +25,7 @@ from colorama import Fore, Style
 LOG = logging.getLogger(__name__)
 PATTERNS_FILENAME = "patterns.yml"
 RESULTS: dict[str, list[dict[str, Any]]] = {}
-PATH_EXCLUDES = ('.git')
+PATH_EXCLUDES = ('.git',)
 
 
 class Pattern():
@@ -317,13 +317,17 @@ def dry_run_patterns(tests_path: str,
 
     for dirpath, dirnames, filenames in os.walk(extra_directory):
         # TODO: exclude using globs
-        if dirpath not in PATH_EXCLUDES:
+        if not any([parent.name in PATH_EXCLUDES for parent in Path(dirpath).parents if parent != '']):
             for filename in filenames:
                 path = (Path(dirpath) / filename).relative_to(extra_directory)
-                with (Path(extra_directory) / path).resolve().open("rb") as f:
-                    # TODO: memory map instead?
-                    content = f.read()
-                    scan(db, path, content, patterns, verbose=verbose, quiet=quiet, write_to_results=False, dry_run=True)
+                try:
+                    file_path = (Path(extra_directory) / path).resolve()
+                    with file_path.open("rb") as f:
+                        # TODO: memory map instead?
+                        content = f.read()
+                        scan(db, path, content, patterns, verbose=verbose, quiet=quiet, write_to_results=False, dry_run=True)
+                except OSError as err:
+                    LOG.error("Failed to open and read file '%s': %s", str(file_path), err)
 
 
 # sideffect: writes to global RESULTS
@@ -347,7 +351,6 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")
     parser.add_argument("--extra",
                         "-e",
-                        default="..",
                         required=False,
                         help="Extra directory for running tests over all contents")
 
@@ -378,7 +381,8 @@ def main() -> None:
     if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet):
         exit(1)
 
-    dry_run_patterns(args.tests, args.extra, verbose=args.verbose, quiet=args.quiet)
+    if args.extra is not None:
+        dry_run_patterns(args.tests, args.extra, verbose=args.verbose, quiet=args.quiet)
 
 
 if __name__ == "__main__":
