@@ -19,10 +19,13 @@ import pcre
 from typing import Union, Any, Optional
 # from asyncio import Future, run, get_event_loop
 import platform
+from colorama import Fore, Style
+
 
 LOG = logging.getLogger(__name__)
 PATTERNS_FILENAME = "patterns.yml"
 RESULTS: dict[str, list[dict[str, Any]]] = {}
+PATH_EXCLUDES = ('.git')
 
 
 class Pattern():
@@ -123,7 +126,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
 
 
 # sideffect: writes to global RESULTS
-def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, verbose: bool, quiet: bool, rule_id: int,
+def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, verbose: bool, quiet: bool, write_to_results: bool, dry_run: bool, rule_id: int,
                         start_offset: int, end_offset: int, flags: int, context: Optional[Any]) -> None:
     """Hyperscan callback."""
     match_content: bytes = content[start_offset:end_offset]
@@ -137,7 +140,7 @@ def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, ver
     LOG.debug("Pattern was: %s", regex_string)
 
     # extract separate parts of match using PCRE
-    pcre_result_match(pattern, path, match_content, start_offset, end_offset, verbose=verbose, quiet=quiet)
+    pcre_result_match(pattern, path, match_content, start_offset, end_offset, verbose=verbose, quiet=quiet, write_to_results=write_to_results, dry_run=dry_run)
 
 
 def path_offsets_match(first: dict[str, Any], second: dict[str, Any]) -> bool:
@@ -155,16 +158,28 @@ def pcre_result_match(pattern: Pattern,
                       start_offset: int,
                       end_offset: int,
                       verbose: bool = False,
-                      quiet: bool = False) -> None:
+                      quiet: bool = False,
+                      dry_run: bool = False,
+                      write_to_results: bool = False) -> None:
     """Use PCRE to extract start, pattern and end matches."""
+    global RESULTS
+
     LOG.debug("Matching with PCRE regex: %s", str(pattern.pcre_regex()))
 
     if m := pattern.pcre_regex().match(content):
-        parts = {
-            'start': m.group('start').decode('utf-8'),
-            'pattern': m.group('pattern').decode('utf-8'),
-            'end': m.group('end').decode('utf-8')
-        }
+        try:
+            parts = {
+                'start': m.group('start').decode('utf-8'),
+                'pattern': m.group('pattern').decode('utf-8'),
+                'end': m.group('end').decode('utf-8')
+            }
+        except UnicodeDecodeError as err:
+            # TODO: fall back to win-1251 and ASCII before just dumping the b'...' string
+            parts = {
+                'start': str(m.group('start')),
+                'pattern': str(m.group('pattern')),
+                'end': str(m.group('end'))
+            }
 
         if pattern.additional_matches is not None:
             if not all([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_matches]):
@@ -177,36 +192,43 @@ def pcre_result_match(pattern: Pattern,
                 return
 
         file_details = {
-            'name': path.name,
+            'name': path.name if not dry_run else str(path),
             'start_offset': start_offset + len(m.group('start')),
             'end_offset': end_offset - len(m.group('end'))
         }
 
-        if not any([path_offsets_match(file_details, loc) for loc in pattern.expected]):
-            if not quiet:
-                LOG.log(logging.ERROR if pattern.expected else logging.INFO,
-                        "%s result '%s' for '%s' in path '%s'; %s:%d-%d",
-                        "❌ unexpected" if pattern.expected else "ℹ️  found", parts['pattern'], pattern.name,
-                        path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
-        else:
-            if not quiet or LOG.level == logging.DEBUG:
-                LOG.log(logging.INFO if verbose else logging.DEBUG,
-                        "✅ expected result '%s' for '%s' in path '%s'; %s:%d-%d", parts['pattern'], pattern.name,
-                        path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
+        if not dry_run:
+            if not any([path_offsets_match(file_details, loc) for loc in pattern.expected]):
+                if not quietn:
+                    LOG.log(logging.ERROR if pattern.expected else logging.INFO,
+                            "%s result '%s' for '%s' in path '%s'; %s:%d-%d",
+                            "❌ unexpected" if pattern.expected else "ℹ️  found", parts['pattern'], pattern.name,
+                            path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
+            else:
+                if not quiet or LOG.level == logging.DEBUG:
+                    LOG.log(logging.INFO if verbose else logging.DEBUG,
+                            "✅ expected result '%s' for '%s' in path '%s'; %s:%d-%d", parts['pattern'], pattern.name,
+                            path.parent, file_details['name'], file_details['start_offset'], file_details['end_offset'])
 
-        if pattern.name not in RESULTS:
-            RESULTS[pattern.name] = []
+        if write_to_results:
+            if pattern.name not in RESULTS:
+                RESULTS[pattern.name] = []
 
-        RESULTS[pattern.name].append({'file': file_details, 'groups': parts})
-
-        LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
+            RESULTS[pattern.name].append({'file': file_details, 'groups': parts})
+        
+            LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
+        
+        if dry_run:
+            # for dry-run, TODO: improve to be single-line grep or SARIF output
+            print(f"{file_details['name']}:{file_details['start_offset']}-{file_details['end_offset']}: {parts['start']}{Fore.RED}{parts['pattern']}{Style.RESET_ALL}{parts['end']} (on {pattern.name})")
 
 
 def test_patterns(tests_path: str,
                   verbose: bool = False,
-                  quiet: bool = False,
-                  extra_directory: Optional[str] = None) -> bool:
+                  quiet: bool = False) -> bool:
     """Run all of the discovered patterns in the given path."""
+    global RESULTS
+
     result = True
 
     if not os.path.isdir(tests_path):
@@ -276,15 +298,45 @@ def test_patterns(tests_path: str,
     return result
 
 
+def dry_run_patterns(tests_path: str,
+                  extra_directory: str,
+                  verbose: bool = False,
+                  quiet: bool = False) -> None:
+    """Dry run all of the discovered patterns in the given path against the extra directory, recursively."""
+    db = hyperscan.Database()
+    patterns = []
+
+    for dirpath, dirnames, filenames in os.walk(tests_path):
+        if PATTERNS_FILENAME in filenames:
+            patterns.extend(parse_patterns(dirpath))
+
+    if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
+        if not quiet:
+            LOG.error("❌ hyperscan pattern compilation error in '%s'", rel_dirpath)
+            exit(1)
+
+    for dirpath, dirnames, filenames in os.walk(extra_directory):
+        # TODO: exclude using globs
+        if dirpath not in PATH_EXCLUDES:
+            for filename in filenames:
+                path = (Path(dirpath) / filename).relative_to(extra_directory)
+                with (Path(extra_directory) / path).resolve().open("rb") as f:
+                    # TODO: memory map instead?
+                    content = f.read()
+                    scan(db, path, content, patterns, verbose=verbose, quiet=quiet, write_to_results=False, dry_run=True)
+
+
 # sideffect: writes to global RESULTS
 def scan(db: hyperscan.Database,
          path: Path,
          content: bytes,
          patterns: list[Pattern],
          verbose: bool = False,
-         quiet: bool = False) -> None:
+         quiet: bool = False,
+         write_to_results: bool=True,
+         dry_run: bool=False) -> None:
     """Scan content with database. I wanted to have this be an async function with a Future, but it didn't work."""
-    db.scan(content, partial(report_scan_results, patterns, path, content, verbose, quiet))
+    db.scan(content, partial(report_scan_results, patterns, path, content, verbose, quiet, write_to_results, dry_run))
 
 
 def add_args(parser: ArgumentParser) -> None:
@@ -323,8 +375,10 @@ def main() -> None:
     if args.debug:
         LOG.setLevel(logging.DEBUG)
 
-    if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet, extra_directory=args.extra):
+    if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet):
         exit(1)
+
+    dry_run_patterns(args.tests, args.extra, verbose=args.verbose, quiet=args.quiet)
 
 
 if __name__ == "__main__":
