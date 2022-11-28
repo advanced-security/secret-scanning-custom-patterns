@@ -46,6 +46,7 @@ class Pattern():
                                       ] if additional_not_matches is not None else []
         self.additional_matches = [add_match.strip() for add_match in additional_matches
                                   ] if additional_matches is not None else []
+
         self.expected = expected
 
     def regex_string(self) -> bytes:
@@ -199,7 +200,7 @@ def pcre_result_match(pattern: Pattern,
 
         if not dry_run:
             if not any([path_offsets_match(file_details, loc) for loc in pattern.expected]):
-                if not quietn:
+                if not quiet:
                     LOG.log(logging.ERROR if pattern.expected else logging.INFO,
                             "%s result '%s' for '%s' in path '%s'; %s:%d-%d",
                             "❌ unexpected" if pattern.expected else "ℹ️  found", parts['pattern'], pattern.name,
