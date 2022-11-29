@@ -141,6 +141,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$`
 - Not Match: `^(?:str|int|bool)( +#.*)?$`
 - Not Match: `^[ \t]+$`
+- Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
 
 </p>
 </details>

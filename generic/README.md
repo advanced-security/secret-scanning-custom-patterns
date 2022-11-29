@@ -32,7 +32,7 @@
 <p>
 
 ```regex
-(?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)?|pwd?|secret)[\t ]*(={1,3}|:)[\t ]*["']?
+(?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|pwd|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
 ```
 
 </p>
@@ -56,13 +56,14 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^.*token.*$`
 - Not Match: `^[a-zA-Z0-9._]+[_.](?:password|passphrase|secret|key).*$`
 - Not Match: `^.* passphrase .*$`
-- Not Match: `^(?i)(?:[a-zA-Z0-9_.]*,\s*)?[[<(]?(?:write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git),?[\]>)]?(?:\)\s*\{)?\\?$`
+- Not Match: `^(?i)(?:[a-zA-Z0-9_.]*,\s*)?[[<(]?(?:write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?$`
 - Not Match: `^\s*%[sr]\s*$`
 - Not Match: `^\s*$`
-- Not Match: `^\s*(?:int|str|Any|None|bytes|bool|ReadableBuffer)\s*([,|].*)?\s*$`
-- Not Match: `^\s*(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional)\[.*$`
-- Not Match: `^\s*\.\.\.\s*$`
+- Not Match: `^\s*(?:int|str|(?:typing\.)?Any|None|bytes|bool|ReadableBuffer)\s*([,|].*)?\s*$`
+- Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
+- Not Match: `^\s*\.\.\.,?\s*$`
 - Not Match: `^\s*\\\s*$`
+- Not Match: `^\\n$`
 - Not Match: `^\s*,s*$`
 - Not Match: `^\\0$`
 - Not Match: `^function\s*\([^)]*\)\s*{\s*`
@@ -73,13 +74,21 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^\s*[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?\s*$`
 - Not Match: `^\s*(?:~|/tmp|\.\.|\.)\s*$`
 - Not Match: `^\\{1,2}w\+/g,( \\?)?$`
-- Not Match: `^\s*\$\{[^}]+}\s*$`
+- Not Match: `^\s*\$\{[^}]+\}\s*$`
+- Not Match: `^\s*\$\([^)]+\)\s*$`
 - Not Match: `^\s*\{[^}]*\}\s*$`
 - Not Match: `^\s*\[[^\]]*\]\s*$`
 - Not Match: `^[,()[\]{}`.]\\?$`
 - Not Match: `^geheim\$parole$`
 - Not Match: `^\s*\([Oo]ptional\).*$`
 - Not Match: `^-[)(]$`
+- Not Match: `^0x[A-Fa-f0-9]+,?$`
+- Not Match: `^\$[1-9]$`
+- Not Match: `^\$[A-Za-z0-9_]+$`
+- Not Match: `^[0-9],?$`
+- Not Match: `^\s*ALL(?:\\n)?\s*$`
+- Not Match: `^(?:public|private) [A-Za-z0-9_]+ \{$`
+- Not Match: `^\$[a-zA-Z0-9_]+\{$`
 
 </p>
 </details>
