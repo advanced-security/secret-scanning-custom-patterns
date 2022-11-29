@@ -346,7 +346,7 @@ def scan(db: hyperscan.Database,
 
 def add_args(parser: ArgumentParser) -> None:
     """Add arguments to the command line parser."""
-    parser.add_argument("--tests", "-t", default="..", required=False, help="Root test directory")
+    parser.add_argument("--tests", "-t", default=Path(__file__).parent.parent, required=False, help="Root test directory (defaults to directory above script directory)")
     parser.add_argument("--debug", "-d", action="store_true", help="Debug output on")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show expected matches")
     parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")

@@ -68,6 +68,7 @@ patterns:
         [^0-9A-Za-z]\s*(secret|service_pass(wd|word|code|phrase)|pass(wd|word|code|phrase)|key)s*:\s*
       end: |
         [^0-9A-Za-z'"\(\)]|\z
+    # TODO: duplicate many of the 'generic' password 'additional_not_match' regex
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
