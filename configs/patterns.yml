@@ -2,6 +2,22 @@
 name: Configuration Secrets
 
 patterns:
+  - name: Hardcoded Database Passwords 
+    type: hardcoded_database_passwords
+    comments:
+      - "Only support for Postgres and MySQL password strings"
+      - "Checks if the password is null / length of 0"
+      - "Supports quoted passwords"
+      - "Not case sensative"
+    regex:
+      version: 0.1
+      pattern: |
+        [a-zA-Z0-9!$%&*+?^_`{|}~-]{1,}
+      start: |
+        [^0-9A-Za-z](?i)(postgres|mysql|mysql_root)_password(\s+|)(=|:)(\s+|)('|"|)
+      end: |
+        \z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
+
   - name: Hardcoded Spring SQL passwords
     description: |
       Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime

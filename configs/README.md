@@ -2,6 +2,51 @@
 -->
 # Configuration Secrets
 
+## Hardcoded Database Passwords
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Only support for Postgres and MySQL password strings
+- Checks if the password is null / length of 0
+- Supports quoted passwords
+- Not case sensative
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[a-zA-Z0-9!$%&*+?^_`{|}~-]{1,}
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+[^0-9A-Za-z](?i)(postgres|mysql|mysql_root)_password(\s+|)(=|:)(\s+|)('|"|)
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
+```
+
+</p>
+</details>
+
 ## Hardcoded Spring SQL passwords
 
 
