@@ -16,7 +16,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-[^\r\n']{1,40}
+[^\r\n'"]{1,40}
 ```
 
 </p>
@@ -27,7 +27,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}'?
+\b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}['"]?
 ```
 
 </p>
@@ -36,7 +36,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\z|['\r\n]
+\z|['"\r\n]
 ```
 
 </p>
