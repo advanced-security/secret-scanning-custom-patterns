@@ -11,7 +11,7 @@ patterns:
       pattern: |
         [^\r\n']{1,40}
       start: |
-        \b(spring\.datasource\.password|jdbc\.password)[ \t]{0,10}=[ \t]{0,10}'?
+        \b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}'?
       end: |
         \z|['\r\n]
     expected:
@@ -42,7 +42,7 @@ patterns:
       pattern: |
         [^\r\n"']+
       start: |
-        \bSECRET_KEY[ \t]{0,10}=[ \t]{0,10}["']
+        \bSECRET_KEY[ \t]*=[ \t]*["']
       end: |
         ['"]
     comments:
@@ -65,10 +65,17 @@ patterns:
       pattern: |
         [^\r\n'"]{12,32}
       start: |
-        \b(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
+        (?:\n|\A)[ \t]{0,10}(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
       end: |
         ['"\r\n]|\z
-    # TODO: duplicate many of the 'generic' password 'additional_not_match' regex
+      additional_not_match:
+        - ^keyPassphrase$
+        - ^.* = (?:None|True|False),?$
+        - ^.* = \.\.\.,?$
+        - ^(?:this\.)?[A-Za-z_]+\,$
+        - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
+        - ^(?:str|int|bool)( +#.*)?$
+        - ^[ \t]+$
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"

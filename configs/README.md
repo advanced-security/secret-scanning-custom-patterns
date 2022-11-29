@@ -27,7 +27,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\b(spring\.datasource\.password|jdbc\.password)[ \t]{0,10}=[ \t]{0,10}'?
+\b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}'?
 ```
 
 </p>
@@ -69,7 +69,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\bSECRET_KEY[ \t]{0,10}=[ \t]{0,10}["']
+\bSECRET_KEY[ \t]*=[ \t]*["']
 ```
 
 </p>
@@ -114,7 +114,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-\b(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
+(?:\n|\A)[ \t]{0,10}(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
 ```
 
 </p>
@@ -125,6 +125,22 @@ Pattern to find Static passwords in YAML configuration files
 ```regex
 ['"\r\n]|\z
 ```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `^keyPassphrase$`
+- Not Match: `^.* = (?:None|True|False),?$`
+- Not Match: `^.* = \.\.\.,?$`
+- Not Match: `^(?:this\.)?[A-Za-z_]+\,$`
+- Not Match: `^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$`
+- Not Match: `^(?:str|int|bool)( +#.*)?$`
+- Not Match: `^[ \t]+$`
 
 </p>
 </details>
