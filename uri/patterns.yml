@@ -61,13 +61,13 @@ patterns:
         [A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s]*:
       end: |
         @
-    additional_not_match:
-      # placeholders
-      - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
-      # variable substitution
-      - ^\$?\{[^}+\}i\}$
-      # format string
-      - ^%(?:\.\*)?s$ 
+      additional_not_match:
+        # placeholders
+        - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
+        # variable substitution
+        - ^\$?\{[^}+]\}i\}$
+        # format string
+        - ^%(?:\.\*)?s$ 
 
     expected:
       - name: app.py

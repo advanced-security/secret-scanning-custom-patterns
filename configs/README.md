@@ -16,7 +16,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-[a-zA-Z0-9!$%&*+?^_`{|}~-]+
+[^\r\n']{1,40}
 ```
 
 </p>
@@ -27,7 +27,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-[^0-9A-Za-z](spring.datasource.password|jdbc.password)(\s+|)=(\s+|)
+\b(spring\.datasource\.password|jdbc\.password)[ \t]{0,10}=[ \t]{0,10}'?
 ```
 
 </p>
@@ -36,7 +36,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\z|[^0-9A-Za-z]|'
+\z|['\r\n]
 ```
 
 </p>
@@ -58,7 +58,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-[^\s"'(${{)][a-zA-Z0-9!.,$%&*+?^_`{|}()~-]*
+[^\r\n"']+
 ```
 
 </p>
@@ -69,7 +69,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-[^0-9A-Za-z](SECRET_KEY)(\s+|)=(\s+|)("|')
+\bSECRET_KEY[ \t]{0,10}=[ \t]{0,10}["']
 ```
 
 </p>
@@ -78,7 +78,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]|'|"
+['"]
 ```
 
 </p>
@@ -95,7 +95,7 @@ Pattern to find Static passwords in YAML configuration files
 
 - The hardcoded password is between 12 and 32 chars long
 - Some false positives in Code might appear
-- The pattern only checks for cerain key words to begin the pattern (`secret:`, `password:`, etc.)
+- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
 
 
 <details>
@@ -103,7 +103,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-[a-zA-Z0-9%!#$%&*+=?^_-{|}~\.,]{12,32}
+[^\r\n'"]{12,32}
 ```
 
 </p>
@@ -114,7 +114,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-[^0-9A-Za-z](\s+|)(secret|service_pass(wd|word|code|phrase)|pass(wd|word|code|phrase)|key)(\s+|):(\s+|)
+\b(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
 ```
 
 </p>
@@ -123,7 +123,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-[^0-9A-Za-z'"\(\)]|\z
+['"\r\n]|\z
 ```
 
 </p>

@@ -69,3 +69,13 @@ SG\.[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*
 </p>
 </details>
 
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^a-zA-Z0-9-]
+```
+
+</p>
+</details>

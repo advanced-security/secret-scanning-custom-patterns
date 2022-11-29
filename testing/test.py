@@ -56,9 +56,13 @@ class Pattern():
 
     def pcre_regex(self) -> pcre.Pattern:
         """Concatenate, label capture groups, and UTF-8 encode."""
-        return pcre.compile(
-            f"(?P<start>{self.start if self.start is not None else Pattern.default_start})(?P<pattern>{self.pattern})(?P<end>{self.end if self.end is not None else Pattern.default_end})"
-            .encode('utf-8'))
+        pcre_string = f"(?P<start>{self.start if self.start is not None else Pattern.default_start})(?P<pattern>{self.pattern})(?P<end>{self.end if self.end is not None else Pattern.default_end})"
+
+        try:
+            return pcre.compile(pcre_string.encode('utf-8'))
+        except pcre.PCREError as err:
+            LOG.error("Cannot compile regex with PCRE: %s; error: %s", pcre_string, err)
+            exit(1)
 
 
 def parse_patterns(patterns_dir: str) -> list[Pattern]:
@@ -76,8 +80,8 @@ def parse_patterns(patterns_dir: str) -> list[Pattern]:
 
         regex = pattern["regex"]
 
-        additional_not_matches = pattern.get("additional_not_match", [])
-        additional_matches = pattern.get("additional_match", [])
+        additional_not_matches = regex.get("additional_not_match", [])
+        additional_matches = regex.get("additional_match", [])
 
         expected = pattern.get("expected", [])
 
@@ -112,17 +116,15 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
     try:
         db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
     except hyperscan.error:
-        try:
-            db.compile(regex_bytes)
-        except (hyperscan.error, TypeError):
-            LOG.debug("Failed to compile rules")
-            LOG.debug(regex_bytes)
-            for r in regex_bytes:
-                try:
-                    db.compile(r)
-                except (hyperscan.error, TypeError) as err:
-                    LOG.error("❌ hyperscan error with '%s': %s", r, err)
-            return False
+        LOG.debug("Failed to compile a rule with 'HS_FLAG_SOM_LEFTMOST': %s", str(regex_bytes))
+        for regex in regex_bytes:
+            try:
+                db.compile([regex], flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
+            except hyperscan.error as err:
+                LOG.error("❌ Failed to compile %s with 'leftmost' flag: %s", str(regex), err) 
+
+                return False
+
     return True
 
 
@@ -182,15 +184,20 @@ def pcre_result_match(pattern: Pattern,
                 'end': str(m.group('end'))
             }
 
-        if pattern.additional_matches:
-            if not all([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_matches]):
-                LOG.debug("One of the required additional pattern matches did not hold")
-                return
+        try:
+            if pattern.additional_matches:
+                if not all([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_matches]):
+                    LOG.debug("One of the required additional pattern matches did not hold")
+                    return
 
-        if pattern.additional_not_matches:
-            if any([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_not_matches]):
-                LOG.debug("One of the additional NOT pattern matches held")
-                return
+            if pattern.additional_not_matches:
+                if any([pcre.compile(pat).match(m.group('pattern')) for pat in pattern.additional_not_matches]):
+                    LOG.debug("One of the additional NOT pattern matches held")
+                    return
+        except pcre.PCREError as err:
+            LOG.error("Cannot compile one of the additional/not match regex for '%s': %s", pattern.name, err)
+            exit(1)
+
 
         file_details = {
             'name': path.name if not dry_run else str(path),
