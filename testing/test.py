@@ -21,7 +21,6 @@ from typing import Union, Any, Optional
 import platform
 from colorama import Fore, Style
 
-
 LOG = logging.getLogger(__name__)
 PATTERNS_FILENAME = "patterns.yml"
 RESULTS: dict[str, list[dict[str, Any]]] = {}
@@ -34,9 +33,8 @@ class Pattern():
     default_start = r'\A|[^0-9A-Za-z]'
     default_end = r'\z|[^0-9A-Za-z]'
 
-    def __init__(self, name: str, description: str, start: str, pattern: str, end: str,
-                 additional_matches: list[str], additional_not_matches: list[str], expected: list[dict[str,
-                                                                                                       Any]]) -> None:
+    def __init__(self, name: str, description: str, start: str, pattern: str, end: str, additional_matches: list[str],
+                 additional_not_matches: list[str], expected: list[dict[str, Any]]) -> None:
         self.name = name.strip() if name is not None else None
         self.description = description.strip() if description is not None else None
         self.start = start.strip() if start is not None else None
@@ -121,7 +119,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
             try:
                 db.compile([regex], flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
             except hyperscan.error as err:
-                LOG.error("❌ Failed to compile %s with 'leftmost' flag: %s", str(regex), err) 
+                LOG.error("❌ Failed to compile %s with 'leftmost' flag: %s", str(regex), err)
 
                 return False
 
@@ -129,8 +127,9 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
 
 
 # sideffect: writes to global RESULTS
-def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, verbose: bool, quiet: bool, write_to_results: bool, dry_run: bool, rule_id: int,
-                        start_offset: int, end_offset: int, flags: int, context: Optional[Any]) -> None:
+def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, verbose: bool, quiet: bool,
+                        write_to_results: bool, dry_run: bool, rule_id: int, start_offset: int, end_offset: int,
+                        flags: int, context: Optional[Any]) -> None:
     """Hyperscan callback."""
     match_content: bytes = content[start_offset:end_offset]
     pattern: Pattern = patterns[rule_id]
@@ -143,7 +142,15 @@ def report_scan_results(patterns: list[Pattern], path: Path, content: bytes, ver
     LOG.debug("Pattern was: %s", regex_string)
 
     # extract separate parts of match using PCRE
-    pcre_result_match(pattern, path, match_content, start_offset, end_offset, verbose=verbose, quiet=quiet, write_to_results=write_to_results, dry_run=dry_run)
+    pcre_result_match(pattern,
+                      path,
+                      match_content,
+                      start_offset,
+                      end_offset,
+                      verbose=verbose,
+                      quiet=quiet,
+                      write_to_results=write_to_results,
+                      dry_run=dry_run)
 
 
 def path_offsets_match(first: dict[str, Any], second: dict[str, Any]) -> bool:
@@ -176,13 +183,15 @@ def pcre_result_match(pattern: Pattern,
                 'pattern': m.group('pattern').decode('utf-8'),
                 'end': m.group('end').decode('utf-8')
             }
-        except UnicodeDecodeError as err:
-            # TODO: fall back to win-1251 and ASCII before just dumping the b'...' string
-            parts = {
-                'start': str(m.group('start')),
-                'pattern': str(m.group('pattern')),
-                'end': str(m.group('end'))
-            }
+        except UnicodeDecodeError:
+            try:
+                parts = {
+                    'start': m.group('start').decode('ascii'),
+                    'pattern': m.group('pattern').decode('ascii'),
+                    'end': m.group('end').decode('ascii')
+                }
+            except UnicodeDecodeError:
+                parts = {'start': str(m.group('start')), 'pattern': str(m.group('pattern')), 'end': str(m.group('end'))}
 
         try:
             if pattern.additional_matches:
@@ -197,7 +206,6 @@ def pcre_result_match(pattern: Pattern,
         except pcre.PCREError as err:
             LOG.error("Cannot compile one of the additional/not match regex for '%s': %s", pattern.name, err)
             exit(1)
-
 
         file_details = {
             'name': path.name if not dry_run else str(path),
@@ -223,17 +231,17 @@ def pcre_result_match(pattern: Pattern,
                 RESULTS[pattern.name] = []
 
             RESULTS[pattern.name].append({'file': file_details, 'groups': parts})
-        
+
             LOG.debug((json.dumps({'name': pattern.name, 'file': file_details, 'groups': parts})))
-        
+
         if dry_run:
             # for dry-run, TODO: improve to be single-line grep or SARIF output
-            print(f"{file_details['name']}:{file_details['start_offset']}-{file_details['end_offset']}: {parts['start']}{Fore.RED}{parts['pattern']}{Style.RESET_ALL}{parts['end']} (on {pattern.name})")
+            print(
+                f"{file_details['name']}:{file_details['start_offset']}-{file_details['end_offset']}: {parts['start']}{Fore.RED}{parts['pattern']}{Style.RESET_ALL}{parts['end']} (on {pattern.name})"
+            )
 
 
-def test_patterns(tests_path: str,
-                  verbose: bool = False,
-                  quiet: bool = False) -> bool:
+def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -> bool:
     """Run all of the discovered patterns in the given path."""
     global RESULTS
 
@@ -306,10 +314,7 @@ def test_patterns(tests_path: str,
     return result
 
 
-def dry_run_patterns(tests_path: str,
-                  extra_directory: str,
-                  verbose: bool = False,
-                  quiet: bool = False) -> None:
+def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = False, quiet: bool = False) -> None:
     """Dry run all of the discovered patterns in the given path against the extra directory, recursively."""
     db = hyperscan.Database()
     patterns = []
@@ -320,7 +325,7 @@ def dry_run_patterns(tests_path: str,
 
     if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
         if not quiet:
-            LOG.error("❌ hyperscan pattern compilation error in '%s'", rel_dirpath)
+            LOG.error("❌ hyperscan pattern compilation error in '%s'", dirpath)
             exit(1)
 
     for dirpath, dirnames, filenames in os.walk(extra_directory):
@@ -333,7 +338,14 @@ def dry_run_patterns(tests_path: str,
                     with file_path.open("rb") as f:
                         # TODO: memory map instead?
                         content = f.read()
-                        scan(db, path, content, patterns, verbose=verbose, quiet=quiet, write_to_results=False, dry_run=True)
+                        scan(db,
+                             path,
+                             content,
+                             patterns,
+                             verbose=verbose,
+                             quiet=quiet,
+                             write_to_results=False,
+                             dry_run=True)
                 except OSError as err:
                     LOG.error("Failed to open and read file '%s': %s", str(file_path), err)
 
@@ -345,22 +357,23 @@ def scan(db: hyperscan.Database,
          patterns: list[Pattern],
          verbose: bool = False,
          quiet: bool = False,
-         write_to_results: bool=True,
-         dry_run: bool=False) -> None:
+         write_to_results: bool = True,
+         dry_run: bool = False) -> None:
     """Scan content with database. I wanted to have this be an async function with a Future, but it didn't work."""
     db.scan(content, partial(report_scan_results, patterns, path, content, verbose, quiet, write_to_results, dry_run))
 
 
 def add_args(parser: ArgumentParser) -> None:
     """Add arguments to the command line parser."""
-    parser.add_argument("--tests", "-t", default=Path(__file__).parent.parent, required=False, help="Root test directory (defaults to directory above script directory)")
+    parser.add_argument("--tests",
+                        "-t",
+                        default=Path(__file__).parent.parent,
+                        required=False,
+                        help="Root test directory (defaults to directory above script directory)")
     parser.add_argument("--debug", "-d", action="store_true", help="Debug output on")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show expected matches")
     parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")
-    parser.add_argument("--extra",
-                        "-e",
-                        required=False,
-                        help="Extra directory for running tests over all contents")
+    parser.add_argument("--extra", "-e", required=False, help="Extra directory for running tests over all contents")
 
 
 def check_platform() -> None:
