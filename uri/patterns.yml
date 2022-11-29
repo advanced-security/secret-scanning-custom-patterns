@@ -62,7 +62,12 @@ patterns:
       end: |
         @
     additional_not_match:
-      - ^<?(?:password|passwd|secret)>?$
+      # placeholders
+      - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
+      # variable substitution
+      - ^\$?\{[^}+\}i\}$
+      # format string
+      - ^%(?:\.\*)?s$ 
 
     expected:
       - name: app.py
