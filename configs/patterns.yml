@@ -9,11 +9,11 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [^\r\n']{1,40}
+        [^\r\n'"]{1,40}
       start: |
-        \b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}'?
+        \b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}['"]?
       end: |
-        \z|['\r\n]
+        \z|['"\r\n]
     expected:
       - name: application.properties
         start_offset: 314
@@ -23,16 +23,19 @@ patterns:
         end_offset: 375
       - name: application.properties
         start_offset: 422
-        end_offset: 439
+        end_offset: 442
       - name: application.properties
-        start_offset: 874
-        end_offset: 880
+        start_offset: 836
+        end_offset: 843
       - name: application.properties
-        start_offset: 1141
-        end_offset: 1147
+        start_offset: 1078
+        end_offset: 1085
       - name: application.properties
-        start_offset: 1427
-        end_offset: 1433
+        start_offset: 1346
+        end_offset: 1353
+      - name: application.properties
+        start_offset: 1633
+        end_offset: 1640
 
 
   - name: Django Secret Key
