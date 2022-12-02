@@ -74,7 +74,7 @@ class Pattern():
             exit(1)
 
 
-def parse_patterns(patterns_dir: str) -> list[Pattern]:
+def parse_patterns(patterns_dir: str, include: Optional[list[str]] = None, exclude: Optional[list[str]] = None) -> list[Pattern]:
     """Parse patterns found in YAML files."""
     patterns = []
 
@@ -83,6 +83,14 @@ def parse_patterns(patterns_dir: str) -> list[Pattern]:
 
     for pattern in data["patterns"]:
         LOG.debug("Pattern: %s", json.dumps(pattern, indent=2))
+
+        pattern_type = pattern.get("type")
+        if include:
+            if not pattern_type in include:
+                continue
+        if exclude:
+            if pattern_type in exclude:
+                continue
 
         name = pattern.get("name")
         description = pattern.get("description")
@@ -122,6 +130,7 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
     else:
         raise ValueError("Regex is not a str or bytes")
 
+    # TODO: also do with hyperscan.HS_FLAG_UCP so we can test them in that encoding - \x00A\x00B etc. (Windows style)
     try:
         db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST|hyperscan.HS_FLAG_UTF8)
     except hyperscan.error:
@@ -261,7 +270,7 @@ def pcre_result_match(pattern: Pattern,
                 )
 
 
-def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -> bool:
+def test_patterns(tests_path: str, include: Optional[list[str]] = None, exclude: Optional[list[str]] = None, verbose: bool = False, quiet: bool = False) -> bool:
     """Run all of the discovered patterns in the given path."""
     global RESULTS
     RESULTS = {}
@@ -280,7 +289,7 @@ def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -
             rel_dirpath = Path(dirpath).relative_to(tests_path)
             LOG.debug("Found patterns in %s", rel_dirpath)
 
-            patterns = parse_patterns(dirpath)
+            patterns = parse_patterns(dirpath, include=include, exclude=exclude)
             if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
                 if not quiet:
                     LOG.error("❌ hyperscan pattern compilation error in '%s'", rel_dirpath)
@@ -338,7 +347,7 @@ def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -
     return result
 
 
-def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = False, quiet: bool = False) -> None:
+def dry_run_patterns(tests_path: str, extra_directory: str, include: Optional[list[str]], exclude: Optional[list[str]], verbose: bool = False, quiet: bool = False) -> None:
     """Dry run all of the discovered patterns in the given path against the extra directory, recursively."""
     global RESULTS
     RESULTS = {}
@@ -356,7 +365,7 @@ def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = Fals
 
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
-            patterns.extend(parse_patterns(dirpath))
+            patterns.extend(parse_patterns(dirpath, include=include, exclude=exclude))
 
     if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
         if not quiet:
@@ -396,7 +405,7 @@ def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = Fals
                 LOG.info("%s: %d", pattern_name, sum((1 for result in results)))
 
 
-def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False, progress: bool = False) -> None:
+def random_test_patterns(tests_path: str, include: Optional[list[str]], exclude: Optional[list[str]], verbose: bool = False, quiet: bool = False, progress: bool = False) -> None:
     global RESULTS
     RESULTS = {}
 
@@ -407,7 +416,7 @@ def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = F
 
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
-            patterns.extend(parse_patterns(dirpath))
+            patterns.extend(parse_patterns(dirpath, include=include, exclude=exclude))
 
     if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
         if not quiet:
@@ -492,6 +501,8 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--extra", "-e", required=False, help="Extra directory for running tests over all contents")
     parser.add_argument("--random", "-r", action="store_true", help="Extra directory for running tests over all contents")
     parser.add_argument("--progress", "-p", action="store_true", help="Show a progress bar where relevant")
+    parser.add_argument("--include", "-i", nargs="*", help="Include these pattern IDs")
+    parser.add_argument("--exclude", "-x", nargs="*", help="Exclude these pattern IDs")
 
 
 def check_platform() -> None:
@@ -517,14 +528,14 @@ def main() -> None:
     if args.debug:
         LOG.setLevel(logging.DEBUG)
 
-    if not test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet):
+    if not test_patterns(args.tests, include=args.include, exclude=args.exclude, verbose=args.verbose, quiet=args.quiet):
         exit(1)
 
     if args.extra is not None:
-        dry_run_patterns(args.tests, args.extra, verbose=args.verbose, quiet=args.quiet)
+        dry_run_patterns(args.tests, args.extra, include=args.include, exclude=args.exclude, verbose=args.verbose, quiet=args.quiet)
 
     if args.random:
-        random_test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet, progress=args.progress)
+        random_test_patterns(args.tests, include=args.include, exclude=args.exclude, verbose=args.verbose, quiet=args.quiet, progress=args.progress)
 
 
 if __name__ == "__main__":
