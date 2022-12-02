@@ -254,7 +254,7 @@ def pcre_result_match(pattern: Pattern,
             # for dry-run, TODO: improve to be single-line grep or SARIF output
             with LOCK:
                 print(
-                    f"{file_details['name']}:{file_details['start_offset']}-{file_details['end_offset']}: {parts['start']}{Fore.RED}{parts['pattern']}{Style.RESET_ALL}{parts['end']} (on {pattern.name})"
+                        f"{repr(file_details['name'])[1:-1]}:{int(file_details['start_offset'])}-{int(file_details['end_offset'])}: {repr(parts['start'])[1:-1]}{Fore.RED}{repr(parts['pattern'])[1:-1]}{Style.RESET_ALL}{repr(parts['end'])[1:-1]} (with {repr(pattern.name)[1:-1]})"
                 )
 
 
