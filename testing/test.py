@@ -22,6 +22,7 @@ from colorama import Fore, Style
 from threading import Lock
 from random import randbytes
 from base64 import b64encode
+from tqdm import tqdm
 
 
 LOG = logging.getLogger(__name__)
@@ -122,12 +123,12 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
         raise ValueError("Regex is not a str or bytes")
 
     try:
-        db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
+        db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST|hyperscan.HS_FLAG_UTF8)
     except hyperscan.error:
         LOG.debug("Failed to compile a rule with 'HS_FLAG_SOM_LEFTMOST': %s", str(regex_bytes))
         for regex in regex_bytes:
             try:
-                db.compile([regex], flags=hyperscan.HS_FLAG_SOM_LEFTMOST)
+                db.compile([regex], flags=hyperscan.HS_FLAG_SOM_LEFTMOST|hyperscan.HS_FLAG_UTF8)
             except hyperscan.error as err:
                 LOG.error("❌ Failed to compile %s with 'leftmost' flag: %s", str(regex), err)
 
@@ -389,13 +390,13 @@ def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = Fals
     
     if not quiet:
         with LOCK:
-            LOG.info(f"ℹ️  Summary: processed {size_read:d} bytes in {files_read:d} files")
+            LOG.info(f"ℹ️  Summary: processed %d bytes in %d files", size_read, files_read)
 
             for pattern_name, results in RESULTS.items():
                 LOG.info("%s: %d", pattern_name, sum((1 for result in results)))
 
 
-def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -> None:
+def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False, progress: bool = False) -> None:
     global RESULTS
     RESULTS = {}
 
@@ -412,13 +413,21 @@ def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = F
         if not quiet:
             LOG.error("❌ hyperscan pattern compilation error in '%s'", dirpath)
             exit(1)
+    
+    goal = 100000000000
+    chunk_size = 100000000
+
+    if progress:
+        pb = tqdm(total=goal, unit_scale=True, unit='B')
 
     # read 100GB of random data (a mix of binary and base64 encoded)
-    while size_read < 100000000000:
-        # read random bytes
-        content = randbytes(100000)
+    while size_read < goal:
+        # read random bytes, 100MB at a time
+        content = randbytes(chunk_size)
 
         size_read += len(content)
+        if progress:
+            pb.update(len(content))
 
         scan(db,
              None,
@@ -433,6 +442,8 @@ def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = F
         content_b64 = b64encode(content)
 
         size_read += len(content_b64)
+        if progress:
+            pb.update(len(content_b64))
 
         scan(db,
              None,
@@ -443,8 +454,11 @@ def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = F
              write_to_results=True,
              dry_run=True)
 
+    if progress:
+        pb.close()
+
     with LOCK:
-        LOG.info("Summary: processed {size_read:d} random bytes")
+        LOG.info("Summary: processed %d random bytes", size_read)
 
         for pattern_name, results in RESULTS.items():
             count = sum((1 for result in results))
@@ -477,6 +491,7 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")
     parser.add_argument("--extra", "-e", required=False, help="Extra directory for running tests over all contents")
     parser.add_argument("--random", "-r", action="store_true", help="Extra directory for running tests over all contents")
+    parser.add_argument("--progress", "-p", action="store_true", help="Show a progress bar where relevant")
 
 
 def check_platform() -> None:
@@ -509,7 +524,7 @@ def main() -> None:
         dry_run_patterns(args.tests, args.extra, verbose=args.verbose, quiet=args.quiet)
 
     if args.random:
-        random_test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet)
+        random_test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet, progress=args.progress)
 
 
 if __name__ == "__main__":

@@ -5,11 +5,12 @@ patterns:
     type: hardcoded_internal_emails
     regex:
       pattern: |
-        [^:@\r\n \t"'/]+@(internal\.)?example\.com
+        [^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
       start: |
         \A|[\s"'`,;=]
       end: |
         \Z|[^a-zA-Z._0-9-]
+
     expected:
       - name: email.js
         start_offset: 75
@@ -23,11 +24,12 @@ patterns:
     type: hardcoded_internal_urls
     regex:
       pattern: |
-        [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
+        [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
       start: |
         \A|[^A-Za-z0-9+_-]
       end: |
         \z|[\s'"]
+
     expected:
       - name: email.js
         start_offset: 169
@@ -56,9 +58,9 @@ patterns:
     type: hardcoded_uri_passwords
     regex:
       pattern: |
-        [^$][^/?#@\s]+
+        [^$/?#@\s][^/?#@\s\p{Cc}]*
       start: |
-        [A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s]*:
+        \b[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\p{Cc}]*:
       end: |
         @
       additional_not_match:
@@ -85,4 +87,6 @@ patterns:
       - name: database.txt
         start_offset: 227
         end_offset: 241
-        
+      - name: non-english.txt
+        start_offset: 19
+        end_offset: 25
