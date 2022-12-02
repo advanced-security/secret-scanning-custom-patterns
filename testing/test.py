@@ -363,8 +363,8 @@ def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = Fals
                              quiet=quiet,
                              write_to_results=False,
                              dry_run=True)
-                except OSError as err:
-                    LOG.error("Failed to open and read file '%s': %s", str(file_path), err)
+                except (OSError, RuntimeError) as err:
+                    LOG.debug("Failed to open and read file '%s': %s", str(file_path), err)
 
 
 # sideffect: writes to global RESULTS
