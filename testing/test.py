@@ -20,12 +20,14 @@ from typing import Union, Any, Optional
 import platform
 from colorama import Fore, Style
 from threading import Lock
+from random import randbytes
+from base64 import b64encode
 
 
 LOG = logging.getLogger(__name__)
 LOCK = Lock()
 PATTERNS_FILENAME = "patterns.yml"
-RESULTS: dict[str, list[dict[str, Any]]] = {}
+RESULTS: dict[str, list[dict[str, Any]], int] = {}
 PATH_EXCLUDES = ('.git',)
 
 
@@ -254,15 +256,16 @@ def pcre_result_match(pattern: Pattern,
             # for dry-run, TODO: improve to be single-line grep or SARIF output
             with LOCK:
                 print(
-                        f"{repr(file_details['name'])[1:-1]}:{int(file_details['start_offset'])}-{int(file_details['end_offset'])}: {repr(parts['start'])[1:-1]}{Fore.RED}{repr(parts['pattern'])[1:-1]}{Style.RESET_ALL}{repr(parts['end'])[1:-1]} (with {repr(pattern.name)[1:-1]})"
+                        f"{repr(file_details['name'])[1:-1]}:{int(file_details['start_offset'])}-{int(file_details['end_offset'])}: {repr(parts['start'])[1:-1]}{Fore.RED}{repr(parts['pattern'])[1:-1]}{Style.RESET_ALL}{repr(parts['end'])[1:-1]} (with '{repr(pattern.name)[1:-1]}')"
                 )
 
 
 def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -> bool:
     """Run all of the discovered patterns in the given path."""
     global RESULTS
+    RESULTS = {}
 
-    result = True
+    result: bool = True
 
     if not os.path.isdir(tests_path):
         if not quiet:
@@ -285,18 +288,21 @@ def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -
                 path = (Path(dirpath) / filename).relative_to(tests_path)
                 with (Path(tests_path) / path).resolve().open("rb") as f:
                     content = f.read()
+
                     # sideffect: writes to global RESULTS
                     scan(db, path, content, patterns, verbose=verbose, quiet=quiet)
 
+            # threads should all exit before here, so we don't need to use LOCK
             for pattern in patterns:
                 # did we match everything we expected?
-                ok = True
+                ok: bool = True
 
                 if pattern.expected:
                     for expected in pattern.expected:
+                        pattern_results = RESULTS.get(pattern.name) if pattern.name in RESULTS else []
                         if not any([
                                 path_offsets_match(expected, result.get('file', {}))
-                                for result in RESULTS.get(pattern.name, [])
+                                for result in pattern_results
                         ]):
                             if not quiet:
                                 with (Path(dirpath) / expected.get('name', '')).resolve().open("rb") as f:
@@ -312,7 +318,7 @@ def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -
                             not any(
                                 [path_offsets_match(expected, result.get('file', {}))
                                  for expected in pattern.expected])
-                            for result in RESULTS.get(pattern.name, [])
+                            for result in pattern_results
                     ]):
                         if not quiet:
                             LOG.error("❌ matched unexpected results for: '%s'", pattern.name)
@@ -333,8 +339,19 @@ def test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -
 
 def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = False, quiet: bool = False) -> None:
     """Dry run all of the discovered patterns in the given path against the extra directory, recursively."""
+    global RESULTS
+    RESULTS = {}
+
     db = hyperscan.Database()
     patterns = []
+
+    size_read: int = 0
+    files_read: int = 0
+
+    if not os.path.isdir(extra_directory):
+        if not quiet:
+            LOG.error("❌ extra directory not found: %s", extra_directory)
+        exit(1)
 
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
@@ -353,18 +370,86 @@ def dry_run_patterns(tests_path: str, extra_directory: str, verbose: bool = Fals
                 try:
                     file_path = (Path(extra_directory) / path).resolve()
                     with file_path.open("rb") as f:
-                        # TODO: memory map instead?
+                        # TODO: memory map instead? 
                         content = f.read()
+
+                        size_read += len(content)
+                        files_read += 1
+
                         scan(db,
                              path,
                              content,
                              patterns,
                              verbose=verbose,
                              quiet=quiet,
-                             write_to_results=False,
+                             write_to_results=not quiet,
                              dry_run=True)
                 except (OSError, RuntimeError) as err:
                     LOG.debug("Failed to open and read file '%s': %s", str(file_path), err)
+    
+    if not quiet:
+        with LOCK:
+            LOG.info(f"ℹ️  Summary: processed {size_read:d} bytes in {files_read:d} files")
+
+            for pattern_name, results in RESULTS.items():
+                LOG.info("%s: %d", pattern_name, sum((1 for result in results)))
+
+
+def random_test_patterns(tests_path: str, verbose: bool = False, quiet: bool = False) -> None:
+    global RESULTS
+    RESULTS = {}
+
+    db = hyperscan.Database()
+    patterns = []
+
+    size_read: int = 0
+
+    for dirpath, dirnames, filenames in os.walk(tests_path):
+        if PATTERNS_FILENAME in filenames:
+            patterns.extend(parse_patterns(dirpath))
+
+    if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
+        if not quiet:
+            LOG.error("❌ hyperscan pattern compilation error in '%s'", dirpath)
+            exit(1)
+
+    # read 100GB of random data (a mix of binary and base64 encoded)
+    while size_read < 100000000000:
+        # read random bytes
+        content = randbytes(100000)
+
+        size_read += len(content)
+
+        scan(db,
+             None,
+             content,
+             patterns,
+             verbose=verbose,
+             quiet=quiet,
+             write_to_results=True,
+             dry_run=True)
+
+        # same content, base64 encoded
+        content_b64 = b64encode(content)
+
+        size_read += len(content_b64)
+
+        scan(db,
+             None,
+             content_b64,
+             patterns,
+             verbose=verbose,
+             quiet=quiet,
+             write_to_results=True,
+             dry_run=True)
+
+    with LOCK:
+        LOG.info("Summary: processed {size_read:d} random bytes")
+
+        for pattern_name, results in RESULTS.items():
+            count = sum((1 for result in results))
+            if count > 0:
+                LOG.info("%s: %d", pattern_name, )
 
 
 # sideffect: writes to global RESULTS
@@ -391,6 +476,7 @@ def add_args(parser: ArgumentParser) -> None:
     parser.add_argument("--verbose", "-v", action="store_true", help="Show expected matches")
     parser.add_argument("--quiet", "-q", action="store_true", help="Don't output anything other than exit error codes")
     parser.add_argument("--extra", "-e", required=False, help="Extra directory for running tests over all contents")
+    parser.add_argument("--random", "-r", action="store_true", help="Extra directory for running tests over all contents")
 
 
 def check_platform() -> None:
@@ -421,6 +507,9 @@ def main() -> None:
 
     if args.extra is not None:
         dry_run_patterns(args.tests, args.extra, verbose=args.verbose, quiet=args.quiet)
+
+    if args.random:
+        random_test_patterns(args.tests, verbose=args.verbose, quiet=args.quiet)
 
 
 if __name__ == "__main__":

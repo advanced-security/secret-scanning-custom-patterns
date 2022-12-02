@@ -32,7 +32,7 @@ patterns:
     type: sendgrid
     regex:
       pattern: |
-        SG\.[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*
+        SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
       end: |
         \z|[^a-zA-Z0-9-]
     comments:
