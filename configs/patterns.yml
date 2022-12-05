@@ -9,9 +9,9 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [^\r\n'"]{1,40}
+        [^\r\n'"\p{Cc}]+
       start: |
-        \b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}['"]?
+        (?:spring\.datasource|jdbc)\.password[ \t]*}=[ \t]*['"]?
       end: |
         \z|['"\r\n]
     expected:
