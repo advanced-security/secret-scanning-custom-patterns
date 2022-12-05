@@ -11,7 +11,7 @@ patterns:
       pattern: |
         [^\r\n'"\p{Cc}]+
       start: |
-        (?:spring\.datasource|jdbc)\.password[ \t]*}=[ \t]*['"]?
+        (?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
       end: |
         \z|['"\r\n]
     expected:
@@ -66,9 +66,9 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [^\r\n'"]{12,32}
+        [^\r\n'"]*
       start: |
-        (?:\n|\A)[ \t]{0,10}(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
+        (?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
       end: |
         ['"\r\n]|\z
       additional_not_match:
