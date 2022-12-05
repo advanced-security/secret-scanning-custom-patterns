@@ -18,7 +18,7 @@ patterns:
     type: grafana_api_token
     regex:
       pattern: |
-        eyJrIjoi(?i)[a-z0-9-_=]{42}
+        eyJrIjoi[A-Za-z0-9_=-]{42}
     expected:
       - name: grafana.txt
         start_offset: 107

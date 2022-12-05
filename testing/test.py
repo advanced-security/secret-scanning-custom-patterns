@@ -22,6 +22,7 @@ from colorama import Fore, Style
 from threading import Lock
 from random import randbytes
 from base64 import b64encode
+from itertools import zip_longest
 from tqdm import tqdm
 
 
@@ -111,9 +112,10 @@ def parse_patterns(patterns_dir: str, include: Optional[list[str]] = None, exclu
     return patterns
 
 
-def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | list[bytes]]) -> bool:
+def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | list[bytes]], labels: list[str] = None) -> bool:
     """Compile one or more hyperscan regexes into the given database."""
     regex_bytes: list[bytes]
+    labels = labels if labels is not None else []
 
     if isinstance(regex, str):
         regex_bytes = [regex.encode('utf-8')]
@@ -136,12 +138,12 @@ def hs_compile(db: hyperscan.Database, regex: Union[str | list[str] | bytes | li
     try:
         db.compile(regex_bytes, flags=hyperscan.HS_FLAG_SOM_LEFTMOST|hyperscan.HS_FLAG_UTF8)
     except hyperscan.error:
-        LOG.debug("Failed to compile a rule with 'HS_FLAG_SOM_LEFTMOST': %s", str(regex_bytes))
-        for regex in regex_bytes:
+        LOG.debug("Failed to compile a rule: %s", str(regex_bytes))
+        for label, regex in zip_longest(labels, regex_bytes):
             try:
                 db.compile([regex], flags=hyperscan.HS_FLAG_SOM_LEFTMOST|hyperscan.HS_FLAG_UTF8)
             except hyperscan.error as err:
-                LOG.error("❌ Failed to compile %s with 'leftmost' flag: %s", str(regex), err)
+                LOG.error("❌ Failed to compile %s%s: %s", str(regex), ' (' + label + ')' if label is not None else '', err)
 
                 return False
 
@@ -299,7 +301,7 @@ def test_patterns(tests_path: str, include: Optional[list[str]] = None, exclude:
 
             found_patterns = True
 
-            if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
+            if not hs_compile(db, [pattern.regex_string() for pattern in patterns], labels=[pattern.type for pattern in patterns]):
                 if not quiet:
                     LOG.error("❌ hyperscan pattern compilation error in '%s'", rel_dirpath)
                     exit(1)
@@ -384,7 +386,7 @@ def dry_run_patterns(tests_path: str, extra_directory: str, include: Optional[li
         LOG.error("❌ Failed to find any patterns in %s", str(tests_path))
         return
 
-    if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
+    if not hs_compile(db, [pattern.regex_string() for pattern in patterns], labels=[pattern.type for pattern in patterns]):
         if not quiet:
             LOG.error("❌ hyperscan pattern compilation error in '%s'", dirpath)
             exit(1)
@@ -435,7 +437,7 @@ def random_test_patterns(tests_path: str, include: Optional[list[str]], exclude:
         if PATTERNS_FILENAME in filenames:
             patterns.extend(parse_patterns(dirpath, include=include, exclude=exclude))
 
-    if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
+    if not hs_compile(db, [pattern.regex_string() for pattern in patterns], labels=[pattern.type for pattern in patterns]):
         if not quiet:
             LOG.error("❌ hyperscan pattern compilation error in '%s'", dirpath)
             exit(1)
