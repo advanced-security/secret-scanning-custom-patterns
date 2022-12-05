@@ -44,9 +44,10 @@ class Pattern():
     default_start = r'\A|[^0-9A-Za-z]'
     default_end = r'\z|[^0-9A-Za-z]'
 
-    def __init__(self, name: str, description: str, start: str, pattern: str, end: str, additional_matches: list[str],
+    def __init__(self, name: str, _type: str, description: str, start: str, pattern: str, end: str, additional_matches: list[str],
                  additional_not_matches: list[str], expected: list[dict[str, Any]]) -> None:
         self.name = name.strip() if name is not None else None
+        self.type = _type.strip() if _type is not None else None
         self.description = description.strip() if description is not None else None
         self.start = start.strip() if start is not None else None
         self.pattern = pattern.strip()
@@ -93,6 +94,7 @@ def parse_patterns(patterns_dir: str, include: Optional[list[str]] = None, exclu
                 continue
 
         name = pattern.get("name")
+        _type = pattern.get("type")
         description = pattern.get("description")
 
         regex = pattern["regex"]
@@ -103,7 +105,7 @@ def parse_patterns(patterns_dir: str, include: Optional[list[str]] = None, exclu
         expected = pattern.get("expected", [])
 
         patterns.append(
-            Pattern(name, description, regex.get('start'), regex.get('pattern'), regex.get('end'), additional_matches,
+            Pattern(name, _type, description, regex.get('start'), regex.get('pattern'), regex.get('end'), additional_matches,
                     additional_not_matches, expected))
 
     return patterns
@@ -275,7 +277,8 @@ def test_patterns(tests_path: str, include: Optional[list[str]] = None, exclude:
     global RESULTS
     RESULTS = {}
 
-    result: bool = True
+    found_patterns: bool = False
+    ret: bool = True
 
     if not os.path.isdir(tests_path):
         if not quiet:
@@ -290,6 +293,12 @@ def test_patterns(tests_path: str, include: Optional[list[str]] = None, exclude:
             LOG.debug("Found patterns in %s", rel_dirpath)
 
             patterns = parse_patterns(dirpath, include=include, exclude=exclude)
+
+            if len(patterns) == 0:
+                continue
+
+            found_patterns = True
+
             if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
                 if not quiet:
                     LOG.error("❌ hyperscan pattern compilation error in '%s'", rel_dirpath)
@@ -317,7 +326,7 @@ def test_patterns(tests_path: str, include: Optional[list[str]] = None, exclude:
                             if not quiet:
                                 with (Path(dirpath) / expected.get('name', '')).resolve().open("rb") as f:
                                     content = f.read()
-                                    LOG.error("❌ unmatched expected location for: '%s'; %s:%d-%d; %s", pattern.name,
+                                    LOG.error("❌ unmatched expected location for: '%s'; %s:%d-%d; %s", pattern.type,
                                               expected.get('name'), expected.get('start_offset'),
                                               expected.get('end_offset'),
                                               content[expected.get('start_offset', 0):expected.get('end_offset', 0)])
@@ -331,20 +340,24 @@ def test_patterns(tests_path: str, include: Optional[list[str]] = None, exclude:
                             for result in pattern_results
                     ]):
                         if not quiet:
-                            LOG.error("❌ matched unexpected results for: '%s'", pattern.name)
+                            LOG.error("❌ matched unexpected results for: '%s'", pattern.type)
                         ok = False
 
                     if ok and not quiet:
-                        LOG.info("✅ '%s' in '%s'", pattern.name, rel_dirpath)
+                        LOG.info("✅ '%s' in '%s'", pattern.type, rel_dirpath)
 
                     if not ok:
-                        result = False
+                        ret = False
 
                 else:
                     if not quiet:
-                        LOG.info("ℹ️  '%s' in '%s': no expected patterns defined", pattern.name, rel_dirpath)
+                        LOG.info("ℹ️  '%s' in '%s': no expected patterns defined", pattern.type, rel_dirpath)
 
-    return result
+    if not found_patterns:
+        LOG.error("❌ Failed to find any patterns in %s", str(tests_path))
+        ret = False
+
+    return ret
 
 
 def dry_run_patterns(tests_path: str, extra_directory: str, include: Optional[list[str]], exclude: Optional[list[str]], verbose: bool = False, quiet: bool = False) -> None:
@@ -366,6 +379,10 @@ def dry_run_patterns(tests_path: str, extra_directory: str, include: Optional[li
     for dirpath, dirnames, filenames in os.walk(tests_path):
         if PATTERNS_FILENAME in filenames:
             patterns.extend(parse_patterns(dirpath, include=include, exclude=exclude))
+
+    if len(patterns) == 0:
+        LOG.error("❌ Failed to find any patterns in %s", str(tests_path))
+        return
 
     if not hs_compile(db, [pattern.regex_string() for pattern in patterns]):
         if not quiet:
