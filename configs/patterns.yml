@@ -75,11 +75,13 @@ patterns:
         - ^keyPassphrase$
         - ^.* = (?:None|True|False),?$
         - ^.* = \.\.\.,?$
-        - ^(?:this\.)?[A-Za-z_]+\,?$
+        - ^(?:(?:this|self|obj)\.)?[A-Za-z_]+\,$
+        - ^(?:(?:this|self|obj)\.)[A-Za-z_].*$
         - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
         - ^(?:str|int|bool)( +#.*)?$
         - ^[ \t]+$
         - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+        - ^\$\{[A-Za-z0-9_-]+\}$
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
