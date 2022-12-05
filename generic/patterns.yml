@@ -9,7 +9,7 @@ patterns:
       pattern: |
         [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
       start: |
-        (?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|pwd|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+        (?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|pwd|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
         (\z|[\r\n'"])
       additional_not_match:

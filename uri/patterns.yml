@@ -62,7 +62,7 @@ patterns:
       start: |
         \b[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\p{Cc}]*:
       end: |
-        @
+        @[^/?#\s\p{Cc},_=!{}()<>~`[\]*&^$£'";|]*(?:\:[0-9]{1,5})?[/?#\s]
       additional_not_match:
         # placeholders
         - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$

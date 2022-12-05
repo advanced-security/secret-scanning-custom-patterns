@@ -20,8 +20,8 @@ from typing import Union, Any, Optional
 import platform
 from colorama import Fore, Style
 from threading import Lock
-from random import randbytes
-from base64 import b64encode
+from random import randbytes, choices
+from string import printable
 from itertools import zip_longest
 from tqdm import tqdm
 
@@ -442,45 +442,49 @@ def random_test_patterns(tests_path: str, include: Optional[list[str]], exclude:
             LOG.error("❌ hyperscan pattern compilation error in '%s'", dirpath)
             exit(1)
     
-    goal = 100000000000
-    chunk_size = 100000000
+    binary_goal = 1000000000
+    ascii_goal = 1000000000
+    binary_chunk_size = 100000000
+    ascii_chunk_size = 100000000
 
     if progress:
-        pb = tqdm(total=goal, unit_scale=True, unit='B')
+        pb = tqdm(total=binary_goal + ascii_goal, unit_scale=True, unit='B')
 
-    # read 100GB of random data (a mix of binary and base64 encoded)
-    while size_read < goal:
+    # read 100GB of random binary data
+    while size_read < binary_goal:
         # read random bytes, 100MB at a time
-        content = randbytes(chunk_size)
-
-        size_read += len(content)
-        if progress:
-            pb.update(len(content))
+        binary_content = randbytes(binary_chunk_size)
 
         scan(db,
              None,
-             content,
+             binary_content,
              patterns,
              verbose=verbose,
              quiet=quiet,
              write_to_results=True,
              dry_run=True)
 
-        # same content, base64 encoded
-        content_b64 = b64encode(content)
-
-        size_read += len(content_b64)
+        size_read += binary_chunk_size
         if progress:
-            pb.update(len(content_b64))
+            pb.update(binary_chunk_size)
+
+    # read 1GB of random ascii data
+    while size_read < binary_goal + ascii_goal: 
+        # some random ASCII (printable characters)
+        ascii_content = ''.join(choices(printable, k=ascii_chunk_size)).encode('utf-8')
 
         scan(db,
              None,
-             content_b64,
+             ascii_content,
              patterns,
              verbose=verbose,
              quiet=quiet,
              write_to_results=True,
              dry_run=True)
+
+        size_read += ascii_chunk_size
+        if progress:
+            pb.update(ascii_chunk_size)
 
     if progress:
         pb.close()
@@ -491,7 +495,7 @@ def random_test_patterns(tests_path: str, include: Optional[list[str]], exclude:
         for pattern_name, results in RESULTS.items():
             count = sum((1 for result in results))
             if count > 0:
-                LOG.info("%s: %d", pattern_name, )
+                LOG.info("%s: %d", pattern_name, count)
 
 
 # sideffect: writes to global RESULTS
