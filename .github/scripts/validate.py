@@ -63,6 +63,8 @@ class Pattern:
 
     regex: Regex = field(default_factory=Regex)
 
+    expected: Optional[List[Dict[str, str]]] = None
+
     type: Optional[str] = None
     comments: List[str] = field(default_factory=list)
 

@@ -15,7 +15,7 @@ JSON Web Tokens are an open, industry standard RFC 7519 method for representing 
 <p>
 
 ```regex
-e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
+ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.?[A-Za-z0-9-_=]*
 ```
 
 </p>
@@ -26,7 +26,7 @@ e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
 <p>
 
 ```regex
-[^0-9A-Za-z-_\\.]|\A
+[^0-9A-Za-z_.-]|\A
 ```
 
 </p>
@@ -35,18 +35,8 @@ e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
 <p>
 
 ```regex
-[^0-9A-Za-z-_\\.]|\z
+[^0-9A-Za-z_.-]|\z
 ```
-
-</p>
-</details>
-<details>
-<summary>Additional Matches</summary>
-<p>
-Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
-
-
-- Not Match: `(/|=)`
 
 </p>
 </details>
