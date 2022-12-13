@@ -12,11 +12,11 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [a-zA-Z0-9!$%&*+?^_`{|}~-]{1,}
+        [^\r\n\p{Cc}]+
       start: |
-        [^0-9A-Za-z](?i)(postgres|mysql|mysql_root)_password(\s+|)(=|:)(\s+|)('|"|)
+        (?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
       end: |
-        \z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
+        \z|[\r\n'"]
 
   - name: Hardcoded Spring SQL passwords
     description: |
