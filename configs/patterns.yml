@@ -95,9 +95,67 @@ patterns:
         - ^(?:(?:this|self|obj)\.)[A-Za-z_].*$
         - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
         - ^(?:str|int|bool)( +#.*)?$
-        - ^[ \t]+$
+        - ^[ \t]*$
         - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
-        - ^\$\{[A-Za-z0-9_-]+\}$
+        - ^\$\{[A-Za-z0-9_.-]+\}$
+        # single digit or letter
+        - ^[a-zA-Z0-9]$
+        # React
+        - ^\?string = null\,?$ 
+        - ^null | .*$ 
+        - ^.* | null,?$ 
+        # Go assignments
+        - ^= .*$
+        # TypeScript types
+        - ^(?:any|string|number)$
+        # Variable substitution in CI/Actions - deliberately not anchored
+        - ^.*\{\{[^}]+\}\}.*$
+        - ^\(\([a-zA-Z0-9-]+\)\)$
+        # env variable access
+        - ^process\.env\.[A-Z0-9_]+,?$
+        # Rust
+        - ^&$
+        - ^[&$<(]?[a-zA-Z0-9_]+(?:::\$?[a-zA-Z0-9_]+)*[<(].*$
+        - ^[&$<(]?[a-zA-Z0-9_]+(?:::\$?[a-zA-Z0-9_]+)*,$
+        - ^&\[[A-Za-z0-9_]+\],?$
+        - ^cargo-installed-crates2-ubuntu-latest$
+        - ^ubuntu-latest-cargo-installed-crates$
+        # Flutter
+        - ^(?:const )?ValueKey<.*$
+        - ^(?:const )?(?:Global|Unique)Key\(\),?$
+        - ^(?:const )?(?:Object|GlobalObject)?Key\(.*$
+        - ^[a-zA-Z0-9_]+\.[a-z0-9_]+(?:Key|Label),?$
+        # Scala types
+        - ^[a-zA-Z0-9_]+(?:\.[a-zA-Z_0-9]+)*\[.*\],?$
+        - ^String$
+        # surrounded by []
+        - ^\s*\[[^\]]*\]\s*$
+        # stray single chars
+        - ^[,()[\]{}`.]\\?$
+        # hex
+        - ^0x[A-Fa-f0-9]+,?$
+        # bash variables
+        - ^\$[1-9]$
+        - ^\$[A-Za-z0-9_]+$
+        # function calls or a new variable
+        - ^(?:new )?[a-zA-Z0-9_.]+\(.*$
+        # reference to a member variable
+        - ^\s*(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_]+[,[]?\s*$
+        # index into a variable
+        - ^\s*[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?\s*$
+        - ^\s*\.\.\.,?\s*$              # ...
+        - ^\s*\\\s*$                    # a bare backslash
+        - ^\\n$                         # \n
+        - ^\s*,s*$                      # a bare comma
+        - ^\\0$                         # literal \0
+        # something that means "password" or a placeholder name - either a variable or a placeholder
+        - ^(?i)(?:[A-Za-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:user|key)_?)?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase|value),?[\]>)]?\\?$
+        - ^.*token.*$
+        - ^(?i)[a-zA-Z0-9._]+[_.](?:password|passphrase|secret|key).*$
+        - ^.* passphrase .*$
+        # a literal value or config switch
+        - ^(?i)(?:[a-zA-Z0-9_.]*,\s*)?[[<(]?(?:write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?$
+
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
