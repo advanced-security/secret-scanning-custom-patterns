@@ -47,8 +47,9 @@ patterns:
         # regex
         - ^\\{1,2}w\+/g,( \\?)?$
         # a variable substitution
-        - ^\s*\$\{[^}]+\}\s*$
+        - ^\s*\$\{\{?[^}]+\}\}?\s*$
         - ^\s*\$\([^)]+\)\s*$
+        - ^\s*\(\([^)]+\)\)\s*$
         # surrounded by {}
         - ^\s*\{[^}]*\}\s*$
         # surrounded by []
@@ -74,6 +75,11 @@ patterns:
         - ^(?:public|private) [A-Za-z0-9_]+ \{$
         # perl hash key index
         - ^\$[a-zA-Z0-9_]+\{$
+        # env variable access
+        - ^os\.environ\[[^\]]\],?$
+        - ^process\.env\.[A-Z0-9_]+,?$
+        # Swift typing
+        - ^(?:Int|Swift\.Int|Int32)\).*$
 
     expected:
       - name: passwords.js
