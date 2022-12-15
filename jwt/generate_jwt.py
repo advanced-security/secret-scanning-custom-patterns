@@ -34,12 +34,13 @@ def leading_json_as_base64() -> Generator:
 
 
 def trailing_json_as_base64() -> Generator:
-        for json_type in [JSONTypes.NUMBER]:
+        for json_type in JSONTypes:
             if json_type == JSONTypes.STRING:
                 for c in range(0x01, 0xf4):
                     for d in range(0x01, 0xf4):
-                        for output in output_trailing_json(chr(c) + chr(d) + '"'):
-                            yield output
+                        for e in range(0x01, 0xf4):
+                            for output in output_trailing_json(chr(c) + chr(d) + chr(e) + '"'):
+                                yield output
             elif json_type == JSONTypes.NUMBER:
                 for c in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'e', '.', '-', ' ', "\t", ':']:
                     for d in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'e', '.', '-', ' ', "\t", ':']:
