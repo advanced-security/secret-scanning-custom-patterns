@@ -7,11 +7,11 @@ patterns:
     description: "JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties."
     regex:
       pattern: |
-        ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.?[A-Za-z0-9-_=]*
+        e(?:y[I-J]|yL[CD]|w[koA][JKgi])[A-Za-z0-9_-]{10,}(?:[0-59JKdgilsw-z]fQ|[3HXn]0|[1BJVlpx]9)={0,2}\.e(?:y[I-J]|yL[CD]|w[koA][JKgi])[A-Za-z0-9_-]{10,}(?:[0-59JKdgilsw-z]fQ|[3HXn]0|[1BJVlpx]9)={0,2}\.?[A-Za-z0-9_-]*={0,2}
       start: |
         [^0-9A-Za-z_.-]|\A
       end: |
-        [^0-9A-Za-z_.-]|\z
+        [^0-9A-Za-z_.=-]|\z
 
     expected:
       - name: owasp-juice-shop.ts
