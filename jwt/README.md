@@ -15,7 +15,7 @@ JSON Web Tokens are an open, industry standard RFC 7519 method for representing 
 <p>
 
 ```regex
-ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.?[A-Za-z0-9-_=]*
+e(?:y[IJ]|yL[CD]|yA[JKgi]|w[koA][JKgi])[A-Za-z0-9_-]{10,}(?:[0-59JKdgilsw-z]fQ|[3HXn]0|[1BFJNRVZdhlpx]9)={0,2}\.e(?:y[IJ]|yL[CD]|yA[JKgi]|w[koA][JKgi])[A-Za-z0-9_-]{10,}(?:[0-59JKdgilsw-z]fQ|[3HXn]0|[1BFJNRVZdhlpx]9)={0,2}(?:\.?[A-Za-z0-9_-]+={0,2})?
 ```
 
 </p>
@@ -35,7 +35,7 @@ ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.ey[A-Za-z0-9-_]{12,}[Q90]={0,2}\.?[A-Za-z0-9-_=
 <p>
 
 ```regex
-[^0-9A-Za-z_.-]|\z
+[^0-9A-Za-z_.=-]|\z
 ```
 
 </p>
