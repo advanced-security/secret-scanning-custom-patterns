@@ -39,7 +39,7 @@
 <p>
 
 ```regex
-eyJrIjoi(?i)[a-z0-9-_=]{42}
+eyJrIjoi[A-Za-z0-9_=-]{42}
 ```
 
 </p>
@@ -63,7 +63,7 @@ eyJrIjoi(?i)[a-z0-9-_=]{42}
 <p>
 
 ```regex
-SG\.[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*
+SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 ```
 
 </p>

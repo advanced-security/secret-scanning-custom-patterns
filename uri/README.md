@@ -15,7 +15,7 @@
 <p>
 
 ```regex
-[^:@\r\n \t"'/]+@(internal\.)?example\.com
+[^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
 ```
 
 </p>
@@ -54,7 +54,7 @@
 <p>
 
 ```regex
-[A-Za-z][A-Za-z0-9+_-]*://([^/?#\s]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
+[A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
 ```
 
 </p>
@@ -93,7 +93,7 @@
 <p>
 
 ```regex
-[^$][^/?#@\s]+
+[^$/?#@\s][^/?#@\s\p{Cc}]*
 ```
 
 </p>
@@ -104,7 +104,7 @@
 <p>
 
 ```regex
-[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s]*:
+\b[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\p{Cc}]*:
 ```
 
 </p>
@@ -113,7 +113,7 @@
 <p>
 
 ```regex
-@
+@[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?[/?#\s]
 ```
 
 </p>

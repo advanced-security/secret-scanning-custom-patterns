@@ -32,7 +32,7 @@
 <p>
 
 ```regex
-(?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|pwd|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+(?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
 ```
 
 </p>
@@ -74,8 +74,9 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^\s*[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?\s*$`
 - Not Match: `^\s*(?:~|/tmp|\.\.|\.)\s*$`
 - Not Match: `^\\{1,2}w\+/g,( \\?)?$`
-- Not Match: `^\s*\$\{[^}]+\}\s*$`
+- Not Match: `^\s*\$\{\{?[^}]+\}\}?\s*$`
 - Not Match: `^\s*\$\([^)]+\)\s*$`
+- Not Match: `^\s*\(\([^)]+\)\)\s*$`
 - Not Match: `^\s*\{[^}]*\}\s*$`
 - Not Match: `^\s*\[[^\]]*\]\s*$`
 - Not Match: `^[,()[\]{}`.]\\?$`
@@ -89,6 +90,9 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^\s*ALL(?:\\n)?\s*$`
 - Not Match: `^(?:public|private) [A-Za-z0-9_]+ \{$`
 - Not Match: `^\$[a-zA-Z0-9_]+\{$`
+- Not Match: `^os\.environ\[[^\]]\],?$`
+- Not Match: `^process\.env\.[A-Z0-9_]+,?$`
+- Not Match: `^(?:Int|Swift\.Int|Int32)\).*$`
 
 </p>
 </details>
