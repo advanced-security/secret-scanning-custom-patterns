@@ -21,7 +21,7 @@
 <p>
 
 ```regex
-[a-zA-Z0-9!$%&*+?^_`{|}~-]{1,}
+[^\r\n\p{Cc}]+
 ```
 
 </p>
@@ -32,7 +32,7 @@
 <p>
 
 ```regex
-[^0-9A-Za-z](?i)(postgres|mysql|mysql_root)_password(\s+|)(=|:)(\s+|)('|"|)
+(?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
 ```
 
 </p>
@@ -41,7 +41,7 @@
 <p>
 
 ```regex
-\z|[^a-zA-Z0-9!$%&*+?^_`{}|~-]|'|"
+\z|[\r\n'"]
 ```
 
 </p>
@@ -61,7 +61,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-[^\r\n'"]{1,40}
+[^\r\n'"\p{Cc}]+
 ```
 
 </p>
@@ -72,7 +72,7 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 <p>
 
 ```regex
-\b(spring\.datasource\.password|jdbc\.password)[ \t]{0,15}=[ \t]{0,15}['"]?
+(?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
 ```
 
 </p>
@@ -148,7 +148,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-[^\r\n'"]{12,32}
+[^\r\n'"]*
 ```
 
 </p>
@@ -159,7 +159,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-(?:\n|\A)[ \t]{0,10}(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]{0,30}:[ \t]{0,30}['"]?
+(?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
 ```
 
 </p>
@@ -182,11 +182,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^keyPassphrase$`
 - Not Match: `^.* = (?:None|True|False),?$`
 - Not Match: `^.* = \.\.\.,?$`
-- Not Match: `^(?:this\.)?[A-Za-z_]+\,$`
+- Not Match: `^(?:(?:this|self|obj)\.)?[A-Za-z_]+\,$`
+- Not Match: `^(?:(?:this|self|obj)\.)[A-Za-z_].*$`
 - Not Match: `^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$`
 - Not Match: `^(?:str|int|bool)( +#.*)?$`
 - Not Match: `^[ \t]+$`
 - Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
+- Not Match: `^\$\{[A-Za-z0-9_-]+\}$`
 
 </p>
 </details>
