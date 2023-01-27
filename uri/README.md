@@ -5,11 +5,6 @@
 ## Hardcoded Internal Emails
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -18,8 +13,12 @@
 [^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -30,7 +29,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -44,11 +44,6 @@
 ## Hardcoded Internal URLs
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -57,8 +52,12 @@
 [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -69,7 +68,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -83,11 +83,6 @@
 ## Hardcoded URI Passwords
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -96,8 +91,12 @@
 [^$/?#@\s][^/?#@\s\p{Cc}]*
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -108,7 +107,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
