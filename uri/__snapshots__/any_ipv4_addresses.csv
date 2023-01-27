@@ -1,4 +1,7 @@
 secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"any_ipv4_addresses","Any IPv4 Addresses","a747a3e24ed7bfa148dc4c46aa88672cc3037df842d541eee86c8e31b841736c","uri/ipv4.txt","9","9","31","39",
+"any_ipv4_addresses","Any IPv4 Addresses","97227bbc5b114669d95f6e7f7d86f21ff6cf89add18a30bfd16f210a68e6d144","uri/ipv4.txt","5","5","14","22",
+"any_ipv4_addresses","Any IPv4 Addresses","fbe723e4c017179916cbe6f6b03706a800135231e2840db20a88aa653aa21f5f","uri/ipv4.txt","3","3","8","20",
 "any_ipv4_addresses","Any IPv4 Addresses","12ca17b49af2289436f303e0166030a21e525d266e209267433801a8fd4071a0","uri/ipaddresses/ipv4_random.txt","7","8","8","10",
 "any_ipv4_addresses","Any IPv4 Addresses","f1412386aa8db2579aff2636cb9511cacc5fd9880ecab60c048508fbe26ee4d9","uri/ipaddresses/ipv4_random.txt","5","6","1","8",
 "any_ipv4_addresses","Any IPv4 Addresses","f5047344122f0dee9974ba6761e61c6b8649e1f3968d13a635ebbf7be53a3a0d","uri/ipaddresses/ipv4_private.txt","7","8","12","9",
