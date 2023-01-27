@@ -11,5 +11,12 @@ jinja2 = "*"
 
 [dev-packages]
 
+
 [requires]
-python_version = "3.8"
+python_version = "3.9"
+
+[scripts]
+main = "python ./.github/scripts/validate.py"
+validate = "python ./.github/scripts/validate.py --validate"
+snapshot = "python ./.github/scripts/validate.py --snapshot"
+markdown = "python ./.github/scripts/validate.py --markdown"

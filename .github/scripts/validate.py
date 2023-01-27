@@ -63,6 +63,8 @@ class Pattern:
 
     regex: Regex = field(default_factory=Regex)
 
+    expected: Optional[List[Dict[str, str]]] = None
+
     type: Optional[str] = None
     comments: List[str] = field(default_factory=list)
 
@@ -116,6 +118,7 @@ def createMarkdown(path: str, template: str = "template.md", **data) -> str:
 
 def loadPatternFiles(path: str) -> Dict[str, PatternsConfig]:
     """Find all files that match a pattern."""
+    logging.info(f"Path being proccessed: {path}")
     patterns: Dict[PatternsConfig] = {}
 
     for root, dirs, files in os.walk(path):
@@ -264,7 +267,12 @@ if __name__ == "__main__":
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
-    configs: Dict[str, PatternsConfig] = loadPatternFiles(arguments.path)
+    path = arguments.path
+    # If a file is provided, point to the directory
+    if os.path.isfile(path):
+        path = os.path.dirname(path)
+
+    configs: Dict[str, PatternsConfig] = loadPatternFiles(path)
     # Sort by name
     configs = collections.OrderedDict(sorted(configs.items()))
 
@@ -319,11 +327,12 @@ if __name__ == "__main__":
                     logging.info(f"No differences found")
                     os.remove(current_snapshot)
 
-    createMarkdown(
-        os.path.join("./", "README.md"),
-        template="main.md",
-        configs=configs,
-    )
+    if arguments.markdown:
+        createMarkdown(
+            os.path.join("./", "README.md"),
+            template="main.md",
+            configs=configs,
+        )
 
     if errors:
         logging.error(f"Found {len(errors)} errors")

@@ -4,13 +4,22 @@
 {%- for pattern in config.patterns %}
 
 ## {{ pattern.name }}
-{% if pattern.description %}
+
+{% if pattern.experimental -%}
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+{%- endif %}
+{% if pattern.description -%}
 {{ pattern.description }}
 {%- endif %}
-{% if pattern.experimental %}
-**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
-{# comment #}
-{%- endif %}
+*version: {{ pattern.regex.version }}*
+
+{% if pattern.comments -%}
+**Comments / Notes:**
+{% for comment in pattern.comments %}
+- {{ comment }}
+{%- endfor %}
+{% endif %}
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -19,16 +28,10 @@
 {{ pattern.regex.pattern }}
 ```
 
-**Comments / Notes:**
-
-- Current Version: {{ pattern.regex.version }}
-{%- for comment in pattern.comments %}
-- {{ comment }}
-{%- endfor %}
 </p>
 </details>
 
-{% if pattern.regex.start %}
+{% if pattern.regex.start -%}
 <details>
 <summary>Start Pattern</summary>
 <p>
@@ -41,7 +44,7 @@
 </details>
 {%- endif %}
 
-{%- if pattern.regex.end %}
+{%- if pattern.regex.end -%}
 <details>
 <summary>End Pattern</summary>
 <p>

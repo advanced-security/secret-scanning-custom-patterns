@@ -5,23 +5,122 @@ patterns:
   - name: Generic Passwords
     type: generic_passwords
     regex:
-      version: 0.3
+      version: 0.4
       pattern: |
-        [^\s"'(${{)][a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]+
+        [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
       start: |
-        (?i)((api|jwt|mysql|)?(_|-|.)?((pass|pas)(wd|wrd|word|code|phrase)|pass|pwd|secret|token))(\s+|)(=|:)(\s+|)("|'|\s|)
+        (?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
-        \z|[^a-zA-Z0-9\s!.,$%&*+?^_`{|}()~-]|'|"
-    
+        (\z|[\r\n'"])
+      additional_not_match:
+        # something that means "password" or a placeholder name - either a variable or a placeholder
+        - ^(?i)(?:[A-Za-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:user|key)_?)?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase),?[\]>)]?\\?$
+        - ^.*token.*$
+        - ^[a-zA-Z0-9._]+[_.](?:password|passphrase|secret|key).*$
+        - ^.* passphrase .*$
+        # a literal value or config switch
+        - ^(?i)(?:[a-zA-Z0-9_.]*,\s*)?[[<(]?(?:write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?$
+        - ^\s*%[sr]\s*$                 # format string placeholder
+        - ^\s*$                         # whitespace
+        # Python type hints
+        - ^\s*(?:int|str|(?:typing\.)?Any|None|bytes|bool|ReadableBuffer)\s*([,|].*)?\s*$  
+        # Python container type hints
+        - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+        - ^\s*\.\.\.,?\s*$              # ...
+        - ^\s*\\\s*$                    # a bare backslash
+        - ^\\n$                         # \n
+        - ^\s*,s*$                      # a bare comma
+        - ^\\0$                         # literal \0
+        # function definitions, e.g. Javascript
+        - ^function\s*\([^)]*\)\s*{\s*
+        - ^\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])$
+        # short numbers, possibly followed by a comment (some kind of tokenisation)
+        - ^\s*[0-9]{1,4}(?:\s*(?:/\*|#|//).*)?$       
+        # function calls or a new variable
+        - ^(?:new )?[a-zA-Z0-9_.]+\(.*$
+        # reference to a member variable
+        - ^\s*(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_]+[,[]?\s*$
+        # index into a variable
+        - ^\s*[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?\s*$
+        # directories
+        - ^\s*(?:~|/tmp|\.\.|\.)\s*$
+        # regex
+        - ^\\{1,2}w\+/g,( \\?)?$
+        # a variable substitution
+        - ^\s*\$\{\{?[^}]+\}\}?\s*$
+        - ^\s*\$\([^)]+\)\s*$
+        - ^\s*\(\([^)]+\)\)\s*$
+        # surrounded by {}
+        - ^\s*\{[^}]*\}\s*$
+        # surrounded by []
+        - ^\s*\[[^\]]*\]\s*$
+        # stray single chars
+        - ^[,()[\]{}`.]\\?$
+        # urllib demo passphrase
+        - ^geheim\$parole$
+        # docs
+        - ^\s*\([Oo]ptional\).*$
+        # smilies
+        - ^-[)(]$
+        # hex
+        - ^0x[A-Fa-f0-9]+,?$
+        # bash variables
+        - ^\$[1-9]$ 
+        - ^\$[A-Za-z0-9_]+$
+        # small numbers
+        - ^[0-9],?$
+        # sudoers file
+        - ^\s*ALL(?:\\n)?\s*$
+        # C++ class definitions
+        - ^(?:public|private) [A-Za-z0-9_]+ \{$
+        # perl hash key index
+        - ^\$[a-zA-Z0-9_]+\{$
+        # env variable access
+        - ^os\.environ\[[^\]]\],?$
+        - ^process\.env\.[A-Z0-9_]+,?$
+        # Swift typing
+        - ^(?:Int|Swift\.Int|Int32)\).*$
+
+    expected:
+      - name: passwords.js
+        start_offset: 14
+        end_offset: 25
+      - name: passwords.js
+        start_offset: 41
+        end_offset: 62
+      - name: passwords.js
+        start_offset: 97
+        end_offset: 112
+
     comments:
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
       - "Delimiters like `=` or `:` (with padding)"
       - "String with a number of chars until a breaking char"
+      - "Not matching variables, placeholders or common configuration constants such as 'read' and 'write'"
 
   - name: UUIDs
     type: uuids
     regex:
       version: 0.1
       pattern: |
-        [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
-      
+        (?i)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+      start: |
+        \A|[^0-9A-Fa-f-]
+      end: |
+        \z|[^0-9A-Fa-f-]
+      additional_not_match:
+        - ^12345678-1234-5678-1234-567812345678$
+        - ^00000000-0000-0000-0000-000000000000$
+        - ^(?i)00010203-0405-0607-0809-0a0b0c0d0e0f$
+        - ^(?i)12345678-1234-1234-1234-123456789abc$
+    expected:
+      - name: uuids.txt
+        start_offset: 12
+        end_offset: 48
+      - name: uuids.txt
+        start_offset: 49
+        end_offset: 85
+      - name: uuids.txt
+        start_offset: 131
+        end_offset: 167
+
