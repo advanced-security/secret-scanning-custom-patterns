@@ -102,3 +102,8 @@ patterns:
       end: |
         \z|[^0-9A-Za-z.-]
 
+    expected:
+      - name: wrong_docker.sh
+        start_offset: 32
+        end_offset: 39
+
