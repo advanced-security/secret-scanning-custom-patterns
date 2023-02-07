@@ -2,7 +2,6 @@ secret_type,secret_type_display_name,secret,path,start_line,end_line,start_colum
 "any_ipv4_addresses","Any IPv4 Addresses","a747a3e24ed7bfa148dc4c46aa88672cc3037df842d541eee86c8e31b841736c","uri/ipv4.txt","9","9","31","39",
 "any_ipv4_addresses","Any IPv4 Addresses","97227bbc5b114669d95f6e7f7d86f21ff6cf89add18a30bfd16f210a68e6d144","uri/ipv4.txt","5","5","14","22",
 "any_ipv4_addresses","Any IPv4 Addresses","fbe723e4c017179916cbe6f6b03706a800135231e2840db20a88aa653aa21f5f","uri/ipv4.txt","3","3","8","20",
-"any_ipv4_addresses","Any IPv4 Addresses","0039ddd0438bbe79bf518a8b52ac3a6d9a99fc8c251e8d8cab102fb0482c42bb","uri/app.py","21","21","13","21",
 "any_ipv4_addresses","Any IPv4 Addresses","81cc404b676e524a41847c254ea5573f9a8b897c81309a6a0cb88ca779e3bd00","uri/README.md","151","151","36","48",
 "any_ipv4_addresses","Any IPv4 Addresses","c717908b6155910b0eff43672248cb0df361b3d2195a59bbd1d3ef0fdd67ed9b","uri/ipaddresses/ipv4_random.txt","7","8","8","10",
 "any_ipv4_addresses","Any IPv4 Addresses","c717908b6155910b0eff43672248cb0df361b3d2195a59bbd1d3ef0fdd67ed9b","uri/ipv4_random.txt","7","8","8","10",
