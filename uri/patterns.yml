@@ -90,3 +90,15 @@ patterns:
       - name: non-english.txt
         start_offset: 19
         end_offset: 25
+
+
+  - name: GitHub Container Registry typos
+    type: ghcr_typos
+    regex:
+      pattern: |
+        (?:ghrc|gchr|hgcr|ghr|ghc)\.io
+      start: |
+        \A|[^0-9A-Za-z-]
+      end: |
+        \z|[^0-9A-Za-z.-]
+
