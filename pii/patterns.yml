@@ -167,3 +167,9 @@ patterns:
         start_offset: 656
         end_offset: 672
 
+  - name: IBAN
+    type: iban
+    regex:
+      pattern: |
+        [A-Z]{2}[0-9]{2}( |-)?([0-9A-Z]{4})?(?:( |-)?[0-9]){14,20}
+
