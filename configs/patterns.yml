@@ -1,0 +1,112 @@
+
+name: Configuration Secrets
+
+patterns:
+  - name: Hardcoded Database Passwords 
+    type: hardcoded_database_passwords
+    comments:
+      - "Only support for Postgres and MySQL password strings"
+      - "Checks if the password is null / length of 0"
+      - "Supports quoted passwords"
+      - "Not case sensative"
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n\p{Cc}]+
+      start: |
+        (?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
+      end: |
+        \z|[\r\n'"]
+
+  - name: Hardcoded Spring SQL passwords
+    description: |
+      Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
+    type: hardcoded_spring_sql_passwords
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n'"\p{Cc}]+
+      start: |
+        (?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
+      end: |
+        \z|['"\r\n]
+    expected:
+      - name: application.properties
+        start_offset: 314
+        end_offset: 318
+      - name: application.properties
+        start_offset: 358
+        end_offset: 375
+      - name: application.properties
+        start_offset: 422
+        end_offset: 442
+      - name: application.properties
+        start_offset: 836
+        end_offset: 843
+      - name: application.properties
+        start_offset: 1078
+        end_offset: 1085
+      - name: application.properties
+        start_offset: 1346
+        end_offset: 1353
+      - name: application.properties
+        start_offset: 1633
+        end_offset: 1640
+
+
+  - name: Django Secret Key
+    type: django_secret_key
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n"']+
+      start: |
+        \bSECRET_KEY[ \t]*=[ \t]*["']
+      end: |
+        ['"]
+    comments:
+      - "_If the secret is at the start of the file, its not picked up_"
+    expected:
+      - name: global_settings.py
+        start_offset: 59
+        end_offset: 109
+
+
+  # Experimental
+
+  - name: YAML Static Password Fields
+    type: yaml_static_password_fields
+    description: |
+      Pattern to find Static passwords in YAML configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n'"]*
+      start: |
+        (?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
+      end: |
+        ['"\r\n]|\z
+      additional_not_match:
+        - ^keyPassphrase$
+        - ^.* = (?:None|True|False),?$
+        - ^.* = \.\.\.,?$
+        - ^(?:(?:this|self|obj)\.)?[A-Za-z_]+\,$
+        - ^(?:(?:this|self|obj)\.)[A-Za-z_].*$
+        - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
+        - ^(?:str|int|bool)( +#.*)?$
+        - ^[ \t]+$
+        - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+        - ^\$\{[A-Za-z0-9_-]+\}$
+    comments:
+      - "The hardcoded password is between 12 and 32 chars long"
+      - "Some false positives in Code might appear"
+      - "The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)"
+    expected:
+      - name: example.yml
+        start_offset: 57
+        end_offset: 80
+      - name: example.yml
+        start_offset: 57
+        end_offset: 80
+

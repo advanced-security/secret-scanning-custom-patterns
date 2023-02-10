@@ -1,5 +1,8 @@
 
 .env
 .venv
+*-current.csv
 
 node_modules/
+
+secrets.json

@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyyaml = "*"
+requests = "*"
+ratelimit = "*"
+jinja2 = "*"
+
+[dev-packages]
+
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+main = "python ./.github/scripts/validate.py"
+validate = "python ./.github/scripts/validate.py --validate"
+snapshot = "python ./.github/scripts/validate.py --snapshot"
+markdown = "python ./.github/scripts/validate.py --markdown"

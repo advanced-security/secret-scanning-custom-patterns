@@ -1,19 +1,43 @@
+<!-- WARNING: This README is generated automatically
+-->
 # JWT
 
-## Generic JWT
+## JWT
 
-```
-e[A-Za-z0-9-_=]{14,}\.e[A-Za-z0-9-_=]{14,}\.?[A-Za-z0-9-_=]*
+JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+e(?:y[IJ]|yL[CD]|yA[JKgi]|w[ko][JKgi])[A-Za-z0-9_-]{10,}(?:fQ|[3HXn]0|[1BFJNRVZdhlpx]9)={0,2}\.e(?:y[IJ]|yL[CD]|yA[JKgi]|w[ko][JKgi])[A-Za-z0-9_-]{10,}(?:fQ|[3HXn]0|[1BFJNRVZdhlpx]9)={0,2}(?:\.?[A-Za-z0-9_-]+={0,2})?
 ```
 
-**Start Delimiter:**
+**Comments / Notes:**
 
-```
-[^0-9A-Za-z-_\\.]|\A
+- Current Version: v0.1
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+[^0-9A-Za-z_.-]|\A
 ```
 
-**End Delimiter:**
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
 
+```regex
+[^0-9A-Za-z_.=-]|\z
 ```
-[^0-9A-Za-z-_\\.]|\z
-```
+
+</p>
+</details>

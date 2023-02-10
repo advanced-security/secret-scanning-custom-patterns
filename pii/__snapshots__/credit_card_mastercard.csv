@@ -1,0 +1,6 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"credit_card_mastercard","Credit Card (MasterCard)","3aebd9be84d81a1c5676e31adda86653aa5e7da0a6bda5ea02fec6526c19bb11","pii/credit-cards.txt","14","14","1","17",
+"credit_card_mastercard","Credit Card (MasterCard)","334b48feec00e7ec9808e50f1f05efd5eb1089abce7430e3a5b2b79dd2da1b73","pii/credit-cards.txt","13","13","1","17",
+"credit_card_mastercard","Credit Card (MasterCard)","be6a3050f2611250d0b50c1fa6aff7d23925922a35520c2d0a51a262ba894f8e","pii/credit-cards.txt","12","12","1","17",
+"credit_card_mastercard","Credit Card (MasterCard)","304945e91de3deff52a61d08733141d72dd42ec9d47972f1060534d54c0c7f90","pii/credit-cards.txt","11","11","1","17",
+"credit_card_mastercard","Credit Card (MasterCard)","2f725bbd1f405a1ed0336abaf85ddfeb6902a9984a76fd877c3b5cc3b5085a82","pii/credit-cards.txt","10","10","1","17",

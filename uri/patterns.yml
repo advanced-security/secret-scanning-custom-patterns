@@ -1,0 +1,153 @@
+name: URI / URL Custom Patterns
+
+patterns:
+  - name: Hardcoded Internal Emails
+    type: hardcoded_internal_emails
+    regex:
+      pattern: |
+        [^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
+      start: |
+        \A|[\s"'`,;=]
+      end: |
+        \Z|[^a-zA-Z._0-9-]
+
+    expected:
+      - name: email.js
+        start_offset: 75
+        end_offset: 95
+      - name: email.js
+        start_offset: 130
+        end_offset: 152
+
+
+  - name: Hardcoded Internal URLs
+    type: hardcoded_internal_urls
+    regex:
+      pattern: |
+        [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
+      start: |
+        \A|[^A-Za-z0-9+_-]
+      end: |
+        \z|[\s'"]
+
+    expected:
+      - name: email.js
+        start_offset: 169
+        end_offset: 188
+      - name: email.js
+        start_offset: 211
+        end_offset: 239
+      - name: email.js
+        start_offset: 266
+        end_offset: 299
+      - name: database.txt
+        start_offset: 72
+        end_offset: 129
+      - name: database.txt
+        start_offset: 147
+        end_offset: 185
+      - name: database.txt
+        start_offset: 216
+        end_offset: 256
+      - name: database.txt
+        start_offset: 565
+        end_offset: 590
+
+
+  - name: Hardcoded URI Passwords
+    type: hardcoded_uri_passwords
+    regex:
+      pattern: |
+        [^$/?#@\s][^/?#@\s\p{Cc}]*
+      start: |
+        \b[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\p{Cc}]*:
+      end: |
+        @[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?[/?#\s]
+      additional_not_match:
+        # placeholders
+        - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
+        # variable substitution
+        - ^\$?\{[^}+]\}i\}$
+        # format string
+        - ^%(?:\.\*)?s$ 
+
+    expected:
+      - name: app.py
+        start_offset: 160
+        end_offset: 179
+      - name: database.txt
+        start_offset: 23
+        end_offset: 29
+      - name: database.txt
+        start_offset: 100
+        end_offset: 108
+      - name: database.txt
+        start_offset: 158
+        end_offset: 170
+      - name: database.txt
+        start_offset: 227
+        end_offset: 241
+      - name: non-english.txt
+        start_offset: 19
+        end_offset: 25
+
+  - name: Routable IPv4 Addresses
+    type: any_ipv4_addresses
+    regex:
+      pattern: |
+        (?:(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])\.){3}(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])
+      start: |
+        \A|[^v.0-9]
+      end: |
+        \z|[^.0-9-]
+      additional_not_match:
+        # listening to everything, or broadcast address
+        - ^(?:0\.0\.0\.0|255\.255\.255\.255)$
+        # localhost, link local or multicast
+        - ^(?:127|169\.254|224\.0\.0)\..*
+        # example IP ranges - TEST-NET-1, etc.
+        - ^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*
+    comments:
+      - False Positives with build versions, but won't match if prefixed with v or ends with -
+      - Use a custom IPv4 pattern if possible, tailored for the ranges you use
+      - Doesn't include test, localhost or non-routable IPs
+      - Does include local ranges such as 192.168.0.0/24
+    expected:
+      - name: ipv4.txt
+        start_offset: 0
+        end_offset: 7
+      - name: ipv4.txt
+        start_offset: 53
+        end_offset: 64
+      - name: ipv4_private.txt
+        start_offset: 81
+        end_offset: 92
+      - name: ipv4_private.txt
+        start_offset: 93
+        end_offset: 101
+      - name: ipv4_random.txt
+        start_offset: 76
+        end_offset: 83
+      - name: ipv4_random.txt
+        start_offset: 84
+        end_offset: 91
+      - name: ipv4_random.txt
+        start_offset: 121
+        end_offset: 133
+
+
+  - name: GitHub Container Registry typos
+    type: ghcr_typos
+    regex:
+      pattern: |
+        (?:ghrc|gchr|hgcr|ghr|ghc)\.io
+      start: |
+        \A|[^0-9A-Za-z-]
+      end: |
+        \z|[^0-9A-Za-z.-]
+
+    expected:
+      - name: wrong_docker.sh
+        start_offset: 32
+        end_offset: 39
+ 

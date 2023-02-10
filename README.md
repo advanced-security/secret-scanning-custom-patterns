@@ -1,19 +1,29 @@
 # custom-pattern-secrets
 
-Custom Secret Scanning Patterns repopository created and maintained by the GitHub Field Services.
+Custom Secret Scanning Patterns repository created and maintained by the GitHub Field Services.
 
-> :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives 
+This repository extends the [list of supported Vendors out of the box](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/secret-scanning-patterns) with GitHub's Advanced Security Secret Scanning.
+
+> :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives
 
 
-### [Configuration Files](./configs)
+### [Configuration Secrets](./configs)
+
+- Hardcoded Database Passwords
+- Hardcoded Spring SQL passwords
+- Django Secret Key
+
+
+### [Generic Secrets / Passwords](./generic)
 
 - Generic Passwords
-- Hardcoded Spring SQL passwords
-- YAML Static Password Fields
+- UUIDs
+
 
 ### [JWT](./jwt)
 
-- Generic JWT
+- JWT
+
 
 ### [Personally identifiable information (PII)](./pii)
 
@@ -22,20 +32,26 @@ Custom Secret Scanning Patterns repopository created and maintained by the GitHu
 - Credit Cards - Visa
 - Credit Cards - MasterCard
 - Credit Cards - American Express
-- Credit Cards - Discovery
+- Credit Cards - Discover
 
-### [RSA](./rsa)
+
+### [RSA Keys](./rsa)
 
 - Generic RSA keys
-- SSH (private keys)
-- GPG (private key)
+- SSH Private Keys
+- GPG Private Key
 
-### [URI Strings](./uri)
+
+### [URI / URL Custom Patterns](./uri)
 
 - Hardcoded Internal Emails
 - Hardcoded Internal URLs
 - Hardcoded URI Passwords
+- Any IPv4 Addresses
+
 
 ### [Vendors](./vendors)
 
+- Azure SQL Connection String
+- Grafana API token
 - SendGrid (deprecated)

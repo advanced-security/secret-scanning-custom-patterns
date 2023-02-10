@@ -1,55 +1,226 @@
+<!-- WARNING: This README is generated automatically
+-->
 # URI / URL Custom Patterns
 
 ## Hardcoded Internal Emails
 
-Replacing `example.com|internal.example.com` with a list on organisation domains (separated by pipes `|`) will allow users to find hardcoded org emails.
 
-### Pattern
+<details>
+<summary>Pattern Format</summary>
+<p>
 
+```regex
+[^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
 ```
-[^/'"`][a-z0-9!#$%&'*+/=?^_`{|}~-]+@(example.com|internal.example.com)
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\A|[\s"'`,;=]
 ```
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\Z|[^a-zA-Z._0-9-]
+```
+
+</p>
+</details>
 
 ## Hardcoded Internal URLs
 
-Replacing `example.com|internal.example.com` with a list on organisation domains (separated by pipes `|`) will allow users to find hardcoded org urls.
 
-### Pattern
+<details>
+<summary>Pattern Format</summary>
+<p>
 
+```regex
+[A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
 ```
-[A-Za-z0-9+-_]+://[a-zA-Z0-9!@:#$%&'*+/=?^_`{|}~-]?(example.com|internal.example.com)[^/#?"']?
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\A|[^A-Za-z0-9+_-]
 ```
 
-**Notes:**
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
 
-- URIs/URLs need to have a schema / protocol
-  - `[A-Za-z0-9+-_]+://`
-- This Regex stops once a path / query / fragment is researched
-  - `[^/#?"']?`
+```regex
+\z|[\s'"]
+```
+
+</p>
+</details>
 
 ## Hardcoded URI Passwords
 
-Find passwords in URI/URL strings.
 
-### Pattern
+<details>
+<summary>Pattern Format</summary>
+<p>
 
-```
-[^$][a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]+
-```
-
-**Notes:**
-
-- `[^$]`: Reduce false positives that are env vars
-
-
-#### Before Secret
-
-```
-(A-Za-z0-9)?://[^/?#:]*:
+```regex
+[^$/?#@\s][^/?#@\s\p{Cc}]*
 ```
 
-#### After Secret
+**Comments / Notes:**
 
+- Current Version: v0.1
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\b[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\p{Cc}]*:
 ```
-\z|[@]|[^a-zA-Z0-9!.,$%&*+?^_`{|}\(\)~-]
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+@[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?[/?#\s]
 ```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `(?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$`
+- Not Match: `^\$?\{[^}+]\}i\}$`
+- Not Match: `^%(?:\.\*)?s$`
+
+</p>
+</details>
+
+## Routable IPv4 Addresses
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+(?:(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])\.){3}(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])
+```
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+- False Positives with build versions, but won't match if prefixed with v or ends with -
+- Use a custom IPv4 pattern if possible, tailored for the ranges you use
+- Doesn't include test, localhost or non-routable IPs
+- Does include local ranges such as 192.168.0.0/24
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\A|[^v.0-9]
+```
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^.0-9-]
+```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `^(?:0\.0\.0\.0|255\.255\.255\.255)$`
+- Not Match: `^(?:127|169\.254|224\.0\.0)\..*`
+- Not Match: `^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*`
+
+</p>
+</details>
+
+## GitHub Container Registry typos
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+(?:ghrc|gchr|hgcr|ghr|ghc)\.io
+```
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\A|[^0-9A-Za-z-]
+```
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^0-9A-Za-z.-]
+```
+
+</p>
+</details>
