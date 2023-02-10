@@ -185,3 +185,42 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## GitHub Container Registry typos
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+(?:ghrc|gchr|hgcr|ghr|ghc)\.io
+```
+
+**Comments / Notes:**
+
+- Current Version: v0.1
+</p>
+</details>
+
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\A|[^0-9A-Za-z-]
+```
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^0-9A-Za-z.-]
+```
+
+</p>
+</details>

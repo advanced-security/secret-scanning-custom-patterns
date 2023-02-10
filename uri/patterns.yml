@@ -135,3 +135,19 @@ patterns:
         start_offset: 121
         end_offset: 133
 
+
+  - name: GitHub Container Registry typos
+    type: ghcr_typos
+    regex:
+      pattern: |
+        (?:ghrc|gchr|hgcr|ghr|ghc)\.io
+      start: |
+        \A|[^0-9A-Za-z-]
+      end: |
+        \z|[^0-9A-Za-z.-]
+
+    expected:
+      - name: wrong_docker.sh
+        start_offset: 32
+        end_offset: 39
+ 
