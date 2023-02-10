@@ -171,5 +171,220 @@ patterns:
     type: iban
     regex:
       pattern: |
-        [A-Z]{2}[0-9]{2}[ -]?(?:[0-9A-Z]{4})?(?:[ -]?[0-9]){14,20}
+        [A-Z]{2}[0-9]{2}[ -]?(?:[0-9A-Z]{4})?(?:[ -]?[0-9]){14,20}[A-Z0-9]{0,3}
+      start: |
+        \A|[^A-Z0-9-]
+      end: |
+        \z|[^A-Z0-9-]
+    expected:
+      - name: iban.txt
+        start_offset: 41
+        end_offset: 65
+      - name: iban.txt
+        start_offset: 41
+        end_offset: 68
+      - name: iban.txt
+        start_offset: 79
+        end_offset: 103
+      - name: iban.txt
+        start_offset: 117
+        end_offset: 144
+      - name: iban.txt
+        start_offset: 229
+        end_offset: 257
+      - name: iban.txt
+        start_offset: 258
+        end_offset: 282
+      - name: iban.txt
+        start_offset: 283
+        end_offset: 303
+      - name: iban.txt
+        start_offset: 304
+        end_offset: 332
+      - name: iban.txt
+        start_offset: 333
+        end_offset: 355
+      - name: iban.txt
+        start_offset: 356
+        end_offset: 384
+      - name: iban.txt
+        start_offset: 402
+        end_offset: 422
+      - name: iban.txt
+        start_offset: 453
+        end_offset: 475
+      - name: iban.txt
+        start_offset: 476
+        end_offset: 498
+      - name: iban.txt
+        start_offset: 499
+        end_offset: 520
+      - name: iban.txt
+        start_offset: 521
+        end_offset: 549
+      - name: iban.txt
+        start_offset: 550
+        end_offset: 574
+      - name: iban.txt
+        start_offset: 575
+        end_offset: 593
+      - name: iban.txt
+        start_offset: 594
+        end_offset: 622
+      - name: iban.txt
+        start_offset: 653
+        end_offset: 681
+      - name: iban.txt
+        start_offset: 682
+        end_offset: 702
+      - name: iban.txt
+        start_offset: 703
+        end_offset: 721
+      - name: iban.txt
+        start_offset: 722
+        end_offset: 740
+      - name: iban.txt
+        start_offset: 741
+        end_offset: 768
+      - name: iban.txt
+        start_offset: 769
+        end_offset: 791
+      - name: iban.txt
+        start_offset: 792
+        end_offset: 814
+      - name: iban.txt
+        start_offset: 815
+        end_offset: 838
+      - name: iban.txt
+        start_offset: 839
+        end_offset: 866
+      - name: iban.txt
+        start_offset: 867
+        end_offset: 885
+      - name: iban.txt
+        start_offset: 886
+        end_offset: 914
+      - name: iban.txt
+        start_offset: 915
+        end_offset: 941
+      - name: iban.txt
+        start_offset: 942
+        end_offset: 970
+      - name: iban.txt
+        start_offset: 971
+        end_offset: 997
+      - name: iban.txt
+        start_offset: 998
+        end_offset: 1021
+      - name: iban.txt
+        start_offset: 1022
+        end_offset: 1044
+      - name: iban.txt
+        start_offset: 1045
+        end_offset: 1068
+      - name: iban.txt
+        start_offset: 1069
+        end_offset: 1096
+      - name: iban.txt
+        start_offset: 1128
+        end_offset: 1148
+      - name: iban.txt
+        start_offset: 1149
+        end_offset: 1169
+      - name: iban.txt
+        start_offset: 1223
+        end_offset: 1251
+      - name: iban.txt
+        start_offset: 1252
+        end_offset: 1277
+      - name: iban.txt
+        start_offset: 1278
+        end_offset: 1299
+      - name: iban.txt
+        start_offset: 1300
+        end_offset: 1320
+      - name: iban.txt
+        start_offset: 1321
+        end_offset: 1341
+      - name: iban.txt
+        start_offset: 1374
+        end_offset: 1401
+      - name: iban.txt
+        start_offset: 1433
+        end_offset: 1457
+      - name: iban.txt
+        start_offset: 1458
+        end_offset: 1485
+      - name: iban.txt
+        start_offset: 1486
+        end_offset: 1508
+      - name: iban.txt
+        start_offset: 1528
+        end_offset: 1547
+      - name: iban.txt
+        start_offset: 1564
+        end_offset: 1588
+      - name: iban.txt
+        start_offset: 1619
+        end_offset: 1647
+      - name: iban.txt
+        start_offset: 1648
+        end_offset: 1673
+      - name: iban.txt
+        start_offset: 1704
+        end_offset: 1728
+      - name: iban.txt
+        start_offset: 1762
+        end_offset: 1789
+      - name: iban.txt
+        start_offset: 1790
+        end_offset: 1815
+      - name: iban.txt
+        start_offset: 1816
+        end_offset: 1840
+      - name: iban.txt
+        start_offset: 1841
+        end_offset: 1863
+      - name: iban.txt
+        start_offset: 1896
+        end_offset: 1920
+      - name: iban.txt
+        start_offset: 1921
+        end_offset: 1940
+      - name: iban.txt
+        start_offset: 1941
+        end_offset: 1965
+      - name: iban.txt
+        start_offset: 1966
+        end_offset: 1984
+      - name: iban.txt
+        start_offset: 1985
+        end_offset: 2009
+      - name: iban.txt
+        start_offset: 2010
+        end_offset: 2031
+      - name: iban.txt
+        start_offset: 2032
+        end_offset: 2055
+      - name: iban.txt
+        start_offset: 2056
+        end_offset: 2080
+      - name: iban.txt
+        start_offset: 2081
+        end_offset: 2107
+      - name: iban.txt
+        start_offset: 2138
+        end_offset: 2161
+      - name: iban.txt
+        start_offset: 2162
+        end_offset: 2184
+      - name: iban.txt
+        start_offset: 2185
+        end_offset: 2209
+      - name: iban.txt
+        start_offset: 2295
+        end_offset: 2319
+      - name: iban.txt
+        start_offset: 2295
+        end_offset: 2321
 
