@@ -90,3 +90,48 @@ patterns:
       - name: non-english.txt
         start_offset: 19
         end_offset: 25
+
+  - name: Routable IPv4 Addresses
+    type: any_ipv4_addresses
+    regex:
+      pattern: |
+        (?:(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])\.){3}(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])
+      start: |
+        \A|[^v.0-9]
+      end: |
+        \z|[^.0-9-]
+      additional_not_match:
+        # listening to everything, or broadcast address
+        - ^(?:0\.0\.0\.0|255\.255\.255\.255)$
+        # localhost, link local or multicast
+        - ^(?:127|169\.254|224\.0\.0)\..*
+        # example IP ranges - TEST-NET-1, etc.
+        - ^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*
+    comments:
+      - False Positives with build versions, but won't match if prefixed with v or ends with -
+      - Use a custom IPv4 pattern if possible, tailored for the ranges you use
+      - Doesn't include test, localhost or non-routable IPs
+      - Does include local ranges such as 192.168.0.0/24
+    expected:
+      - name: ipv4.txt
+        start_offset: 0
+        end_offset: 7
+      - name: ipv4.txt
+        start_offset: 53
+        end_offset: 64
+      - name: ipv4_private.txt
+        start_offset: 81
+        end_offset: 92
+      - name: ipv4_private.txt
+        start_offset: 93
+        end_offset: 101
+      - name: ipv4_random.txt
+        start_offset: 76
+        end_offset: 83
+      - name: ipv4_random.txt
+        start_offset: 84
+        end_offset: 91
+      - name: ipv4_random.txt
+        start_offset: 121
+        end_offset: 133
+

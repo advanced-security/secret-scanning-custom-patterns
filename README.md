@@ -46,6 +46,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Hardcoded Internal Emails
 - Hardcoded Internal URLs
 - Hardcoded URI Passwords
+- Any IPv4 Addresses
 
 
 ### [Vendors](./vendors)
@@ -53,4 +54,3 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Azure SQL Connection String
 - Grafana API token
 - SendGrid (deprecated)
-

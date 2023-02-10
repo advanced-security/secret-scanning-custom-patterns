@@ -1,0 +1,21 @@
+
+# =====================
+# True Findings (any IPs)
+# =====================
+
+1.1.1.1
+8.8.8.8
+127.0.0.1
+
+
+u = url("https://192.168.0.10")
+
+
+# =====================
+# False Positives
+# =====================
+
+
+# Chrome build ID
+105.0.5195.102      # The 3rd part of the version is 4 chars long
+v105.0.5195.102
