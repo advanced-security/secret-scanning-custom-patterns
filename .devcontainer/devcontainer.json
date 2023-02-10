@@ -1,0 +1,10 @@
+{
+    "name": "advanced-security/secret-scanning-custom-patterns",
+    "extensions": [
+        "github.copilot"
+    ],
+    "settings": {
+        "editor.formatOnSave": true
+    },
+    "postCreateCommand": "git submodule init && git submodule update --recursive && pipenv install"
+}
