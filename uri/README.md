@@ -179,15 +179,9 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^0\.0\.0\.0$`
-- Not Match: `^127\..*`
-- Not Match: `^192\.0.2\.`
-- Not Match: `^198\.51\.100\.`
-- Not Match: `^203\.0\.113\.`
-- Not Match: `^233\.252\.0\.`
-- Not Match: `^169\.254\.`
-- Not Match: `^224\.0\.0\.`
-- Not Match: `^255\.255\.255\.255$`
+- Not Match: `^(?:0\.0\.0\.0|255\.255\.255\.255)$`
+- Not Match: `^(?:127|169\.254|224\.0\.0)\..*`
+- Not Match: `^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*`
 
 </p>
 </details>
