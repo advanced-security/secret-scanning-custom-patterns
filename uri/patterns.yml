@@ -101,21 +101,12 @@ patterns:
       end: |
         \z|[^.0-9-]
       additional_not_match:
-        # listening to everything
-        - ^0\.0\.0\.0$
-        # localhost
-        - ^127\..*
+        # listening to everything, or broadcast address
+        - ^(?:0\.0\.0\.0|255\.255\.255\.255)$
+        # localhost, link local or multicast
+        - ^(?:127|169\.254|224\.0\.0)\..*
         # example IP ranges - TEST-NET-1, etc.
-        - ^192\.0.2\.
-        - ^198\.51\.100\.
-        - ^203\.0\.113\.
-        - ^233\.252\.0\.
-        # link local
-        - ^169\.254\.
-        # multicast
-        - ^224\.0\.0\.
-        # broadcast
-        - ^255\.255\.255\.255$
+        - ^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*
     comments:
       - False Positives with build versions, but won't match if prefixed with v or ends with -
       - Use a custom IPv4 pattern if possible, tailored for the ranges you use
