@@ -107,7 +107,7 @@
 <p>
 
 ```regex
-[A-Z]{2}[0-9]{2}[ -]?(?:[0-9A-Z]{4})?(?:[ -]?[0-9]){14,20}
+[A-Z]{2}[0-9]{2}[ -]?(?:[0-9A-Z]{4})?(?:[ -]?[0-9]){9,25}[A-Z0-9]{0,3}
 ```
 
 **Comments / Notes:**
@@ -116,3 +116,24 @@
 </p>
 </details>
 
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+\A|[^A-Za-z0-9-]
+```
+
+</p>
+</details>
+<details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[^A-Za-z0-9-]
+```
+
+</p>
+</details>
