@@ -70,12 +70,13 @@ def main() -> None:
 
                 # sometimes patterns end in letters, so allow the final 3 to be A-Z instead of numbers
                 # also allows for a checksum followed by a 4-character bank code, which is used by some countries
-                regex = (f"{country['Code']}"                # country code
+                # we could account for knowledge of which countries use a code, etc., but we don't
+                regex = (f"{country['Code']}"               # country code
                        + "(?:[0-9][ -]?){2}"                # possible checksum
                        + "(?:[0-9A-Z][ -]?){4}"             # possible 4-character bank code
                        + "(?:[0-9][ -]?)"                   # standard numeric part
                        + "{" + str(int(country['Length']) - 2 - 2 - 4 - 3) + '}'    
-                       + '(?:(?:[0-9][ -]?){3}|[A-Z]{3})')   # possible alphabetic ending
+                       + '(?:[0-9A-Z][ -]?){3}')            # possible alphabetic ending
 
                 pattern["regex"] = {}
                 pattern["regex"]["pattern"] = regex
