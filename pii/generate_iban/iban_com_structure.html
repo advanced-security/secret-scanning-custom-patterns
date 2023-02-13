@@ -1,0 +1,1705 @@
+
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<title>IBAN Examples, Structure and Length</title>
+<meta name="description" content="Valid IBAN examples. List of SEPA countries, Structure and types of the IBAN validation supported on the bank and account number." />
+<meta name="keywords" content="iban, structure, length, example, SEPA, iban examples" />
+<meta name="theme-color" content="#153570">
+<meta name="apple-mobile-web-app-status-bar-style" content="#153570">
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://www.google.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+
+<link href="https://www.iban.com/structure" rel="canonical">
+<link rel="alternate" href="https://www.iban.com/structure" hreflang="x-default" />
+<link rel="alternate" href="https://www.iban.com/structure" hreflang="en" />
+<link rel="alternate" href="https://de.iban.com/struktur" hreflang="de" />
+<link rel="alternate" href="https://fr.iban.com/structure" hreflang="fr" />
+<link rel="alternate" href="https://es.iban.com/estructura" hreflang="es" />
+<link rel="alternate" href="https://pt.iban.com/estrutura" hreflang="pt" />
+<link rel="alternate" href="https://nl.iban.com/structuur" hreflang="nl" />
+<link rel="alternate" href="https://it.iban.com/struttura" hreflang="it" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css?v=2">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+<div class="boxed">
+<div class="topheader">
+<div class="container">
+
+
+<div class="row">
+<div class="col-4">
+<div class="top-navigator float-left">
+<ul>
+<li ><a href="/contact" title="Contact Us" class="no-border"><i class="fa fa-envelope"></i> Contact</a></li>
+</ul>
+</div>
+</div>
+
+<div class="col-8">
+<div class="top-navigator float-right">
+<ul>
+<li class="d-none d-sm-inline-block"><a href="#" class="language"><img src="/images/icon/blank.png" class="flag flag-gb" width="16" height="11" alt="en"> EN</a>
+<ul>
+<li><a href="https://de.iban.com/" title="Deutsch" data-lang-id="de_DE"><img src="/images/icon/blank.png" class="flag flag-de" width="16" height="11" alt="de"> Deutsch</a></li>
+<li><a href="https://fr.iban.com/" title="Français" data-lang-id="fr_FR"><img src="/images/icon/blank.png" class="flag flag-fr" width="16" height="11" alt="fr"> Français</a></li>
+<li><a href="https://it.iban.com/" title="Italiano" data-lang-id="it_IT"><img src="/images/icon/blank.png" class="flag flag-it" width="16" height="11" alt="it"> Italiano</a></li>
+<li><a href="https://nl.iban.com/" title="Dutch" data-lang-id="nl_NL"><img src="/images/icon/blank.png" class="flag flag-nl" width="16" height="11" alt="nl"> Dutch</a></li>
+<li><a href="https://es.iban.com/" title="Español" data-lang-id="es_ES"><img src="/images/icon/blank.png" class="flag flag-es" width="16" height="11" alt="es"> Español</a></li>
+<li><a href="https://pt.iban.com/" title="Português" data-lang-id="pt_PT"><img src="/images/icon/blank.png" class="flag flag-pt" width="16" height="11" alt="pt"> Português</a></li>
+<li><a href="https://www.iban.pl/" title="Polski" data-lang-id="pl"><img src="/images/icon/blank.png" class="flag flag-pl" width="16" height="11" alt="pl"> Polski</a></li>
+<li><a href="https://www.iban.se/" title="Svenska" data-lang-id="sv"><img src="/images/icon/blank.png" class="flag flag-se" width="16" height="11" alt="sv"> Svenska</a></li>
+<li><a href="https://www.iban.fi/" title="Suomi" data-lang-id="fi"><img src="/images/icon/blank.png" class="flag flag-fi" width="16" height="11" alt="fi"> Suomi</a></li>
+<li><a href="https://www.iban.dk/" title="Dansk" data-lang-id="da"><img src="/images/icon/blank.png" class="flag flag-dk" width="16" height="11" alt="da"> Dansk</a></li>
+<li><a href="https://www.iban.co.no/" title="Norsk" data-lang-id="no"><img src="/images/icon/blank.png" class="flag flag-no" width="16" height="11" alt="no"> Norsk</a></li>
+<li><a href="https://www.iban.hu/" title="Magyar" data-lang-id="hu"><img src="/images/icon/blank.png" class="flag flag-hu" width="16" height="11" alt="hu"> Magyar</a></li>
+<li><a href="https://www.iban.gr/" title="Eλληνική" data-lang-id="el"><img src="/images/icon/blank.png" class="flag flag-gr" width="16" height="11" alt="el"> Eλληνική</a></li>
+<li><a href="https://www.iban.cz/" title="Čeština" data-lang-id="cs"><img src="/images/icon/blank.png" class="flag flag-cz" width="16" height="11" alt="cs"> Čeština</a></li>
+<li><a href="https://www.iban.si/" title="Slovenščina" data-lang-id="sv"><img src="/images/icon/blank.png" class="flag flag-si" width="16" height="11" alt="sl"> Slovenščina</a></li>
+<li><a href="https://www.iban.hr/" title="Hrvatski" data-lang-id="hr_HR"><img src="/images/icon/blank.png" class="flag flag-hr" width="16" height="11" alt="hr"> Hrvatski</a></li>
+<li><a href="https://www.iban.sk/" title="Slovenský" data-lang-id="sk"><img src="/images/icon/blank.png" class="flag flag-sk" width="16" height="11" alt="sk"> Slovenský</a></li>
+<li><a href="https://www.iban.lv/" title="Latviešu" data-lang-id="lv"><img src="/images/icon/blank.png" class="flag flag-lv" width="16" height="11" alt="lv"> Latviešu</a></li>
+<li><a href="https://www.iban.lt/" title="Lietuvių" data-lang-id="lt"><img src="/images/icon/blank.png" class="flag flag-lt" width="16" height="11" alt="lt"> Lietuvių</a></li>
+<li><a href="https://www.iban.ee/" title="Eesti" data-lang-id="et"><img src="/images/icon/blank.png" class="flag flag-ee" width="16" height="11" alt="et"> Eesti</a></li>
+<li><a href="https://www.iban.rs/" title="Srpski" data-lang-id="sr"><img src="/images/icon/blank.png" class="flag flag-rs" width="16" height="11" alt="sr"> Srpski</a></li>
+<li><a href="https://www.ibankodu.com.tr/" title="Türkçe" data-lang-id="tr"><img src="/images/icon/blank.png" class="flag flag-tr" width="16" height="11" alt="tr"> Türkçe</a></li>
+<li><a href="https://www.iban.ru/" title="Русский" data-lang-id="ru_RU"><img src="/images/icon/blank.png" class="flag flag-ru" width="16" height="11" alt="ru"> Русский</a></li>
+<li><a href="https://www.iban.bg/" title=" Български" data-lang-id="bg"><img src="/images/icon/blank.png" class="flag flag-bg" width="16" height="11" alt="bg"> Български</a></li>
+<li><a href="https://www.iban.com.ua/" title="Українська" data-lang-id="uk"><img src="/images/icon/blank.png" class="flag flag-ua" width="16" height="11" alt="uk"> Українська</a></li>
+<li><a href="https://www.iban.ma/" title="العربية" data-lang-id="ar"><img src="/images/icon/blank.png" class="flag flag-ma" width="16" height="11" alt="ar"> العربية</a></li>
+<li><a href="https://www.iban.co.il/" title="עברית" data-lang-id="he"><img src="/images/icon/blank.png" class="flag flag-il" width="16" height="11" alt="he"> עברית</a></li>
+<li><a href="https://www.iban.jp/" title="日本語" data-lang-id="ja"><img src="/images/icon/blank.png" class="flag flag-jp" width="16" height="11" alt="ja"> 日本語</a></li>
+<li><a href="https://www.iban.kr/" title="한국어" data-lang-id="ko"><img src="/images/icon/blank.png" class="flag flag-kr" width="16" height="11" alt="ko"> 한국어</a></li>
+<li><a href="https://www.iban.hk/" title="繁體中文" data-lang-id="zh-TW"><img src="/images/icon/blank.png" class="flag flag-hk" width="16" height="11" alt="zh-TW"> 繁體中文</a></li>
+<!--
+<li><a href="https://www.iban.ro/" title="Română" data-lang-id="ro"><img src="/images/icon/blank.png" class="flag flag-ro" width="16" height="11" alt="ro"> Română</a></li>
+<li><a href="https://www.ibanbic.cn/" title="体中文" data-lang-id="zh"><img src="/images/icon/blank.png" class="flag flag-cn" width="16" height="11" alt="zh"> 体中文</a></li>
+
+<li><a href="https://www.iban.my/" title="Bahasa Melayu" data-lang-id="ms"><img src="/images/icon/blank.png" class="flag flag-my" width="16" height="11" alt="ms"> Bahasa Melayu</a></li>
+-->
+</ul>
+</li>
+
+
+
+<li></li>
+
+<li><a href="https://clients.iban.com/login" title="Member Login" class="login"><i class="fa fa-lock no-border" aria-hidden="true"></i>Login</a></li>
+<li><a href="https://clients.iban.com/register" title="Request a trial account" class="requesttrial d-none d-sm-inline-block">Request a demo</a></li>
+
+
+
+</ul>
+</div>
+</div>              
+</div>
+</div>
+</div>
+		
+		
+<header id="header" class="header clearfix"> 
+<div class="header-wrap clearfix">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+
+<div id="logo" class="logo">
+<a href="/" title="IBAN Home">
+<img src="/images/logo.png" alt="IBAN Logo" width="170" height="75">
+</a>
+</div>
+<div class="btn-menu">
+<span></span>
+</div>
+
+<div class="nav-wrap">                                
+<nav id="mainnav" class="mainnav navbar-right">
+<ul class="menu"> 
+<li><a  href="/iban-checker" title="Check IBAN Number"><i class="fa fa-check"></i> <div class="atitle">Validate IBAN</div></a></li>
+<li><a  href="/calculate-iban" title="IBAN Calculator"><i class="fa fa-retweet"></i> <div class="atitle">Calculate IBAN</div></a></li>
+<li><a  href="/products" title="Products and services"><i class="fa fa-th-large" ></i> <div class="atitle">Products</div></a></li>
+<li><a  href="/why-iban" title="Why choose IBAN Services"><i class="fa fa-question-circle" aria-hidden="true"></i> <div class="atitle">Why IBAN</div></a></li>
+<li><a  href="/developers" title="Developers Documentation"><i class="fa fa-cogs"></i> <div class="atitle">Developers</div></a></li>
+<li><a  href="/pricing" title="Order products and services"><i class="fa fa-tasks"></i> <div class="atitle">Pricing</div></a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+
+
+
+<div class="flat-row pad-bottom50px">
+<div class="container">
+<div class="row">
+              
+
+<div class="flat-services">
+<div class="services-title"><h1 class="title no-margin-top pad-bottom40px">Register of countries using the IBAN standard</h1></div>
+	<div class="flat-wrapper">	
+
+<div id="mapdiv"></div><br>
+<hr>
+
+
+The individual countries and formatting are described in the IBAN Register. This register provides detailed information about all ISO 13616-compliant national IBAN formats.<br>
+
+This section provides an up to date reference for the International Bank Account Number length and supported validation methods.<br><br>
+
+To validate an IBAN using our platform, please feel free to visit our <a href="/iban-checker"> iban checker </a> page.<br><br>
+
+In the table below we have provided sample <a href="/">IBAN</a> number as well as country code and account format checksum validation support. IBAN Structure examples can be used to test our service and understand how different countries construct IBAN numbers.<br><br>
+
+For more information on data accuracy, please visit <a href="/our-data"> our data page.</a><br><br>
+
+<strong>Data updated on 8 February 2023.</strong><br>
+
+<h2>IBAN Structure &amp; Examples</h2>
+
+<div class="register structure">
+<table class="table table-bordered downloads tablesorter">
+  <thead>
+			<tr>
+				<th class="head">Country</th>
+				<th class="head">Code</th>
+				<th class="head">SEPA</th>
+				<th class="head">Length</th>
+				<th class="head">Account Check</th>
+				<th class="head">Branch</th>
+				<th class="head">IBAN Example</th>
+			</tr>
+		</thead>
+		<tbody>
+  <tr>
+    <td>Albania</td>
+    <td>AL</td>
+    <td>No</td>
+    <td>28</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>AL35202111090000000001234567</td>
+  </tr>
+  <tr>
+    <td>Andorra</td>
+    <td>AD</td>
+    <td>Yes</td>
+    <td>24</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>AD1400080001001234567890</td>
+  </tr>
+  <tr>
+    <td>Austria</td>
+    <td>AT</td>
+    <td>Yes</td>
+    <td>20</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>AT483200000012345864</td>
+  </tr>
+  <tr>
+    <td>Azerbaijan</td>
+    <td>AZ</td>
+    <td>No</td>
+    <td>28</td>
+    <td></td>
+    <td></td>
+    <td>AZ77VTBA00000000001234567890</td>
+  </tr>
+  <tr>
+    <td>Bahrain</td>
+    <td>BH</td>
+    <td>No</td>
+    <td>22</td>
+    <td></td>
+    <td></td>
+    <td>BH02CITI00001077181611</td>
+  </tr>
+  <tr>
+    <td>Belgium</td>
+    <td>BE</td>
+    <td>Yes</td>
+    <td>16</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>BE71096123456769</td>
+  </tr>
+  <tr>
+    <td>Bosnia and Herzegovina</td>
+    <td>BA</td>
+    <td>No</td>
+    <td>20</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>BA393385804800211234</td>
+  </tr>
+  <tr>
+    <td>Brazil</td>
+    <td>BR</td>
+    <td>No</td>
+    <td>29</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>BR1500000000000010932840814P2</td>
+  </tr>
+  <tr>
+    <td>Bulgaria</td>
+    <td>BG</td>
+    <td>Yes</td>
+    <td>22</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>BG18RZBB91550123456789</td>
+  </tr>
+  <tr>
+    <td>Costa Rica</td>
+    <td>CR</td>
+    <td>No</td>
+    <td>22</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>CR23015108410026012345</td>
+  </tr>
+  <tr>
+    <td>Croatia</td>
+    <td>HR</td>
+    <td>Yes</td>
+    <td>21</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>HR1723600001101234565</td>
+  </tr>
+  <tr>
+    <td>Cyprus</td>
+    <td>CY</td>
+    <td>Yes</td>
+    <td>28</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>CY21002001950000357001234567</td>
+  </tr>
+  <tr>
+    <td>Czech Republic</td>
+    <td>CZ</td>
+    <td>Yes</td>
+    <td>24</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>CZ5508000000001234567899</td>
+  </tr>
+  <tr>
+    <td>Faroe Islands</td>
+    <td>FO</td>
+    <td>No</td>
+    <td>18</td>
+<td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>FO9264600123456789</td>
+  </tr>
+  <tr>
+    <td>Greenland</td>
+    <td>GL</td>
+    <td>No</td>
+    <td>18</td>
+<td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>GL8964710123456789</td>
+  </tr>
+  <tr>
+    <td>Denmark</td>
+    <td>DK</td>
+    <td>Yes</td>
+    <td>18</td>
+<td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>DK9520000123456789</td>
+  </tr>
+  <tr>
+    <td>Dominican Republic</td>
+    <td>DO</td>
+    <td>No</td>
+    <td>28</td>
+    <td></td>
+    <td></td>
+    <td>DO22ACAU00000000000123456789</td>
+  </tr>
+  <tr>
+    <td>Estonia</td>
+    <td>EE</td>
+    <td>Yes</td>
+    <td>20</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>EE471000001020145685</td>
+  </tr>
+<tr>
+<td>Egypt</td>
+<td>EG</td>
+<td>No</td>
+<td>29</td>
+<td></td>
+<td></td>
+<td>EG800002000156789012345180002</td>
+</tr>
+  <tr>
+    <td>Finland</td>
+    <td>FI</td>
+    <td>Yes</td>
+    <td>18</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>FI1410093000123458</td>
+  </tr>
+  <tr>
+    <td>France</td>
+    <td>FR</td>
+    <td>Yes</td>
+    <td>27</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>FR7630006000011234567890189</td>
+  </tr>
+  <tr>
+    <td>Georgia</td>
+    <td>GE</td>
+    <td>No</td>
+    <td>22</td>
+    <td></td>
+    <td></td>
+    <td>GE60NB0000000123456789</td>
+  </tr>
+  <tr>
+    <td><a href="/country/germany">Germany</a></td>
+    <td>DE</td>
+    <td>Yes</td>
+    <td>22</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>DE75512108001245126199</td>
+  </tr>
+  <tr>
+    <td>Gibraltar</td>
+    <td>GI</td>
+    <td>Yes</td>
+    <td>23</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>GI56XAPO000001234567890</td>
+  </tr>
+  <tr>
+    <td>Greece</td>
+    <td>GR</td>
+    <td>Yes</td>
+    <td>27</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>GR9608100010000001234567890</td>
+  </tr>
+  <tr>
+    <td>Guatemala</td>
+    <td>GT</td>
+    <td>No</td>
+    <td>28</td>
+    <td></td>
+    <td></td>
+    <td>GT20AGRO00000000001234567890</td>
+  </tr>
+  <tr>
+    <td>Hungary</td>
+    <td>HU</td>
+    <td>Yes</td>
+    <td>28</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>HU93116000060000000012345676</td>
+  </tr>
+  <tr>
+    <td>Iceland</td>
+    <td>IS</td>
+    <td>Yes</td>
+    <td>26</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>IS750001121234563108962099</td>
+  </tr>
+  <tr>
+    <td>Ireland</td>
+    <td>IE</td>
+    <td>Yes</td>
+    <td>22</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>IE64IRCE92050112345678</td>
+  </tr>
+  <tr>
+    <td>Israel</td>
+    <td>IL</td>
+    <td>No</td>
+    <td>23</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>IL170108000000012612345</td>
+  </tr>
+  <tr>
+    <td>Italy</td>
+    <td>IT</td>
+    <td>Yes</td>
+    <td>27</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>IT60X0542811101000000123456</td>
+  </tr>
+  <tr>
+    <td>Jordan</td>
+    <td>JO</td>
+    <td>No</td>
+    <td>30</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>JO71CBJO0000000000001234567890</td>
+  </tr>
+  <tr>
+    <td>Kazakhstan</td>
+    <td>KZ</td>
+    <td>No</td>
+    <td>20</td>
+    <td></td>
+    <td></td>
+    <td>KZ244350000012344567</td>
+  </tr>
+  <tr>
+    <td>Kosovo</td>
+    <td>XK</td>
+    <td>No</td>
+    <td>20</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>XK051212012345678906</td>
+  </tr>
+  <tr>
+    <td>Kuwait</td>
+    <td>KW</td>
+    <td>No</td>
+    <td>30</td>
+    <td></td>
+    <td></td>
+    <td>KW81CBKU0000000000001234560101</td>
+  </tr>
+  <tr>
+    <td>Latvia</td>
+    <td>LV</td>
+    <td>Yes</td>
+    <td>21</td>
+    <td></td>
+    <td></td>
+    <td>LV97HABA0012345678910</td>
+  </tr>
+  <tr>
+    <td>Lebanon</td>
+    <td>LB</td>
+    <td>No</td>
+    <td>28</td>
+    <td></td>
+    <td></td>
+    <td>LB92000700000000123123456123</td>
+  </tr>
+  <tr>
+    <td>Liechtenstein</td>
+    <td>LI</td>
+    <td>Yes</td>
+    <td>21</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>LI7408806123456789012</td>
+  </tr>
+  <tr>
+    <td>Lithuania</td>
+    <td>LT</td>
+    <td>Yes</td>
+    <td>20</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>LT601010012345678901</td>
+  </tr>
+  <tr>
+    <td>Luxembourg</td>
+    <td>LU</td>
+    <td>Yes</td>
+    <td>20</td>
+    <td></td>
+    <td></td>
+    <td>LU120010001234567891</td>
+  </tr>
+  <tr>
+    <td>North Macedonia</td>
+    <td>MK</td>
+    <td>No</td>
+    <td>19</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>MK07200002785123453</td>
+  </tr>
+  <tr>
+    <td>Malta</td>
+    <td>MT</td>
+    <td>Yes</td>
+    <td>31</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>MT31MALT01100000000000000000123</td>
+  </tr>
+  <tr>
+    <td>Mauritania</td>
+    <td>MR</td>
+    <td>No</td>
+    <td>27</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>MR1300020001010000123456753</td>
+  </tr>
+  <tr>
+    <td>Mauritius</td>
+    <td>MU</td>
+    <td>No</td>
+    <td>30</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>MU43BOMM0101123456789101000MUR</td>
+  </tr>
+  <tr>
+    <td>Moldova</td>
+    <td>MD</td>
+    <td>No</td>
+    <td>24</td>
+    <td></td>
+    <td></td>
+    <td>MD21EX000000000001234567</td>
+  </tr>
+  <tr>
+    <td>Monaco</td>
+    <td>MC</td>
+    <td>Yes</td>
+    <td>27</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>MC5810096180790123456789085</td>
+  </tr>
+  <tr>
+    <td>Montenegro</td>
+    <td>ME</td>
+    <td>No</td>
+    <td>22</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>ME25505000012345678951</td>
+  </tr>
+  <tr>
+    <td>Netherlands</td>
+    <td>NL</td>
+    <td>Yes</td>
+    <td>18</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>NL02ABNA0123456789</td>
+  </tr>
+  <tr>
+    <td>Norway</td>
+    <td>NO</td>
+    <td>Yes</td>
+    <td>15</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>NO8330001234567</td>
+  </tr>
+  <tr>
+    <td>Pakistan</td>
+    <td>PK</td>
+    <td>No</td>
+    <td>24</td>
+    <td></td>
+    <td></td>
+    <td>PK36SCBL0000001123456702</td>
+  </tr>
+  <tr>
+    <td>Palestine</td>
+    <td>PS</td>
+    <td>No</td>
+    <td>29</td>
+    <td></td>
+    <td></td>
+    <td>PS92PALS000000000400123456702</td>
+  </tr>
+  <tr>
+    <td>Poland</td>
+    <td>PL</td>
+    <td>Yes</td>
+    <td>28</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>PL10105000997603123456789123</td>
+  </tr>
+  <tr>
+    <td>Portugal</td>
+    <td>PT</td>
+    <td>Yes</td>
+    <td>25</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>PT50002700000001234567833</td>
+  </tr>
+  <tr>
+    <td>Qatar</td>
+    <td>QA</td>
+    <td>No</td>
+    <td>29</td>
+    <td></td>
+    <td></td>
+    <td>QA54QNBA000000000000693123456</td>
+  </tr>
+  <tr>
+    <td>Romania</td>
+    <td>RO</td>
+    <td>Yes</td>
+    <td>24</td>
+    <td></td>
+    <td></td>
+    <td>RO66BACX0000001234567890</td>
+  </tr>
+  <tr>
+    <td>San Marino</td>
+    <td>SM</td>
+    <td>Yes</td>
+    <td>27</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>SM76P0854009812123456789123</td>
+  </tr>
+    <tr>
+    <td>Saint Lucia</td>
+    <td>LC</td>
+    <td>No</td>
+    <td>32</td>
+    <td></td>
+    <td></td>
+    <td>LC14BOSL123456789012345678901234</td>
+  </tr>
+<tr>
+    <td>Sao Tome and Principe</td>
+    <td>ST</td>
+    <td>No</td>
+    <td>25</td>
+    <td></td>
+    <td></td>
+    <td>ST23000200000289355710148</td>
+  </tr>
+<tr>
+    <td>Saudi Arabia</td>
+    <td>SA</td>
+    <td>No</td>
+    <td>24</td>
+    <td></td>
+    <td></td>
+    <td>SA4420000001234567891234</td>
+  </tr>
+  <tr>
+    <td>Serbia</td>
+    <td>RS</td>
+    <td>No</td>
+    <td>22</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>RS35105008123123123173</td>
+  </tr>
+  <tr>
+    <td>Slovakia</td>
+    <td>SK</td>
+    <td>Yes</td>
+    <td>24</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>SK8975000000000012345671</td>
+  </tr>
+  <tr>
+    <td>Slovenia</td>
+    <td>SI</td>
+    <td>Yes</td>
+    <td>19</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>SI56192001234567892</td>
+  </tr>
+  <tr>
+    <td>Spain</td>
+    <td>ES</td>
+    <td>Yes</td>
+    <td>24</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>ES7921000813610123456789</td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>SE</td>
+    <td>Yes</td>
+    <td>24</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>SE7280000810340009783242</td>
+  </tr>
+  <tr>
+    <td>Switzerland</td>
+    <td>CH</td>
+    <td>Yes</td>
+    <td>21</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>CH5604835012345678009</td>
+  </tr>
+  <tr>
+    <td>Timor-Leste</td>
+    <td>TL</td>
+    <td>No</td>
+    <td>23</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td></td>
+    <td>TL380010012345678910106</td>
+  </tr>
+  <tr>
+    <td>Tunisia</td>
+    <td>TN</td>
+    <td>No</td>
+    <td>24</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>TN5904018104004942712345</td>
+  </tr>
+  <tr>
+    <td>Turkey</td>
+    <td>TR</td>
+    <td>No</td>
+    <td>26</td>
+    <td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>TR320010009999901234567890</td>
+  </tr>
+  <tr>
+    <td>United Arab Emirates</td>
+    <td>AE</td>
+    <td>No</td>
+    <td>23</td>
+    <td></td>
+    <td></td>
+    <td>AE460090000000123456789</td>
+  </tr>
+  <tr>
+    <td><a href="/country/united-kingdom">United Kingdom</a></td>
+    <td>GB</td>
+    <td>Yes</td>
+    <td>22</td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>GB33BUKB20201555555555</td>
+  </tr>
+    <tr>
+    <td>Holy See (the)</td>
+    <td>VA</td>
+    <td>Yes</td>
+    <td>22</td>
+    <td></td>
+    <td></td>
+    <td>VA59001123000012345678</td>
+  </tr>
+  <tr>
+    <td>Virgin Islands, British</td>
+    <td>VG</td>
+    <td>No</td>
+    <td>24</td>
+    <td></td>
+    <td></td>
+    <td>VG07ABVI0000000123456789</td>
+  </tr>
+    <tr>
+    <td>Ukraine</td>
+    <td>UA</td>
+    <td>No</td>
+    <td>29</td>
+	<td></td>
+    <td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+    <td>UA903052992990004149123456789</td>
+  </tr>
+<tr>
+<td>Seychelles</td>
+<td>SC</td>
+<td>No</td>
+<td>31</td>
+<td></td>
+<td></td>
+<td>SC74MCBL01031234567890123456USD</td>
+</tr>
+<tr>
+<td>Iraq</td>
+<td>IQ</td>
+<td>No</td>
+<td>23</td>
+<td></td>
+<td></td>
+<td>IQ20CBIQ861800101010500</td>
+</tr>
+<tr>
+<td>Belarus</td>
+<td>BY</td>
+<td>No</td>
+<td>28</td>
+<td></td>
+<td></td>
+<td>BY86AKBB10100000002966000000</td>
+</tr>
+<tr>
+<td>El Salvador</td>
+<td>SV</td>
+<td>No</td>
+<td>28</td>
+<td></td>
+<td></td>
+<td>SV43ACAT00000000000000123123</td>
+</tr>
+
+
+<tr>
+<td>Libya</td>
+<td>LY</td>
+<td>No</td>
+<td>25</td>
+<td></td>
+<td></td>
+<td>LY38021001000000123456789</td>
+</tr>
+
+
+<tr>
+<td>Sudan</td>
+<td>SD</td>
+<td>No</td>
+<td>18</td>
+<td></td>
+<td></td>
+<td>SD8811123456789012</td>
+</tr>
+
+<tr>
+<td>Burundi</td>
+<td>BI</td>
+<td>No</td>
+<td>27</td>
+<td></td>
+<td></td>
+<td>BI43220001131012345678912345</td>
+</tr>
+  
+
+<tr>
+<td>Djibouti</td>
+<td>DJ</td>
+<td>No</td>
+<td>27</td>
+<td></td>
+<td></td>
+<td>DJ2110002010010409943020008</td>
+</tr>
+
+<tr>
+<td>Russia</td>
+<td>RU</td>
+<td>No</td>
+<td>33</td>
+<td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+<td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+<td>RU0204452560040702810412345678901</td>
+</tr>
+
+<tr>
+<td>Somalia</td>
+<td>SO</td>
+<td>No</td>
+<td>23</td>
+<td></td>
+<td><img src="images/icon/tick.png" alt="yes" width="18" height="17"></td>
+<td>SO061000001123123456789</td>
+</tr>
+
+
+  </tbody>
+</table>
+</div>
+
+<br>
+<div class="includes">
+<h4>FR includes:</h4>
+<ul class="flat-list style1 style2">
+<li>French Guyana (GF)</li>
+<li>Guadeloupe (GP)</li>
+<li>Martinique (MQ)</li>
+<li>Reunion (RE)</li>
+<li>French Polynesia (PF)</li>
+<li>French Southern Territories (TF)</li>
+<li>Mayotte (YT)</li>
+<li>New Caledonia (NC)</li>
+<li>Saint Barthelemy (BL)</li>
+<li>Saint Martin (French part) (MF)</li>
+<li>Saint Pierre et Miquelon (PM)</li>
+<li>Wallis and Futuna Islands (WF)</li>
+</ul>
+</div>
+
+<div class="includes">
+<h4>GB includes:</h4>
+<ul class="flat-list style1 style2">
+<li>Isle of Man (IM)</li>
+<li>Guernsey (GG)</li>
+<li>Jersey (JE)</li>
+<li>Channel Islands</li>
+</ul>
+</div>
+
+<div class="includes">
+<h4>FI includes:</h4>
+<ul class="flat-list style1 style2" >
+<li>Aland Islands (AX)</li>
+</ul>
+</div>
+
+<div class="includes">
+<h4>PT includes:</h4>
+<ul class="flat-list style1 style2">
+<li>Azores and Madeira</li>
+</ul>
+</div>
+
+<div class="includes">
+<h4>ES includes:</h4>
+<ul class="flat-list style1 style2">
+<li>Canary Islands (IC)</li>
+<li>Ceuta and Melilla (EA)</li>
+</ul>
+</div>
+
+<br>
+<br style="clear:both;">
+<hr>
+
+<h3>Partial IBAN Countries (Experimental)</h3>
+<table class="table table-bordered downloads tablesorter" style="margin:0px!important; width:100%!important;">
+  <thead>
+			<tr>
+				<th class="head">Name of country</th>
+				<th class="head">IBAN Code</th>
+				<th class="head">SEPA</th>
+				<th class="head">Length</th>
+				<th class="head">IBAN Example</th>
+			</tr>
+  </thead>
+<tbody>
+  <tr>
+    <td><span class="partial">Angola</span></td>
+    <td>AO</td>
+    <td>No</td>
+    <td>25</td>
+    <td>AO06004400006729503010102</td>
+  </tr>
+  <tr>
+    <td>Burkina Faso</td>
+    <td>BF</td>
+    <td>No</td>
+    <td>28</td>
+    <td>BF42BF0840101300463574000390</td>
+  </tr>
+  
+  <tr>
+    <td>Benin</td>
+    <td>BJ</td>
+    <td>No</td>
+    <td>28</td>
+    <td>BJ66BJ0610100100144390000769</td>
+    
+  </tr>
+  <tr>
+    <td>Central African Republic</td>
+    <td>CF</td>
+    <td>No</td>
+    <td>27</td>
+    <td>CF4220001000010120069700160</td>
+  </tr>
+  <tr>
+    <td>Congo</td>
+    <td>CG</td>
+    <td>No</td>
+    <td>27</td>
+    <td>CG3930011000101013451300019</td>
+  </tr>
+  <tr>
+    <td>Ivory Coast</td>
+    <td>CI</td>
+    <td>No</td>
+    <td>28</td>
+    <td>CI93CI0080111301134291200589</td>
+  </tr>
+  <tr>
+    <td>Cameroon</td>
+    <td>CM</td>
+    <td>No</td>
+    <td>27</td>
+    <td>CM2110002000300277976315008</td>
+  </tr>
+  <tr>
+    <td>Cape Verde</td>
+    <td>CV</td>
+    <td>No</td>
+    <td>25</td>
+    <td>CV64000500000020108215144</td>
+  </tr>
+
+
+  <tr>
+    <td>Algeria</td>
+    <td>DZ</td>
+    <td>No</td>
+    <td>26</td>
+    <td>DZ580002100001113000000570</td>
+  </tr>
+  <tr>
+    <td>Gabon</td>
+    <td>GA</td>
+    <td>No</td>
+    <td>27</td>
+    <td>GA2140021010032001890020126</td>
+  </tr>
+  <tr>
+    <td>Equatorial Guinea</td>
+    <td>GQ</td>
+    <td>No</td>
+    <td>27</td>
+    <td>GQ7050002001003715228190196</td>
+  </tr>
+  <tr>
+    <td>Guinea-Bissau</td>
+    <td>GW</td>
+    <td>No</td>
+    <td>25</td>
+    <td>GW04GW1430010181800637601</td>
+  </tr>
+  <tr>
+    <td>Iran</td>
+    <td>IR</td>
+    <td>No</td>
+    <td>26</td>
+    <td>IR710570029971601460641001</td>
+  </tr>
+  <tr>
+    <td>Morocco</td>
+    <td>MA</td>
+    <td>No</td>
+    <td>28</td>
+    <td>MA64011519000001205000534921</td>
+  </tr>
+  <tr>
+    <td>Madagascar</td>
+    <td>MG</td>
+    <td>No</td>
+    <td>27</td>
+    <td>MG4600005030071289421016045</td>
+  </tr>
+  <tr>
+    <td>Mali</td>
+    <td>ML</td>
+    <td>No</td>
+    <td>28</td>
+    <td>ML13ML0160120102600100668497</td>
+  </tr>
+  <tr>
+    <td>Mozambique</td>
+    <td>MZ</td>
+    <td>No</td>
+    <td>25</td>
+    <td>MZ59000301080016367102371</td>
+  </tr>
+  <tr>
+    <td>Niger</td>
+    <td>NE</td>
+    <td>No</td>
+    <td>28</td>
+    <td>NE58NE0380100100130305000268</td>
+  </tr>
+  <tr>
+    <td>Senegal</td>
+    <td>SN</td>
+    <td>No</td>
+    <td>28</td>
+    <td>SN08SN0100152000048500003035</td>
+  </tr>
+  <tr>
+    <td>Chad</td>
+    <td>TD</td>
+    <td>No</td>
+    <td>27</td>
+    <td>TD8960002000010271091600153</td>
+  </tr>
+  <tr>
+    <td>Togo</td>
+    <td>TG</td>
+    <td>No</td>
+    <td>28</td>
+    <td>TG53TG0090604310346500400070</td>
+  </tr>
+  <tr>
+    <td>Comoros</td>
+    <td>KM</td>
+    <td>No</td>
+    <td>27</td>
+    <td>KM4600005000010010904400137</td>
+  </tr>
+  
+    <tr>
+    <td>Honduras</td>
+    <td>HN</td>
+    <td>No</td>
+    <td>28</td>
+    <td>HN54PISA00000000000000123124</td>
+  </tr>
+  
+    <tr>
+    <td>Nicaragua</td>
+    <td>NI</td>
+    <td>No</td>
+    <td>32</td>
+    <td>NI92BAMC000000000000000003123123</td>
+  </tr>
+
+    <tr>
+    <td>Mongolia</td>
+    <td>MN</td>
+    <td>No</td>
+    <td>20</td>
+    <td>MN580050099123456789</td>
+  </tr>
+  
+
+  
+  
+  
+  
+  </tbody>
+</table>
+<br>
+All rights to this list belong IBAN.com. The information in the list may be used freely as long as the use does not involve any reproduction or any commercial exploitation. Should you publish this list, you need to provide a link the source website ( www.iban.com ) acknowledging it as the original source. IBAN.com is under no circumstances responsible for the accuracy of the information in the list or for their use.<br><br>
+
+
+
+</div></div></div></div></div>
+
+</div> 
+<footer class="footer" >
+
+
+
+<div class="footer-widgets">
+<div class="container">
+<div class="row">
+
+					
+					
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+<div class="widget widget_nav_menu">
+<div class="menu-footer-menu-container">
+<div class="footermenutitle">Web Tools</div>
+<ul class="ft-menu">
+<li><a href="/iban-checker">IBAN Checker</a></li>
+<li><a href="/calculate-iban">IBAN Calculator</a></li>
+<li><a href="/search-bic">Search BIC</a></li>
+<li><a href="/vat-checker">VAT Checker</a></li>
+<li><a href="/currency-converter">Currency Convert</a></li>
+<li><a href="/exchange-rates">Currency Exchange rates</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+<div class="widget widget_nav_menu">
+<div class="menu-footer-menu-container">
+<div class="footermenutitle"><a href="/developers">Products</a></div>
+<ul class="ft-menu">
+<li><a href="/iban-suite">IBAN Suite: Validation & Calculation</a></li>
+<li><a href="/bank-suite">Bank Suite: Global Banking Validation</a></li>
+<li><a href="/bic-validation-service">BIC Validation Service</a></li>
+<li><a href="/sortware">SortWare: Web Portal & Rest API</a></li>
+<li><a href="/forex-reference-suite">Forex Reference Suite</a></li>
+
+
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+<div class="widget widget_nav_menu">
+<div class="menu-footer-menu-container">
+<div class="footermenutitle"><a href="/developers">Developers</a></div>
+<ul class="ft-menu">
+
+<li><a href="/validation-api">IBAN Validation API</a></li>
+<li><a href="/calculation-api">IBAN Calculation API</a></li>
+<li><a href="/bank-suite-api">Bank Suite API</a></li>
+<li><a href="/bic-validation-api">BIC Validation API</a></li>
+<li><a href="/sortware-api">SortWare Rest API</a></li>
+<!-- <li><a href="/sortware-plus-soap-api">SortWare SOAP API</a></li> -->
+</ul>
+</div>
+</div>
+</div>
+
+
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+<div class="widget widget_nav_menu">
+<div class="menu-footer-menu-container">
+<div class="footermenutitle"><a href="/about">About</a></div>
+<ul class="ft-menu">
+<li><a href="/why-iban">Why IBAN</a></li>
+<li><a href="/security">Security</a></li>
+<li><a href="/customers">Customers</a></li>
+<li><a href="/our-data">Our Data</a></li>
+<li><a href="/news">News & Updates</a></li>
+
+</ul>
+</div>
+</div>
+</div>
+
+</div></div></div>
+	 
+	 
+	 
+<div class="content-bottom-widgets">        
+<div class="container">
+
+
+<div class="ft-wrapper">						
+<div class="col-md-12 text-center footermenutitle">Partners</div></div>
+
+ 
+</div>
+</div>
+
+	 
+	 
+	 
+<div class="content-bottom-widgets">        
+<div class="container">
+<div class="row"> 
+
+
+<div class="col-md-4 text-left">
+<span style="clear:both;">BIC data used with permission of S.W.I.F.T. SCRL. Database Rights Reserved, 2023. <br> IBAN.com is an authorized VocaLink™ Distributor</span>
+</div>
+
+<div class="col-md-2 col-sm-6 text-center">
+<span><img src="/images/logos/swiftref.png" alt="S.W.I.F.T. SCRL" width="155" height="178" >&nbsp;&nbsp;</span>
+</div>
+<div class="col-md-2 col-sm-6 text-center">
+<span><img src="/images/logos/deutsche_bundesbank.png" alt="Deutsche Bundesbank" width="155" height="178">&nbsp;&nbsp;</span>
+</div>
+<div class="col-md-2 col-sm-6 text-center">
+<span><img src="/images/logos/banque_de_france.png" alt="La Banque de France Eurosisteme" width="155" height="178"></span>
+</div>
+<div class="col-md-2 col-sm-6 text-center">
+<span><img src="/images/logos/vocalink_mastercard.png" alt="Vocalink LTD (Mastercard)" width="155" height="178">&nbsp;&nbsp;</span>
+</div>
+
+
+
+</div>    
+</div>
+</div>
+
+<div class="footer-content">
+ <div class="copyright">
+<div class="container">
+<div class="row">
+
+
+
+<div class="col-md-3 col-sm-12 col-xs-12">
+Copyright © 2023 IBAN.COM 
+</div>
+
+
+
+<div class="col-md-8 col-sm-12 col-xs-12">
+<a href="/privacy">Privacy</a> 
+<a href="/terms">Terms</a> 
+<a href="/dpa">DPA</a> 
+<a href="/sla" class="d-none d-sm-inline-block">SLA</a> 
+<a href="/security" class="d-none d-sm-inline-block">Security</a> 
+<a href="/contact">Contact</a>
+<a href="/sitemap" class="d-none d-sm-inline-block" >Sitemap</a>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+
+<a href="#" class="go-top" aria-label="go to top"><i class="fa fa-chevron-up"></i></a>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/javascript/main.js"></script> 
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+
+
+<script src="javascript/ammap/ammap.js" type="text/javascript"></script>
+<script src="javascript/ammap/maps/js/worldHigh.js" type="text/javascript"></script>
+<script src="javascript/jquery.tablesorter.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("table").tablesorter({ 
+		sortList: [[0,0],[0,1]],
+		 textExtraction:function(s){
+        if($(s).find('img').length == 0) return $(s).text();
+        return $(s).find('img').attr('alt');
+    }
+    });
+		
+		
+    } 
+); 
+</script>
+<script type="text/javascript">
+var map;
+
+AmCharts.ready(function() {
+    map = new AmCharts.AmMap();
+	map.pathToImages = "javascript/ammap/images/";
+    map.panEventsEnabled = true;
+   /* map.backgroundColor = "#CCF3FF";
+    map.backgroundAlpha = 1;*/
+	
+	
+	
+    var dataProvider = {
+        mapVar: AmCharts.maps.worldHigh,
+
+        zoomLevel: 3.55,
+        zoomLongitude: 20,
+        zoomLatitude: 45
+    };
+
+    map.areasSettings = {
+        autoZoom: true,
+		
+		
+		unlistedAreasColor: "#DDDDDD",
+        rollOverOutlineColor: "#000000",
+		//rollOverColor: "#CC0000",
+		selectedColor: "#009900",
+		outlineColor:"#f5f5f5",
+		outlineThickness: 0.1,
+		balloonText: "[[title]] [[customData]]",
+		description: "[[description]]"
+    };
+	
+	
+	
+	dataProvider.areas = [
+
+
+{title: "Austria", id: "AT", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Belgium", id: "BE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Bulgaria", id: "BG", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Cyprus", id: "CY", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Czech Republic", id: "CZ", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Faroe Islands", id: "FO", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Greenland", id: "GL", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Denmark", id: "DK", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Estonia", id: "EE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Finland", id: "FI", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "France", id: "FR", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Germany", id: "DE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Gibraltar", id: "GI", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Greece", id: "GR", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Hungary", id: "HU", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Iceland", id: "IS", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Ireland", id: "IE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Italy", id: "IT", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Latvia", id: "LV", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Liechtenstein", id: "LI", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Lithuania", id: "LT", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Luxembourg", id: "LU", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Malta", id: "MT", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Monaco", id: "MC", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Netherlands", id: "NL", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Norway", id: "NO", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Poland", id: "PL", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Portugal", id: "PT", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Romania", id: "RO", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "San Marino", id: "SM", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Slovak Republic", id: "SK", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Slovenia", id: "SI", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Spain", id: "ES", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Sweden", id: "SE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Switzerland", id: "CH", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "United Kingdom", id: "GB", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Albania", id: "AL", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Andorra", id: "AD", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Azerbaijan", id: "AZ", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Bahrain", id: "BH", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Bosnia and Herzegovina", id: "BA", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Brazil", id: "BR", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Costa Rica", id: "CR", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Croatia", id: "HR", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Dominican Republic", id: "DO", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Georgia", id: "GE", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Guatemala", id: "GT", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Israel", id: "IL", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Jordan", id: "JO", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Kazakhstan", id: "KZ", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Kosovo", id: "XK", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Kuwait", id: "KW", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Lebanon", id: "LB", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Macedonia", id: "MK", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Mauritania", id: "MR", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Mauritius", id: "MU", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Moldova", id: "MD", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Montenegro", id: "ME", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Pakistan", id: "PK", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Palestine", id: "PS", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Qatar", id: "QA", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Saint Lucia", id: "LC", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Saudi Arabia", id: "SA", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Serbia", id: "RS", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Timor-Leste", id: "TL", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Tunisia", id: "TN", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Turkey", id: "TR", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "United Arab Emirates", id: "AE", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Virgin Islands  British", id: "VG", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Sao Tome and Principe", id: "ST", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Aland Islands", id: "AX", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "French Guyana", id: "GF", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Guadeloupe", id: "GP", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Martinique", id: "MQ", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Reunion", id: "RE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "French Polynesia", id: "PF", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "French Southern Territories ", id: "TF", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Mayotte", id: "YT", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "New Caledonia", id: "NC", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Saint Barthelemy", id: "BL", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Saint Martin", id: "MF", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Saint Pierre et Miquelon", id: "PM", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Wallis and Futuna Islands", id: "WF", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Ceuta and Melilla", id: "EA", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Isle of Man", id: "IM", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Guernsey", id: "GG", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Jersey", id: "JE", color: "#00377c", customData: "Support SEPA: Yes"},
+{title: "Algeria", id: "DZ", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Angola", id: "AO", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Benin", id: "BJ", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Burkina Faso", id: "BF", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Burundi", id: "BI", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Cameroon", id: "CM", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Cape Verde", id: "CV", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Central African Republic", id: "CF", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Chad", id: "TD", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Congo", id: "CG", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Djibouti", id: "DJ", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Egypt", id: "EG", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Equatorial Guinea", id: "GQ", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Gabon", id: "GA", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Guinea-Bissau", id: "GW", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Iran", id: "IR", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Iraq", id: "IQ", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Belarus", id: "BY", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "El Salvador", id: "SV", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Honduras", id: "HN", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Nicaragua", id: "NI", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Ivory Coast", id: "CI", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Madagascar", id: "MG", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Mali", id: "ML", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Morocco", id: "MA", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Mozambique", id: "MZ", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Niger", id: "NE", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Senegal", id: "SN", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Togo", id: "TG", color: "#d5eff7", customData: "Support SEPA: No"},
+{title: "Ukraine", id: "UA", color: "#337ab7", customData: "Support SEPA: No"},
+{title: "Seychelles", id: "SC", color: "#00377c", customData: "Support SEPA: No"},
+
+
+];
+
+map.dataProvider = dataProvider;
+
+
+    var legend = {
+        width: 210,
+        backgroundAlpha: 0.5,
+        backgroundColor: "#e6e6e6",
+        borderColor: "#00316e",
+        borderAlpha: 1,
+        bottom: 15,
+        left: 15,
+        horizontalGap: 5,
+        data: [
+            {
+            title: "IBAN SEPA Countries",
+            color: "#00377c"},
+        {
+            title: "IBAN Countries",
+            color: "#337ab7"},
+        {
+            title: "Experimental IBAN Countries",
+            color: "#d5eff7"}
+        ]
+    };
+	
+	// balloon customization
+	map.balloon.borderThickness=1;
+	map.balloon.cornerRadius=0;
+	map.balloon.fillAlpha=0.8;
+	map.balloon.pointerWidth=8;
+	
+	// description customization
+	//map.description.borderThickness=10;
+	
+	// zoomControl customization
+	map.zoomControl.zoomControlEnabled = true;
+	map.zoomControl.panControlEnabled = false;
+	map.zoomControl.maxZoomLevel = 64;
+	map.zoomControl.zoomFactor = 3;
+	map.zoomControl.buttonFillColor = "#BBBBBB";
+    map.zoomControl.buttonRollOverColor= "#666666";
+	map.zoomControl.buttonBorderThickness = 1;
+	map.zoomControl.buttonBorderColor="#DDDDDD";
+
+	//map.smallMap = new AmCharts.SmallMap();
+	//map.smallMap.top=20;
+	
+    map.addLegend(legend);
+    map.write("mapdiv");
+
+});
+</script><script src="javascript/jquery.tablesorter.min.js"></script>
+
+
+
+
+<!-- NID BROWSER CODE SWITCHING JS INCLUDE -->
+
+
+
+
+
+
+<!-- END NID BROWSER SWITCHING JS INCLUDE -->
+
+
+
+
+<script>
+//divascookies
+$.DivasCookies({
+	bannerText				: "This website uses cookies in order to improve your web experience. ",		// text for the Divas Cookies banner
+	cookiePolicyLink		: "/privacy",		// link to the extended cookie policy
+	cookiePolicyLinkText	: "Privacy policy",				// text for the link to the extended cookie policy
+	thirdPartyPolicyWidget	: "",						// if set to "iubenda" tries to use the Iubenda widget
+	acceptButtonText		: "Accept",						// text for the close button
+	acceptButtonSrc			: "",						// source for the close button image
+	openEffect				: "",				// opening effect for Divas Cookies banner ["fade", "slideUp", "slideDown", "slideLeft", "slideRight"]
+	openEffectDuration		: 600,						// duration of the opening effect (msec)
+	openEffectEasing		: "",					// easing for the opening effect
+	closeEffect				: "",				// closing effect for Divas Cookies banner ["fade", "slideUp", "slideDown", "slideLeft", "slideRight"]
+	closeEffectDuration		: 600,						// duration of the closing effect (msec)
+	closeEffectEasing		: "",					// easing for the closing effect
+	debugMode				: false,					// if true, the options are checked and warnings are shown
+	saveUserPreferences		: true,						// if true, sets a cookie after the Divas Cookies is closed the first time and never shows it again
+	cookieDuration			: 30,						// number of days after which the Divas Cookie technical cookie will expire (default 365 days)
+	blockScripts			: false,					// set this to true if you blocked scripts by wrapping them with if($.DivasCookies.optedIn()){**script to be blocked**} (default false)
+	pageReload				: false,					// if true reloads the actual page after opt-in to show the previuosly blocked scripts (default false)
+	acceptOnScroll			: false,					// if true sets the Divas Cookie technical cookie on page scroll for cookies agreement (default false)
+	acceptOnClick			: true,					// if true sets the Divas Cookie technical cookie on click on any <a> in the page except that on Divas Cookies banner for cookies agreement (default false)
+	excludePolicyPage		: true						// if true excludes the cookie policy page from acceptOnScroll and acceptOnClick (default false)
+});
+</script>
+
+
+<!--[if lt IE 10]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!--[if IE 9]>
+	<script src="javascript/matchMedia.js"></script>
+		 <script type="text/javascript" src="javascript/jquery.placeholder.js"></script>
+	 {literal}
+	 <script>
+			// To test the @id toggling on password inputs in browsers that don’t support changing an input’s @type dynamically (e.g. Firefox 3.6 or IE), uncomment this:
+			// $.fn.hide = function() { return this; }
+			// Then uncomment the last rule in the <style> element (in the <head>).
+			$(function() {
+				// Invoke the plugin
+				$('input, textarea').placeholder({customClass:'my-placeholder'});
+				// That’s it, really.
+				
+				var html;
+			});
+		</script>{/literal}
+<![endif]-->
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57490686-1', {cookieFlags: 'max-age=7200;secure;samesite=none'});
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body>
+</html>
