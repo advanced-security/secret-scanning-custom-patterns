@@ -171,11 +171,11 @@ patterns:
     type: iban
     regex:
       pattern: |
-        [A-Z]{2}[0-9]{2}[ -]?(?:[0-9A-Z]{4})?(?:[ -]?[0-9]){14,20}[A-Z0-9]{0,3}
+        [A-Z]{2}[0-9]{2}[ -]?(?:[0-9A-Z]{4})?(?:[ -]?[0-9]){10,33}[A-Z0-9]{0,3}
       start: |
-        \A|[^A-Z0-9-]
+        \A|[^A-Za-z0-9-]
       end: |
-        \z|[^A-Z0-9-]
+        \z|[^A-Za-z0-9-]
     expected:
       - name: iban.txt
         start_offset: 41
@@ -387,4 +387,61 @@ patterns:
       - name: iban.txt
         start_offset: 2295
         end_offset: 2321
+      - name: iban.txt
+        start_offset: 423
+        end_offset: 452
+      - name: iban.txt
+        start_offset: 623
+        end_offset: 652
+      - name: iban.txt
+        start_offset: 1097
+        end_offset: 1127
+      - name: iban.txt
+        start_offset: 1170
+        end_offset: 1200
+      - name: iban.txt
+        start_offset: 1342
+        end_offset: 1373
+      - name: iban.txt
+        start_offset: 1402
+        end_offset: 1432
+      - name: iban.txt
+        start_offset: 1589
+        end_offset: 1618
+      - name: iban.txt
+        start_offset: 1674
+        end_offset: 1703
+      - name: iban.txt
+        start_offset: 1864
+        end_offset: 1895
+      - name: iban.txt
+        start_offset: 2108
+        end_offset: 2137
+      - name: iban.txt
+        start_offset: 41
+        end_offset: 60
+      - name: iban.txt
+        start_offset: 79
+        end_offset: 98
+      - name: iban.txt
+        start_offset: 155
+        end_offset: 173
+      - name: iban.txt
+        start_offset: 385
+        end_offset: 401
+      - name: iban.txt
+        start_offset: 1201
+        end_offset: 1222
+      - name: iban.txt
+        start_offset: 1509
+        end_offset: 1527
+      - name: iban.txt
+        start_offset: 1548
+        end_offset: 1563
+      - name: iban.txt
+        start_offset: 1729
+        end_offset: 1761
+      - name: iban.txt
+        start_offset: 2295
+        end_offset: 2314
 
