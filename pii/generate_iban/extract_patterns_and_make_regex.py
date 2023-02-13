@@ -16,6 +16,7 @@ def add_args(parser: ArgumentParser) -> None:
     """Add command-line arguments."""
     parser.add_argument("html_file", help="HTML from iban.com/structure")
     parser.add_argument("--debug", "-d", action="store_true", help="Debug output")
+    parser.add_argument("--add-test-data", "-t", action="store_true", help="Add test data to patterns")
 
 
 def main() -> None:
@@ -84,11 +85,13 @@ def main() -> None:
                 pattern["regex"]["end"] = r"\z|[^A-Za-z0-9-]"
 
                 data = country['IBAN Example']
-                pattern["test"] = {
-                    "data": data,
-                    "start_offset": 0,
-                    "end_offset": len(data)
-                }
+
+                if args.add_test_data:
+                    pattern["test"] = {
+                        "data": data,
+                        "start_offset": 0,
+                        "end_offset": len(data)
+                    }
             except KeyError as err:
                 LOG.debug("Missing key: %s", err)
                 continue
