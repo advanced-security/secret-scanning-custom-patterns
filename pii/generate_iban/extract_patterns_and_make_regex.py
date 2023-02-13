@@ -69,7 +69,13 @@ def main() -> None:
                 pattern['type'] = f"iban_{str(country['Code']).lower()}"
 
                 # sometimes patterns end in letters, so allow the final 3 to be A-Z instead of numbers
-                regex = f"{country['Code']}" + "(?:[0-9][ -]?)" + "{" + str(int(country['Length']) - 3) + '}' + '(?:(?:[0-9][ -]){3}|[A-Z]{3})'
+                # also allows for a checksum followed by a 4-character bank code, which is used by some countries
+                regex = (f"{country['Code']}"                # country code
+                       + "(?:[0-9][ -]?){2}"                # possible checksum
+                       + "(?:[0-9A-Z][ -]?){4}"             # possible 4-character bank code
+                       + "(?:[0-9][ -]?)"                   # standard numeric part
+                       + "{" + str(int(country['Length']) - 2 - 2 - 4 - 3) + '}'    
+                       + '(?:(?:[0-9][ -]?){3}|[A-Z]{3})')   # possible alphabetic ending
 
                 pattern["regex"] = {}
                 pattern["regex"]["pattern"] = regex
@@ -95,8 +101,8 @@ def main() -> None:
 
         output = { 'name': 'IBANs', 'patterns': patterns }
 
-        # write to YAML
-        print(yaml.safe_dump(output))
+        # write to YAML, avoiding line wrapping
+        print(yaml.safe_dump(output, width=float("inf")))
 
 
 if __name__ == "__main__":
