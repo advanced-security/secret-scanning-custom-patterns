@@ -176,6 +176,12 @@ patterns:
         \A|[^A-Za-z0-9-]
       end: |
         \z|[^A-Za-z0-9-]
+    additional_not_match:
+      # hex strings that don't match a country code
+      - ^(?:A[ABC]|BC|C[BE]|D[A-DF]|E[ABDF]|F[A-F])
+      # lots of zeroes, probably an example
+      - ^[A-Z]{2}0+$
+      # examples we know about from the test set 
     expected:
       - name: iban.txt
         start_offset: 41
