@@ -1,3 +1,18 @@
+// From https://www.iban.com/calculate-iban, not common test IBANs
+
+GB46BUKB20041538290008
+GB46-BUKB-2004-1538-2900-08
+GB46 BUKB 2004 1538 2900 08
+FR3330002005500000157841Z25
+FR33-3000-2005-5000-0015-7841-Z25
+FR33 3000 2005 5000 0015 7841 Z25
+
+// FP, because it is embedded in more text (e.g. Base64), so just coincidence
+AAAAAAAAAGB00FOOD12341234123412AAAAAAAAAAAAAAAAAAAA
+
+// NOTE: *none* of the following should be alerted on
+// because they are well known test IBANs, and we want to minimise non-actionable FPs
+
 // https://stackoverflow.com/a/44657292
 
 DE89 3704 0044 0532 0130 00     // ok
