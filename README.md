@@ -27,6 +27,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 
 ### [Personally identifiable information (PII)](./pii)
 
+- IBAN
 - Credit Cards
 - Credit Cards - Visa
 - Credit Cards - MasterCard
