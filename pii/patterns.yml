@@ -171,11 +171,11 @@ patterns:
     type: iban
     regex:
       pattern: |
-        [A-Z]{2}[0-9]{2}[ -]?(?:[A-Z0-9]{4}[ -]?|(?:[0-9][ -]?){4})?(?:[0-9][ -]?){9,25}[A-Z0-9]{0,3}
+        [A-Z]{2}[0-9]{2}(?:[ -]?[A-Z0-9]{4}|(?:[ -]?[0-9]){4})?(?:[ -]?[0-9]){9,25}(?:[ -]?[A-Z0-9]){0,3}
       start: |
         \A|[^A-Za-z0-9-]
       end: |
-        \z|[^A-Za-z0-9 -]| [^0-9A-Z]
+        \z|[^A-Za-z0-9 -]|[ ][^0-9A-Z]|[ ]?\z
       additional_not_match:
         # hex strings that don't match a country code, or lots of zeros (so probably an example)
         - ^(?:(?:A[ABC]|BC|C[BE]|D[A-DF]|E[ABDF]|F[A-F]).*|[A-Z]{2}(?:0[ -]?)+)$
