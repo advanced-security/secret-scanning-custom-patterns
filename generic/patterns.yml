@@ -81,6 +81,11 @@ patterns:
         # Swift typing
         - ^(?:Int|Swift\.Int|Int32)\).*$
 
+    test:
+      - data: password=Password123
+        start_offset: 9
+        end_offset: -1
+
     expected:
       - name: passwords.js
         start_offset: 14
@@ -113,6 +118,12 @@ patterns:
         - ^00000000-0000-0000-0000-000000000000$
         - ^(?i)00010203-0405-0607-0809-0a0b0c0d0e0f$
         - ^(?i)12345678-1234-1234-1234-123456789abc$
+
+    test:
+      - data: 10203040-5060-7080-90a0-b0c0d0e0f000
+        start_offset: 0
+        end_offset: -1
+
     expected:
       - name: uuids.txt
         start_offset: 12
