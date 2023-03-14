@@ -110,3 +110,18 @@ patterns:
         start_offset: 57
         end_offset: 80
 
+  - name: GitHub Actions SHA Checker 
+    type: github_actions_sha_checker
+    comments:
+      - "Checks for all github actions not using sha commit "
+      - "Checks for uses: org name / repo name @ string under 40 characters"
+      - "Not case sensative"
+    regex:
+      version: 0.1
+      pattern: |
+        [a-z0-9_-]+\/[a-z0-9_-]+@[a-z0-9._-]{1,39}
+      start: |
+        uses: 
+      end: |
+        \s|\z
+
