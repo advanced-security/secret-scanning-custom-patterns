@@ -113,9 +113,10 @@ patterns:
   - name: GitHub Actions SHA Checker 
     type: github_actions_sha_checker
     comments:
-      - "Checks for all github actions not using sha commit "
+      - "Checks for all github action susing a version that isn't a pinned SHA-1 commit hash"
       - "Checks for uses: org name / repo name @ string under 40 characters"
       - "Not case sensative"
+      - "exclude all actions in actions, github and advanced-security repo"
     regex:
       version: 0.1
       pattern: |
@@ -124,4 +125,6 @@ patterns:
         uses: 
       end: |
         \s|\z
+      additional_not_match:
+        - ^(actions|github|advanced-security)/
 
