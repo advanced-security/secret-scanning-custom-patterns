@@ -120,9 +120,9 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [a-z0-9_-]+\/[a-z0-9_-]+@[a-z0-9._-]{1,39}
+        [a-z0-9_-]{1,39}\/[a-z0-9_-]{1,100}@[a-z0-9._-]{1,39}
       start: |
-        [ \t]*uses:[ \t]* 
+        \buses:[ \t]{1,5}
       end: |
         \s|\z
       additional_not_match:

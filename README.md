@@ -12,6 +12,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Hardcoded Database Passwords
 - Hardcoded Spring SQL passwords
 - Django Secret Key
+- GitHub Actions SHA Checker
 
 
 ### [Generic Secrets / Passwords](./generic)

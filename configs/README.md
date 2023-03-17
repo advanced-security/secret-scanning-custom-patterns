@@ -198,7 +198,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 <p>
 
 ```regex
-[a-z0-9_-]+\/[a-z0-9_-]+@[a-z0-9._-]{1,39}
+[a-z0-9_-]{1,39}\/[a-z0-9_-]{1,100}@[a-z0-9._-]{1,39}
 ```
 
 **Comments / Notes:**
@@ -217,7 +217,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 <p>
 
 ```regex
-[ \t]*uses:[ \t]* 
+\buses:[ \t]{1,5}
 ```
 
 </p>
