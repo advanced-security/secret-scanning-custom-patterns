@@ -110,3 +110,21 @@ patterns:
         start_offset: 57
         end_offset: 80
 
+  - name: GitHub Actions SHA Checker 
+    type: github_actions_sha_checker
+    comments:
+      - "Checks for all github action susing a version that isn't a pinned SHA-1 commit hash"
+      - "Checks for uses: org name / repo name @ string under 40 characters"
+      - "Not case sensative"
+      - "exclude all actions in actions, github and advanced-security repo"
+    regex:
+      version: 0.1
+      pattern: |
+        [a-z0-9_-]{1,39}\/[a-z0-9_-]{1,100}@[a-z0-9._-]{1,39}
+      start: |
+        \buses:[ \t]{1,5}
+      end: |
+        \s|\z
+      additional_not_match:
+        - ^(actions|github|advanced-security)/
+
