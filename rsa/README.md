@@ -50,7 +50,7 @@
 <p>
 
 ```regex
---BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
+--BEGIN PGP PRIVATE KEY BLOCK--+(?:[\r\n]+((Version|Comment|MessageID|Hash|Charset): [^\r\n]+[\r\n]+)+[\r\n]+)?[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
 ```
 
 **Comments / Notes:**

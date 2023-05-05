@@ -36,11 +36,14 @@ patterns:
     type: gpg_private_key
     regex:
       pattern: |
-        --BEGIN PGP PRIVATE KEY BLOCK--+[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
+        --BEGIN PGP PRIVATE KEY BLOCK--+(?:[\r\n]+((Version|Comment|MessageID|Hash|Charset): [^\r\n]+[\r\n]+)+[\r\n]+)?[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
     expected:
       - name: GeekMasher GPG.asc
         start_offset: 3
         end_offset: 6651
+      - name: GeekMasher_GPG_with_headers.asc
+        start_offset: 3
+        end_offset: 6728
 
 
   - name: SSH Public Key
