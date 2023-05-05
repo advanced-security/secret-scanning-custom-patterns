@@ -1,0 +1,25 @@
+
+name: Password stores
+
+patterns:
+  - name: Arc
+    type: arc
+    description: "Arc password stores are created by the Arc open source software (https://github.com/evilsocket/arc). They are AES encrypted, but should not be stored in shared repositories."
+    regex:
+      pattern: |
+        {"id":[0-9]+,"title":"[^"]+","encryption":"[^"]+","created_at":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}(Z|[+-][0-9]{2}:[0-9]{2})","updated_at":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}(Z|[+-][0-9]{2}:[0-9]{2})","expired_at":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]{6})?(Z|[+-][0-9]{2}:[0-9]{2})","prune":(true|false),"notified":(true|false),"compressed":(true|false),"pinned":(true|false),"size":[0-9]+,"next_id":[0-9]+}
+      start: |
+        \A|\x00
+      end: |
+        \Z|\x00
+
+    expected:
+      - name: meta.json
+        start_offset: 0
+        end_offset: 261
+
+    comments:
+      - This spots `meta.json` files created by Arc, not the secrets themselves
+      - The encrypted secrets will be in a numbered directory below the detected `meta.json` file
+      - This can also spot uncompressed tar file backups created by Arc
+ 
