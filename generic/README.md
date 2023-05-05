@@ -50,47 +50,11 @@
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(?i)(?:[A-Za-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:user|key)_?)?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase),?[\]>)]?\\?$`
-- Not Match: `^.*token.*$`
-- Not Match: `^[a-zA-Z0-9._]+[_.](?:password|passphrase|secret|key).*$`
-- Not Match: `^.* passphrase .*$`
-- Not Match: `^(?i)(?:[a-zA-Z0-9_.]*,\s*)?[[<(]?(?:write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?$`
-- Not Match: `^\s*%[sr]\s*$`
-- Not Match: `^\s*$`
-- Not Match: `^\s*(?:int|str|(?:typing\.)?Any|None|bytes|bool|ReadableBuffer)\s*([,|].*)?\s*$`
-- Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
-- Not Match: `^\s*\.\.\.,?\s*$`
-- Not Match: `^\s*\\\s*$`
-- Not Match: `^\\n$`
-- Not Match: `^\s*,s*$`
-- Not Match: `^\\0$`
-- Not Match: `^function\s*\([^)]*\)\s*{\s*`
-- Not Match: `^\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])$`
-- Not Match: `^\s*[0-9]{1,4}(?:\s*(?:/\*|#|//).*)?$`
-- Not Match: `^(?:new )?[a-zA-Z0-9_.]+\(.*$`
-- Not Match: `^\s*(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_]+[,[]?\s*$`
-- Not Match: `^\s*[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?\s*$`
-- Not Match: `^\s*(?:~|/tmp|\.\.|\.)\s*$`
-- Not Match: `^\\{1,2}w\+/g,( \\?)?$`
-- Not Match: `^\s*\$\{\{?[^}]+\}\}?\s*$`
-- Not Match: `^\s*\$\([^)]+\)\s*$`
-- Not Match: `^\s*\(\([^)]+\)\)\s*$`
-- Not Match: `^\s*\{[^}]*\}\s*$`
-- Not Match: `^\s*\[[^\]]*\]\s*$`
-- Not Match: `^[,()[\]{}`.]\\?$`
-- Not Match: `^geheim\$parole$`
-- Not Match: `^\s*\([Oo]ptional\).*$`
-- Not Match: `^-[)(]$`
-- Not Match: `^0x[A-Fa-f0-9]+,?$`
-- Not Match: `^\$[1-9]$`
-- Not Match: `^\$[A-Za-z0-9_]+$`
-- Not Match: `^[0-9],?$`
-- Not Match: `^\s*ALL(?:\\n)?\s*$`
-- Not Match: `^(?:public|private) [A-Za-z0-9_]+ \{$`
-- Not Match: `^\$[a-zA-Z0-9_]+\{$`
-- Not Match: `^os\.environ\[[^\]]\],?$`
-- Not Match: `^process\.env\.[A-Z0-9_]+,?$`
-- Not Match: `^(?:Int|Swift\.Int|Int32)\).*$`
+- Not Match: `^(?i)(?:[a-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:(?:user|key)_?)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase)|write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?( or )?.*$`
+- Not Match: `^\s*(?:(?:typing\.)?(?:(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*|(?:int|str|float|(?:typing.)?Any|None|bytes|bool|ReadableBuffer)\s*(?:[,|].*)?|(?:Int|Swift\.Int|Int32)\.*))\s*$`
+- Not Match: `^\s*(?:\.\.\.|\\|\\n|\\0|[,()[\]{}`.]\\?|-[)(]|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.)|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?))?,?\s*(?:\s*(?:/\*|#|//).*)?$`
+- Not Match: `^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new )?[a-zA-Z0-9_.]+\(.*|(?:public|private) [A-Za-z0-9_]+ \{)$`
+- Not Match: `^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$`
 
 </p>
 </details>

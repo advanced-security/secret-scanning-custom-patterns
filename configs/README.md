@@ -179,7 +179,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 - Not Match: `^(?:keyPassphrase|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|int|bool)( +#.*)?)$`
 - Not Match: `^.* = (?:None|True|False|\.\.\.),?$`
-- Not Match: `^(?:(?:this|self|obj)\.)(?:?[A-Za-z_]+\,|[A-Za-z_].*)$`
+- Not Match: `^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$`
 - Not Match: `^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$`
 - Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
 
