@@ -1,0 +1,7 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"iban","IBAN","97486347bf79e40253a1191986ad4d3709e7ad5017bae24e4f9ddf3cba52aeab","pii/iban.txt","7","7","1","34",
+"iban","IBAN","61ec5f563d04fadee9b813245a0a60a5ca45b4ace124590d70723146e47e94de","pii/iban.txt","8","8","1","34",
+"iban","IBAN","98e4ab9904d6f7f48effecc7d988d78a1d0904e0100cb00ca79e5d3977cfeec1","pii/iban.txt","3","3","1","23",
+"iban","IBAN","767d9c95a175562396b3d5a5dacf27a5200277cd587fda0980fe9974cfcd926e","pii/iban.txt","5","5","1","28",
+"iban","IBAN","14c34fcf5b6069e9e36fa6a630c6052e14d7f4d06168c99302b879a9cbac59b0","pii/iban.txt","6","6","1","28",
+"iban","IBAN","1ce5bb0fa1a749c9ebf9ab066b92d57e9d10c2d0dd308ed85ceaea2381fb494e","pii/iban.txt","4","4","1","28",
