@@ -13,7 +13,6 @@ patterns:
         start_offset: 27
         end_offset: 61
 
-
   - name: Grafana API token
     type: grafana_api_token
     regex:
@@ -26,7 +25,6 @@ patterns:
       - name: grafana.txt
         start_offset: 159
         end_offset: 209
-
 
   - name: SendGrid (deprecated)
     type: sendgrid
@@ -41,4 +39,111 @@ patterns:
       - name: sendgrid.py
         start_offset: 20
         end_offset: 89
- 
+
+  # random 64-character hex string
+  # https://docs.sentry.io/api/auth/
+  # Source: https://github.com/getsentry/sentry/blob/master/src/sentry/models/apitoken.py#L27
+  - name: Sentry Auth Token
+    type: sentry_auth_token
+    regex:
+      pattern: |
+        [a-fA-F0-9]{64}
+      start: |
+        (?:\A|[\r\n])(?:\[auth\][^[]*\ntoken=|(?:export )?SENTRY_AUTH_TOKEN=|sentry-cli [^\r\n]*--auth-token |auth\.token=)
+      end: |
+        \z|\s
+      additional_match:
+        - \d\D|\D\d
+    expected:
+      - name: .env
+        start_offset: 18
+        end_offset: 89
+      - name: .sentryclirc
+        start_offset: 13
+        end_offset: 76
+      - name: sentry.sh
+        start_offset: 35
+        end_offset: 98
+      - name: sentry.properties
+        start_offset: 11
+        end_offset: 74
+
+  # random 32-character hex string
+  # Source: https://github.com/getsentry/sentry/blob/master/src/sentry/models/apikey.py#LL74C18-L74C18
+  - name: Sentry API Key
+    type: sentry_api_key
+    regex:
+      pattern: |
+        [a-fA-F0-9]{32}
+      start: |
+        (?:\A|[\r\n])(?:\[auth\][^[]*\napi_key=|(?:export )?SENTRY_API_KEY=|sentry-cli [^\r\n]*--api-key |auth\.api_key=)
+      end: |
+        \z|\s
+      additional_match:
+        - \d\D|\D\d
+    expected:
+      - name: .env
+        start_offset: 106
+        end_offset: 145
+      - name: .sentryclirc
+        start_offset: 86
+        end_offset: 117
+      - name: sentry.sh
+        start_offset: 121
+        end_offset: 152
+      - name: sentry.properties
+        start_offset: 89
+        end_offset: 120
+
+  # https://docs.sentry.io/product/sentry-basics/dsn-explainer
+  - name: Sentry DSN secret
+    type: sentry_dsn_secret
+    regex:
+      pattern: |
+        [a-fA-F0-9]{32}
+      start: |
+        https://[a-fA-F0-9]{32}:
+      end: |
+        @([a-z0-9-.]+\.)?sentry\.io(?:/[^?#]*)?/\d+
+      additional_match:
+        - \d\D|\D\d
+    comments:
+      - "The secret part of the DSN is optional and effectively deprecated, and should be removed from the DSN: https://docs.sentry.io/product/sentry-basics/dsn-explainer"
+    expected:
+      - name: sentry_dsn.txt
+        start_offset: 41
+        end_offset: 72
+
+  # https://github.com/40thieves/webpack-sentry-plugin/blob/master/README.md
+  - name: Sentry webpack plugin token
+    type: sentry_webpack_plugin_token
+    regex:
+      pattern: |
+        (?:[a-fA-F0-9]{32}|[a-fA-F0-9]{64})
+      start: |
+        new SentryPlugin\(\s*\{[^}]*[,\n \t]apiKey:\s*['"]
+      end: |
+        ['"]
+      additional_match:
+        - \d\D|\D\d
+    expected:
+      - name: webpack_sentry.js
+        start_offset: 215
+        end_offset: 246
+
+  # https://registry.terraform.io/providers/jianyuan/sentry/latest/docs
+  - name: Sentry Terraform provider token
+    type: sentry_terraform_provider_token
+    regex:
+      pattern: |
+        [a-fA-F0-9]{64}
+      start: |
+        (?:\A|[\r\n])provider "sentry" {[^}]*[\n \t]token\s*=\s*['"]
+      end: |
+        ['"]
+      additional_match:
+        - \d\D|\D\d
+    expected:
+      - name: terraform.tf
+        start_offset: 127
+        end_offset: 190
