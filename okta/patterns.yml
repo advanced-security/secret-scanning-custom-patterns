@@ -27,6 +27,15 @@ patterns:
       - name: token.txt
         start_offset: 12
         end_offset: 55
+      - name: token.txt
+        start_offset: 69
+        end_offset: 107
+      - name: token.txt
+        start_offset: 121
+        end_offset: 161
+      - name: token.txt
+        start_offset: 174
+        end_offset: 215
 
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric
