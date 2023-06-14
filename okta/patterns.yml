@@ -19,9 +19,9 @@ patterns:
         - [g-zG-Z]
       additional_match:
         # Avoid Hexadecimal only 
-        - ^[0-9A-Fa-f\-]+$
+        - (^[0-9A-Fa-f\-]+$)
         # Avoid char only
-        - [a-zA-Z_-]{20,}
+        - ([a-zA-Z_-]{20,})
 
     expected:
       - name: token.txt
