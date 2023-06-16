@@ -49,19 +49,15 @@ patterns:
       pattern: |
         (0{2}[0-9A-Za-z\-\_]{40})
       start: |
-        (\A|[^0-9A-Za-z\_\-0x])
+        (\A|[^0-9A-Za-z\_\-])
       end: |
         (\z|[^0-9A-Za-z_=-])
       additional_not_match:
-        # to cut stuff where there is just numbers
-        - (\d\D|\D\d)
-        # Positive match
-        - [g-zG-Z]
       additional_match:
         # Avoid Hexadecimal only 
-        - (^[0-9A-Fa-f\-]+$)
+        - ^(0x)?[0-9A-Fa-f\-]+x?$
         # Avoid char only
-        - ([a-zA-Z_-]{20,})
+        - [a-zA-Z_-]{20,}
 
     expected:
       - name: token.txt
@@ -78,5 +74,5 @@ patterns:
         end_offset: 215
 
     comments:
-      - Okta token, starting with `00` and 40 random alphanumeric
+      - Okta token, starting with `00` and 40 random alphanumeric with _ and -
  
