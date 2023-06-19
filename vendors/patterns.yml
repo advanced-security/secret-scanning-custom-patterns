@@ -55,24 +55,24 @@ patterns:
       additional_not_match:
         # Avoid Hexadecimal only 
         - ^(0x)?[0-9A-Fa-f\-]+x?$
-        # Avoid char only
-        - [a-zA-Z_-]{20,}
+        # Avoid char only - in string quotes to avoid YAML parsing issues
+        - "[a-zA-Z_-]{20,}"
         # Avoid big number with exponent
-        - \d+(\.\d+)?e[+-]\d+
+        - ^\d+(\.\d+)?e[+-]\d+$
 
     expected:
-      - name: token.txt
+      - name: okta.txt
         start_offset: 12
-        end_offset: 55
-      - name: token.txt
-        start_offset: 69
-        end_offset: 107
-      - name: token.txt
-        start_offset: 121
-        end_offset: 161
-      - name: token.txt
-        start_offset: 174
-        end_offset: 215
+        end_offset: 54
+      - name: okta.txt
+        start_offset: 68
+        end_offset: 110
+      - name: okta.txt
+        start_offset: 127
+        end_offset: 169
+      - name: okta.txt
+        start_offset: 180
+        end_offset: 222
 
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric with _ and -
