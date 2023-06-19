@@ -58,7 +58,7 @@ patterns:
         # Avoid char only
         - [a-zA-Z_-]{20,}
         # Avoid big number with exponent
-        - \d+(\.\d+)?e[+-]\d+
+        - ^\d+(\.\d+)?e[+-]?\d+$
 
     expected:
       - name: token.txt
