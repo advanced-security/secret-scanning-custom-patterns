@@ -47,11 +47,11 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        (0{2}[0-9A-Za-z\-\_]{40})
+        (0{2}[0-9A-Za-z_-]{40})
       start: |
-        (\A|[^0-9A-Za-z\_\-])
+        (\A|[^0-9A-Za-z_+/-])
       end: |
-        (\z|[^0-9A-Za-z_=-])
+        (\z|[^0-9A-Za-z_+/=-])
       additional_not_match:
         # Avoid Hexadecimal only 
         - ^(0x)?[0-9A-Fa-f\-]+x?$
