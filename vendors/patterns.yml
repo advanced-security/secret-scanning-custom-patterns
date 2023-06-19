@@ -59,6 +59,8 @@ patterns:
         - "[a-zA-Z_-]{20,}"
         # Avoid big number with exponent
         - ^\d+(\.\d+)?e[+-]?\d+$
+        # Don't hit on long strings of numbers and underscores only
+        - "[\\d_]{25}"
 
     expected:
       - name: okta.txt
