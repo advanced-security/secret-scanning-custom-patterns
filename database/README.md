@@ -49,7 +49,7 @@ Database connection strings are used to connect to databases, often with embedde
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(%(.*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$`
+- Not Match: `^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$`
 - Not Match: `parameters\('[^']+'\)`
 
 </p>
@@ -102,7 +102,7 @@ Database connection strings are used to connect to databases, often with embedde
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(%(.*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$`
+- Not Match: `^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$`
 - Not Match: `parameters\('[^']+'\)`
 
 </p>
