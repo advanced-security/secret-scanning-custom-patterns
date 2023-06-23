@@ -6,5 +6,5 @@
     "settings": {
         "editor.formatOnSave": true
     },
-    "postCreateCommand": "git submodule init && git submodule update --recursive && pipenv install"
+    "postCreateCommand": "git submodule init && git submodule update --recursive && pipenv install --system"
 }
