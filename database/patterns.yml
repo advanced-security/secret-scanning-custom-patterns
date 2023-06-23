@@ -1,0 +1,56 @@
+name: Database passwords
+
+# We have two Database Connection String patterns: one with Password= before any other keyword, and one with Password= after any other keyword
+
+# we define the pattern by what we don't want it to match
+# - ; or ", since those are the end of the password/secret field and the end of the connection string respectively
+# - control characters, \x00-\x08, since those are not valid in ASCII or UTF-8, or other common character sets we'll come across
+# We don't account for connection strings encoded in UTF-16, but that will be a rare case, if it happens at all
+
+patterns:
+  - name: Database Connection String (1)
+    type: database_connection_string_1
+    description: "Database connection strings are used to connect to databases, often with embedded credentials."
+    regex:
+      pattern: |
+        [^;"\x00-\x08]+
+      start: |
+        "(([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=[^"]+;) ?([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
+      end: |
+        ;
+      additional_not_match:
+        # placeholders, variable substitutions and regex matches
+        - ^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$
+        # parameterized query
+        - parameters\('[^']+'\)
+    expected:
+      - name: connection_strings.txt
+        start_offset: 126
+        end_offset: 129
+      - name: connection_strings.txt
+        start_offset: 172
+        end_offset: 225
+
+    comments:
+      - This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
+      - To cut FPs, we require the start of the string to be a database-specific keyword
+
+  - name: Database Connection String (2)
+    type: database_connection_string_2
+    description: "Database connection strings are used to connect to databases, often with embedded credentials."
+    regex:
+      pattern: |
+        [^;"\x00-\x08]+
+      start: |
+        (?i)"([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
+      end: |
+        ";[^";]* ?([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=
+      additional_not_match:
+        # placeholders
+        - ^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$
+        # parameterized query
+        - parameters\('[^']+'\)
+
+    comments:
+      - This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
+      - To cut FPs, we require part of the string after the password to be a database-specific keyword

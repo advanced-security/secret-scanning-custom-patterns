@@ -15,6 +15,12 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - GitHub Actions SHA Checker
 
 
+### [Database passwords](./database)
+
+- Database Connection String (1)
+- Database Connection String (2)
+
+
 ### [Generic Secrets / Passwords](./generic)
 
 - Generic Passwords
