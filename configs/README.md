@@ -148,7 +148,7 @@ Pattern to find Static passwords in YAML configuration files
 <p>
 
 ```regex
-[^\r\n'"]*
+[^\r\n'"]+
 ```
 
 </p>
@@ -179,8 +179,8 @@ Pattern to find Static passwords in YAML configuration files
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(?:keyPassphrase|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|int|bool)( +#.*)?)$`
-- Not Match: `^.* = (?:None|True|False|\.\.\.),?$`
+- Not Match: `^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$`
+- Not Match: `^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$`
 - Not Match: `^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$`
 - Not Match: `^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$`
 - Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
