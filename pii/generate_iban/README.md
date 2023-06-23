@@ -5,6 +5,11 @@
 ## IBAN for Albania
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -13,12 +18,8 @@
 AL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -29,8 +30,7 @@ AL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -44,6 +44,11 @@ AL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Andorra
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -52,12 +57,8 @@ AL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 AD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -68,8 +69,7 @@ AD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -83,6 +83,11 @@ AD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Austria
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -91,12 +96,8 @@ AD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 AT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -107,8 +108,7 @@ AT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -122,6 +122,11 @@ AT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Azerbaijan
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -130,12 +135,8 @@ AT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 AZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -146,8 +147,7 @@ AZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -161,6 +161,11 @@ AZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Bahrain
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -169,12 +174,8 @@ AZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 BH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -185,8 +186,7 @@ BH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -200,6 +200,11 @@ BH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Belgium
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -208,12 +213,8 @@ BH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 BE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){5}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -224,8 +225,7 @@ BE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){5}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -239,6 +239,11 @@ BE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){5}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Bosnia and Herzegovina
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -247,12 +252,8 @@ BE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){5}(?:[0-9A-Z][ -]?){3}
 BA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -263,8 +264,7 @@ BA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -278,6 +278,11 @@ BA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Brazil
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -286,12 +291,8 @@ BA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 BR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -302,8 +303,7 @@ BR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -317,6 +317,11 @@ BR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Bulgaria
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -325,12 +330,8 @@ BR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 BG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -341,8 +342,7 @@ BG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -356,6 +356,11 @@ BG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Costa Rica
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -364,12 +369,8 @@ BG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 CR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -380,8 +381,7 @@ CR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -395,6 +395,11 @@ CR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Croatia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -403,12 +408,8 @@ CR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 HR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -419,8 +420,7 @@ HR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -434,6 +434,11 @@ HR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Cyprus
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -442,12 +447,8 @@ HR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 CY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -458,8 +459,7 @@ CY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -473,6 +473,11 @@ CY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Czech Republic
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -481,12 +486,8 @@ CY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 CZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -497,8 +498,7 @@ CZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -512,6 +512,11 @@ CZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Faroe Islands
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -520,12 +525,8 @@ CZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 FO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -536,8 +537,7 @@ FO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -551,6 +551,11 @@ FO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Greenland
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -559,12 +564,8 @@ FO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 GL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -575,8 +576,7 @@ GL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -590,6 +590,11 @@ GL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Denmark
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -598,12 +603,8 @@ GL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 DK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -614,8 +615,7 @@ DK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -629,6 +629,11 @@ DK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Dominican Republic
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -637,12 +642,8 @@ DK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 DO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -653,8 +654,7 @@ DO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -668,6 +668,11 @@ DO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Estonia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -676,12 +681,8 @@ DO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 EE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -692,8 +693,7 @@ EE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -707,6 +707,11 @@ EE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Egypt
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -715,12 +720,8 @@ EE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 EG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -731,8 +732,7 @@ EG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -746,6 +746,11 @@ EG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Finland
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -754,12 +759,8 @@ EG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 FI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -770,8 +771,7 @@ FI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -785,6 +785,11 @@ FI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ## IBAN for France
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -793,12 +798,8 @@ FI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 FR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -809,8 +810,7 @@ FR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -824,6 +824,11 @@ FR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Georgia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -832,12 +837,8 @@ FR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 GE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -848,8 +849,7 @@ GE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -863,6 +863,11 @@ GE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Germany
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -871,12 +876,8 @@ GE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 DE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -887,8 +888,7 @@ DE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -902,6 +902,11 @@ DE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Gibraltar
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -910,12 +915,8 @@ DE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 GI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -926,8 +927,7 @@ GI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -941,6 +941,11 @@ GI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Greece
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -949,12 +954,8 @@ GI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 GR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -965,8 +966,7 @@ GR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -980,6 +980,11 @@ GR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Guatemala
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -988,12 +993,8 @@ GR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 GT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1004,8 +1005,7 @@ GT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1019,6 +1019,11 @@ GT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Hungary
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1027,12 +1032,8 @@ GT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 HU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1043,8 +1044,7 @@ HU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1058,6 +1058,11 @@ HU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Iceland
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1066,12 +1071,8 @@ HU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 IS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1082,8 +1083,7 @@ IS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1097,6 +1097,11 @@ IS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Ireland
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1105,12 +1110,8 @@ IS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 IE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1121,8 +1122,7 @@ IE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1136,6 +1136,11 @@ IE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Israel
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1144,12 +1149,8 @@ IE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 IL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1160,8 +1161,7 @@ IL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1175,6 +1175,11 @@ IL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Italy
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1183,12 +1188,8 @@ IL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 IT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1199,8 +1200,7 @@ IT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1214,6 +1214,11 @@ IT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Jordan
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1222,12 +1227,8 @@ IT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 JO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1238,8 +1239,7 @@ JO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1253,6 +1253,11 @@ JO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Kazakhstan
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1261,12 +1266,8 @@ JO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 KZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1277,8 +1278,7 @@ KZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1292,6 +1292,11 @@ KZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Kosovo
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1300,12 +1305,8 @@ KZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 XK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1316,8 +1317,7 @@ XK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1331,6 +1331,11 @@ XK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Kuwait
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1339,12 +1344,8 @@ XK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 KW(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1355,8 +1356,7 @@ KW(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1370,6 +1370,11 @@ KW(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Latvia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1378,12 +1383,8 @@ KW(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 LV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1394,8 +1395,7 @@ LV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1409,6 +1409,11 @@ LV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Lebanon
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1417,12 +1422,8 @@ LV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 LB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1433,8 +1434,7 @@ LB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1448,6 +1448,11 @@ LB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Liechtenstein
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1456,12 +1461,8 @@ LB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 LI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1472,8 +1473,7 @@ LI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1487,6 +1487,11 @@ LI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Lithuania
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1495,12 +1500,8 @@ LI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 LT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1511,8 +1512,7 @@ LT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1526,6 +1526,11 @@ LT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Luxembourg
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1534,12 +1539,8 @@ LT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 LU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1550,8 +1551,7 @@ LU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1565,6 +1565,11 @@ LU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 ## IBAN for North Macedonia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1573,12 +1578,8 @@ LU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
 MK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1589,8 +1590,7 @@ MK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1604,6 +1604,11 @@ MK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Malta
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1612,12 +1617,8 @@ MK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 MT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1628,8 +1629,7 @@ MT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1643,6 +1643,11 @@ MT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Mauritania
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1651,12 +1656,8 @@ MT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 MR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1667,8 +1668,7 @@ MR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1682,6 +1682,11 @@ MR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Mauritius
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1690,12 +1695,8 @@ MR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 MU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1706,8 +1707,7 @@ MU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1721,6 +1721,11 @@ MU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Moldova
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1729,12 +1734,8 @@ MU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
 MD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1745,8 +1746,7 @@ MD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1760,6 +1760,11 @@ MD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Monaco
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1768,12 +1773,8 @@ MD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 MC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1784,8 +1785,7 @@ MC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1799,6 +1799,11 @@ MC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Montenegro
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1807,12 +1812,8 @@ MC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ME(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1823,8 +1824,7 @@ ME(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1838,6 +1838,11 @@ ME(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Netherlands
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1846,12 +1851,8 @@ ME(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 NL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1862,8 +1863,7 @@ NL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1877,6 +1877,11 @@ NL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Norway
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1885,12 +1890,8 @@ NL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 NO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){4}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1901,8 +1902,7 @@ NO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){4}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1916,6 +1916,11 @@ NO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){4}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Pakistan
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1924,12 +1929,8 @@ NO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){4}(?:[0-9A-Z][ -]?){3}
 PK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1940,8 +1941,7 @@ PK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1955,6 +1955,11 @@ PK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Palestine
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -1963,12 +1968,8 @@ PK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 PS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -1979,8 +1980,7 @@ PS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -1994,6 +1994,11 @@ PS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Poland
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2002,12 +2007,8 @@ PS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 PL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2018,8 +2019,7 @@ PL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2033,6 +2033,11 @@ PL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Portugal
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2041,12 +2046,8 @@ PL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 PT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2057,8 +2058,7 @@ PT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2072,6 +2072,11 @@ PT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Qatar
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2080,12 +2085,8 @@ PT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 QA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2096,8 +2097,7 @@ QA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2111,6 +2111,11 @@ QA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Romania
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2119,12 +2124,8 @@ QA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 RO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2135,8 +2136,7 @@ RO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2150,6 +2150,11 @@ RO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for San Marino
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2158,12 +2163,8 @@ RO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 SM(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2174,8 +2175,7 @@ SM(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2189,6 +2189,11 @@ SM(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Saint Lucia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2197,12 +2202,8 @@ SM(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 LC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){21}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2213,8 +2214,7 @@ LC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){21}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2228,6 +2228,11 @@ LC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){21}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Sao Tome and Principe
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2236,12 +2241,8 @@ LC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){21}(?:[0-9A-Z][ -]?){3}
 ST(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2252,8 +2253,7 @@ ST(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2267,6 +2267,11 @@ ST(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Saudi Arabia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2275,12 +2280,8 @@ ST(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 SA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2291,8 +2292,7 @@ SA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2306,6 +2306,11 @@ SA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Serbia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2314,12 +2319,8 @@ SA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 RS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2330,8 +2331,7 @@ RS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2345,6 +2345,11 @@ RS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Slovakia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2353,12 +2358,8 @@ RS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 SK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2369,8 +2370,7 @@ SK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2384,6 +2384,11 @@ SK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Slovenia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2392,12 +2397,8 @@ SK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 SI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2408,8 +2409,7 @@ SI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2423,6 +2423,11 @@ SI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Spain
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2431,12 +2436,8 @@ SI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
 ES(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2447,8 +2448,7 @@ ES(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2462,6 +2462,11 @@ ES(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Sweden
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2470,12 +2475,8 @@ ES(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 SE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2486,8 +2487,7 @@ SE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2501,6 +2501,11 @@ SE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Switzerland
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2509,12 +2514,8 @@ SE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 CH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2525,8 +2526,7 @@ CH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2540,6 +2540,11 @@ CH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Timor-Leste
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2548,12 +2553,8 @@ CH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
 TL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2564,8 +2565,7 @@ TL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2579,6 +2579,11 @@ TL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Tunisia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2587,12 +2592,8 @@ TL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 TN(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2603,8 +2604,7 @@ TN(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2618,6 +2618,11 @@ TN(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Turkey
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2626,12 +2631,8 @@ TN(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 TR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2642,8 +2643,7 @@ TR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2657,6 +2657,11 @@ TR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 ## IBAN for United Arab Emirates
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2665,12 +2670,8 @@ TR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
 AE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2681,8 +2682,7 @@ AE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2696,6 +2696,11 @@ AE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ## IBAN for United Kingdom
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2704,12 +2709,8 @@ AE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 GB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2720,8 +2721,7 @@ GB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2735,6 +2735,11 @@ GB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Holy See (the)
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2743,12 +2748,8 @@ GB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 VA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2759,8 +2760,7 @@ VA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2774,6 +2774,11 @@ VA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Virgin Islands, British
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2782,12 +2787,8 @@ VA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
 VG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2798,8 +2799,7 @@ VG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2813,6 +2813,11 @@ VG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Ukraine
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2821,12 +2826,8 @@ VG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
 UA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2837,8 +2838,7 @@ UA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2852,6 +2852,11 @@ UA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Seychelles
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2860,12 +2865,8 @@ UA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
 SC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2876,8 +2877,7 @@ SC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2891,6 +2891,11 @@ SC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Iraq
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2899,12 +2904,8 @@ SC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
 IQ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2915,8 +2916,7 @@ IQ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2930,6 +2930,11 @@ IQ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Belarus
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2938,12 +2943,8 @@ IQ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 BY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2954,8 +2955,7 @@ BY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -2969,6 +2969,11 @@ BY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for El Salvador
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -2977,12 +2982,8 @@ BY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 SV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -2993,8 +2994,7 @@ SV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -3008,6 +3008,11 @@ SV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Libya
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -3016,12 +3021,8 @@ SV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
 LY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -3032,8 +3033,7 @@ LY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -3047,6 +3047,11 @@ LY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Sudan
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -3055,12 +3060,8 @@ LY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
 SD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -3071,8 +3072,7 @@ SD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -3086,6 +3086,11 @@ SD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Burundi
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -3094,12 +3099,8 @@ SD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
 BI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -3110,8 +3111,7 @@ BI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -3125,6 +3125,11 @@ BI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Djibouti
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -3133,12 +3138,8 @@ BI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 DJ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -3149,8 +3150,7 @@ DJ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -3164,6 +3164,11 @@ DJ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Russia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -3172,12 +3177,8 @@ DJ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
 RU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){22}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -3188,8 +3189,7 @@ RU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){22}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -3203,6 +3203,11 @@ RU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){22}(?:[0-9A-Z][ -]?){3}
 ## IBAN for Somalia
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -3211,12 +3216,8 @@ RU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){22}(?:[0-9A-Z][ -]?){3}
 SO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -3227,8 +3228,7 @@ SO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 

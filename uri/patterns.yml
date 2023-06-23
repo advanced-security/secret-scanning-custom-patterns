@@ -58,11 +58,11 @@ patterns:
     type: hardcoded_uri_passwords
     regex:
       pattern: |
-        [^$/?#@\s][^/?#@\s\p{Cc}]*
+        [^$/?#@\s][^/?#@\s\x00-\x08]*
       start: |
-        \b[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\p{Cc}]*:
+        (\b|\A)[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\x00-\x08]*:
       end: |
-        @[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?[/?#\s]
+        @[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?([/?#\s]|\b|\z)
       additional_not_match:
         # placeholders
         - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
