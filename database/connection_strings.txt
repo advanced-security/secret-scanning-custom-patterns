@@ -1,0 +1,4 @@
+# Azure
+"Data Source=tcp:aaa.database.windows.net,1433;Initial Catalog=bbb;Integrated Security=False;User ID=ccc@aaa;Password=ddd;"
+# pscale
+"server=127.0.0.1;uid=root;pwd=pscale_pw_fAagpYk49fh0rvL-Ag-7J3HMq6oXk7p1ObLDn4PLHO8;database=test"
