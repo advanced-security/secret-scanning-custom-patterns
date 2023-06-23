@@ -1,22 +1,25 @@
-
 name: Configuration Secrets
 
 patterns:
-  - name: Hardcoded Database Passwords 
+  - name: Hardcoded Database Passwords
     type: hardcoded_database_passwords
     comments:
       - "Only support for Postgres and MySQL password strings"
       - "Checks if the password is null / length of 0"
       - "Supports quoted passwords"
-      - "Not case sensative"
+      - "Case insensitive"
     regex:
       version: 0.1
       pattern: |
-        [^\r\n\p{Cc}]+
+        [^\r\n\x00-\x08]+
       start: |
         (?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
       end: |
         \z|[\r\n'"]
+    test:
+      data: postgres_password=password
+      start_offset: 18
+      end_offset: -1
 
   - name: Hardcoded Spring SQL passwords
     description: |
@@ -25,7 +28,7 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [^\r\n'"\p{Cc}]+
+        [^\r\n'"\x00-\x08]+
       start: |
         (?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
       end: |
@@ -52,7 +55,10 @@ patterns:
       - name: application.properties
         start_offset: 1633
         end_offset: 1640
-
+    test:
+      data: spring.datasource.password=password
+      start_offset: 27
+      end_offset: -1
 
   - name: Django Secret Key
     type: django_secret_key
@@ -61,16 +67,17 @@ patterns:
       pattern: |
         [^\r\n"']+
       start: |
-        \bSECRET_KEY[ \t]*=[ \t]*["']
+        (\b|\A)SECRET_KEY[ \t]*=[ \t]*["']
       end: |
         ['"]
-    comments:
-      - "_If the secret is at the start of the file, its not picked up_"
     expected:
       - name: global_settings.py
         start_offset: 59
         end_offset: 109
-
+    test:
+      data: SECRET_KEY = "password"
+      start_offset: 14
+      end_offset: 21
 
   # Experimental
 
@@ -104,8 +111,12 @@ patterns:
       - name: example.yml
         start_offset: 57
         end_offset: 80
+    test:
+      data: "password: password"
+      start_offset: 10
+      end_offset: 17
 
-  - name: GitHub Actions SHA Checker 
+  - name: GitHub Actions SHA Checker
     type: github_actions_sha_checker
     comments:
       - "Checks for all github action susing a version that isn't a pinned SHA-1 commit hash"
@@ -122,4 +133,8 @@ patterns:
         \s|\z
       additional_not_match:
         - ^(actions|github|advanced-security)/
-
+    test:
+      data: |
+        uses: sample-org/sample-action@v2
+      start_offset: 6
+      end_offset: -1
