@@ -30,7 +30,7 @@ patterns:
       pattern: |
         [^\r\n'"\x00-\x08]+
       start: |
-        (?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
+        (\A|\b)(?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
       end: |
         \z|['"\r\n]
     expected:
@@ -137,4 +137,4 @@ patterns:
       data: |
         uses: sample-org/sample-action@v2
       start_offset: 6
-      end_offset: -1
+      end_offset: 33
