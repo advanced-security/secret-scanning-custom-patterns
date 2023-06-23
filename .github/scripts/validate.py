@@ -7,13 +7,14 @@ import yaml
 import hashlib
 import logging
 import argparse
-import requests
 import subprocess
 import collections
-from ratelimit import limits, sleep_and_retry
 from typing import List, Dict, Optional
 from dataclasses import dataclass, field
+
 from jinja2 import Environment, FileSystemLoader
+
+from ghastoolkit import GitHub, SecretScanning, SecretAlert
 
 __here__ = os.path.dirname(os.path.realpath(__file__))
 
@@ -25,9 +26,9 @@ parser.add_argument(
 )
 
 parser_modes = parser.add_argument_group("modes")
-parser_modes.add_argument("--validate", action="store_true")
-parser_modes.add_argument("--snapshot", action="store_true")
-parser_modes.add_argument("--markdown", action="store_true")
+parser_modes.add_argument("--validate", action="store_true", help="Validation Mode")
+parser_modes.add_argument("--snapshot", action="store_true", help="Snapshot Mode")
+parser_modes.add_argument("--markdown", action="store_true", help="Markdown Mode")
 
 
 @dataclass
@@ -91,19 +92,6 @@ class PatternsConfig:
             self.patterns.append(Pattern(**pattern))
 
 
-@dataclass
-class SecretScanningAlert:
-    secret_type: str
-    secret_type_display_name: str
-    secret: str
-
-    path: Optional[str] = None
-    start_line: Optional[int] = None
-    end_line: Optional[int] = None
-    start_column: Optional[int] = None
-    end_column: Optional[int] = None
-
-
 def createMarkdown(path: str, template: str = "template.md", **data) -> str:
     logging.info(f"Creating markdown :: {path}")
     env = Environment(loader=FileSystemLoader(__here__))
@@ -140,73 +128,8 @@ def loadPatternFiles(path: str) -> Dict[str, PatternsConfig]:
     return patterns
 
 
-@sleep_and_retry
-@limits(calls=30, period=60)
-def getSecretScanningLocations(url: str, token: str) -> Dict:
-    """Get the locations of a secret scanning alert
-    - https://docs.github.com/en/enterprise-cloud@latest/rest/secret-scanning#list-locations-for-a-secret-scanning-alert
-    """
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.secret-scanner-report-preview+json",
-    }
-    response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-        error = f"Failed to get secret scanning results: {response.status_code}"
-        logging.error(error)
-        raise Exception(error)
-    return response.json()
-
-
-@sleep_and_retry
-@limits(calls=30, period=60)
-def getSecretScanningResults(
-    owner: str, repo: str, token: str, secret_type: Optional[str] = None
-) -> List[SecretScanningAlert]:
-    """
-    - https://docs.github.com/en/enterprise-cloud@latest/rest/secret-scanning#list-secret-scanning-alerts-for-a-repository
-    """
-    secrets: List[SecretScanningAlert] = []
-    params = {"state": "open"}
-    if secret_type:
-        params["secret_type"] = secret_type
-    url = f"https://api.github.com/repos/{owner}/{repo}/secret-scanning/alerts"
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.secret-scanner-report-preview+json",
-    }
-    response = requests.get(url, headers=headers, params=params)
-
-    if response.status_code != 200:
-        error = f"Failed to get secret scanning results: {response.status_code}"
-        logging.error(error)
-        raise Exception(error)
-
-    with open("./secrets.json", "w") as f:
-        json.dump(response.json(), f, indent=4)
-
-    for secret in response.json():
-        locations = getSecretScanningLocations(secret["locations_url"], token)
-        for location in locations:
-            location = location.get("details")
-            secrets.append(
-                SecretScanningAlert(
-                    secret.get("secret_type"),
-                    secret.get("secret_type_display_name"),
-                    secret.get("secret"),
-                    location.get("path"),
-                    location.get("start_line"),
-                    location.get("end_line"),
-                    location.get("start_column"),
-                    location.get("end_column"),
-                )
-            )
-    return secrets
-
-
-def createSnapshot(path: str, results: List[SecretScanningAlert]):
+def createSnapshot(path: str, results: List[SecretAlert]):
     """Create snapshot from SecretScanningAlert to CSV"""
-
     header = [
         "secret_type",
         "secret_type_display_name",
@@ -221,19 +144,31 @@ def createSnapshot(path: str, results: List[SecretScanningAlert]):
     with open(path, "w") as f:
         f.write(f"{','.join(header)}\n")
         for result in results:
-            # TODO: This might need to be removed
-            if result.path.startswith(".venv"):
-                continue
-            secret = hashlib.sha256(result.secret.encode("utf-8")).hexdigest()
-            content = ""
-            for head in header:
-                if head == "secret":
-                    content += f'"{secret}"'
-                else:
-                    content += f'"{getattr(result, head) or ""}"'
-                content += ","
+            #
+            for location in result.locations:
+                # skip non-commit locations
+                if location.get("type") != "commit":
+                    continue
+                details = location.get("details", {})
+                if details.get("path", "").startswith(".venv"):
+                    continue
 
-            f.write(f"{content}\n")
+                secret = hashlib.sha256(result.secret.encode("utf-8")).hexdigest()
+                content = f'"{result.secret_type}","{result.secret_type_display_name}","{secret}",'
+                # location info
+                content += f'"{details.get("path")}",'
+                content += f'"{details.get("start_line")}","{details.get("end_line")}",'
+                content += (
+                    f'"{details.get("start_column")}","{details.get("end_column")}",'
+                )
+
+                f.write(f"{content}\n")
+
+
+def checkExpected(expected: List[Dict[str, str]], results: List[SecretAlert]) -> int:
+    """Check if the expected results match the actual results"""
+    issues = 0
+    return issues
 
 
 def compareSnapshots(default: str, current: str) -> List[str]:
@@ -282,6 +217,14 @@ if __name__ == "__main__":
         logging.warning("No patterns found")
         sys.exit(0)
 
+    GitHub.init("advanced-security/secret-scanning-custom-patterns")
+
+    secret_scanning = SecretScanning()
+    # todo: caching
+    all_secrets = secret_scanning.getAlerts(state="open")
+
+    logging.info(f"Number of secrets found: {len(all_secrets)}")
+
     for file_path, pattern_config in configs.items():
         pattern_path = os.path.dirname(pattern_config.path)
 
@@ -301,19 +244,17 @@ if __name__ == "__main__":
 
             snapshot_path = f"{snapshot_dir}/{pattern.type}.csv"
 
-            results = getSecretScanningResults(
-                "advanced-security",
-                "secret-scanning-custom-patterns",
-                arguments.token,
-                pattern.type,
-            )
+            # list of secrets for a specific pattern
+            results = [
+                secret for secret in all_secrets if secret.secret_type == pattern.type
+            ]
             logging.info(f"Found secrets :: {len(results)}")
 
             if arguments.snapshot:
                 logging.info(f"Creating snapshot for {pattern.name} in {pattern_path}")
                 createSnapshot(snapshot_path, results)
             else:
-                logging.debug(f"Creating current snapshot for {pattern.name}")
+                logging.debug(f"Creating snapshot for '{pattern.name}' for validation")
                 current_snapshot = snapshot_path.replace(".csv", "-current.csv")
                 createSnapshot(current_snapshot, results)
 
@@ -326,6 +267,9 @@ if __name__ == "__main__":
                 else:
                     logging.info(f"No differences found")
                     os.remove(current_snapshot)
+
+                # expected
+                expected = checkExpected(pattern.expected, results)
 
     if arguments.markdown:
         createMarkdown(

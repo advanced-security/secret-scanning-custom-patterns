@@ -5,12 +5,10 @@ name = "pypi"
 
 [packages]
 pyyaml = "*"
-requests = "*"
-ratelimit = "*"
 jinja2 = "*"
+ghastoolkit = "*"
 
 [dev-packages]
-
 
 [requires]
 python_version = "3.10"
@@ -20,3 +18,6 @@ main = "python ./.github/scripts/validate.py"
 validate = "python ./.github/scripts/validate.py --validate"
 snapshot = "python ./.github/scripts/validate.py --snapshot"
 markdown = "python ./.github/scripts/validate.py --markdown"
+# formatting
+fmt = "black ./src/ghastoolkit"
+lint = "black --check ./src/ghastoolkit"
