@@ -18,6 +18,8 @@ main = "python ./.github/scripts/validate.py"
 validate = "python ./.github/scripts/validate.py --validate"
 snapshot = "python ./.github/scripts/validate.py --snapshot"
 markdown = "python ./.github/scripts/validate.py --markdown"
+# tests
+test = "python ./.github/scripts/validate.py --validate"
 # formatting
 fmt = "black ./src/ghastoolkit"
 lint = "black --check ./src/ghastoolkit"
