@@ -80,6 +80,8 @@ class PatternsConfig:
 
     name: str
 
+    display: bool = True
+
     patterns: List[Pattern] = field(default_factory=list)
 
     path: Optional[str] = field(default=None)
