@@ -7,7 +7,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 > :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives
 
 
-### [Configuration Secrets](/Users/aegilops/Repos/secret-scanning-custom-patterns/configs)
+### [Configuration Secrets](./configs)
 
 - Hardcoded Database Passwords
 - Hardcoded Spring SQL passwords
@@ -15,23 +15,23 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - GitHub Actions SHA Checker
 
 
-### [Generic Secrets / Passwords](/Users/aegilops/Repos/secret-scanning-custom-patterns/generic)
+### [Generic Secrets / Passwords](./generic)
 
 - Generic Passwords
 - UUIDs
 
 
-### [JWT](/Users/aegilops/Repos/secret-scanning-custom-patterns/jwt)
+### [JWT](./jwt)
 
 - JWT
 
 
-### [Password stores](/Users/aegilops/Repos/secret-scanning-custom-patterns/password_store)
+### [Password stores](./password_store)
 
 - Arc
 
 
-### [IBANs](/Users/aegilops/Repos/secret-scanning-custom-patterns/pii/generate_iban)
+### [IBANs](./pii/generate_iban)
 
 - IBAN for Albania
 - IBAN for Andorra
@@ -118,7 +118,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - IBAN for Somalia
 
 
-### [Personally identifiable information (PII)](/Users/aegilops/Repos/secret-scanning-custom-patterns/pii)
+### [Personally identifiable information (PII)](./pii)
 
 - Credit Cards
 - Credit Cards - Visa
@@ -128,14 +128,14 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - IBAN
 
 
-### [RSA Keys](/Users/aegilops/Repos/secret-scanning-custom-patterns/rsa)
+### [RSA Keys](./rsa)
 
 - Generic RSA keys
 - SSH Private Keys
 - GPG Private Key
 
 
-### [URI / URL Custom Patterns](/Users/aegilops/Repos/secret-scanning-custom-patterns/uri)
+### [URI / URL Custom Patterns](./uri)
 
 - Hardcoded Internal Emails
 - Hardcoded Internal URLs
@@ -144,7 +144,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - GitHub Container Registry typos
 
 
-### [Vendors](/Users/aegilops/Repos/secret-scanning-custom-patterns/vendors)
+### [Vendors](./vendors)
 
 - Azure SQL Connection String
 - Grafana API token
