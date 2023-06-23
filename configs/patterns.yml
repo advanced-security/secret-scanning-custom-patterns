@@ -13,13 +13,13 @@ patterns:
       pattern: |
         [^\r\n\x00-\x08]+
       start: |
-        (?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
+        (?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]?
       end: |
         \z|[\r\n'"]
     test:
       data: postgres_password=password
       start_offset: 18
-      end_offset: -1
+      end_offset: 26
 
   - name: Hardcoded Spring SQL passwords
     description: |
@@ -58,7 +58,7 @@ patterns:
     test:
       data: spring.datasource.password=password
       start_offset: 27
-      end_offset: -1
+      end_offset: 35
 
   - name: Django Secret Key
     type: django_secret_key
@@ -77,7 +77,7 @@ patterns:
     test:
       data: SECRET_KEY = "password"
       start_offset: 14
-      end_offset: 21
+      end_offset: 22
 
   # Experimental
 
@@ -114,15 +114,15 @@ patterns:
     test:
       data: "password: password"
       start_offset: 10
-      end_offset: 17
+      end_offset: 18
 
   - name: GitHub Actions SHA Checker
     type: github_actions_sha_checker
     comments:
-      - "Checks for all github action susing a version that isn't a pinned SHA-1 commit hash"
+      - "Checks for all github actions using a version that isn't a pinned SHA-1 commit hash"
       - "Checks for uses: org name / repo name @ string under 40 characters"
-      - "Not case sensative"
-      - "exclude all actions in actions, github and advanced-security repo"
+      - "Not case sensitive"
+      - "Exclude all actions in actions, github and advanced-security repo"
     regex:
       version: 0.1
       pattern: |
