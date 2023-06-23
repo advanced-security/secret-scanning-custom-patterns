@@ -217,11 +217,18 @@ if __name__ == "__main__":
         logging.warning("No patterns found")
         sys.exit(0)
 
-    GitHub.init("advanced-security/secret-scanning-custom-patterns")
+    GitHub.init(
+        "advanced-security/secret-scanning-custom-patterns", token=arguments.token
+    )
 
     secret_scanning = SecretScanning()
     # todo: caching
-    all_secrets = secret_scanning.getAlerts(state="open")
+    try:
+        all_secrets = secret_scanning.getAlerts(state="open")
+    except Exception as err:
+        logging.error(f"Error occured while fetching alerts: {err}")
+        logging.error(f"Please check your token has the right access and try again")
+        sys.exit(1)
 
     logging.info(f"Number of secrets found: {len(all_secrets)}")
 
