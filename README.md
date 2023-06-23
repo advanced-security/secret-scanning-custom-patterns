@@ -14,6 +14,11 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Django Secret Key
 - GitHub Actions SHA Checker
 
+### [Database passwords](./database)
+
+- Database Connection String (1)
+- Database Connection String (2)
+
 ### [Generic Secrets / Passwords](./generic)
 
 - Generic Passwords
@@ -55,3 +60,5 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Azure SQL Connection String
 - Grafana API token
 - SendGrid (deprecated)
+- Okta token
+
