@@ -88,16 +88,11 @@ patterns:
       end: |
         ['"\r\n]|\z
       additional_not_match:
-        - ^keyPassphrase$
-        - ^.* = (?:None|True|False),?$
-        - ^.* = \.\.\.,?$
-        - ^(?:(?:this|self|obj)\.)?[A-Za-z_]+\,$
-        - ^(?:(?:this|self|obj)\.)[A-Za-z_].*$
+        - ^(?:keyPassphrase|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|int|bool)( +#.*)?)$
+        - ^.* = (?:None|True|False|\.\.\.),?$
+        - ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
         - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
-        - ^(?:str|int|bool)( +#.*)?$
-        - ^[ \t]+$
         - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
-        - ^\$\{[A-Za-z0-9_-]+\}$
     comments:
       - "The hardcoded password is between 12 and 32 chars long"
       - "Some false positives in Code might appear"
@@ -109,4 +104,22 @@ patterns:
       - name: example.yml
         start_offset: 57
         end_offset: 80
+
+  - name: GitHub Actions SHA Checker 
+    type: github_actions_sha_checker
+    comments:
+      - "Checks for all github action susing a version that isn't a pinned SHA-1 commit hash"
+      - "Checks for uses: org name / repo name @ string under 40 characters"
+      - "Not case sensative"
+      - "exclude all actions in actions, github and advanced-security repo"
+    regex:
+      version: 0.1
+      pattern: |
+        [a-z0-9_-]{1,39}\/[a-z0-9_-]{1,100}@[a-z0-9._-]{1,39}
+      start: |
+        \buses:[ \t]{1,5}
+      end: |
+        \s|\z
+      additional_not_match:
+        - ^(actions|github|advanced-security)/
 

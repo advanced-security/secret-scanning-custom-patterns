@@ -1,3 +1,3 @@
 secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
-"ssh_private_keys","SSH Private Keys","1919b948cc0bc884310a9afa0ff0ee8f08a1fb6ed97a8a47ba2354eb0e151c0f","ssh/ssh_rsa","1","39","4","31",
-"ssh_private_keys","SSH Private Keys","1919b948cc0bc884310a9afa0ff0ee8f08a1fb6ed97a8a47ba2354eb0e151c0f","rsa/ssh_rsa","1","39","4","31",
+"ssh_private_keys","SSH Private Keys","aa0ecbfe194925a35a44b1c801ac58fececb6ee9e7f2480c0598f4cb33235908","ssh/ssh_rsa","1","39","4","31",
+"ssh_private_keys","SSH Private Keys","aa0ecbfe194925a35a44b1c801ac58fececb6ee9e7f2480c0598f4cb33235908","rsa/ssh_rsa","1","39","4","31",
