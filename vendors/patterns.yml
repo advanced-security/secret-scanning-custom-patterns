@@ -41,4 +41,41 @@ patterns:
       - name: sendgrid.py
         start_offset: 20
         end_offset: 89
+
+  - name: Okta token
+    type: okta_token
+    regex:
+      version: 0.1
+      pattern: |
+        (0{2}[0-9A-Za-z_-]{40})
+      start: |
+        (\A|[^0-9A-Za-z_+/-])
+      end: |
+        (\z|[^0-9A-Za-z_+/=-])
+      additional_not_match:
+        # Avoid long runs of hexadecimal only 
+        - "[0-9A-Fa-f-]{30}"
+        # Avoid long runs of alphabetic and _ - only
+        - "[a-zA-Z_-]{30}"
+        # Avoid big number with exponent
+        - ^\d+(\.\d+)?e[+-]?\d+$
+        # Don't hit on long strings of numbers and underscores only
+        - "[\\d_]{30}"
+
+    expected:
+      - name: okta.txt
+        start_offset: 12
+        end_offset: 54
+      - name: okta.txt
+        start_offset: 68
+        end_offset: 110
+      - name: okta.txt
+        start_offset: 127
+        end_offset: 169
+      - name: okta.txt
+        start_offset: 180
+        end_offset: 222
+
+    comments:
+      - Okta token, starting with `00` and 40 random alphanumeric with _ and -
  
