@@ -35,12 +35,12 @@ jobs:
 
           if [ -z "$(git status --porcelain)" ]; then
             gh pr comment --edit-last ${{ github.event.number }} \
-              --body "## :white_check_mark: Markdown Validation Passed :rocket:!"
+              --body "## :white_check_mark: Markdown Validation Passed :rocket:!" || true
             exit 0
 
           else
             PR_BODY=$'## :x: Markdown Failed\n\nPlease re-run the markdown generation \`pipenv run markdown\`'
-            gh pr comment --edit-last ${{ github.event.number }} \
+            gh pr comment ${{ github.event.number }} \
               --body "$PR_BODY"
             exit 1
           fi
