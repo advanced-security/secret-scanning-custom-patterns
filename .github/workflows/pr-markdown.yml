@@ -36,6 +36,7 @@ jobs:
           if [ -z "$(git status --porcelain)" ];
             gh pr comment ${{ github.event.number }} --body "## :white_check_mark: Markdown Passed"
             exit 0
+
           else
             gh pr comment ${{ github.event.number }} --body "## :x: Markdown Failed\n\nPlease re-run the markdown generation."
             exit 1
