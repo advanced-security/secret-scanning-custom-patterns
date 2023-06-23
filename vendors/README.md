@@ -83,6 +83,14 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 ## Okta token
 
 
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Okta token, starting with `00` and 40 random alphanumeric with _ and -
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -91,13 +99,8 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 (0{2}[0-9A-Za-z_-]{40})
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- Okta token, starting with `00` and 40 random alphanumeric with _ and -
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -108,8 +111,7 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
