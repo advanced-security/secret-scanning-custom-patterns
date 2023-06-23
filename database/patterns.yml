@@ -9,7 +9,7 @@ name: Database passwords
 
 patterns:
   - name: Database Connection String (1)
-    type: database_connection_string
+    type: database_connection_string_1
     description: "Database connection strings are used to connect to databases, often with embedded credentials."
     regex:
       pattern: |
@@ -23,13 +23,20 @@ patterns:
         - ^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$
         # parameterized query
         - parameters\('[^']+'\)
+    expected:
+      - name: connection_strings.txt
+        start_offset: 126
+        end_offset: 129
+      - name: connection_strings.txt
+        start_offset: 172
+        end_offset: 225
 
     comments:
       - This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
       - To cut FPs, we require the start of the string to be a database-specific keyword
 
   - name: Database Connection String (2)
-    type: database_connection_string
+    type: database_connection_string_2
     description: "Database connection strings are used to connect to databases, often with embedded credentials."
     regex:
       pattern: |
