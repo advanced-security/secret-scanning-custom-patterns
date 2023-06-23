@@ -1,4 +1,4 @@
-name: Auto-Markdown Generater
+name: Markdown Validation
 
 on:
   pull_request:
@@ -8,13 +8,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
 
-    permissions:
-      security-events: write
-
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
 
       - uses: actions/setup-python@v4
         with:
@@ -31,16 +26,17 @@ jobs:
         run: python3 -m pip install pipenv && python3 -m pipenv install
 
       # Run Validation
-      - name: Run Validation
+      - name: Run Markdown Validation
         env:
           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         run: |
           pipenv run python ./.github/scripts/validate.py \
             --markdown
 
-      - name: Commit update
-        run: |
-          git config --global user.name 'Git bot'
-          git config --global user.email 'bot@noreply.github.com'
-          git remote set-url origin https://${{ env.ADVANCED_SECURITY_APP_NAME }}:${{ steps.get_workflow_token.outputs.token }}@github.com/${{ github.repository }}
-          git commit -am "[bot] Auto-Generate Markdown Updates" && git push || echo "No changes to commit"
+          if [ -z "$(git status --porcelain)" ];
+            gh pr comment ${{ github.event.number }} --body "## :white_check_mark: Markdown Passed"
+            exit 0
+          else
+            gh pr comment ${{ github.event.number }} --body "## :x: Markdown Failed\n\nPlease re-run the markdown generation."
+            exit 1
+          fi
