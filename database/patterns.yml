@@ -54,3 +54,22 @@ patterns:
     comments:
       - This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
       - To cut FPs, we require part of the string after the password to be a database-specific keyword
+
+  - name: TSQL CREATE LOGIN
+    type: tsql_create_login
+    description: "A TSQL CREATE LOGIN command using a password"
+    regex:
+      pattern: |
+        [^'\x00-\x08]{8,128}
+      start: |
+        (\A|\b)CREATE\s+LOGIN\s+[^\s\x00-\x08]+\s+WITH\s+PASSWORD\s+=\s+N?'
+      end: |
+        \'
+    expected:
+      - name: create_user.sql
+        start_offset: 0
+        end_offset: -1
+
+    comments:
+      - This is specific to Microsoft SQL Server TSQL syntax
+
