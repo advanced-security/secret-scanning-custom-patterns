@@ -1,0 +1,19 @@
+name: Commonly Used Secrets / Passwords
+
+patterns:
+  - name: Common Passwords Shortlist
+    type: common_passwords_shortlist
+    regex:
+      version: 0.1
+      pattern: |
+        "(?i)(p[@a][s5]{2}w[o0]rd|123456(7|78|789|7890|78910)|(abc|123|xyz|321|qaz|wsx|zaq|xsw|qwe|asd|zxc)+|(q[uw]|az)erty(uiop)?|m[o0]nk[e3][yi]|l[e3]tm[e3][i1!]n|dr[a@]g[o0]n|111111|777777|888888|b[@a][s5$][e3]b[@]a[l1!]{1,2}|[i1!]l[o0]v[e3]y[o0]u|tru[s5$]tn[o0](1|!|one)|[s5$]un[s5$]h[i1!]n[e3]|m[a@][s5$]t[e3]r|w[e3][l1!]c[o0]m[e3]|[s5$]h[a@]d[o0]w|[a@][s5$]hl[e3]y|f[o0]{1,2}tb[a@]l{1,2}|j[e3][s5$]u[s5$]|m[i1!]ch[a@][e@]l|n[i1!]nj[a@]|mu[s5$]t[a@]ng)[!?%$]*\d*[!?%$]*"
+      start: |
+        [a-zA-Z0-9_-]+(={1,3}|:)[\t ]*(?:b?["'])?
+      end: |
+        (\z|[\r\n'"])
+    comments:
+      - very small common password shortlist from SecLists
+      - allows for numbers and common punctuation at the end
+      - case insensitive
+      - adds some l33tsp3@k variations
+
