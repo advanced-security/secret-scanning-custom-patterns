@@ -123,3 +123,17 @@ patterns:
       additional_not_match:
         - ^(actions|github|advanced-security)/
 
+
+  - name: .NET Configuration file
+    type: dotnet_configuration
+    regex:
+      version: 0.1
+      pattern: |
+        [^"\x00\x08]+
+      start: |
+        <add key="[^"]*(?i)(password|secret|pass(?:wd|word|code|phrase)?|key|token)"\s+value="
+      end: |
+        \"
+    comments:
+      - XML key/value format, <add key="key name" value="value of key" />
+
