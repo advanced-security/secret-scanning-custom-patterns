@@ -28,9 +28,9 @@ patterns:
         - ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$
 
     test:
-      - data: password=Password123
-        start_offset: 9
-        end_offset: -1
+      data: password=Password123
+      start_offset: 9
+      end_offset: -1
 
     expected:
       - name: passwords.js
