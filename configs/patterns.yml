@@ -136,6 +136,10 @@ patterns:
         \"
     comments:
       - XML key/value format, <add key="key name" value="value of key" />
+    expected:
+      - name: app.config
+        start_offset: 59
+        end_offset: 84
 
 
   - name: .NET MachineKey
