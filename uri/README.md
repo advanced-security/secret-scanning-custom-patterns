@@ -5,11 +5,6 @@
 ## Hardcoded Internal Emails
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -18,8 +13,12 @@
 [^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -30,7 +29,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -44,11 +44,6 @@
 ## Hardcoded Internal URLs
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -57,8 +52,12 @@
 [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -69,7 +68,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -83,11 +83,6 @@
 ## Hardcoded URI Passwords
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -96,8 +91,12 @@
 [^$/?#@\s][^/?#@\s\x00-\x08]*
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -108,7 +107,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -134,17 +134,6 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## Routable IPv4 Addresses
 
 
-
-*version: v0.1*
-
-**Comments / Notes:**
-
-- False Positives with build versions, but won't match if prefixed with v or ends with -
-- Use a custom IPv4 pattern if possible, tailored for the ranges you use
-- Doesn't include test, localhost or non-routable IPs
-- Does include local ranges such as 192.168.0.0/24
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -153,8 +142,16 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 (?:(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])\.){3}(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
+- False Positives with build versions, but won't match if prefixed with v or ends with -
+- Use a custom IPv4 pattern if possible, tailored for the ranges you use
+- Doesn't include test, localhost or non-routable IPs
+- Does include local ranges such as 192.168.0.0/24
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -165,7 +162,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -191,11 +189,6 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## GitHub Container Registry typos
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -204,8 +197,12 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 (?:ghrc|gchr|hgcr|ghr|ghc)\.io
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -216,7 +213,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
