@@ -5,17 +5,6 @@
 ## Generic Passwords
 
 
-
-*version: v0.4*
-
-**Comments / Notes:**
-
-- `password`, `secret`, `key`, or password like prefix (fuzzy)
-- Delimiters like `=` or `:` (with padding)
-- String with a number of chars until a breaking char
-- Not matching variables, placeholders or common configuration constants such as 'read' and 'write'
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -24,8 +13,16 @@
 [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.4
+- `password`, `secret`, `key`, or password like prefix (fuzzy)
+- Delimiters like `=` or `:` (with padding)
+- String with a number of chars until a breaking char
+- Not matching variables, placeholders or common configuration constants such as 'read' and 'write'
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -36,7 +33,8 @@
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -64,11 +62,6 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## UUIDs
 
 
-
-*version: v0.1*
-
-
-
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -77,8 +70,12 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 (?i)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -89,7 +86,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
