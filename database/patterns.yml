@@ -61,7 +61,7 @@ patterns:
     description: "Database connection strings are used to connect to databases, often with embedded credentials."
     regex:
       pattern: |
-        [^;"\x00-\x08]+
+        [^;\r\n"'\x00-\x08]+
       start: |
         (\A|\b)ConnectionStrings__Default=[^\r\n]*([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
       end: |
@@ -72,4 +72,8 @@ patterns:
 
     comments:
       - This will spot the ConnectionStrings__Default env var being set with a Password
+    expected:
+      - name: docker_sqlserver.yml
+        start_offset: 394
+        end_offset: 405
 
