@@ -117,7 +117,7 @@ Database connection strings are used to connect to databases, often with embedde
 <p>
 
 ```regex
-[^;"\x00-\x08]+
+[^;\r\n"'\x00-\x08]+
 ```
 
 **Comments / Notes:**
