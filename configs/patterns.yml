@@ -154,5 +154,11 @@ patterns:
         \"
     comments:
       - contents of the validationKey or decryptionKey of a machineKey XML element
-
+    expected:
+      - name: web.config
+        start_offset: 27
+        end_offset: 154
+      - name: web.config
+        start_offset: 171
+        end_offset: 234
 
