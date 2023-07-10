@@ -6,14 +6,88 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        "(?i)(p[@a][s5]{2}w[o0]rd|123456(7|78|789|7890|78910)|(abc|123|xyz|321|qaz|wsx|zaq|xsw|qwe|asd|zxc)+|(q[uw]|az)erty(uiop)?|m[o0]nk[e3][yi]|l[e3]tm[e3][i1!]n|dr[a@]g[o0]n|111111|777777|888888|b[@a][s5$][e3]b[@]a[l1!]{1,2}|[i1!]l[o0]v[e3]y[o0]u|tru[s5$]tn[o0](1|!|one)|[s5$]un[s5$]h[i1!]n[e3]|m[a@][s5$]t[e3]r|w[e3][l1!]c[o0]m[e3]|[s5$]h[a@]d[o0]w|[a@][s5$]hl[e3]y|f[o0]{1,2}tb[a@]l{1,2}|j[e3][s5$]u[s5$]|m[i1!]ch[a@][e@]l|n[i1!]nj[a@]|mu[s5$]t[a@]ng)[!?%$]*\d*[!?%$]*"
+        (?i)(p[@a][s5]{2}w[o0]rd|123456(7|78|789|7890|78910)|(abc|123|xyz|321|qaz|wsx|zaq|xsw|qwe|asd|zxc)+|(q[uw]|az)erty(uiop)?|m[o0]nk[e3][yi]|l[e3]tm[e3][i1!]n|dr[a@]g[o0]n|111111|777777|888888|b[@a][s5$][e3]b[@]a[l1!]{1,2}|[i1!]l[o0]v[e3]y[o0]u|tru[s5$]tn[o0](1|!|one)|[s5$]un[s5$]h[i1!]n[e3]|m[a@][s5$]t[e3]r|w[e3][l1!]c[o0]m[e3]|[s5$]h[a@]d[o0]w|[a@][s5$]hl[e3]y|f[o0]{1,2}tb[a@]l{1,2}|j[e3][s5$]u[s5$]|m[i1!]ch[a@][e@]l|n[i1!]nj[a@]|mu[s5$]t[a@]ng)[!?%$]*\d*[!?%$]*
       start: |
-        [a-zA-Z0-9_-]+(={1,3}|:)[\t ]*(?:b?["'])?
+        (?:\b|\A)[a-zA-Z0-9_-]+[\t ]*(?:={1,3}|:)[\t ]*(?:b?["'])?
       end: |
-        (\z|[\r\n'"])
+        (?:\z|[\r\n'"])
     comments:
       - very small common password shortlist from SecLists
       - allows for numbers and common punctuation at the end
       - case insensitive
       - adds some l33tsp3@k variations
+
+    expected:
+      - name: top-passwords-shortlist.txt
+        start_offset: 13
+        end_offset: 21
+      - name: top-passwords-shortlist.txt
+        start_offset: 34
+        end_offset: 40
+      - name: top-passwords-shortlist.txt
+        start_offset: 49
+        end_offset: 57
+      - name: top-passwords-shortlist.txt
+        start_offset: 64
+        end_offset: 70
+      - name: top-passwords-shortlist.txt
+        start_offset: 80
+        end_offset: 86
+      - name: top-passwords-shortlist.txt
+        start_offset: 94
+        end_offset: 100
+      - name: top-passwords-shortlist.txt
+        start_offset: 106
+        end_offset: 113
+      - name: top-passwords-shortlist.txt
+        start_offset: 119
+        end_offset: 125
+      - name: top-passwords-shortlist.txt
+        start_offset: 131
+        end_offset: 137
+      - name: top-passwords-shortlist.txt
+        start_offset: 161
+        end_offset: 169
+      - name: top-passwords-shortlist.txt
+        start_offset: 179
+        end_offset: 187
+      - name: top-passwords-shortlist.txt
+        start_offset: 197
+        end_offset: 204
+      - name: top-passwords-shortlist.txt
+        start_offset: 214
+        end_offset: 222
+      - name: top-passwords-shortlist.txt
+        start_offset: 232
+        end_offset: 238
+      - name: top-passwords-shortlist.txt
+        start_offset: 248
+        end_offset: 254
+      - name: top-passwords-shortlist.txt
+        start_offset: 264
+        end_offset: 271
+      - name: top-passwords-shortlist.txt
+        start_offset: 281
+        end_offset: 287
+      - name: top-passwords-shortlist.txt
+        start_offset: 297
+        end_offset: 303
+      - name: top-passwords-shortlist.txt
+        start_offset: 313
+        end_offset: 320
+      - name: top-passwords-shortlist.txt
+        start_offset: 330
+        end_offset: 335
+      - name: top-passwords-shortlist.txt
+        start_offset: 345
+        end_offset: 352
+      - name: top-passwords-shortlist.txt
+        start_offset: 362
+        end_offset: 367
+      - name: top-passwords-shortlist.txt
+        start_offset: 377
+        end_offset: 384
+      - name: top-passwords-shortlist.txt
+        start_offset: 394
+        end_offset: 403
 
