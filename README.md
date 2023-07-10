@@ -7,12 +7,12 @@ This repository extends the [list of supported Vendors out of the box](https://d
 > :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives
 
 
-### [Commonly Used Secrets / Passwords](/home/azureuser/secret-scanning-custom-patterns/common)
+### [Commonly Used Secrets / Passwords](./common)
 
 - Common Passwords Shortlist
 
 
-### [Configuration Secrets](/home/azureuser/secret-scanning-custom-patterns/configs)
+### [Configuration Secrets](./configs)
 
 - Hardcoded Database Passwords
 - Hardcoded Spring SQL passwords
@@ -20,29 +20,29 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - GitHub Actions SHA Checker
 
 
-### [Database passwords](/home/azureuser/secret-scanning-custom-patterns/database)
+### [Database passwords](./database)
 
 - Database Connection String (1)
 - Database Connection String (2)
 
 
-### [Generic Secrets / Passwords](/home/azureuser/secret-scanning-custom-patterns/generic)
+### [Generic Secrets / Passwords](./generic)
 
 - Generic Passwords
 - UUIDs
 
 
-### [JWT](/home/azureuser/secret-scanning-custom-patterns/jwt)
+### [JWT](./jwt)
 
 - JWT
 
 
-### [Password stores](/home/azureuser/secret-scanning-custom-patterns/password_store)
+### [Password stores](./password_store)
 
 - Arc
 
 
-### [IBANs](/home/azureuser/secret-scanning-custom-patterns/pii/generate_iban)
+### [IBANs](./pii/generate_iban)
 
 - IBAN for Albania
 - IBAN for Andorra
@@ -129,7 +129,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - IBAN for Somalia
 
 
-### [Personally identifiable information (PII)](/home/azureuser/secret-scanning-custom-patterns/pii)
+### [Personally identifiable information (PII)](./pii)
 
 - Credit Cards
 - Credit Cards - Visa
@@ -139,14 +139,14 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - IBAN
 
 
-### [RSA Keys](/home/azureuser/secret-scanning-custom-patterns/rsa)
+### [RSA Keys](./rsa)
 
 - Generic RSA keys
 - SSH Private Keys
 - GPG Private Key
 
 
-### [URI / URL Custom Patterns](/home/azureuser/secret-scanning-custom-patterns/uri)
+### [URI / URL Custom Patterns](./uri)
 
 - Hardcoded Internal Emails
 - Hardcoded Internal URLs
@@ -155,7 +155,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - GitHub Container Registry typos
 
 
-### [Vendors](/home/azureuser/secret-scanning-custom-patterns/vendors)
+### [Vendors](./vendors)
 
 - Azure SQL Connection String
 - Grafana API token
