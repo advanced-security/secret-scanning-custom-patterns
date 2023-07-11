@@ -4,15 +4,7 @@
 
 ## Database Connection String (1)
 
-
 Database connection strings are used to connect to databases, often with embedded credentials.
-*version: v0.1*
-
-**Comments / Notes:**
-
-- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
-- To cut FPs, we require the start of the string to be a database-specific keyword
-
 
 <details>
 <summary>Pattern Format</summary>
@@ -22,8 +14,14 @@ Database connection strings are used to connect to databases, often with embedde
 [^;"\x00-\x08]+
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
+- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
+- To cut FPs, we require the start of the string to be a database-specific keyword
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -34,7 +32,8 @@ Database connection strings are used to connect to databases, often with embedde
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
@@ -58,15 +57,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 ## Database Connection String (2)
 
-
 Database connection strings are used to connect to databases, often with embedded credentials.
-*version: v0.1*
-
-**Comments / Notes:**
-
-- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
-- To cut FPs, we require part of the string after the password to be a database-specific keyword
-
 
 <details>
 <summary>Pattern Format</summary>
@@ -76,8 +67,14 @@ Database connection strings are used to connect to databases, often with embedde
 [^;"\x00-\x08]+
 ```
 
+**Comments / Notes:**
+
+- Current Version: v0.1
+- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
+- To cut FPs, we require part of the string after the password to be a database-specific keyword
 </p>
 </details>
+
 
 <details>
 <summary>Start Pattern</summary>
@@ -88,7 +85,8 @@ Database connection strings are used to connect to databases, often with embedde
 ```
 
 </p>
-</details><details>
+</details>
+<details>
 <summary>End Pattern</summary>
 <p>
 
