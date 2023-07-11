@@ -1,0 +1,46 @@
+name: Markdown Validation
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Get Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@8e1ba3bf1619726336414f1014e37f17fbadf1db #v2.1.0
+        with:
+          application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
+          application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
+
+      - name: Install Deps
+        run: python3 -m pip install pipenv && python3 -m pipenv install
+
+      # Run Validation
+      - name: Run Markdown Validation
+        env:
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+        run: |
+          pipenv run python ./.github/scripts/validate.py \
+            --markdown
+
+          if [ -z "$(git status --porcelain)" ]; then
+            gh pr comment --edit-last ${{ github.event.number }} \
+              --body "## :white_check_mark: Markdown Validation Passed :rocket:!" || true
+            exit 0
+
+          else
+            PR_BODY=$'## :x: Markdown Failed\n\nPlease re-run the markdown generation \`pipenv run markdown\`'
+            gh pr comment ${{ github.event.number }} \
+              --body "$PR_BODY"
+            exit 1
+          fi

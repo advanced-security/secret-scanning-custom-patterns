@@ -14,32 +14,32 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Django Secret Key
 - GitHub Actions SHA Checker
 
+### [Database passwords](./database)
+
+- Database Connection String (1)
+- Database Connection String (2)
 
 ### [Generic Secrets / Passwords](./generic)
 
 - Generic Passwords
 - UUIDs
 
-
 ### [JWT](./jwt)
 
 - JWT
 
-
-### [Password Stores](./password_store)
+### [Password stores](./password_store)
 
 - Arc
 
-
 ### [Personally identifiable information (PII)](./pii)
 
-- IBAN
 - Credit Cards
 - Credit Cards - Visa
 - Credit Cards - MasterCard
 - Credit Cards - American Express
 - Credit Cards - Discover
-
+- IBAN
 
 ### [RSA Keys](./rsa)
 
@@ -47,17 +47,17 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - SSH Private Keys
 - GPG Private Key
 
-
 ### [URI / URL Custom Patterns](./uri)
 
 - Hardcoded Internal Emails
 - Hardcoded Internal URLs
 - Hardcoded URI Passwords
-- Any IPv4 Addresses
-
+- Routable IPv4 Addresses
+- GitHub Container Registry typos
 
 ### [Vendors](./vendors)
 
 - Azure SQL Connection String
 - Grafana API token
 - SendGrid (deprecated)
+- Okta token
