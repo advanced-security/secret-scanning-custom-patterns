@@ -57,16 +57,16 @@ patterns:
     expected:
       - name: .env
         start_offset: 18
-        end_offset: 89
+        end_offset: 82
       - name: .sentryclirc
         start_offset: 13
-        end_offset: 76
+        end_offset: 77
       - name: sentry.sh
         start_offset: 35
-        end_offset: 98
+        end_offset: 99
       - name: sentry.properties
         start_offset: 11
-        end_offset: 74
+        end_offset: 75
 
   # random 32-character hex string
   # Source: https://github.com/getsentry/sentry/blob/master/src/sentry/models/apikey.py#LL74C18-L74C18
@@ -83,17 +83,17 @@ patterns:
         - \d\D|\D\d
     expected:
       - name: .env
-        start_offset: 106
-        end_offset: 145
+        start_offset: 98
+        end_offset: 130
       - name: .sentryclirc
         start_offset: 86
-        end_offset: 117
+        end_offset: 118
       - name: sentry.sh
         start_offset: 121
-        end_offset: 152
+        end_offset: 153
       - name: sentry.properties
         start_offset: 89
-        end_offset: 120
+        end_offset: 121
 
   # https://docs.sentry.io/product/sentry-basics/dsn-explainer
   - name: Sentry DSN secret
@@ -112,7 +112,7 @@ patterns:
     expected:
       - name: sentry_dsn.txt
         start_offset: 41
-        end_offset: 72
+        end_offset: 73
 
   # https://github.com/40thieves/webpack-sentry-plugin/blob/master/README.md
   - name: Sentry webpack plugin token
@@ -129,7 +129,7 @@ patterns:
     expected:
       - name: webpack_sentry.js
         start_offset: 215
-        end_offset: 246
+        end_offset: 247
 
   # https://registry.terraform.io/providers/jianyuan/sentry/latest/docs
   - name: Sentry Terraform provider token
@@ -146,7 +146,7 @@ patterns:
     expected:
       - name: terraform.tf
         start_offset: 127
-        end_offset: 190
+        end_offset: 191
 
   - name: Okta token
     type: okta_token
