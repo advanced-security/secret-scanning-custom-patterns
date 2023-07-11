@@ -55,7 +55,7 @@ patterns:
       additional_match:
         - \d\D|\D\d
     expected:
-      - name: .env
+      - name: dotenv
         start_offset: 18
         end_offset: 82
       - name: .sentryclirc
@@ -82,7 +82,7 @@ patterns:
       additional_match:
         - \d\D|\D\d
     expected:
-      - name: .env
+      - name: dotenv
         start_offset: 98
         end_offset: 130
       - name: .sentryclirc
