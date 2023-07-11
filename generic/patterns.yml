@@ -85,6 +85,13 @@ patterns:
         - ^(?i)(?:[a-z0-9]|XYZ|ABC|123|.*_token)$
         - (?i)x{5}
         - ^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$
+    expected:
+      - name: bearer.txt
+        start_offset: 45
+        end_offset: 64
+      - name: bearer.txt
+        start_offset: 99
+        end_offset: 118
     comments:
       - "As used in an Authorization header"
       - "We try to remove common placeholders"
