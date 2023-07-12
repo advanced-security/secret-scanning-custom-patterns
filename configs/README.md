@@ -242,3 +242,87 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## .NET Configuration file
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- XML key/value format, <add key="key name" value="value of key" />
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[^"\x00\x08]+
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+<add\s+key="[^"]*(?i)(password|secret|pass(?:wd|word|code|phrase)?|key|token)"\s+value="
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\"
+```
+
+</p>
+</details>
+
+## .NET MachineKey
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- contents of the validationKey or decryptionKey of a machineKey XML element
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[A-Fa-f0-9]+
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+<machineKey\s+[^>]*(validation|decryption)Key="
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\"
+```
+
+</p>
+</details>
