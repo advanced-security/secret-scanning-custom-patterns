@@ -31,6 +31,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 
 - Generic Passwords
 - UUIDs
+- Bearer Tokens
 
 ### [JWT](./jwt)
 

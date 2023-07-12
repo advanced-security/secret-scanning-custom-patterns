@@ -112,3 +112,60 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## Bearer Tokens
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- As used in an Authorization header
+- We try to remove common placeholders
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[a-zA-Z0-9_.=/+:-]+
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+['"\s][Aa]uthorization: Bearer[ ]+
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[\s'"]
+```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `^(?:letmein|Oracle|SuperSecretString|foo|ababbdbbebbbebdbbe5538003023|XYZ_INVALID_ACCESTOKEN_XYZ|QQ==|Shizuku|mF_9.B5f-4.1JqM|h480djs93hd8|SlAV32hkKG)$`
+- Not Match: `^(?i)(?:dummy|fake|bearer|auth|invalid|your|my|the|undefined|github|oidc|database)(?:_api)?(?:_?token|key|secret)?$`
+- Not Match: `^(?i)(?:[a-z0-9]|XYZ|ABC|123|.*_token)$`
+- Not Match: `(?i)x{5}`
+- Not Match: `^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$`
+
+</p>
+</details>
