@@ -67,6 +67,11 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Azure SQL Connection String
 - Grafana API token
 - SendGrid (deprecated)
+- Sentry Auth Token
+- Sentry API Key
+- Sentry DSN secret
+- Sentry webpack plugin token
+- Sentry Terraform provider token
 - Okta token
 - DataDog API key
 - DataDog APP key
