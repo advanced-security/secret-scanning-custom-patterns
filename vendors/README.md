@@ -369,3 +369,112 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## DataDog API key
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Looks for surrounding context to confirm this is a DataDog API key, not some other 32-byte hex string
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[a-f0-9]{32}
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+(\A|\b)(((?i)(DD|DATADOG)_API_KEY)['"]?\s*(value)?[=:,]\s*['"]?|new DataDogWinston\({[^}]*apiKey:\s*'|terraformer import datadog [^\n]*--api-key=|provider "datadog" {[^}]*api_key\s*=\s*")
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|\b
+```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `^0+$`
+- Not Match: `^1+$`
+- Not Match: `^ef8d5de700e7989468166c40fc8a0ccd$`
+- Not Match: `^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$`
+
+</p>
+</details>
+
+## DataDog APP key
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Looks for surrounding context to confirm this is a DataDog App key, not some other 40-byte hex string
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[a-f0-9]{40}
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+(\A|\b)(((?i)(DD|DATADOG)_APP(LICATION)?_KEY)['"]?\s*(value)?[=:,]\s*['"]?|new DataDogWinston\({[^}]*apiKey:\s*'|terraformer import datadog [^\n]*--api-key=|provider "datadog" {[^}]*api_key\s*=\s*")
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|\b
+```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `^0+$`
+- Not Match: `^1+$`
+- Not Match: `a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9`
+
+</p>
+</details>

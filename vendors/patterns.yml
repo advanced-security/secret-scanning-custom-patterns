@@ -184,4 +184,78 @@ patterns:
 
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric with _ and -
- 
+
+  - name: DataDog API key
+    type: datadog_api_key
+    regex:
+      version: 0.1
+      pattern: |
+        [a-f0-9]{32}
+      start: |
+        (\A|\b)(((?i)(DD|DATADOG)_API_KEY)['"]?\s*(value)?[=:,]\s*['"]?|new DataDogWinston\({[^}]*apiKey:\s*'|terraformer import datadog [^\n]*--api-key=|provider "datadog" {[^}]*api_key\s*=\s*")
+      end: |
+        \z|\b
+      additional_not_match:
+        - ^0+$
+        - ^1+$
+        - ^ef8d5de700e7989468166c40fc8a0ccd$
+        - ^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$
+    expected:
+      - name: datadog.txt
+        start_offset: 22
+        end_offset: 54
+      - name: datadog.txt
+        start_offset: 154
+        end_offset: 186
+      - name: datadog.txt
+        start_offset: 273
+        end_offset: 305
+      - name: datadog.txt
+        start_offset: 576
+        end_offset: 608
+      - name: datadog.txt
+        start_offset: 740
+        end_offset: 772
+      - name: datadog.txt
+        start_offset: 881
+        end_offset: 913
+      - name: datadog.txt
+        start_offset: 1017
+        end_offset: 1049
+    comments:
+      - "Looks for surrounding context to confirm this is a DataDog API key, not some other 32-byte hex string"
+
+  - name: DataDog APP key
+    type: datadog_app_key
+    regex:
+      version: 0.1
+      pattern: |
+        [a-f0-9]{40}
+      start: |
+        (\A|\b)(((?i)(DD|DATADOG)_APP(LICATION)?_KEY)['"]?\s*(value)?[=:,]\s*['"]?|new DataDogWinston\({[^}]*apiKey:\s*'|terraformer import datadog [^\n]*--api-key=|provider "datadog" {[^}]*api_key\s*=\s*")
+      end: |
+        \z|\b
+      additional_not_match:
+        - ^0+$
+        - ^1+$
+        - a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9
+    expected:
+      - name: datadog.txt
+        start_offset: 66
+        end_offset: 106
+      - name: datadog.txt
+        start_offset: 206
+        end_offset: 246
+      - name: datadog.txt
+        start_offset: 323
+        end_offset: 363
+      - name: datadog.txt
+        start_offset: 483
+        end_offset: 523
+      - name: datadog.txt
+        start_offset: 1074
+        end_offset: 1114
+
+    comments:
+      - "Looks for surrounding context to confirm this is a DataDog App key, not some other 40-byte hex string"
+
