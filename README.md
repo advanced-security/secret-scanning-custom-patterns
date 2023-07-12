@@ -25,6 +25,7 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Database Connection String (1)
 - Database Connection String (2)
 - Database Connection String (3)
+- TSQL CREATE LOGIN/USER
 
 ### [Generic Secrets / Passwords](./generic)
 

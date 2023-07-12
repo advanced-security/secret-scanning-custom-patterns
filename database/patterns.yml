@@ -55,7 +55,6 @@ patterns:
       - This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
       - To cut FPs, we require part of the string after the password to be a database-specific keyword
 
-
   - name: Database Connection String (3)
     type: database_connection_string_3
     description: "Database connection strings are used to connect to databases, often with embedded credentials."
@@ -76,4 +75,24 @@ patterns:
       - name: docker_sqlserver.yml
         start_offset: 394
         end_offset: 405
+
+  - name: TSQL CREATE LOGIN/USER
+    type: tsql_create_login_or_user
+    description: "A TSQL CREATE LOGIN or USER command using a password"
+    regex:
+      pattern: |
+        [^'\x00-\x08]{8,128}
+      start: |
+        (\A|\b)CREATE\s+(LOGIN|USER)\s+[^\s\x00-\x08]+\s+WITH\s+PASSWORD\s+=\s+N?'
+      end: |
+        \'
+    expected:
+      - name: tsql_create_user.sql
+        start_offset: 35
+        end_offset: 45
+
+    comments:
+      - This is specific to Microsoft SQL Server TSQL syntax
+
+
 

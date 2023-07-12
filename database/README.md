@@ -161,3 +161,45 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## TSQL CREATE LOGIN/USER
+
+
+A TSQL CREATE LOGIN or USER command using a password
+*version: v0.1*
+
+**Comments / Notes:**
+
+- This is specific to Microsoft SQL Server TSQL syntax
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[^'\x00-\x08]{8,128}
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+(\A|\b)CREATE\s+(LOGIN|USER)\s+[^\s\x00-\x08]+\s+WITH\s+PASSWORD\s+=\s+N?'
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\'
+```
+
+</p>
+</details>
