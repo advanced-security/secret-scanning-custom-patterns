@@ -7,6 +7,10 @@ This repository extends the [list of supported Vendors out of the box](https://d
 > :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives
 
 
+### [Commonly Used Secrets / Passwords](./common)
+
+- Common Passwords Shortlist
+
 ### [Configuration Secrets](./configs)
 
 - Hardcoded Database Passwords
