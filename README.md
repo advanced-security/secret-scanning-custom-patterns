@@ -17,6 +17,8 @@ This repository extends the [list of supported Vendors out of the box](https://d
 - Hardcoded Spring SQL passwords
 - Django Secret Key
 - GitHub Actions SHA Checker
+- .NET Configuration file
+- .NET MachineKey
 
 ### [Database passwords](./database)
 
