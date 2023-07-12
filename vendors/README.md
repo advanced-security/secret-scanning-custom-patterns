@@ -5,6 +5,14 @@
 ## Azure SQL Connection String
 
 
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -13,16 +21,17 @@
 (?i)[a-z][a-z0-9-]+\.database(?:\.secure)?\.(?:(?:windows|usgovcloudapi)\.net|chinacloudapi\.cn|cloudapi\.de)
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/
 </p>
 </details>
 
 
 
 ## Grafana API token
+
+
+
+*version: v0.1*
+
 
 
 <details>
@@ -33,15 +42,20 @@
 eyJrIjoi[A-Za-z0-9_=-]{42}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
 
 
 
 ## SendGrid (deprecated)
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Deprecated (supported by Secret Scanning)
 
 
 <details>
@@ -52,13 +66,8 @@ eyJrIjoi[A-Za-z0-9_=-]{42}
 SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- Deprecated (supported by Secret Scanning)
 </p>
 </details>
-
 
 <details>
 <summary>End Pattern</summary>
@@ -74,6 +83,11 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 ## Sentry Auth Token
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -82,12 +96,8 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 [a-fA-F0-9]{64}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -98,8 +108,7 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -123,6 +132,11 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## Sentry API Key
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -131,12 +145,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 [a-fA-F0-9]{32}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -147,8 +157,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -172,6 +181,14 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## Sentry DSN secret
 
 
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- The secret part of the DSN is optional and effectively deprecated, and should be removed from the DSN: https://docs.sentry.io/product/sentry-basics/dsn-explainer
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -180,13 +197,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 [a-fA-F0-9]{32}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- The secret part of the DSN is optional and effectively deprecated, and should be removed from the DSN: https://docs.sentry.io/product/sentry-basics/dsn-explainer
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -197,8 +209,7 @@ https://[a-fA-F0-9]{32}:
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -222,6 +233,11 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## Sentry webpack plugin token
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -230,12 +246,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 (?:[a-fA-F0-9]{32}|[a-fA-F0-9]{64})
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -246,8 +258,7 @@ new SentryPlugin\(\s*\{[^}]*[,\n \t]apiKey:\s*['"]
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -271,6 +282,11 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## Sentry Terraform provider token
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -279,12 +295,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 [a-fA-F0-9]{64}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -295,8 +307,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -320,6 +331,14 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## Okta token
 
 
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Okta token, starting with `00` and 40 random alphanumeric with _ and -
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -328,13 +347,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 (0{2}[0-9A-Za-z_-]{40})
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
-- Okta token, starting with `00` and 40 random alphanumeric with _ and -
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -345,8 +359,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
