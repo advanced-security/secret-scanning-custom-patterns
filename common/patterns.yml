@@ -12,95 +12,67 @@ patterns:
       end: |
         \z|[\r\n'"]
       additional_not_match:
-        # very common FP 
-        - ^red'?$
         # some really common FPs in code
-        - ^(master|shadow|password|\$PASSWORD|MASTER|www\.)$
-        # web colours
-        - ^\#[0-9]+$
-        # long strings, unlikely to be a weak password
-        - ^.{20,} 
+        - ^(red'?|master|shadow|password|\$PASSWORD|MASTER|www\.|#[0-9]+)$
+      additional_match:
+        # must have 1 of lowercase, uppercase, letters and special characters, to pass a complexity filter
+        - "[a-z].*[A-Z]|[A-Z].*[a-z]"
+        - "[0-9].*[^0-9A-Za-z]|[^0-9A-Za-z].*[0-9]"
+        # must be 8-20 characters to be counted as a "password"
+        # 8 tends to be a minimum for most passwords with a complexity rule
+        # 20 is a rough maximum for most human-created passwords
+        - ^.{8,20}$  
     comments:
       - ⚠️  prone to high numbers of false positives, use with caution ⚠️ 
       - very small common password shortlist from SecLists
       - allows for numbers and common punctuation at the end
       - case insensitive
       - adds some l33tsp3@k variations
+      - limits lengths to 8-20 characters
+      - requires it passes a complexity rule - at least one lowercase, uppercase, number and special character
+      - tune to your requirements!
 
     expected:
       - name: top-passwords-shortlist.txt
         start_offset: 13
         end_offset: 21
       - name: top-passwords-shortlist.txt
-        start_offset: 34
+        start_offset: 32
         end_offset: 40
       - name: top-passwords-shortlist.txt
-        start_offset: 49
-        end_offset: 57
+        start_offset: 47
+        end_offset: 55
       - name: top-passwords-shortlist.txt
-        start_offset: 64
-        end_offset: 70
+        start_offset: 76
+        end_offset: 84
       - name: top-passwords-shortlist.txt
-        start_offset: 80
-        end_offset: 86
+        start_offset: 130
+        end_offset: 139
       - name: top-passwords-shortlist.txt
-        start_offset: 94
-        end_offset: 100
+        start_offset: 149
+        end_offset: 158
       - name: top-passwords-shortlist.txt
-        start_offset: 106
-        end_offset: 113
+        start_offset: 168
+        end_offset: 176
       - name: top-passwords-shortlist.txt
-        start_offset: 119
-        end_offset: 125
+        start_offset: 186
+        end_offset: 195
       - name: top-passwords-shortlist.txt
-        start_offset: 131
-        end_offset: 137
+        start_offset: 205
+        end_offset: 213
       - name: top-passwords-shortlist.txt
-        start_offset: 143
-        end_offset: 151
+        start_offset: 223
+        end_offset: 231
       - name: top-passwords-shortlist.txt
-        start_offset: 161
-        end_offset: 169
+        start_offset: 278
+        end_offset: 286
       - name: top-passwords-shortlist.txt
-        start_offset: 179
-        end_offset: 187
+        start_offset: 296
+        end_offset: 304
       - name: top-passwords-shortlist.txt
-        start_offset: 197
-        end_offset: 204
+        start_offset: 314
+        end_offset: 323
       - name: top-passwords-shortlist.txt
-        start_offset: 214
-        end_offset: 222
-      - name: top-passwords-shortlist.txt
-        start_offset: 232
-        end_offset: 238
-      - name: top-passwords-shortlist.txt
-        start_offset: 248
-        end_offset: 254
-      - name: top-passwords-shortlist.txt
-        start_offset: 264
-        end_offset: 271
-      - name: top-passwords-shortlist.txt
-        start_offset: 281
-        end_offset: 287
-      - name: top-passwords-shortlist.txt
-        start_offset: 297
-        end_offset: 303
-      - name: top-passwords-shortlist.txt
-        start_offset: 313
-        end_offset: 320
-      - name: top-passwords-shortlist.txt
-        start_offset: 330
-        end_offset: 335
-      - name: top-passwords-shortlist.txt
-        start_offset: 345
-        end_offset: 352
-      - name: top-passwords-shortlist.txt
-        start_offset: 362
-        end_offset: 367
-      - name: top-passwords-shortlist.txt
-        start_offset: 377
-        end_offset: 384
-      - name: top-passwords-shortlist.txt
-        start_offset: 394
-        end_offset: 403
+        start_offset: 333
+        end_offset: 342
 
