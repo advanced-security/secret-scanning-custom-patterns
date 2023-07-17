@@ -120,13 +120,12 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
 - Match: `\d\D|\D\d`
 
-</p>
 </details>
 
 ## Sentry API Key
@@ -169,13 +168,12 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
 - Match: `\d\D|\D\d`
 
-</p>
 </details>
 
 ## Sentry DSN secret
@@ -221,13 +219,12 @@ https://[a-fA-F0-9]{32}:
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
 - Match: `\d\D|\D\d`
 
-</p>
 </details>
 
 ## Sentry webpack plugin token
@@ -270,13 +267,12 @@ new SentryPlugin\(\s*\{[^}]*[,\n \t]apiKey:\s*['"]
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
 - Match: `\d\D|\D\d`
 
-</p>
 </details>
 
 ## Sentry Terraform provider token
@@ -319,13 +315,12 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
 - Match: `\d\D|\D\d`
 
-</p>
 </details>
 
 ## Okta token
@@ -371,7 +366,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
@@ -380,7 +375,6 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^\d+(\.\d+)?e[+-]?\d+$`
 - Not Match: `[\d_]{30}`
 
-</p>
 </details>
 
 ## DataDog API key
@@ -426,7 +420,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
@@ -435,7 +429,6 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^ef8d5de700e7989468166c40fc8a0ccd$`
 - Not Match: `^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$`
 
-</p>
 </details>
 
 ## DataDog APP key
@@ -481,7 +474,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 </details>
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
@@ -489,5 +482,4 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^1+$`
 - Not Match: `a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9`
 
-</p>
 </details>
