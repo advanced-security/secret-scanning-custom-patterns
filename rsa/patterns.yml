@@ -17,6 +17,11 @@ patterns:
       - name: rsa.js
         start_offset: 50
         end_offset: 924
+    test:
+      data: |
+        --BEGIN PRIVATE KEY--\nAAAA\n--END PRIVATE KEY--
+      start_offset: 0
+      end_offset: 48
 
 
   - name: SSH Private Keys
@@ -30,6 +35,11 @@ patterns:
       - name: ssh_rsa
         start_offset: 3
         end_offset: 2631
+    test:
+      data: |
+          --BEGIN OPENSSH PRIVATE KEY--AAAA--END OPENSSH PRIVATE KEY--
+      start_offset: 0
+      end_offset: 60
 
  
   - name: GPG Private Key
@@ -44,6 +54,11 @@ patterns:
       - name: GeekMasher_GPG_with_headers.asc
         start_offset: 3
         end_offset: 6728
+    test:
+      data: |
+        --BEGIN PGP PRIVATE KEY BLOCK--AAAA--END PGP PRIVATE KEY BLOCK--
+      start_offset: 0
+      end_offset: 64
 
 
   - name: SSH Public Key
@@ -62,4 +77,9 @@ patterns:
       - name: ssh_rsa.pub
         start_offset: 0
         end_offset: 552
+    test:
+      data: |
+        ssh-rsa aaaaaaaaaaaaaaaaaaaaa foo
+      start_offset: 0
+      end_offset: 29
 
