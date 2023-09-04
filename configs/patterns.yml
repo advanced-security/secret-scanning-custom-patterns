@@ -182,4 +182,8 @@ patterns:
       - name: web.config
         start_offset: 171
         end_offset: 235
-
+    test:
+      data: |
+        <machineKey decryptionKey="ABAA84D7EC4BB56D75D217CECFFB9628809BDB8BF91CFCD64568A145BE59719F" decryption="AES" />
+      start_offset: 27
+      end_offset: 91
