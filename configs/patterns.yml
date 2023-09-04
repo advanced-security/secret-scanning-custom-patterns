@@ -112,9 +112,9 @@ patterns:
         start_offset: 57
         end_offset: 80
     test:
-      data: "password: password"
+      data: "password: password123"
       start_offset: 10
-      end_offset: 18
+      end_offset: 21
 
   - name: GitHub Actions SHA Checker
     type: github_actions_sha_checker
@@ -176,5 +176,5 @@ patterns:
         end_offset: 154
       - name: web.config
         start_offset: 171
-        end_offset: 234
+        end_offset: 235
 
