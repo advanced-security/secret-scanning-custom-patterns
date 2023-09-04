@@ -1,4 +1,3 @@
-
 name: Generic Secrets / Passwords
 
 patterns:
@@ -9,7 +8,7 @@ patterns:
       pattern: |
         [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
       start: |
-        (?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+        (?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret)([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
         (\z|[\r\n'"])
       additional_not_match:
@@ -17,7 +16,7 @@ patterns:
         # a literal value or config switch
         - ^(?i)(?:[a-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:(?:user|key)_?)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase)|write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?( or )?$
         # Python type hints, Swift typing
-        - ^\s*(?:(?:typing\.)?(?:(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*|(?:int|str|float|(?:typing.)?Any|None|bytes|bool|ReadableBuffer)\s*(?:[,|].*)?|(?:Int|Swift\.Int|Int32)\.*))\s*$  
+        - ^\s*(?:(?:typing\.)?(?:(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*|(?:int|str|float|(?:typing.)?Any|None|bytes|bool|ReadableBuffer)\s*(?:[,|].*)?|(?:Int|Swift\.Int|Int32)\.*))\s*$
         # ..., \, , \n, \0, ',' and other single chars, smilies, hex, digits, nothing at all,
         # directories, regex, format string placeholder, urllib demo passphrase, "optional" in docs, a variable substitution, or surrounded by brackets of various kinds
         # all with possible ',' and surrounding whitespace, possibly with a following comment
@@ -81,3 +80,29 @@ patterns:
         start_offset: 131
         end_offset: 167
 
+  - name: Bearer Tokens
+    type: bearer_tokens
+    regex:
+      version: 0.1
+      pattern: |
+        [a-zA-Z0-9_.=/+:-]+
+      start: |
+        ['"\s][Aa]uthorization: Bearer[ ]+
+      end: |
+        \z|[\s'"]
+      additional_not_match:
+        - ^(?:letmein|Oracle|SuperSecretString|foo|ababbdbbebbbebdbbe5538003023|XYZ_INVALID_ACCESTOKEN_XYZ|QQ==|Shizuku|mF_9.B5f-4.1JqM|h480djs93hd8|SlAV32hkKG)$
+        - ^(?i)(?:dummy|fake|bearer|auth|invalid|your|my|the|undefined|github|oidc|database)(?:_api)?(?:_?token|key|secret)?$
+        - ^(?i)(?:[a-z0-9]|XYZ|ABC|123|.*_token)$
+        - (?i)x{5}
+        - ^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$
+    expected:
+      - name: bearer.txt
+        start_offset: 45
+        end_offset: 64
+      - name: bearer.txt
+        start_offset: 99
+        end_offset: 118
+    comments:
+      - "As used in an Authorization header"
+      - "We try to remove common placeholders"

@@ -89,14 +89,14 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [^\r\n'"]*
+        [^\r\n'"]+
       start: |
         (?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
       end: |
         ['"\r\n]|\z
       additional_not_match:
-        - ^(?:keyPassphrase|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|int|bool)( +#.*)?)$
-        - ^.* = (?:None|True|False|\.\.\.),?$
+        - ^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$
+        - ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
         - ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
         - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
         - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
@@ -138,3 +138,43 @@ patterns:
         uses: sample-org/sample-action@v2
       start_offset: 6
       end_offset: 33
+
+
+  - name: .NET Configuration file
+    type: dotnet_configuration
+    regex:
+      version: 0.1
+      pattern: |
+        [^"\x00\x08]+
+      start: |
+        <add\s+key="[^"]*(?i)(password|secret|pass(?:wd|word|code|phrase)?|key|token)"\s+value="
+      end: |
+        \"
+    comments:
+      - XML key/value format, <add key="key name" value="value of key" />
+    expected:
+      - name: app.config
+        start_offset: 59
+        end_offset: 84
+
+
+  - name: .NET MachineKey
+    type: dotnet_machinekey
+    regex:
+      version: 0.1
+      pattern: |
+        [A-Fa-f0-9]+
+      start: |
+        <machineKey\s+[^>]*(validation|decryption)Key="
+      end: |
+        \"
+    comments:
+      - contents of the validationKey or decryptionKey of a machineKey XML element
+    expected:
+      - name: web.config
+        start_offset: 27
+        end_offset: 154
+      - name: web.config
+        start_offset: 171
+        end_offset: 234
+

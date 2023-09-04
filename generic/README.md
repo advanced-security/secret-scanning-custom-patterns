@@ -5,6 +5,17 @@
 ## Generic Passwords
 
 
+
+*version: v0.4*
+
+**Comments / Notes:**
+
+- `password`, `secret`, `key`, or password like prefix (fuzzy)
+- Delimiters like `=` or `:` (with padding)
+- String with a number of chars until a breaking char
+- Not matching variables, placeholders or common configuration constants such as 'read' and 'write'
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -13,28 +24,19 @@
 [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.4
-- `password`, `secret`, `key`, or password like prefix (fuzzy)
-- Delimiters like `=` or `:` (with padding)
-- String with a number of chars until a breaking char
-- Not matching variables, placeholders or common configuration constants such as 'read' and 'write'
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
 <p>
 
 ```regex
-(?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret)[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+(?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret)([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -62,6 +64,11 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## UUIDs
 
 
+
+*version: v0.1*
+
+
+
 <details>
 <summary>Pattern Format</summary>
 <p>
@@ -70,12 +77,8 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 (?i)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
 ```
 
-**Comments / Notes:**
-
-- Current Version: v0.1
 </p>
 </details>
-
 
 <details>
 <summary>Start Pattern</summary>
@@ -86,8 +89,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ```
 
 </p>
-</details>
-<details>
+</details><details>
 <summary>End Pattern</summary>
 <p>
 
@@ -107,6 +109,63 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match: `^00000000-0000-0000-0000-000000000000$`
 - Not Match: `^(?i)00010203-0405-0607-0809-0a0b0c0d0e0f$`
 - Not Match: `^(?i)12345678-1234-1234-1234-123456789abc$`
+
+</p>
+</details>
+
+## Bearer Tokens
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- As used in an Authorization header
+- We try to remove common placeholders
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+[a-zA-Z0-9_.=/+:-]+
+```
+
+</p>
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+<p>
+
+```regex
+['"\s][Aa]uthorization: Bearer[ ]+
+```
+
+</p>
+</details><details>
+<summary>End Pattern</summary>
+<p>
+
+```regex
+\z|[\s'"]
+```
+
+</p>
+</details>
+<details>
+<summary>Additional Matches</summary>
+<p>
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match: `^(?:letmein|Oracle|SuperSecretString|foo|ababbdbbebbbebdbbe5538003023|XYZ_INVALID_ACCESTOKEN_XYZ|QQ==|Shizuku|mF_9.B5f-4.1JqM|h480djs93hd8|SlAV32hkKG)$`
+- Not Match: `^(?i)(?:dummy|fake|bearer|auth|invalid|your|my|the|undefined|github|oidc|database)(?:_api)?(?:_?token|key|secret)?$`
+- Not Match: `^(?i)(?:[a-z0-9]|XYZ|ABC|123|.*_token)$`
+- Not Match: `(?i)x{5}`
+- Not Match: `^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$`
 
 </p>
 </details>
