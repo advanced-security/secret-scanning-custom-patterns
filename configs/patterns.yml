@@ -156,6 +156,11 @@ patterns:
       - name: app.config
         start_offset: 59
         end_offset: 84
+    test:
+      data: |
+        <add key="password" value="mypassword" />
+      start_offset: 27
+      end_offset: 37
 
 
   - name: .NET MachineKey
