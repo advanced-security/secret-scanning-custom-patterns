@@ -87,6 +87,11 @@ patterns:
 #      - name: credit-cards.txt
 #        start_offset: 798
 #        end_offset: 814
+    test:
+      data: |
+        3530111333300000
+      start_offset: 0
+      end_offset: 16
     comments:
       - "Only supports Visa, MasterCard, and American Express"
 
@@ -106,6 +111,11 @@ patterns:
       - name: credit-cards.txt
         start_offset: 397
         end_offset: 410
+    test:
+      data: |
+        4012888888881881
+      start_offset: 0
+      end_offset: 16
 
 
   - name: Credit Cards - MasterCard
@@ -129,7 +139,11 @@ patterns:
       - name: credit-cards.txt
         start_offset: 302
         end_offset: 318
-
+    test:
+      data: |
+        5555555555554444
+      start_offset: 0
+      end_offset: 16
 
   - name: Credit Cards - American Express
     type: credit_cards_american_express
@@ -152,7 +166,11 @@ patterns:
       - name: credit-cards.txt
         start_offset: 516
         end_offset: 531
-
+    test:
+      data: |
+        378282246310005
+      start_offset: 0
+      end_offset: 15
 
   - name: Credit Cards - Discover
     type: credit_card_discovery
@@ -166,6 +184,11 @@ patterns:
       - name: credit-cards.txt
         start_offset: 656
         end_offset: 672
+    test:
+      data: |
+        6011111111111117
+      start_offset: 0
+      end_offset: 16
 
   - name: IBAN
     type: iban
@@ -204,6 +227,11 @@ patterns:
       - name: iban.txt
         start_offset: 209
         end_offset: 242
+    test:
+      data: |
+        AL35202111090000000001234566
+      start_offset: 0
+      end_offset: 28
     comments:
       - This can produce false positives, since it doesn't check the checksum pair after the Country Code
       - Examples include YouTube playlist IDs and Italian tax codes
