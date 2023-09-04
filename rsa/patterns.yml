@@ -1,4 +1,3 @@
-
 name: RSA Keys
 
 patterns:
@@ -7,7 +6,7 @@ patterns:
     regex:
       version: 1.1
       pattern: |
-        --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\r|\\n|)+[a-zA-Z0-9+/=\s]+(\\r|\\n|)+--+END (?:[A-Z]+ )?PRIVATE KEY--
+        --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\r|\\n|)+[a-zA-Z0-9\\n+/=\s]+(\\r|\\n|)+--+END (?:[A-Z]+ )?PRIVATE KEY--
     comments:
       - "Basic support for hardcoded strings in code with RSA private key"
     expected:
@@ -17,7 +16,9 @@ patterns:
       - name: rsa.js
         start_offset: 50
         end_offset: 924
-
+      - name: rsa.json
+        start_offset: 49
+        end_offset: 2721
 
   - name: SSH Private Keys
     type: ssh_private_keys
@@ -31,7 +32,6 @@ patterns:
         start_offset: 3
         end_offset: 2631
 
- 
   - name: GPG Private Key
     type: gpg_private_key
     regex:
@@ -44,7 +44,6 @@ patterns:
       - name: GeekMasher_GPG_with_headers.asc
         start_offset: 3
         end_offset: 6728
-
 
   - name: SSH Public Key
     type: ssh_public_key
@@ -62,4 +61,3 @@ patterns:
       - name: ssh_rsa.pub
         start_offset: 0
         end_offset: 552
-
