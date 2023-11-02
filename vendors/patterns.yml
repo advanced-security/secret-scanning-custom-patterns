@@ -212,7 +212,10 @@ patterns:
         - ^\d+(\.\d+)?e[+-]?\d+$
         # Don't hit on long strings of numbers and underscores only
         - "[\\d_]{30}"
-
+    test:
+      data: okta_token="00RCsRGyrF9QzBe0rnWmw221UeclqRXFQGEJFdhAFM"
+      start_offset: 12
+      end_offset: 54
     expected:
       - name: okta.txt
         start_offset: 12
