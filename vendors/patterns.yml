@@ -248,6 +248,9 @@ patterns:
         - ^1+$
         - ^ef8d5de700e7989468166c40fc8a0ccd$
         - ^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$
+    test:
+      data: DD_API_KEY=01000000000000000000000000000000
+      start_offset: 11
     expected:
       - name: datadog.txt
         start_offset: 22
@@ -287,6 +290,9 @@ patterns:
         - ^0+$
         - ^1+$
         - a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9
+    test:
+      data: DD_APP_KEY=0100000000000000000000000000000000000000
+      start_offset: 11
     expected:
       - name: datadog.txt
         start_offset: 66
