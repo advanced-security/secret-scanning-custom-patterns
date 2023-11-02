@@ -23,6 +23,11 @@ patterns:
     regex:
       pattern: |
         eyJrIjoi[A-Za-z0-9_=-]{42}
+    test:
+      data: |
+        eyJrIjoiT0tTcG1pUlY2RnVKZTFVaDFsNFZXdE9ZWmNrMkZYbk
+      start_offset: 0
+      end_offset: 50
     expected:
       - name: grafana.txt
         start_offset: 107
