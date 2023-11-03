@@ -21,9 +21,9 @@ __here__ = os.path.dirname(os.path.realpath(__file__))
 parser = argparse.ArgumentParser(description="Validate a directory of files.")
 parser.add_argument("--debug", action="store_true", help="Print debug messages")
 parser.add_argument("-p", "--path", default="./", help="Directory to scan")
-# parser.add_argument(
-#     "--token", default=os.environ.get("GITHUB_TOKEN"), help="GitHub token to use"
-# )
+parser.add_argument(
+    "--token", default=os.environ.get("GITHUB_TOKEN"), help="GitHub token to use"
+)
 
 parser_modes = parser.add_argument_group("modes")
 parser_modes.add_argument("--validate", action="store_true", help="Validation Mode")
@@ -219,9 +219,9 @@ if __name__ == "__main__":
         logging.warning("No patterns found")
         sys.exit(0)
 
-    # GitHub.init(
-    #     "mattkim/secret-scanning-custom-patterns", token=arguments.token
-    # )
+    GitHub.init(
+        "advanced-security/secret-scanning-custom-patterns", token=arguments.token
+    )
 
     secret_scanning = SecretScanning()
     # todo: caching
