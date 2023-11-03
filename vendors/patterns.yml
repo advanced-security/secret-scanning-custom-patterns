@@ -267,28 +267,28 @@ patterns:
         tmprl_[a-zA-Z0-9]+_[a-zA-Z0-9]+
     expected:
       - name: temporal.txt
-        start_offset: 30
-        end_offset: 132
+        start_offset: 28
+        end_offset: 131
       - name: temporal.txt
-        start_offset: 185
-        end_offset: 287
+        start_offset: 180
+        end_offset: 283
       - name: temporal.txt
-        start_offset: 319
-        end_offset: 421
+        start_offset: 311
+        end_offset: 414
       - name: temporal.txt
-        start_offset: 482
-        end_offset: 584
+        start_offset: 469
+        end_offset: 572
       - name: temporal.txt
-        start_offset: 643
-        end_offset: 745
+        start_offset: 626
+        end_offset: 729
       - name: temporal.txt
-        start_offset: 829
-        end_offset: 931
+        start_offset: 808
+        end_offset: 911
       - name: temporal.txt
-        start_offset: 996
-        end_offset: 1098
+        start_offset: 969
+        end_offset: 1072
       - name: temporal.txt
-        start_offset: 1154
-        end_offset: 1256
+        start_offset: 1123
+        end_offset: 1226
     comments:
       - "Temporal API Keys start with prefix tmprl_"
