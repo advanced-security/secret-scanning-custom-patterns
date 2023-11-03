@@ -159,7 +159,7 @@ patterns:
       end: |
         (\z|[^0-9A-Za-z_+/=-])
       additional_not_match:
-        # Avoid long runs of hexadecimal only 
+        # Avoid long runs of hexadecimal only
         - "[0-9A-Fa-f-]{30}"
         # Avoid long runs of alphabetic and _ - only
         - "[a-zA-Z_-]{30}"
@@ -259,3 +259,36 @@ patterns:
     comments:
       - "Looks for surrounding context to confirm this is a DataDog App key, not some other 40-byte hex string"
 
+  - name: Temporal API key
+    type: temporal_api_key
+    regex:
+      version: 0.1
+      pattern: |
+        tmprl_[a-zA-Z0-9]+_[a-zA-Z0-9]+
+    expected:
+      - name: temporal.txt
+        start_offset: 30
+        end_offset: 132
+      - name: temporal.txt
+        start_offset: 185
+        end_offset: 287
+      - name: temporal.txt
+        start_offset: 319
+        end_offset: 421
+      - name: temporal.txt
+        start_offset: 482
+        end_offset: 584
+      - name: temporal.txt
+        start_offset: 643
+        end_offset: 745
+      - name: temporal.txt
+        start_offset: 829
+        end_offset: 931
+      - name: temporal.txt
+        start_offset: 996
+        end_offset: 1098
+      - name: temporal.txt
+        start_offset: 1154
+        end_offset: 1256
+    comments:
+      - "Temporal API Keys start with prefix tmprl_"

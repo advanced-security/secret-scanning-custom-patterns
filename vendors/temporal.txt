@@ -1,0 +1,29 @@
+# env vars
+TEMPORAL_API_KEY=tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl
+
+# some other config format
+TEMPORAL_API_KEY = "tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl"
+
+# YAML
+temporal_api_key: tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl
+
+# Docker
+env:
+  - name: TEMPORAL_API_KEY
+    value: "tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl"
+
+# Winston config
+new TemporalWinston({
+    apiKey:'tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl'
+});
+
+# shell script use of terraformer
+terraformer import temporal --api-key=tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl
+
+# content of .tf file
+provider "temporal" {
+	api_key = "tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl"
+}
+
+# Capistrano, Capfile
+set :temporal_api_key, "tmprl_LZDV3buJhgjdeiNMwvU9F3JQpOccnVP6_XQPtInroPz3ik8kDcba6IFpyzFLiMrGOtHYzg98iAjRg74RGQOMDezmE8Hlkrjrl"
