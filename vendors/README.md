@@ -491,3 +491,25 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
+## Temporal API key
+
+
+
+*version: v0.1*
+
+**Comments / Notes:**
+
+- Temporal API Keys start with prefix tmprl_
+
+
+<details>
+<summary>Pattern Format</summary>
+<p>
+
+```regex
+tmprl_[a-zA-Z0-9]+_[a-zA-Z0-9]+
+```
+
+</p>
+</details>

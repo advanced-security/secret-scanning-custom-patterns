@@ -77,3 +77,4 @@ Click on each header to find the patterns and additional information for that se
 - Okta token
 - DataDog API key
 - DataDog APP key
+- Temporal API key
