@@ -1,12 +1,13 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # URI / URL Custom Patterns
 
 ## Hardcoded Internal Emails
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -45,7 +46,7 @@
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -84,7 +85,7 @@
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -118,15 +119,16 @@
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `(?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$`
-- Not Match: `^\$?\{[^}+]\}i\}$`
-- Not Match: `^%(?:\.\*)?s$`
+- Not Match: ```(?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$```
+- Not Match: ```^\$?\{[^}+]\}i\}$```
+- Not Match: ```^%(?:\.\*)?s$```
 
 </p>
 </details>
@@ -135,15 +137,19 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- False Positives with build versions, but won't match if prefixed with v or ends with -
-- Use a custom IPv4 pattern if possible, tailored for the ranges you use
-- Doesn't include test, localhost or non-routable IPs
-- Does include local ranges such as 192.168.0.0/24
 
+- False Positives with build versions, but won't match if prefixed with v or ends with -
+
+- Use a custom IPv4 pattern if possible, tailored for the ranges you use
+
+- Doesn't include test, localhost or non-routable IPs
+
+- Does include local ranges such as 192.168.0.0/24
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -175,15 +181,16 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(?:0\.0\.0\.0|255\.255\.255\.255)$`
-- Not Match: `^(?:127|169\.254|224\.0\.0)\..*`
-- Not Match: `^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*`
+- Not Match: ```^(?:0\.0\.0\.0|255\.255\.255\.255)$```
+- Not Match: ```^(?:127|169\.254|224\.0\.0)\..*```
+- Not Match: ```^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*```
 
 </p>
 </details>
@@ -192,7 +199,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 

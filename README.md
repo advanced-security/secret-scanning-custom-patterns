@@ -1,79 +1,101 @@
-# custom-pattern-secrets
+# Secret Scanning Tools
 
-Custom Secret Scanning Patterns repository created and maintained by the GitHub Field Services.
+> ℹ️ This is an _unofficial_ tool created by Field Security Services, and is not officially supported by GitHub.
 
-This repository extends the [list of supported Vendors out of the box](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/secret-scanning-patterns) with GitHub's Advanced Security Secret Scanning.
+This is a testing suite for GitHub Secret Scanning Custom Patterns.
 
-> :warning: This repository does not guarantee the quality or precision of the patterns which might result in False Positives
-Click on each header to find the patterns and additional information for that section.
+It can be used in combination with GitHub Actions to test custom patterns before they are deployed.
 
-### [Commonly Used Secrets / Passwords](./common)
+An example repository that uses this Action is [advanced-security/secret-scanning-custom-patterns](https://github.com/advanced-security/secret-scanning-custom-patterns).
 
-- Common Passwords Shortlist
+A sample custom patterns config file compatible with this tool suite is provided in [`examples/config/patterns.yml`](examples/config/patterns.yml).
 
-### [Configuration Secrets](./configs)
+## Usage in Actions
 
-- Hardcoded Database Passwords
-- Hardcoded Spring SQL passwords
-- Django Secret Key
-- GitHub Actions SHA Checker
-- .NET Configuration file
-- .NET MachineKey
+```yaml
+- name: Secret Scanning Test Suite
+  uses: advanced-security/secret-scanning-tools@main
+```
 
-### [Database passwords](./database)
+### Advanced Configuration
 
-- Database Connection String (1)
-- Database Connection String (2)
-- Database Connection String (3)
-- TSQL CREATE LOGIN/USER
+```yaml
+- name: Secret Scanning Test Suite
+  uses: advanced-security/secret-scanning-tools@main
+  with:
+    # Modes to run
+    # > 'validate' (default), 'all', 'snapshot', 'markdown'
+    mode: 'validate'
+```
 
-### [Generic Secrets / Passwords](./generic)
+### Using GitHub App Token
 
-- Generic Passwords
-- UUIDs
-- Bearer Tokens
+```yaml
+- name: Get Token
+  id: get_workflow_token
+  uses: peter-murray/workflow-application-token-action@v1
+  with:
+    application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
+    application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
 
-### [JWT](./jwt)
+- name: Secret Scanning Test Suite
+  uses: advanced-security/secret-scanning-tools@main
+  with:
+    token: ${{ steps.get_workflow_token.outputs.token }}
+```
 
-- JWT
+## Offline testing of Secret Scanning custom patterns
 
-### [Password stores](./password_store)
+We have a test Python script, `secretscanning/test.py` that uses Intel's `hyperscan` to test custom GitHub Advanced Security Secret Scanning patterns.
 
-- Arc
+This is useful for thorough testing of patterns before they are deployed, whereas the rest of the test suite is primarily designed to be run in GitHub Actions for testing in CI.
 
-### [Personally identifiable information (PII)](./pii)
+### Local test script usage
 
-- Credit Cards
-- Credit Cards - Visa
-- Credit Cards - MasterCard
-- Credit Cards - American Express
-- Credit Cards - Discover
-- IBAN
+Change directory to `secretscanning`.
 
-### [RSA Keys](./rsa)
+First run `make requirements` to install required dependencies.
 
-- Generic RSA keys
-- SSH Private Keys
-- GPG Private Key
+``` bash
+./test.py
+```
 
-### [URI / URL Custom Patterns](./uri)
+By default it searches the directory above the `testing` directory for `pattern.yml` files, and tests those patterns on the same directory that file was found in.
 
-- Hardcoded Internal Emails
-- Hardcoded Internal URLs
-- Hardcoded URI Passwords
-- Routable IPv4 Addresses
-- GitHub Container Registry typos
+or
 
-### [Vendors](./vendors)
+``` bash
+./test.py --tests <directory>
+```
 
-- Azure SQL Connection String
-- Grafana API token
-- SendGrid (deprecated)
-- Sentry Auth Token
-- Sentry API Key
-- Sentry DSN secret
-- Sentry webpack plugin token
-- Sentry Terraform provider token
-- Okta token
-- DataDog API key
-- DataDog APP key
+For full usage use `./test.py --help`
+
+### Local test script requirements
+
+This only works on Intel-compatible platforms, since `hyperscan` is an Intel application and written to use Intel-specific instructions.
+
+* Python 3.9+
+* `hyperscan` module, which provides Python bindings to Intel's Hyperscan
+* `python-pcre` module, which provides Python bindings to libPCRE
+
+### Development notes
+
+Please run `make lint` after any changes
+
+## License
+
+This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](LICENSE) for the full terms.
+
+## Maintainers
+
+See [CODEOWNERS](CODEOWNERS) for the list of maintainers.
+
+## Support
+
+> ℹ️ This is an _unofficial_ tool created by Field Security Services, and is not officially supported by GitHub.
+
+See the [SUPPORT](SUPPORT.md) file.
+
+## Background
+
+See the [CHANGELOG](CHANGELOG.md), [CONTRIBUTING](CONTRIBUTING.md), [SECURITY](SECURITY.md), [SUPPORT](SUPPORT.md), [CODE OF CONDUCT](CODE_OF_CONDUCT.md) and [PRIVACY](PRIVACY.md) files for more information.

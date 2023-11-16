@@ -1,19 +1,23 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # Password stores
 
 ## Arc
 
 
 Arc password stores are created by the Arc open source software (https://github.com/evilsocket/arc). They are AES encrypted, but should not be stored in shared repositories.
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- This spots `meta.json` files created by Arc, not the secrets themselves
-- The encrypted secrets will be in a numbered directory below the detected `meta.json` file
-- This can also spot uncompressed tar file backups created by Arc
 
+- This spots `meta.json` files created by Arc, not the secrets themselves
+
+- The encrypted secrets will be in a numbered directory below the detected `meta.json` file
+
+- This can also spot uncompressed tar file backups created by Arc
+  
 
 <details>
 <summary>Pattern Format</summary>

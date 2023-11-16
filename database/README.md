@@ -1,18 +1,21 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # Database passwords
 
 ## Database Connection String (1)
 
 
 Database connection strings are used to connect to databases, often with embedded credentials.
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
-- To cut FPs, we require the start of the string to be a database-specific keyword
 
+- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
+
+- To cut FPs, we require the start of the string to be a database-specific keyword
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -44,14 +47,15 @@ Database connection strings are used to connect to databases, often with embedde
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$`
-- Not Match: `parameters\('[^']+'\)`
+- Not Match: ```^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$```
+- Not Match: ```parameters\('[^']+'\)```
 
 </p>
 </details>
@@ -60,13 +64,15 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 Database connection strings are used to connect to databases, often with embedded credentials.
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
-- To cut FPs, we require part of the string after the password to be a database-specific keyword
 
+- This will spot connection strings for many databases, including MySQL, PostgreSQL, Oracle, SQL Server
+
+- To cut FPs, we require part of the string after the password to be a database-specific keyword
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -98,14 +104,15 @@ Database connection strings are used to connect to databases, often with embedde
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$`
-- Not Match: `parameters\('[^']+'\)`
+- Not Match: ```^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$```
+- Not Match: ```parameters\('[^']+'\)```
 
 </p>
 </details>
@@ -114,12 +121,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 Database connection strings are used to connect to databases, often with embedded credentials.
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- This will spot the ConnectionStrings__Default env var being set with a Password
 
+- This will spot the ConnectionStrings__Default env var being set with a Password
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -151,13 +159,14 @@ Database connection strings are used to connect to databases, often with embedde
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\$?\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$`
+- Not Match: ```^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\$?\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$```
 
 </p>
 </details>
@@ -166,12 +175,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 A TSQL CREATE LOGIN or USER command using a password
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- This is specific to Microsoft SQL Server TSQL syntax
 
+- This is specific to Microsoft SQL Server TSQL syntax
+  
 
 <details>
 <summary>Pattern Format</summary>

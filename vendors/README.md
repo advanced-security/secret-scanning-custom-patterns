@@ -1,17 +1,19 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # Vendors
 
 ## Azure SQL Connection String
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/
 
+- Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -30,7 +32,7 @@
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -51,12 +53,13 @@ eyJrIjoi[A-Za-z0-9_=-]{42}
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Deprecated (supported by Secret Scanning)
 
+- Deprecated (supported by Secret Scanning)
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -84,7 +87,7 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -118,13 +121,15 @@ SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Match: `\d\D|\D\d`
+
+- Match: ```\d\D|\D\d```
 
 </p>
 </details>
@@ -133,7 +138,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -167,13 +172,15 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Match: `\d\D|\D\d`
+
+- Match: ```\d\D|\D\d```
 
 </p>
 </details>
@@ -182,12 +189,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- The secret part of the DSN is optional and effectively deprecated, and should be removed from the DSN: https://docs.sentry.io/product/sentry-basics/dsn-explainer
 
+- The secret part of the DSN is optional and effectively deprecated, and should be removed from the DSN: https://docs.sentry.io/product/sentry-basics/dsn-explainer
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -219,13 +227,15 @@ https://[a-fA-F0-9]{32}:
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Match: `\d\D|\D\d`
+
+- Match: ```\d\D|\D\d```
 
 </p>
 </details>
@@ -234,7 +244,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -268,13 +278,15 @@ new SentryPlugin\(\s*\{[^}]*[,\n \t]apiKey:\s*['"]
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Match: `\d\D|\D\d`
+
+- Match: ```\d\D|\D\d```
 
 </p>
 </details>
@@ -283,7 +295,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -317,13 +329,15 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Match: `\d\D|\D\d`
+
+- Match: ```\d\D|\D\d```
 
 </p>
 </details>
@@ -332,12 +346,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Okta token, starting with `00` and 40 random alphanumeric with _ and -
 
+- Okta token, starting with `00` and 40 random alphanumeric with _ and -
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -369,16 +384,17 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `[0-9A-Fa-f-]{30}`
-- Not Match: `[a-zA-Z_-]{30}`
-- Not Match: `^\d+(\.\d+)?e[+-]?\d+$`
-- Not Match: `[\d_]{30}`
+- Not Match: ```[0-9A-Fa-f-]{30}```
+- Not Match: ```[a-zA-Z_-]{30}```
+- Not Match: ```^\d+(\.\d+)?e[+-]?\d+$```
+- Not Match: ```[\d_]{30}```
 
 </p>
 </details>
@@ -387,12 +403,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Looks for surrounding context to confirm this is a DataDog API key, not some other 32-byte hex string
 
+- Looks for surrounding context to confirm this is a DataDog API key, not some other 32-byte hex string
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -424,16 +441,17 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^0+$`
-- Not Match: `^1+$`
-- Not Match: `^ef8d5de700e7989468166c40fc8a0ccd$`
-- Not Match: `^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$`
+- Not Match: ```^0+$```
+- Not Match: ```^1+$```
+- Not Match: ```^ef8d5de700e7989468166c40fc8a0ccd$```
+- Not Match: ```^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$```
 
 </p>
 </details>
@@ -442,12 +460,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Looks for surrounding context to confirm this is a DataDog App key, not some other 40-byte hex string
 
+- Looks for surrounding context to confirm this is a DataDog App key, not some other 40-byte hex string
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -479,15 +498,16 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^0+$`
-- Not Match: `^1+$`
-- Not Match: `a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9`
+- Not Match: ```^0+$```
+- Not Match: ```^1+$```
+- Not Match: ```a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9```
 
 </p>
 </details>

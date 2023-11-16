@@ -1,21 +1,27 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # Commonly Used Secrets / Passwords
 
 ## Common Passwords Shortlist
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- ⚠️  prone to high numbers of false positives, use with caution ⚠️
-- very small common password shortlist from SecLists
-- allows for numbers and common punctuation at the end
-- case insensitive
-- adds some l33tsp3@k variations
 
+- ⚠️  prone to high numbers of false positives, use with caution ⚠️
+
+- very small common password shortlist from SecLists
+
+- allows for numbers and common punctuation at the end
+
+- case insensitive
+
+- adds some l33tsp3@k variations
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -47,16 +53,17 @@
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^red'?$`
-- Not Match: `^(master|shadow|password|\$PASSWORD|MASTER|www\.)$`
-- Not Match: `^\#[0-9]+$`
-- Not Match: `^.{20,}`
+- Not Match: ```^red'?$```
+- Not Match: ```^(master|shadow|password|\$PASSWORD|MASTER|www\.)$```
+- Not Match: ```^\#[0-9]+$```
+- Not Match: ```^.{20,}```
 
 </p>
 </details>

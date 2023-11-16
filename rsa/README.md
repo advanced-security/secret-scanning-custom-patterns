@@ -1,24 +1,28 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # RSA Keys
 
 ## Generic RSA keys
 
 
 
-*version: v1.1*
+_version: v1.2_
 
 **Comments / Notes:**
 
+
 - Basic support for hardcoded strings in code with RSA private key
 
+- Includes keys hardcoded in strings with escaped line breaks
+  
 
 <details>
 <summary>Pattern Format</summary>
 <p>
 
 ```regex
---BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\r|\\n|)+[a-zA-Z0-9+/=\s]+(\\r|\\n|)+--+END (?:[A-Z]+ )?PRIVATE KEY--
+--BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\[nr]|[\r\n])+([a-zA-Z0-9+/=\s]|\\[rn])+(\\[rn]|[\r\n])+--+END (?:[A-Z]+ )?PRIVATE KEY--
 ```
 
 </p>
@@ -30,12 +34,13 @@
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- *SSH Password:* `MyPassword`
 
+- *SSH Password:* `MyPassword`
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -54,7 +59,7 @@
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -75,13 +80,15 @@
 
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 
-*version: v0.2*
+_version: v0.2_
 
 **Comments / Notes:**
 
-- SSH Public Key (not a secret)
-- Ignores the name of the public key
 
+- SSH Public Key (not a secret)
+
+- Ignores the name of the public key
+  
 
 <details>
 <summary>Pattern Format</summary>

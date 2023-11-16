@@ -1,20 +1,25 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # Configuration Secrets
 
 ## Hardcoded Database Passwords
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Only support for Postgres and MySQL password strings
-- Checks if the password is null / length of 0
-- Supports quoted passwords
-- Not case sensative
 
+- Only support for Postgres and MySQL password strings
+
+- Checks if the password is null / length of 0
+
+- Supports quoted passwords
+
+- Not case sensative
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -52,7 +57,7 @@
 
 Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
 
-*version: v0.1*
+_version: v0.1_
 
 
 
@@ -91,12 +96,13 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- _If the secret is at the start of the file, its not picked up_
 
+- _If the secret is at the start of the file, its not picked up_
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -134,14 +140,17 @@ Hardcoded JDBC / Spring datasource passwords which typically are in property fil
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 Pattern to find Static passwords in YAML configuration files
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- The hardcoded password is between 12 and 32 chars long
-- Some false positives in Code might appear
-- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
 
+- The hardcoded password is between 12 and 32 chars long
+
+- Some false positives in Code might appear
+
+- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -173,17 +182,18 @@ Pattern to find Static passwords in YAML configuration files
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$`
-- Not Match: `^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$`
-- Not Match: `^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$`
-- Not Match: `^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$`
-- Not Match: `^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$`
+- Not Match: ```^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$```
+- Not Match: ```^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$```
+- Not Match: ```^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$```
+- Not Match: ```^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$```
+- Not Match: ```^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$```
 
 </p>
 </details>
@@ -192,15 +202,19 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- Checks for all github action susing a version that isn't a pinned SHA-1 commit hash
-- Checks for uses: org name / repo name @ string under 40 characters
-- Not case sensative
-- exclude all actions in actions, github and advanced-security repo
 
+- Checks for all github action susing a version that isn't a pinned SHA-1 commit hash
+
+- Checks for uses: org name / repo name @ string under 40 characters
+
+- Not case sensative
+
+- exclude all actions in actions, github and advanced-security repo
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -232,13 +246,14 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
 <p>
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(actions|github|advanced-security)/`
+- Not Match: ```^(actions|github|advanced-security)/```
 
 </p>
 </details>
@@ -247,12 +262,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- XML key/value format, <add key="key name" value="value of key" />
 
+- XML key/value format, <add key="key name" value="value of key" />
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -289,12 +305,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- contents of the validationKey or decryptionKey of a machineKey XML element
 
+- contents of the validationKey or decryptionKey of a machineKey XML element
+  
 
 <details>
 <summary>Pattern Format</summary>
