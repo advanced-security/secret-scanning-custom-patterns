@@ -9,7 +9,7 @@ patterns:
       start: |
         \A|[\s"'`,;=]
       end: |
-        \Z|[^a-zA-Z._0-9-]
+        \z|[^a-zA-Z._0-9-]
     test:
       data: foo@internal.example.com
     expected:

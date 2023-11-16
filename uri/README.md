@@ -1,228 +1,227 @@
 <!-- WARNING: This README is generated automatically
 -->
+
 # URI / URL Custom Patterns
 
 ## Hardcoded Internal Emails
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^:@\r\n \t"'/\p{Cc}]+@(internal\.)?example\.com
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 \A|[\s"'`,;=]
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
-\Z|[^a-zA-Z._0-9-]
+\z|[^a-zA-Z._0-9-]
 ```
 
-</p>
 </details>
 
 ## Hardcoded Internal URLs
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [A-Za-z][A-Za-z0-9+_-]*://([^/?#\s\p{Cc}]*[.@])?(example\.com|internal\.example\.com)[/?#]?[^\s"']*
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 \A|[^A-Za-z0-9+_-]
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \z|[\s'"]
 ```
 
-</p>
 </details>
 
 ## Hardcoded URI Passwords
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^$/?#@\s][^/?#@\s\x00-\x08]*
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (\b|\A)[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\x00-\x08]*:
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 @[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?([/?#\s]|\b|\z)
 ```
 
-</p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `(?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$`
-- Not Match: `^\$?\{[^}+]\}i\}$`
-- Not Match: `^%(?:\.\*)?s$`
+- Not Match:
 
-</p>
+  ```regex
+  (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
+  ```
+- Not Match:
+
+  ```regex
+  ^\$?\{[^}+]\}i\}$
+  ```
+- Not Match:
+
+  ```regex
+  ^%(?:\.\*)?s$
+  ```
+
 </details>
 
 ## Routable IPv4 Addresses
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 **Comments / Notes:**
 
-- False Positives with build versions, but won't match if prefixed with v or ends with -
-- Use a custom IPv4 pattern if possible, tailored for the ranges you use
-- Doesn't include test, localhost or non-routable IPs
-- Does include local ranges such as 192.168.0.0/24
 
+- False Positives with build versions, but won't match if prefixed with v or ends with -
+
+- Use a custom IPv4 pattern if possible, tailored for the ranges you use
+
+- Doesn't include test, localhost or non-routable IPs
+
+- Does include local ranges such as 192.168.0.0/24
+  
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 (?:(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])\.){3}(?:25[0-5]|(?:2[0-4]|1[0-9]|[1-9]|)[0-9])
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 \A|[^v.0-9]
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \z|[^.0-9-]
 ```
 
-</p>
 </details>
+
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: `^(?:0\.0\.0\.0|255\.255\.255\.255)$`
-- Not Match: `^(?:127|169\.254|224\.0\.0)\..*`
-- Not Match: `^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*`
+- Not Match:
 
-</p>
+  ```regex
+  ^(?:0\.0\.0\.0|255\.255\.255\.255)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(?:127|169\.254|224\.0\.0)\..*
+  ```
+- Not Match:
+
+  ```regex
+  ^(?:192\.0.2|198\.51\.100|203\.0\.113|233\.252\.0)\..*
+  ```
+
 </details>
 
 ## GitHub Container Registry typos
 
 
 
-*version: v0.1*
+_version: v0.1_
 
 
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 (?:ghrc|gchr|hgcr|ghr|ghc)\.io
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 \A|[^0-9A-Za-z-]
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \z|[^0-9A-Za-z.-]
 ```
 
-</p>
 </details>
