@@ -23,33 +23,27 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^\r\n\p{Cc}]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \z|[\r\n'"]
 ```
 
-</p>
 </details>
 
 ## Hardcoded Spring SQL passwords
@@ -63,33 +57,27 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^\r\n'"\p{Cc}]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \z|['"\r\n]
 ```
 
-</p>
 </details>
 
 ## Django Secret Key
@@ -106,33 +94,27 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^\r\n"']+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 \bSECRET_KEY[ \t]*=[ \t]*["']
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 ['"]
 ```
 
-</p>
 </details>
 
 ## YAML Static Password Fields
@@ -154,48 +136,61 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^\r\n'"]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 ['"\r\n]|\z
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: ```^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$```
-- Not Match: ```^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$```
-- Not Match: ```^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$```
-- Not Match: ```^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$```
-- Not Match: ```^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$```
+- Not Match:
 
-</p>
+  ```regex
+  ^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$
+  ```
+- Not Match:
+
+  ```regex
+  ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+  ```
+- Not Match:
+
+  ```regex
+  ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
+  ```
+- Not Match:
+
+  ```regex
+  ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+  ```
+
 </details>
 
 ## GitHub Actions SHA Checker
@@ -218,44 +213,41 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [a-z0-9_-]{1,39}\/[a-z0-9_-]{1,100}@[a-z0-9._-]{1,39}
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 \buses:[ \t]{1,5}
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \s|\z
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: ```^(actions|github|advanced-security)/```
+- Not Match:
 
-</p>
+  ```regex
+  ^(actions|github|advanced-security)/
+  ```
+
 </details>
 
 ## .NET Configuration file
@@ -272,33 +264,27 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^"\x00\x08]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 <add\s+key="[^"]*(?i)(password|secret|pass(?:wd|word|code|phrase)?|key|token)"\s+value="
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \"
 ```
 
-</p>
 </details>
 
 ## .NET MachineKey
@@ -315,31 +301,25 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [A-Fa-f0-9]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 <machineKey\s+[^>]*(validation|decryption)Key="
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \"
 ```
 
-</p>
 </details>

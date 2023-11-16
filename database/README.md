@@ -19,45 +19,46 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^;"\x00-\x08]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 ("|&quot;)(([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=[^"]+;) ?([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 (;|"|&quot;)
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: ```^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$```
-- Not Match: ```parameters\('[^']+'\)```
+- Not Match:
 
-</p>
+  ```regex
+  ^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]*\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*|\[\^])$
+  ```
+- Not Match:
+
+  ```regex
+  parameters\('[^']+'\)
+  ```
+
 </details>
 
 ## Database Connection String (2)
@@ -76,45 +77,46 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^;"\x00-\x08]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (?i)("|&quot;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 ("|&quot;);[^";]* ?([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: ```^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$```
-- Not Match: ```parameters\('[^']+'\)```
+- Not Match:
 
-</p>
+  ```regex
+  ^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$
+  ```
+- Not Match:
+
+  ```regex
+  parameters\('[^']+'\)
+  ```
+
 </details>
 
 ## Database Connection String (3)
@@ -131,44 +133,41 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^;\r\n"'\x00-\x08]+
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (\A|\b)ConnectionStrings__Default=[^\r\n]*([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 ([;\n]|\z)
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Additional Matches</summary>
-<p>
+
 Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
 
 
-- Not Match: ```^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\$?\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$```
+- Not Match:
 
-</p>
+  ```regex
+  ^(%(\.\*)?s|\$[a-zA-Z_]+|<[a-zA-Z_]+>|\$?\{[a-zA-Z_]+\}|\[[a-zA-Z_]+\]|%[A-Z_]+%|\.\*)$
+  ```
+
 </details>
 
 ## TSQL CREATE LOGIN/USER
@@ -185,31 +184,25 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 [^'\x00-\x08]{8,128}
 ```
 
-</p>
 </details>
 
 <details>
 <summary>Start Pattern</summary>
-<p>
 
 ```regex
 (\A|\b)CREATE\s+(LOGIN|USER)\s+[^\s\x00-\x08]+\s+WITH\s+PASSWORD\s+=\s+N?'
 ```
 
-</p>
 </details><details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \'
 ```
 
-</p>
 </details>

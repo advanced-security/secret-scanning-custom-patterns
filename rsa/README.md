@@ -19,13 +19,11 @@ _version: v1.2_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 --BEGIN (?:[A-Z]+ )?PRIVATE KEY--+(\\[nr]|[\r\n])+([a-zA-Z0-9+/=\s]|\\[rn])+(\\[rn]|[\r\n])+--+END (?:[A-Z]+ )?PRIVATE KEY--
 ```
 
-</p>
 </details>
 
 
@@ -44,13 +42,11 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 --BEGIN OPENSSH PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END OPENSSH PRIVATE KEY--
 ```
 
-</p>
 </details>
 
 
@@ -65,13 +61,11 @@ _version: v0.1_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 --BEGIN PGP PRIVATE KEY BLOCK--+(?:[\r\n]+((Version|Comment|MessageID|Hash|Charset): [^\r\n]+[\r\n]+)+[\r\n]+)?[a-zA-Z0-9+/=\s]+--+END PGP PRIVATE KEY BLOCK--
 ```
 
-</p>
 </details>
 
 
@@ -92,22 +86,18 @@ _version: v0.2_
 
 <details>
 <summary>Pattern Format</summary>
-<p>
 
 ```regex
 ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
 ```
 
-</p>
 </details>
 
 <details>
 <summary>End Pattern</summary>
-<p>
 
 ```regex
 \z|(\s)+[a-zA-Z0-9@-]+
 ```
 
-</p>
 </details>
