@@ -16,10 +16,13 @@ jobs:
       security-events: write
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Get Token
         id: get_workflow_token
@@ -28,13 +31,8 @@ jobs:
           application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
           application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
 
-      - name: Install Deps
-        run: python3 -m pip install pipenv && python3 -m pipenv install
-
-      # Run Validation
-      - name: Run Validation
-        env:
-          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
-        run: |
-          pipenv run python ./.github/scripts/validate.py \
-            --validate
+      - name: Secret Scanning Test Suite validation
+        uses: advanced-security/secret-scanning-tools@f55ca41132d2d9554eba0b7901d2005ef6ade456
+        with:
+          mode: 'validate'
+          token: ${{ steps.get_workflow_token.outputs.token }}
