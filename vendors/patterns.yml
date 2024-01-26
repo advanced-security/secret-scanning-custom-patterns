@@ -192,15 +192,17 @@ patterns:
       pattern: |
         (0{2}[0-9A-Za-z_-]{40})
       start: |
-        (\bSSWS\s+)
+        (\bSSWS\s+|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s*([:=]|[=-]>|to|[!=]={1,2}|<>)\s*['"`]?)
       end: |
         (\z|[^0-9A-Za-z_+/=-])
       additional_not_match:
-        # dummy token
+        # dummy tokens
         - ^0+$
 
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric with _ and -
+      - adds context beforehand to avoid false positives
+      - suitable for push protection
 
   - name: DataDog API key
     type: datadog_api_key
