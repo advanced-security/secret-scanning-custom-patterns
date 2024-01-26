@@ -185,6 +185,23 @@ patterns:
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric with _ and -
 
+  - name: Okta token (precise)
+    type: okta_token_precise
+    regex:
+      version: 0.1
+      pattern: |
+        (0{2}[0-9A-Za-z_-]{40})
+      start: |
+        (\bSSWS\s+)
+      end: |
+        (\z|[^0-9A-Za-z_+/=-])
+      additional_not_match:
+        # dummy token
+        - ^0+$
+
+    comments:
+      - Okta token, starting with `00` and 40 random alphanumeric with _ and -
+
   - name: DataDog API key
     type: datadog_api_key
     regex:
