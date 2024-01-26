@@ -153,7 +153,7 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        (0{2}[0-9A-Za-z_-]{40})
+        0{2}[0-9A-Za-z_-]{40}
       start: |
         (\A|[^0-9A-Za-z_+/-])
       end: |
@@ -190,9 +190,9 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        (0{2}[0-9A-Za-z_-]{40})
+        0{2}[0-9A-Za-z_-]{40}
       start: |
-        (\bSSWS\s+|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s*([:=]|[=-]>|to|[!=]={1,2}|<>)\s*['"`]?)
+        (\bSSWS\s{1,5}|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s{0,32}([:=]|[=-]>|to|[!=]={1,2}|<>)\s{0,32}['"`]?)
       end: |
         (\z|[^0-9A-Za-z_+/=-])
       additional_not_match:
