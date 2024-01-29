@@ -26,7 +26,7 @@ jobs:
           application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
 
       - name: Validate results against snapshot
-        uses: advanced-security/secret-scanning-tools@f55ca41132d2d9554eba0b7901d2005ef6ade456
+        uses: advanced-security/secret-scanning-tools@main
         with:
           mode: validate
           token: ${{ steps.get_workflow_token.outputs.token }}
