@@ -25,6 +25,8 @@ jobs:
           token: ${{ steps.get_workflow_token.outputs.token }}
 
       - name: Check git status
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
             gh pr comment --edit-last ${{ github.event.number }} \
