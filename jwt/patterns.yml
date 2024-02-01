@@ -12,9 +12,10 @@ patterns:
         [^0-9A-Za-z_.-]|\A
       end: |
         [^0-9A-Za-z_.=-]|\z
-      # don't detect JWT that are used in private GitHub issues
+      # don't match on JWT that are used in private GitHub issues - they now always start with:
+      # {"iss":"github.com","aud":"raw.githubusercontent.com",
       additional_not_match:
-        - ^eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.eyJrZXkiOiJrZXkxIiwiZXhwIjo[A-Za-z0-9_-]+(JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9|ZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmYWN0b3JfaWQ9MCZrZXlfaWQ9MCZyZXBvX2lkPTAifQ|mWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0)
+        - ^eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIs
 
     expected:
       - name: owasp-juice-shop.ts
@@ -29,4 +30,3 @@ patterns:
       - name: test_jwt.txt
         start_offset: 170
         end_offset: 381
-
