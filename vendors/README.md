@@ -1,6 +1,8 @@
 <!-- WARNING: This README is generated automatically
 -->
 
+<!-- markdownlint-disable no-inline-html -->
+
 # Vendors
 
 ## Azure SQL Connection String
