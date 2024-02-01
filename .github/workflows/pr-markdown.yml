@@ -2,18 +2,14 @@ name: Markdown Validation
 
 on:
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+      - uses: actions/checkout@v4
 
       - name: Get Token
         id: get_workflow_token
@@ -22,17 +18,16 @@ jobs:
           application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
           application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
 
-      - name: Install Deps
-        run: python3 -m pip install pipenv && python3 -m pipenv install
+      - name: Generate Markdown
+        uses: advanced-security/secret-scanning-tools@v1
+        with:
+          mode: markdown
+          token: ${{ steps.get_workflow_token.outputs.token }}
 
-      # Run Validation
-      - name: Run Markdown Validation
+      - name: Check git status
         env:
-          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
+          GH_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         run: |
-          pipenv run python ./.github/scripts/validate.py \
-            --markdown
-
           if [ -z "$(git status --porcelain)" ]; then
             gh pr comment --edit-last ${{ github.event.number }} \
               --body "## :white_check_mark: Markdown Validation Passed :rocket:!" || true

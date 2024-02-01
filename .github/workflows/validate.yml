@@ -1,10 +1,10 @@
-name: Main
+name: Results Validation
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
   workflow_dispatch:
 
@@ -16,10 +16,7 @@ jobs:
       security-events: write
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
+      - uses: actions/checkout@v4
 
       - name: Get Token
         id: get_workflow_token
@@ -28,13 +25,8 @@ jobs:
           application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
           application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
 
-      - name: Install Deps
-        run: python3 -m pip install pipenv && python3 -m pipenv install
-
-      # Run Validation
-      - name: Run Validation
-        env:
-          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
-        run: |
-          pipenv run python ./.github/scripts/validate.py \
-            --validate
+      - name: Validate results against snapshot
+        uses: advanced-security/secret-scanning-tools@v1
+        with:
+          mode: validate
+          token: ${{ steps.get_workflow_token.outputs.token }}
