@@ -20,14 +20,14 @@ _version: v0.1_
 
 - Supports quoted passwords
 
-- Not case sensative
+- Case insensitive
   
 
 <details>
 <summary>Pattern Format</summary>
 
 ```regex
-[^\r\n\p{Cc}]+
+[^\r\n\x00-\x08]+
 ```
 
 </details>
@@ -36,7 +36,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]
+(?:[^0-9A-Za-z]|\A)(?i)(?:postgres|mysql|mysql_root)_password[\t ]*[=:][\t ]*['"]?
 ```
 
 </details><details>
@@ -61,7 +61,7 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-[^\r\n'"\p{Cc}]+
+[^\r\n'"\x00-\x08]+
 ```
 
 </details>
@@ -70,7 +70,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
+(\A|\b)(?:spring\.datasource|jdbc)\.password[ \t]*=[ \t]*['"]?
 ```
 
 </details><details>
@@ -88,11 +88,7 @@ _version: v0.1_
 
 _version: v0.1_
 
-**Comments / Notes:**
 
-
-- _If the secret is at the start of the file, its not picked up_
-  
 
 <details>
 <summary>Pattern Format</summary>
@@ -107,7 +103,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-\bSECRET_KEY[ \t]*=[ \t]*["']
+(\b|\A)SECRET_KEY[ \t]*=[ \t]*["']
 ```
 
 </details><details>
@@ -204,13 +200,13 @@ _version: v0.1_
 **Comments / Notes:**
 
 
-- Checks for all github action susing a version that isn't a pinned SHA-1 commit hash
+- Checks for all github actions using a version that isn't a pinned SHA-1 commit hash
 
 - Checks for uses: org name / repo name @ string under 40 characters
 
-- Not case sensative
+- Not case sensitive
 
-- exclude all actions in actions, github and advanced-security repo
+- Exclude all actions in actions, github and advanced-security repo
   
 
 <details>
