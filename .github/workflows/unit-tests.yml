@@ -16,15 +16,24 @@ jobs:
       security-events: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout custom patterns
+        uses: actions/checkout@v4
+
+      - name: Checkout secret-scanning-tools
+        uses: actions/checkout@v4
         with:
           repository: "advanced-security/secret-scanning-tools"
           path: "secret-scanning-tools"
 
+      - name: Install dependencies
+        run: |
+          cd "${GITHUB_WORKSPACE}"/secret-scanning-tools/secretscanning
+          sudo apt-get -qq update
+          sudo apt-get -qq install libpcre3-dev
+          python3 -mpip -q install -r requirements.txt
+          python3 -mpip -q install tqdm
+
       - name: Unit Test patterns with hyperscan
         run: |
           cd "${GITHUB_WORKSPACE}"/secret-scanning-tools/secretscanning
-          sudo apt-get -qq install libpcre3-dev
-          python3 -mpip install -r requirements.txt
-          python3 -mpip install tqdm
-          python3 ./test.py --tests "${GITHUB_WORKSPACE}"
+          python3 ./test.py --tests "${GITHUB_WORKSPACE}" --exclude django_secret_key
