@@ -26,4 +26,5 @@ jobs:
           cd "${GITHUB_WORKSPACE}"/secret-scanning-tools/secretscanning
           sudo apt-get -qq install libpcre3-dev
           python3 -mpip install -r requirements.txt
+          python3 -mpip install tqdm
           python3 ./test.py --tests "${GITHUB_WORKSPACE}"
