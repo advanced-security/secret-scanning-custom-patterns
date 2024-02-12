@@ -69,7 +69,7 @@ patterns:
       pattern: |
         ssh-rsa\s+[a-zA-Z0-9/\+=]{20,}
       end: |
-        \z|\b
+        \z|\s+[a-zA-Z0-9@-]+([\r\n]|\z)
     comments:
       - "SSH Public Key (not a secret)"
       - Ignores the name of the public key
