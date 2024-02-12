@@ -36,4 +36,4 @@ jobs:
       - name: Unit Test patterns with hyperscan
         run: |
           cd "${GITHUB_WORKSPACE}"/secret-scanning-tools/secretscanning
-          python3 ./test.py --tests "${GITHUB_WORKSPACE}" --exclude django_secret_key --debug --verbose
+          python3 ./test.py --tests "${GITHUB_WORKSPACE}" --exclude django_secret_key
