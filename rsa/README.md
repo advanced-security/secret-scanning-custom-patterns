@@ -90,7 +90,7 @@ _version: v0.2_
 <summary>Pattern Format</summary>
 
 ```regex
-ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
+ssh-rsa\s+[a-zA-Z0-9/\+=]{20,}
 ```
 
 </details>
@@ -99,7 +99,7 @@ ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
 <summary>End Pattern</summary>
 
 ```regex
-\z|(\s)+[a-zA-Z0-9@-]+
+\z|\s+[a-zA-Z0-9@-]+([\r\n]|\z)
 ```
 
 </details>

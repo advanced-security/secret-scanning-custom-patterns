@@ -6,496 +6,829 @@ patterns:
     end: \z|[^A-Za-z0-9-]
     pattern: AL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: AL35202111090000000001234567
+    end_offset: 28
+    start_offset: 0
   type: iban_al
 - name: IBAN for Andorra
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: AD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: AD1400080001001234567890
+    end_offset: 24
+    start_offset: 0
   type: iban_ad
 - name: IBAN for Austria
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: AT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: AT483200000012345864
+    end_offset: 20
+    start_offset: 0
   type: iban_at
 - name: IBAN for Azerbaijan
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: AZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: AZ77VTBA00000000001234567890
+    end_offset: 28
+    start_offset: 0
   type: iban_az
 - name: IBAN for Bahrain
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BH02CITI00001077181611
+    end_offset: 22
+    start_offset: 0
   type: iban_bh
 - name: IBAN for Belgium
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){5}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BE71096123456769
+    end_offset: 16
+    start_offset: 0
   type: iban_be
 - name: IBAN for Bosnia and Herzegovina
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BA393385804800211234
+    end_offset: 20
+    start_offset: 0
   type: iban_ba
 - name: IBAN for Brazil
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BR1500000000000010932840814P2
+    end_offset: 29
+    start_offset: 0
   type: iban_br
 - name: IBAN for Bulgaria
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BG18RZBB91550123456789
+    end_offset: 22
+    start_offset: 0
   type: iban_bg
 - name: IBAN for Costa Rica
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: CR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: CR23015108410026012345
+    end_offset: 22
+    start_offset: 0
   type: iban_cr
 - name: IBAN for Croatia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: HR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: HR1723600001101234565
+    end_offset: 21
+    start_offset: 0
   type: iban_hr
 - name: IBAN for Cyprus
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: CY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: CY21002001950000357001234567
+    end_offset: 28
+    start_offset: 0
   type: iban_cy
 - name: IBAN for Czech Republic
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: CZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: CZ5508000000001234567899
+    end_offset: 24
+    start_offset: 0
   type: iban_cz
 - name: IBAN for Faroe Islands
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: FO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: FO9264600123456789
+    end_offset: 18
+    start_offset: 0
   type: iban_fo
 - name: IBAN for Greenland
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: GL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: GL8964710123456789
+    end_offset: 18
+    start_offset: 0
   type: iban_gl
 - name: IBAN for Denmark
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: DK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: DK9520000123456789
+    end_offset: 18
+    start_offset: 0
   type: iban_dk
 - name: IBAN for Dominican Republic
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: DO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: DO22ACAU00000000000123456789
+    end_offset: 28
+    start_offset: 0
   type: iban_do
 - name: IBAN for Estonia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: EE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: EE471000001020145685
+    end_offset: 20
+    start_offset: 0
   type: iban_ee
 - name: IBAN for Egypt
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: EG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: EG800002000156789012345180002
+    end_offset: 29
+    start_offset: 0
   type: iban_eg
 - name: IBAN for Finland
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: FI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: FI1410093000123458
+    end_offset: 18
+    start_offset: 0
   type: iban_fi
 - name: IBAN for France
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: FR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: FR7630006000011234567890189
+    end_offset: 27
+    start_offset: 0
   type: iban_fr
 - name: IBAN for Georgia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: GE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: GE60NB0000000123456789
+    end_offset: 22
+    start_offset: 0
   type: iban_ge
 - name: IBAN for Germany
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: DE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: DE75512108001245126199
+    end_offset: 22
+    start_offset: 0
   type: iban_de
 - name: IBAN for Gibraltar
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: GI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: GI56XAPO000001234567890
+    end_offset: 23
+    start_offset: 0
   type: iban_gi
 - name: IBAN for Greece
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: GR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: GR9608100010000001234567890
+    end_offset: 27
+    start_offset: 0
   type: iban_gr
 - name: IBAN for Guatemala
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: GT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: GT20AGRO00000000001234567890
+    end_offset: 28
+    start_offset: 0
   type: iban_gt
 - name: IBAN for Hungary
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: HU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: HU93116000060000000012345676
+    end_offset: 28
+    start_offset: 0
   type: iban_hu
 - name: IBAN for Iceland
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: IS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: IS750001121234563108962099
+    end_offset: 26
+    start_offset: 0
   type: iban_is
 - name: IBAN for Ireland
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: IE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: IE64IRCE92050112345678
+    end_offset: 22
+    start_offset: 0
   type: iban_ie
 - name: IBAN for Israel
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: IL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: IL170108000000012612345
+    end_offset: 23
+    start_offset: 0
   type: iban_il
 - name: IBAN for Italy
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: IT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: IT60X0542811101000000123456
+    end_offset: 27
+    start_offset: 0
   type: iban_it
 - name: IBAN for Jordan
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: JO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: JO71CBJO0000000000001234567890
+    end_offset: 30
+    start_offset: 0
   type: iban_jo
 - name: IBAN for Kazakhstan
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: KZ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: KZ244350000012344567
+    end_offset: 20
+    start_offset: 0
   type: iban_kz
 - name: IBAN for Kosovo
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: XK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: XK051212012345678906
+    end_offset: 20
+    start_offset: 0
   type: iban_xk
 - name: IBAN for Kuwait
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: KW(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: KW81CBKU0000000000001234560101
+    end_offset: 30
+    start_offset: 0
   type: iban_kw
 - name: IBAN for Latvia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LV97HABA0012345678910
+    end_offset: 21
+    start_offset: 0
   type: iban_lv
 - name: IBAN for Lebanon
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LB92000700000000123123456123
+    end_offset: 28
+    start_offset: 0
   type: iban_lb
 - name: IBAN for Liechtenstein
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LI7408806123456789012
+    end_offset: 21
+    start_offset: 0
   type: iban_li
 - name: IBAN for Lithuania
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LT601010012345678901
+    end_offset: 20
+    start_offset: 0
   type: iban_lt
 - name: IBAN for Luxembourg
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){9}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LU120010001234567891
+    end_offset: 20
+    start_offset: 0
   type: iban_lu
 - name: IBAN for North Macedonia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: MK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: MK07200002785123453
+    end_offset: 19
+    start_offset: 0
   type: iban_mk
 - name: IBAN for Malta
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: MT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: MT31MALT01100000000000000000123
+    end_offset: 31
+    start_offset: 0
   type: iban_mt
 - name: IBAN for Mauritania
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: MR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: MR1300020001010000123456753
+    end_offset: 27
+    start_offset: 0
   type: iban_mr
 - name: IBAN for Mauritius
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: MU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){19}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: MU43BOMM0101123456789101000MUR
+    end_offset: 30
+    start_offset: 0
   type: iban_mu
 - name: IBAN for Moldova
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: MD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: MD21EX000000000001234567
+    end_offset: 24
+    start_offset: 0
   type: iban_md
 - name: IBAN for Monaco
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: MC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: MC5810096180790123456789085
+    end_offset: 27
+    start_offset: 0
   type: iban_mc
 - name: IBAN for Montenegro
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: ME(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: ME25505000012345678951
+    end_offset: 22
+    start_offset: 0
   type: iban_me
 - name: IBAN for Netherlands
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: NL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: NL02ABNA0123456789
+    end_offset: 18
+    start_offset: 0
   type: iban_nl
 - name: IBAN for Norway
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: NO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){4}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: NO8330001234567
+    end_offset: 15
+    start_offset: 0
   type: iban_no
 - name: IBAN for Pakistan
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: PK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: PK36SCBL0000001123456702
+    end_offset: 24
+    start_offset: 0
   type: iban_pk
 - name: IBAN for Palestine
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: PS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: PS92PALS000000000400123456702
+    end_offset: 29
+    start_offset: 0
   type: iban_ps
 - name: IBAN for Poland
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: PL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: PL10105000997603123456789123
+    end_offset: 28
+    start_offset: 0
   type: iban_pl
 - name: IBAN for Portugal
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: PT(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: PT50002700000001234567833
+    end_offset: 25
+    start_offset: 0
   type: iban_pt
 - name: IBAN for Qatar
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: QA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: QA54QNBA000000000000693123456
+    end_offset: 29
+    start_offset: 0
   type: iban_qa
 - name: IBAN for Romania
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: RO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: RO66BACX0000001234567890
+    end_offset: 24
+    start_offset: 0
   type: iban_ro
 - name: IBAN for San Marino
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SM(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SM76P0854009812123456789123
+    end_offset: 27
+    start_offset: 0
   type: iban_sm
 - name: IBAN for Saint Lucia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){21}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LC14BOSL123456789012345678901234
+    end_offset: 32
+    start_offset: 0
   type: iban_lc
 - name: IBAN for Sao Tome and Principe
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: ST(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: ST23000200000289355710148
+    end_offset: 25
+    start_offset: 0
   type: iban_st
 - name: IBAN for Saudi Arabia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SA4420000001234567891234
+    end_offset: 24
+    start_offset: 0
   type: iban_sa
 - name: IBAN for Serbia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: RS(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: RS35105008123123123173
+    end_offset: 22
+    start_offset: 0
   type: iban_rs
 - name: IBAN for Slovakia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SK(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SK8975000000000012345671
+    end_offset: 24
+    start_offset: 0
   type: iban_sk
 - name: IBAN for Slovenia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){8}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SI56192001234567892
+    end_offset: 19
+    start_offset: 0
   type: iban_si
 - name: IBAN for Spain
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: ES(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: ES7921000813610123456789
+    end_offset: 24
+    start_offset: 0
   type: iban_es
 - name: IBAN for Sweden
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SE7280000810340009783242
+    end_offset: 24
+    start_offset: 0
   type: iban_se
 - name: IBAN for Switzerland
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: CH(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){10}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: CH5604835012345678009
+    end_offset: 21
+    start_offset: 0
   type: iban_ch
 - name: IBAN for Timor-Leste
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: TL(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: TL380010012345678910106
+    end_offset: 23
+    start_offset: 0
   type: iban_tl
 - name: IBAN for Tunisia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: TN(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: TN5904018104004942712345
+    end_offset: 24
+    start_offset: 0
   type: iban_tn
 - name: IBAN for Turkey
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: TR(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){15}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: TR320010009999901234567890
+    end_offset: 26
+    start_offset: 0
   type: iban_tr
 - name: IBAN for United Arab Emirates
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: AE(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: AE460090000000123456789
+    end_offset: 23
+    start_offset: 0
   type: iban_ae
 - name: IBAN for United Kingdom
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: GB(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: GB33BUKB20201555555555
+    end_offset: 22
+    start_offset: 0
   type: iban_gb
 - name: IBAN for Holy See (the)
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: VA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){11}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: VA59001123000012345678
+    end_offset: 22
+    start_offset: 0
   type: iban_va
 - name: IBAN for Virgin Islands, British
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: VG(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){13}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: VG07ABVI0000000123456789
+    end_offset: 24
+    start_offset: 0
   type: iban_vg
 - name: IBAN for Ukraine
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: UA(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){18}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: UA903052992990004149123456789
+    end_offset: 29
+    start_offset: 0
   type: iban_ua
 - name: IBAN for Seychelles
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SC(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){20}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SC74MCBL01031234567890123456USD
+    end_offset: 31
+    start_offset: 0
   type: iban_sc
 - name: IBAN for Iraq
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: IQ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: IQ20CBIQ861800101010500
+    end_offset: 23
+    start_offset: 0
   type: iban_iq
 - name: IBAN for Belarus
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BY86AKBB10100000002966000000
+    end_offset: 28
+    start_offset: 0
   type: iban_by
 - name: IBAN for El Salvador
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SV(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){17}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SV43ACAT00000000000000123123
+    end_offset: 28
+    start_offset: 0
   type: iban_sv
 - name: IBAN for Libya
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: LY(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){14}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: LY38021001000000123456789
+    end_offset: 25
+    start_offset: 0
   type: iban_ly
 - name: IBAN for Sudan
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SD(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){7}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SD8811123456789012
+    end_offset: 18
+    start_offset: 0
   type: iban_sd
 - name: IBAN for Burundi
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: BI(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: BI4322000113101234567891234
+    end_offset: 27
+    start_offset: 0
   type: iban_bi
 - name: IBAN for Djibouti
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: DJ(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){16}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: DJ2110002010010409943020008
+    end_offset: 27
+    start_offset: 0
   type: iban_dj
 - name: IBAN for Russia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: RU(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){22}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: RU0204452560040702810412345678901
+    end_offset: 33
+    start_offset: 0
   type: iban_ru
 - name: IBAN for Somalia
   regex:
     end: \z|[^A-Za-z0-9-]
     pattern: SO(?:[0-9][ -]?){2}(?:[0-9A-Z][ -]?){4}(?:[0-9][ -]?){12}(?:[0-9A-Z][ -]?){3}
     start: \A|[^A-Za-z0-9-]
+  test:
+    data: SO061000001123123456789
+    end_offset: 23
+    start_offset: 0
   type: iban_so
+

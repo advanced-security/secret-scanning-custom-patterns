@@ -26,6 +26,11 @@ patterns:
         # reference to a member variable, index into a variable, bash variables, perl hash key index, environment vars
         - ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$
 
+    test:
+      data: password=Password123
+      start_offset: 9
+      end_offset: -1
+
     expected:
       - name: passwords.js
         start_offset: 14
@@ -58,6 +63,12 @@ patterns:
         - ^00000000-0000-0000-0000-000000000000$
         - ^(?i)00010203-0405-0607-0809-0a0b0c0d0e0f$
         - ^(?i)12345678-1234-1234-1234-123456789abc$
+
+    test:
+      - data: 10203040-5060-7080-90a0-b0c0d0e0f000
+        start_offset: 0
+        end_offset: -1
+
     expected:
       - name: uuids.txt
         start_offset: 12
@@ -92,6 +103,10 @@ patterns:
       - name: bearer.txt
         start_offset: 99
         end_offset: 118
+    test:
+      - data: "Authorization: Bearer FAKETOKENFORTESTING"
+        start_offset: 23
+        end_offset: 42
     comments:
       - "As used in an Authorization header"
       - "We try to remove common placeholders"

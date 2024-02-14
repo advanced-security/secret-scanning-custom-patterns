@@ -16,6 +16,8 @@ patterns:
       # {"iss":"github.com","aud":"raw.githubusercontent.com",
       additional_not_match:
         - ^eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIs
+    test:
+      data: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjM2MzcxNDkzLCJleHAiOjE5NTE5NDc0OTN9.T365h6AcgnvibAWvN_rIiaFnOK5R1ZGqdEkPI45zsNs
 
     expected:
       - name: owasp-juice-shop.ts

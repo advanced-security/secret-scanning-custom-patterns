@@ -99,7 +99,7 @@ _version: v0.1_
 <summary>End Pattern</summary>
 
 ```regex
-@[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?([/?#\s]|\b|\z)
+@[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?([/?#\s"'`]|\z)
 ```
 
 </details>

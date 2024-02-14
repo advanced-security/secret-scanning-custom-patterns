@@ -10,7 +10,8 @@ patterns:
         \A|[\s"'`,;=]
       end: |
         \z|[^a-zA-Z._0-9-]
-
+    test:
+      data: foo@internal.example.com
     expected:
       - name: email.js
         start_offset: 75
@@ -29,7 +30,8 @@ patterns:
         \A|[^A-Za-z0-9+_-]
       end: |
         \z|[\s'"]
-
+    test:
+      data: https://something_internal.example.com/a/path/
     expected:
       - name: email.js
         start_offset: 169
@@ -62,15 +64,18 @@ patterns:
       start: |
         (\b|\A)[A-Za-z][A-Za-z0-9+_-]*://[^/?#:@\s\x00-\x08]*:
       end: |
-        @[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?([/?#\s]|\b|\z)
+        @[\p{L}\p{N}\.-]*(?:\:[0-9]{1,5})?([/?#\s"'`]|\z)
       additional_not_match:
         # placeholders
         - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
         # variable substitution
         - ^\$?\{[^}+]\}i\}$
         # format string
-        - ^%(?:\.\*)?s$ 
-
+        - ^%(?:\.\*)?s$
+    test:
+      data: https://user:foo@example.invalid/
+      start_offset: 13
+      end_offset: 16
     expected:
       - name: app.py
         start_offset: 160
@@ -112,6 +117,8 @@ patterns:
       - Use a custom IPv4 pattern if possible, tailored for the ranges you use
       - Doesn't include test, localhost or non-routable IPs
       - Does include local ranges such as 192.168.0.0/24
+    test:
+      data: 192.168.1.100
     expected:
       - name: ipv4.txt
         start_offset: 0
@@ -145,7 +152,8 @@ patterns:
         \A|[^0-9A-Za-z-]
       end: |
         \z|[^0-9A-Za-z.-]
-
+    test:
+      data: ghrc.io
     expected:
       - name: wrong_docker.sh
         start_offset: 32

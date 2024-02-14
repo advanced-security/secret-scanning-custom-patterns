@@ -8,6 +8,11 @@ patterns:
         (?i)[a-z][a-z0-9-]+\.database(?:\.secure)?\.(?:(?:windows|usgovcloudapi)\.net|chinacloudapi\.cn|cloudapi\.de)
     comments:
       - "Removed from Secret Scanning for private repositories: https://github.blog/changelog/2021-10-18-secret-scanning-no-longer-supports-azure-sql-connection-strings-in-private-repos/"
+    test:
+      data: |
+        const db = "abc123.database.secure.windows.net" 
+      start_offset: 12
+      end_offset: 46
     expected:
       - name: azure.js
         start_offset: 27
@@ -18,6 +23,8 @@ patterns:
     regex:
       pattern: |
         eyJrIjoi[A-Za-z0-9_=-]{42}
+    test:
+      data: eyJrIjoiT0tTcG1pUlY2RnVKZTFVaDFsNFZXdE9ZWmNrMkZYbk
     expected:
       - name: grafana.txt
         start_offset: 107
@@ -33,6 +40,8 @@ patterns:
         SG\.[a-zA-Z0-9-]{5,}\.[a-zA-Z0-9-]{5,}
       end: |
         \z|[^a-zA-Z0-9-]
+    test:
+      data: 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
     comments:
       - "Deprecated (supported by Secret Scanning)"
     expected:
@@ -54,6 +63,10 @@ patterns:
         \z|\s
       additional_match:
         - \d\D|\D\d
+    test:
+      data: SENTRY_AUTH_TOKEN=aabbccddeeff0011223344556677889900a1b1c1d1e1f1011121314151617181
+      start_offset: 18
+      end_offset: -1
     expected:
       - name: dotenv
         start_offset: 18
@@ -81,6 +94,10 @@ patterns:
         \z|\s
       additional_match:
         - \d\D|\D\d
+    test:
+      data: SENTRY_API_KEY=aabbccddeeff00112233445566778899
+      start_offset: 15
+      end_offset: -1
     expected:
       - name: dotenv
         start_offset: 98
@@ -107,6 +124,10 @@ patterns:
         @([a-z0-9-.]+\.)?sentry\.io(?:/[^?#]*)?/\d+
       additional_match:
         - \d\D|\D\d
+    test:
+      data: https://cec9dfceb0b74c1c9a5e3c135585f364:4f6a592349e249c5906918393766718d@sentry.io/2
+      start_offset: 41
+      end_offset: 73
     comments:
       - "The secret part of the DSN is optional and effectively deprecated, and should be removed from the DSN: https://docs.sentry.io/product/sentry-basics/dsn-explainer"
     expected:
@@ -126,6 +147,23 @@ patterns:
         ['"]
       additional_match:
         - \d\D|\D\d
+    test:
+      data: |
+        var config = {
+            plugins: [
+                new SentryPlugin({
+                    // Sentry options are required
+                    organization: 'your-organization-name',
+                    project: 'your-project-name',
+                    apiKey: '1234567890abcdef1234567890abcdef',
+
+                    // Release version name/hash is required
+                    release: process.env.GIT_SHA
+                })
+            ]
+        }
+      start_offset: 215
+      end_offset: 247
     expected:
       - name: webpack_sentry.js
         start_offset: 215
@@ -143,6 +181,13 @@ patterns:
         ['"]
       additional_match:
         - \d\D|\D\d
+    test:
+      data: |
+        provider "sentry" {
+          token = "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+        }
+      start_offset: 31
+      end_offset: 95
     expected:
       - name: terraform.tf
         start_offset: 127
@@ -167,7 +212,10 @@ patterns:
         - ^\d+(\.\d+)?e[+-]?\d+$
         # Don't hit on long strings of numbers and underscores only
         - "[\\d_]{30}"
-
+    test:
+      data: okta_token="00RCsRGyrF9QzBe0rnWmw221UeclqRXFQGEJFdhAFM"
+      start_offset: 12
+      end_offset: 54
     expected:
       - name: okta.txt
         start_offset: 12
@@ -200,6 +248,9 @@ patterns:
         - ^1+$
         - ^ef8d5de700e7989468166c40fc8a0ccd$
         - ^(a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5|1234567890abcdef1234567890abcdef)$
+    test:
+      data: DD_API_KEY=01000000000000000000000000000000
+      start_offset: 11
     expected:
       - name: datadog.txt
         start_offset: 22
@@ -239,6 +290,9 @@ patterns:
         - ^0+$
         - ^1+$
         - a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9
+    test:
+      data: DD_APP_KEY=0100000000000000000000000000000000000000
+      start_offset: 11
     expected:
       - name: datadog.txt
         start_offset: 66

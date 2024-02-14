@@ -20,6 +20,11 @@ patterns:
       - name: rsa.json
         start_offset: 49
         end_offset: 2715
+    test:
+      data: |
+        --BEGIN PRIVATE KEY--\nAAAA\n--END PRIVATE KEY--
+      start_offset: 0
+      end_offset: 48
 
   - name: SSH Private Keys
     type: ssh_private_keys
@@ -32,6 +37,11 @@ patterns:
       - name: ssh_rsa
         start_offset: 3
         end_offset: 2631
+    test:
+      data: |
+          --BEGIN OPENSSH PRIVATE KEY--AAAA--END OPENSSH PRIVATE KEY--
+      start_offset: 0
+      end_offset: 60
 
   - name: GPG Private Key
     type: gpg_private_key
@@ -45,6 +55,11 @@ patterns:
       - name: GeekMasher_GPG_with_headers.asc
         start_offset: 3
         end_offset: 6728
+    test:
+      data: |
+        --BEGIN PGP PRIVATE KEY BLOCK--AAAA--END PGP PRIVATE KEY BLOCK--
+      start_offset: 0
+      end_offset: 64
 
   - name: SSH Public Key
     type: ssh_public_key
@@ -52,9 +67,9 @@ patterns:
     regex:
       version: 0.2
       pattern: |
-        ssh-rsa(\s)+[a-zA-Z0-9\/\+=]{20,}
+        ssh-rsa\s+[a-zA-Z0-9/\+=]{20,}
       end: |
-        \z|(\s)+[a-zA-Z0-9@-]+
+        \z|\s+[a-zA-Z0-9@-]+([\r\n]|\z)
     comments:
       - "SSH Public Key (not a secret)"
       - Ignores the name of the public key
@@ -62,3 +77,8 @@ patterns:
       - name: ssh_rsa.pub
         start_offset: 0
         end_offset: 552
+    test:
+      data: |
+        ssh-rsa aaaaaaaaaaaaaaaaaaaaa foo
+      start_offset: 0
+      end_offset: 29
