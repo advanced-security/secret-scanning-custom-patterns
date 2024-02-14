@@ -1,4 +1,5 @@
 name: IBANs
+display: false
 patterns:
 - name: IBAN for Albania
   regex:
