@@ -313,3 +313,24 @@ patterns:
     comments:
       - "Looks for surrounding context to confirm this is a DataDog App key, not some other 40-byte hex string"
 
+  - name: OpenStack Password/API key
+    type: openstack_password
+    regex:
+      version: 0.1
+      pattern: |
+        [^'",\r\n\x00-\x08]+
+      start: |
+        (?i)OPEN_?STACK_(PASSWORD|API_?KEY)[_A-Z]*[:=]\s*['"]?
+      end: |
+        ['"\r\n,]|\z
+      additional_not_match:
+        - ^(ENV|[a-z_]+)\[$
+        - ^<%=.*%>$
+        - ^([a-z_]+\.api_?key|self\.[a-z_]+|os\.environ\.get\()$
+        - ^(\$\{?[A-Z]+\}?|<password>)$
+        - ^(@?[a-z_]+\[:.*\]|@[a-z_]+)$
+    test:
+      data: OPENSTACK_PASSWORD=demo_password
+      start_offset: 19
+    comments:
+      - "Relies entirely on surrounding context to confirm this is an OpenStack password"

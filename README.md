@@ -136,4 +136,6 @@ Custom Secret Scanning Patterns repository.
 - DataDog API key
 
 - DataDog APP key
+
+- OpenStack Password/API key
   

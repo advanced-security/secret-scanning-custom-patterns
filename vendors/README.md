@@ -513,3 +513,74 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
   ```
 
 </details>
+
+## OpenStack Password/API key
+
+
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- Relies entirely on surrounding context to confirm this is an OpenStack password
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^'",\r\n\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)OPEN_?STACK_(PASSWORD|API_?KEY)[_A-Z]*[:=]\s*['"]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n,]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^(ENV|[a-z_]+)\[$
+  ```
+- Not Match:
+
+  ```regex
+  ^<%=.*%>$
+  ```
+- Not Match:
+
+  ```regex
+  ^([a-z_]+\.api_?key|self\.[a-z_]+|os\.environ\.get\()$
+  ```
+- Not Match:
+
+  ```regex
+  ^(\$\{?[A-Z]+\}?|<password>)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(@?[a-z_]+\[:.*\]|@[a-z_]+)$
+  ```
+
+</details>
