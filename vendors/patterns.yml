@@ -512,7 +512,7 @@ patterns:
       data: Bearer 01234567-89ab-cdef-0123-456789abcdef
       start_offset: 7
 
-  - Azure client secret
+  - name: Azure client secret
     type: azure_client_secret
     regex:
       version: 0.1
