@@ -423,6 +423,7 @@ patterns:
     test:
       data: https://user:ZrQyYJbcgw8YtyzGT3Hn@hub-cloud.browserstack.com/...
       start_offset: 8
+      end_offset: 33
 
   - name: Vercel Access Token (imprecise)
     type: vercel_access_token_imprecise
