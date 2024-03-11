@@ -514,6 +514,53 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </details>
 
+## Microsoft Teams incoming webhook
+
+
+
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+https://[a-z-]+\.webhook\.office\.com/webhookb2/[a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}@[a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}/[^/]+/[a-fA-F0-9]{32}/[a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\A|\b
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|\b
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^https://contoso\.
+  ```
+
+</details>
+
 ## LaunchDarkly API key
 
 

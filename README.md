@@ -139,6 +139,8 @@ Custom Secret Scanning Patterns repository.
 
 - DataDog APP key
 
+- Microsoft Teams incoming webhook
+
 - LaunchDarkly API key
 
 - PagerDuty API/Service key
