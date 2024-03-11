@@ -380,6 +380,7 @@ patterns:
     test:
       data: https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=415fe941b56580b5c99a69ebe44322ee&pho...
       start_offset: 76
+      end_offset: 108
 
   - name: BrowserStack access key
     type: browserstack_access_key
