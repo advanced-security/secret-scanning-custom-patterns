@@ -52,6 +52,8 @@ Custom Secret Scanning Patterns repository.
 - UUIDs
 
 - Bearer Tokens
+
+- OAuth client secret and ID pair
   
 
 ### [JWT](./jwt)
@@ -136,4 +138,28 @@ Custom Secret Scanning Patterns repository.
 - DataDog API key
 
 - DataDog APP key
+
+- LaunchDarkly API key
+
+- PagerDuty API/Service key
+
+- Flickr OAuth token
+
+- Flickr API key
+
+- BrowserStack access key
+
+- BrowserStack access key (imprecise)
+
+- BrowserStack token (URL)
+
+- Vercel Access Token (imprecise)
+
+- Vercel Access Token
+
+- Vercel CLI token
+
+- Vercel OAuth client secrets
+
+- UUIDv4 Bearer token (maybe Heroku)
   

@@ -148,7 +148,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 
 
-_version: v0.1_
+_version: v0.2_
 
 **Comments / Notes:**
 
@@ -171,7 +171,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-['"\s][Aa]uthorization: Bearer[ ]+
+\b([Bb]earer|[Tt]oken)[ ]+
 ```
 
 </details><details>
@@ -213,6 +213,73 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
   ```regex
   ^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$
+  ```
+
+</details>
+
+## OAuth client secret and ID pair
+
+
+
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(?i)client[_.-]?Id\s*([:=]|[=-]>|to|[!=]={1,2}|<>)\s*['"`]?[^\s'"`[\]{}()<>]+['"`]?\s*[,\r\n]\s*\bclient[_.-]?Secret\s*([:=]|[=-]>|to|[!=]={1,2}|<>)\s*['"`]?[^\s'"`[\]{}()<>]+['"`]?
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\A|\b
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|\b
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^(?i)client[_.-]?id\s*[:=]?\s*(string|str|None)\b|\.\.\.|\(string\)|(?i)Client(ID|Secret)[a-z]|^(?i)client[_.-]?id["'`]\)|"\$\{
+  ```
+- Not Match:
+
+  ```regex
+  ^(?i)client[_.-]?id\s*[=:]\s*([a-z.]+(\[|\.get\())?["'`]?(\$\{|@)?[a-z0-9_.-]*((client|app)[_.-]?id|key)\b
+  ```
+- Not Match:
+
+  ```regex
+  (?i)client[_.-]?secret\s*[=:]\s*["'`]?(\$\{|@)?[a-z_.-]*(secret|token)\b
+  ```
+- Not Match:
+
+  ```regex
+  ^(?i)client[_.-]?Id(:.,|:\s*client[_.-]?secret:)
+  ```
+- Not Match:
+
+  ```regex
+  xxxxx|\?\?\?\?\?|example|00000|123-?45|['"][^'"\s]{1,5}['"]|(?i)<client[_-]?id>
   ```
 
 </details>
