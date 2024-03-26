@@ -521,7 +521,7 @@ patterns:
       pattern: |
         [a-zA-Z0-9~_.-]{34}
       start: |
-        (?i)(client|azure[a-z_.-]{0,29})(key|secret|password|pwd|token)[a-z_.-]{0,29}\b['"`]?(\s{0,3}[\]\)])?\s{0,5}([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s{0,5}([[{])?['"`]?
+        (?i)(client|azure[a-z_.-]{0,10})(key|secret|password|pwd|token)[a-z_.-]{0,9}\b['"`]?(\s{0,5}[\]\)])?\s{0,3}([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s{0,5}([[{])?['"`]?
       end: |
         \z|["'`]|\s
       additional_matches:
@@ -531,3 +531,4 @@ patterns:
     test:
       data: ClientSecret = "kc3KP75a~edN1cV.rs~_r6F-O7-C-55-Ts"
       start_offset: 16
+      end_offset: 50
