@@ -1,5 +1,5 @@
 secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
-"credit_cards_american_express","Credit Cards (American Express)","c4fdb6f6c2740911ac19e48600164e3b6d1b9fa26ba9a23a3aee7404a6e11617","pii/credit-cards.txt","29","29","1","16",
-"credit_cards_american_express","Credit Cards (American Express)","273476b83f26d858e3e62e1fc042e06961ed9229a428156d7ccfa096297267ff","pii/credit-cards.txt","28","28","1","16",
-"credit_cards_american_express","Credit Cards (American Express)","53a8fc816e63b7a5ccd17aaff93f28bcf13abbf418209dcd93947722d7c326ba","pii/credit-cards.txt","27","27","1","16",
-"credit_cards_american_express","Credit Cards (American Express)","3a134ef77d4e2e4cdad2d2945ff1f76c1a23296c93c851f6244220a8cedea130","pii/credit-cards.txt","26","26","1","16",
+"credit_cards_american_express","Credit Cards - American Express","c4fdb6f6c2740911ac19e48600164e3b6d1b9fa26ba9a23a3aee7404a6e11617","pii/credit-cards.txt","29","29","1","16",
+"credit_cards_american_express","Credit Cards - American Express","273476b83f26d858e3e62e1fc042e06961ed9229a428156d7ccfa096297267ff","pii/credit-cards.txt","28","28","1","16",
+"credit_cards_american_express","Credit Cards - American Express","53a8fc816e63b7a5ccd17aaff93f28bcf13abbf418209dcd93947722d7c326ba","pii/credit-cards.txt","27","27","1","16",
+"credit_cards_american_express","Credit Cards - American Express","3a134ef77d4e2e4cdad2d2945ff1f76c1a23296c93c851f6244220a8cedea130","pii/credit-cards.txt","26","26","1","16",
