@@ -492,7 +492,7 @@ patterns:
         \A|\b
       end: |
         \z|\s|['"`]
-      additional_not_matches:
+      additional_not_match:
         - ^mongodb\+srv://(test-)?user:(test-)?pass(word)?@
         - ^mongodb\+srv://%s:%s@
         - ^mongodb\+srv://auser:apass@
