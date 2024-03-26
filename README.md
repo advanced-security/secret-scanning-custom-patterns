@@ -163,5 +163,7 @@ Custom Secret Scanning Patterns repository.
 
 - Vercel OAuth client secrets
 
+- MongoDB connection string
+
 - UUIDv4 Bearer token (maybe Heroku)
   
