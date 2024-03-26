@@ -481,6 +481,8 @@ patterns:
       data: |
         clientId: 'oac_aaaaaaaaaaaaaaaaaaaaaaaa',
         clientSecret: 'aaaaaaaaaaaaaaaaaaaaaaaa',
+      start_offset: 57
+      end_offset: 81
 
   - name: MongoDB connection string
     type: mongodb_connection_string
