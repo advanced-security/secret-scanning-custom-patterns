@@ -507,11 +507,11 @@ patterns:
       pattern: |
         [a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}
       start: |
-        (\b|\A)(?i)Bearer 
+        (\b|\A)(?i)Bearer[ ]
       end: |
         \b|\z
     test:
-      data: Bearer 01234567-89ab-cdef-0123-456789abcdef
+      data: Bearer 01234567-89ab-4def-8123-456789abcdef
       start_offset: 7
 
   - name: Azure client secret
