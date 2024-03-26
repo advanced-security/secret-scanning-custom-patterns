@@ -945,7 +945,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(\b|\A)(?i)Bearer
+(\b|\A)(?i)Bearer[ ]
 ```
 
 </details><details>
