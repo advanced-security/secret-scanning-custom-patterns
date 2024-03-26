@@ -524,7 +524,7 @@ patterns:
         (?i)(client|azure[a-z_.-]{0,10})(key|secret|password|pwd|token)[a-z_.-]{0,9}\b['"`]?(\s{0,5}[\]\)])?\s{0,3}([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s{0,5}([[{])?['"`]?
       end: |
         \z|["'`]|\s
-      additional_matches:
+      additional_match:
         - "[A-Z][a-z]|[A-Z][a-z]"
         - "[0-9][A-Za-z]|[A-Za-z][0-9]"
         - "[.~_-][A-Za-z0-9]|[A-Za-z0-9][.~_-]"
