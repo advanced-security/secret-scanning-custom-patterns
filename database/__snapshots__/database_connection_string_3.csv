@@ -1,0 +1,2 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"database_connection_string_3","Database Connection String (3)","49924b9a100a8aa9dab6014398ed23d567f59036f14de87175387fbc02dba7cc","database/docker_sqlserver.yml","14","14","122","133",

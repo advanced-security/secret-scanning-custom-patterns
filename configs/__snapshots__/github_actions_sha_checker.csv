@@ -1,1 +1,2 @@
 secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"github_actions_sha_checker","GitHub Actions SHA Checker","4d3f15563a592095caa4092b45d768c848f4b174f33aad40d5bda8e42cb34d0a",".github/workflows/validate.yml","26","26","15","64",

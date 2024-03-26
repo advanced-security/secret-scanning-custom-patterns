@@ -1,0 +1,2 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"datadog_app_key","DataDog APP key","24d8f4e4081d8eda2006bb23752167e6e1a81a8506969397efc1c827f8dfe1ca","vendors/datadog.txt","3","3","12","52",

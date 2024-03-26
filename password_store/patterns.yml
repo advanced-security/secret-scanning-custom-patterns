@@ -11,7 +11,7 @@ patterns:
       start: |
         \A|\x00
       end: |
-        \Z|\x00
+        \n?\Z|\x00
 
     expected:
       - name: meta.json

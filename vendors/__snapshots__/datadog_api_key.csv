@@ -1,0 +1,2 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"datadog_api_key","DataDog API key","b4e67dacb27d549802aaa27029da59b8f877df1d939096f0bd5cd5b9ff0d2266","vendors/datadog.txt","2","2","12","44",

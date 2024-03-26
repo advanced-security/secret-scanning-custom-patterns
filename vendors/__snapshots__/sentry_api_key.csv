@@ -1,0 +1,5 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"sentry_api_key","Sentry API Key","cc75443d8979fe5cdbdf2de55b822ec8b63bc55348c2e451b46b19f4746885ca","vendors/sentry.sh","4","4","22","54",
+"sentry_api_key","Sentry API Key","cc75443d8979fe5cdbdf2de55b822ec8b63bc55348c2e451b46b19f4746885ca","vendors/sentry.properties","2","2","14","46",
+"sentry_api_key","Sentry API Key","cc75443d8979fe5cdbdf2de55b822ec8b63bc55348c2e451b46b19f4746885ca","vendors/.sentryclirc","3","3","9","41",
+"sentry_api_key","Sentry API Key","cc75443d8979fe5cdbdf2de55b822ec8b63bc55348c2e451b46b19f4746885ca","vendors/dotenv","2","2","16","48",

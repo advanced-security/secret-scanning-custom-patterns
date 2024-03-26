@@ -1,0 +1,2 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"sentry_terraform_provider_token","Sentry Terraform provider token","35ab52a17f6ba835f9243d9fd1549534ff663ce66f30660022f47c004be622bd","vendors/terraform.tf","10","10","12","76",

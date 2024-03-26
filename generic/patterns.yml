@@ -83,11 +83,11 @@ patterns:
   - name: Bearer Tokens
     type: bearer_tokens
     regex:
-      version: 0.1
+      version: 0.2
       pattern: |
         [a-zA-Z0-9_.=/+:-]+
       start: |
-        ['"\s][Aa]uthorization: Bearer[ ]+
+        \b([Bb]earer|[Tt]oken)[ ]+
       end: |
         \z|[\s'"]
       additional_not_match:
@@ -110,3 +110,24 @@ patterns:
     comments:
       - "As used in an Authorization header"
       - "We try to remove common placeholders"
+
+  - name: OAuth client secret and ID pair
+    type: oauth_client_secret
+    regex:
+      version: 0.1
+      pattern: |
+        (?i)client[_.-]?Id\s*([:=]|[=-]>|to|[!=]={1,2}|<>)\s*['"`]?[^\s'"`[\]{}()<>]+['"`]?\s*[,\r\n]\s*\bclient[_.-]?Secret\s*([:=]|[=-]>|to|[!=]={1,2}|<>)\s*['"`]?[^\s'"`[\]{}()<>]+['"`]?
+      start: |
+        \A|\b
+      end: |
+        \z|\b
+      additional_not_match:
+        - ^(?i)client[_.-]?id\s*[:=]?\s*(string|str|None)\b|\.\.\.|\(string\)|(?i)Client(ID|Secret)[a-z]|^(?i)client[_.-]?id["'`]\)|"\$\{
+        - ^(?i)client[_.-]?id\s*[=:]\s*([a-z.]+(\[|\.get\())?["'`]?(\$\{|@)?[a-z0-9_.-]*((client|app)[_.-]?id|key)\b
+        - (?i)client[_.-]?secret\s*[=:]\s*["'`]?(\$\{|@)?[a-z_.-]*(secret|token)\b
+        - ^(?i)client[_.-]?Id(:.,|:\s*client[_.-]?secret:)
+        - xxxxx|\?\?\?\?\?|example|00000|123-?45|['"][^'"\s]{1,5}['"]|(?i)<client[_-]?id>
+    test:
+      - data: |
+          client_id = '1234567890'
+          client_secret = 'thisisaverysecretkey'

@@ -1,0 +1,9 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"okta_token","Okta token","35821823b599572690b53eb1c3790b5321404dc2d1aeab9bd1dafa659175a3b8","okta/token.txt","4","4","10","52",
+"okta_token","Okta token","35821823b599572690b53eb1c3790b5321404dc2d1aeab9bd1dafa659175a3b8","vendors/okta.txt","4","4","10","52",
+"okta_token","Okta token","09923263914c7c1ec55a644b427b880723e9824c911be686466802dd48ac65f6","okta/token.txt","3","3","17","59",
+"okta_token","Okta token","09923263914c7c1ec55a644b427b880723e9824c911be686466802dd48ac65f6","vendors/okta.txt","3","3","17","59",
+"okta_token","Okta token","a545ff8376db626ff2f47e6c2c5873cdc9d69c328e0ebb59a7341ca8be475086","okta/token.txt","1","1","13","55",
+"okta_token","Okta token","a545ff8376db626ff2f47e6c2c5873cdc9d69c328e0ebb59a7341ca8be475086","vendors/okta.txt","1","1","13","55",
+"okta_token","Okta token","0325196f39785e7082af6c696608caf612b3500b94d2f1b7cff77a06c0dc5219","okta/token.txt","2","2","13","55",
+"okta_token","Okta token","0325196f39785e7082af6c696608caf612b3500b94d2f1b7cff77a06c0dc5219","vendors/okta.txt","2","2","13","55",

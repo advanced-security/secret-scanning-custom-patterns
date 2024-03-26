@@ -41,7 +41,7 @@ _version: v0.1_
 <summary>End Pattern</summary>
 
 ```regex
-\Z|\x00
+\n?\Z|\x00
 ```
 
 </details>
