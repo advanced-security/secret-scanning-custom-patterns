@@ -166,4 +166,6 @@ Custom Secret Scanning Patterns repository.
 - MongoDB connection string
 
 - UUIDv4 Bearer token (maybe Heroku)
+
+- Azure client secret
   

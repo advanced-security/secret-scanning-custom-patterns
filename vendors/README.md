@@ -1018,3 +1018,63 @@ _version: v0.1_
 ```
 
 </details>
+
+## Azure client secret
+
+
+
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[a-zA-Z0-9~_.-]{34}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)(client|azure[a-z_.-]{0,10})(key|secret|password|pwd|token)[a-z_.-]{0,9}\b['"`]?(\s{0,5}[\]\)])?\s{0,3}([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s{0,5}([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|["'`]|\s
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [A-Z][a-z]|[A-Z][a-z]
+  ```
+
+- Match:
+
+  ```regex
+  [0-9][A-Za-z]|[A-Za-z][0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [.~_-][A-Za-z0-9]|[A-Za-z0-9][.~_-]
+  ```
+
+</details>
