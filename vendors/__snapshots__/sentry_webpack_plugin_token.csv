@@ -1,0 +1,2 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"sentry_webpack_plugin_token","Sentry webpack plugin token","cc75443d8979fe5cdbdf2de55b822ec8b63bc55348c2e451b46b19f4746885ca","vendors/webpack_sentry.js","7","7","22","54",

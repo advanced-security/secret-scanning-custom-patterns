@@ -1,1 +1,3 @@
 secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"azure_sql_connection_string","Azure SQL Connection String","bafd067904385cb71cf71b22e0fb5d579836392230cdb981d652bb5aeb646fef","vendors/azure.js","2","2","13","47",
+"azure_sql_connection_string","Azure SQL Connection String","fcdaf324b609297bec70987b77b8005d447fbe7ab87c619e7477f9045d346a4f","database/connection_strings.txt","2","2","18","42",

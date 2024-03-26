@@ -1,0 +1,5 @@
+secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
+"sentry_auth_token","Sentry Auth Token","35ab52a17f6ba835f9243d9fd1549534ff663ce66f30660022f47c004be622bd","vendors/sentry.sh","3","3","25","89",
+"sentry_auth_token","Sentry Auth Token","35ab52a17f6ba835f9243d9fd1549534ff663ce66f30660022f47c004be622bd","vendors/sentry.properties","1","1","12","76",
+"sentry_auth_token","Sentry Auth Token","35ab52a17f6ba835f9243d9fd1549534ff663ce66f30660022f47c004be622bd","vendors/.sentryclirc","2","2","7","71",
+"sentry_auth_token","Sentry Auth Token","35ab52a17f6ba835f9243d9fd1549534ff663ce66f30660022f47c004be622bd","vendors/dotenv","1","1","19","83",
