@@ -344,10 +344,11 @@ patterns:
 
   - name: LaunchDarkly API key
     type: launchdarkly_api_key
+    description: LaunchDarkly API or SDK key
     regex:
       version: 0.1
       pattern: |
-        api-[a-f0-9-]{8}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{12}
+        (api|sdk)-[a-f0-9-]{8}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{12}
       start: |
         \A|\b
       end: |
