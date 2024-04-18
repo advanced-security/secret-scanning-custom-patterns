@@ -237,3 +237,21 @@ patterns:
       - Examples include YouTube playlist IDs and Italian tax codes
       - If this is a problem, try the individual country IBAN patterns, based on the published IBAN structures on https://iban.com/structure
 
+  - name: Norwegian national identity number/D number
+    type: no_national_id_number
+    regex:
+      pattern: |
+        (([04][1-9]|[15][0-9]|[26][0-9])(0[1-9]|1[0-2])|[37]0(0[469]|11)|[37][01](0[13578]|1[02]))[0-9]{2} ?[0-9]{3} ?[0-9]{2}
+      start: |
+        \A|[^0-9A-Za-z_.+/\\-]
+      end: |
+        \z|[^0-9A-Za-z_.+/\\=-]
+      additional_not_match:
+        - 1111111111[123]|11112222333|01123456978|410185 ?123 ?45|220676 ?123 ?45|01010202010|01010101023
+    test:
+      data: |
+        41018512346
+    comments:
+      - With no validation of the checksum this can cause a lot of false positives
+      - The example test data does not have a valid checksum - it is one of the examples used with one digit in the checksum changed
+      - You can test using the correct checksum, but it is used as a NOT match here to prevent false positives on other test data
