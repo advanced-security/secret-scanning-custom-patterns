@@ -567,4 +567,24 @@ patterns:
       start_offset: 16
       end_offset: -1
 
-  - 
+  - name: OpenStack password/API key
+    type: openstack_password_or_key
+    description: OpenStack password or API key
+    regex:
+      pattern: |
+        [^'",\r\n\x00-\x08]+
+      start: |
+        (?i)OPEN_?STACK_(PASSWORD|API_?KEY)[_A-Z]*['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"\r\n,]|\z
+      additional_not_match:
+        - ^(ENV|[a-z_]+)\[$
+        - ^<%=.*%>$
+        - ^([a-z_]+\.api_?key|self\.[a-z_]+|os\.environ\.get\()$
+        - ^(\$\{?[A-Z]+\}?|<password>)$
+        - ^(@?[a-z_]+\[:.*\]|@[a-z_]+)$
+    test:
+      data: |
+        OPENSTACK_PASSWORD: "password1234isnotagoodpassword"
+      start_offset: 21
+      end_offset: 51
