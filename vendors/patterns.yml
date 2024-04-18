@@ -227,9 +227,25 @@ patterns:
       - name: okta.txt
         start_offset: 180
         end_offset: 222
-
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric with _ and -
+
+  - name: Okta API key (precise)
+    type: okta_token_precise
+    regex:
+      version: 0.1
+      pattern: |
+        0{2}[0-9A-Za-z_-]{40}
+      start: |
+        (\bSSWS\s{1,5}|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s{0,32}([:=]|[=-]>|to|[!=]={1,2}|<>)\s{0,32}['"`]?)
+      end: |
+        \z|[^0-9A-Za-z_+/=-]
+    test:
+      data: SSWS 00RCsRGyrF9QzBe0rnWmw221UeclqRXFQGEJFdhAFM
+      start_offset: 5
+    comments:
+      - Uses surrounding context to reduce false positives
+      - Either `SSWS ` then the token, or a variable starting `okta` followed by an assignment operator, then the token
 
   - name: DataDog API key
     type: datadog_api_key
@@ -534,3 +550,21 @@ patterns:
       data: ClientSecret = "kc3KP75a~edN1cV.rs~_r6F-O7-C-55-Ts"
       start_offset: 16
       end_offset: 50
+
+  - name: Google private key id (or older API key)
+    type: google_private_key_id_or_old_api_token
+    regex:
+      version: 0.1
+      pattern: |
+        [a-fA-F0-9]{40}
+      start: |
+        (?i)(private_key_id|google_api_key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        \b|\z
+    test:
+      data: |
+        google_api_key: 0123456789abcdef0123456789abcdef01234567
+      start_offset: 16
+      end_offset: -1
+
+  - 
