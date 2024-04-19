@@ -1300,7 +1300,7 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-[a-f0-9]{32}
+[a-f0-9]{32,64}
 ```
 
 </details>
@@ -1309,7 +1309,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?i)jenkins(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+(?i)jenkins_?(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
 ```
 
 </details><details>
