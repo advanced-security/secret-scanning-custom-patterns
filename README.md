@@ -44,8 +44,6 @@ Custom Secret Scanning Patterns repository.
 
 - SQLAlchemy Database Connection String
 
-- MongoDB Database Connection String
-
 - MongoDB connection string
   
 
