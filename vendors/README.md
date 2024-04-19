@@ -1155,3 +1155,36 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
   ```
 
 </details>
+
+## AlienVault OTX API key
+
+
+AlienVault OTX API key
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[a-f0-9]{64}|[a-f0-9]{40}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)ALIENVAULT(_?OTX)?(_?API)?_?KEY['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"`\r\n,]|\z
+```
+
+</details>

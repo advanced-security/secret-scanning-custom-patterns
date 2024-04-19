@@ -178,4 +178,6 @@ Custom Secret Scanning Patterns repository.
 - Google private key id (or older API key)
 
 - OpenStack password/API key
+
+- AlienVault OTX API key
   
