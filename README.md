@@ -45,6 +45,8 @@ Custom Secret Scanning Patterns repository.
 - SQLAlchemy Database Connection String
 
 - MongoDB Database Connection String
+
+- MongoDB connection string
   
 
 ### [Generic Secrets / Passwords](./generic)
@@ -170,8 +172,6 @@ Custom Secret Scanning Patterns repository.
 - Vercel CLI token
 
 - Vercel OAuth client secrets
-
-- MongoDB connection string
 
 - UUIDv4 Bearer token (maybe Heroku)
 

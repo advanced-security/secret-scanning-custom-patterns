@@ -327,3 +327,65 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
   ```
 
 </details>
+
+## MongoDB connection string
+
+
+
+_version: v0.2_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+mongodb(\+[a-z]+)?://[^'"`<>/:@\s\x00-\x08]+:[^'"`<>/@\s\x00-\x08]+@[^?'"`\s\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\A|\b
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|\s|['"`?]
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  (?i):(test|a|my)?[_-]?pass(word)?@
+  ```
+- Not Match:
+
+  ```regex
+  :%(?:\.\*)?[sv]@
+  ```
+- Not Match:
+
+  ```regex
+  :\$?\{[^}+]\}@
+  ```
+- Not Match:
+
+  ```regex
+  ^mongodb\+srv://b\*b%40f3tt%3D:%244to%40L8%3DMC@test3.test.build.10gen.cc/mydb%3F\?replicaSet=repl0
+  ```
+
+</details>
