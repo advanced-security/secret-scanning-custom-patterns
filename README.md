@@ -41,6 +41,10 @@ Custom Secret Scanning Patterns repository.
 - Database Connection String (3)
 
 - TSQL CREATE LOGIN/USER
+
+- SQLAlchemy Database Connection String
+
+- MongoDB Database Connection String
   
 
 ### [Generic Secrets / Passwords](./generic)
@@ -85,6 +89,8 @@ Custom Secret Scanning Patterns repository.
 - Credit Cards - Discover
 
 - IBAN
+
+- Norwegian national identity number/D number
   
 
 ### [RSA Keys](./rsa)
@@ -135,6 +141,8 @@ Custom Secret Scanning Patterns repository.
 
 - Okta token
 
+- Okta API key (precise)
+
 - DataDog API key
 
 - DataDog APP key
@@ -168,4 +176,8 @@ Custom Secret Scanning Patterns repository.
 - UUIDv4 Bearer token (maybe Heroku)
 
 - Azure client secret
+
+- Google private key id (or older API key)
+
+- OpenStack password/API key
   

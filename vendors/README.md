@@ -387,6 +387,45 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
 </details>
 
+## Okta API key (precise)
+
+
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- Uses surrounding context to reduce false positives
+
+- Either `SSWS ` then the token, or a variable starting `okta` followed by an assignment operator, then the token
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+0{2}[0-9A-Za-z_-]{40}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(\bSSWS\s{1,5}|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s{0,32}([:=]|[=-]>|to|[!=]={1,2}|<>)\s{0,32}['"`]?)
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|[^0-9A-Za-z_+/=-]
+```
+
+</details>
+
 ## DataDog API key
 
 
@@ -564,7 +603,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 ## LaunchDarkly API key
 
 
-
+LaunchDarkly API or SDK key
 _version: v0.1_
 
 
@@ -573,7 +612,7 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-api-[a-f0-9-]{8}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{12}
+(api|sdk)-[a-f0-9-]{8}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{12}
 ```
 
 </details>
@@ -1075,6 +1114,106 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
   ```regex
   [.~_-][A-Za-z0-9]|[A-Za-z0-9][.~_-]
+  ```
+
+</details>
+
+## Google private key id (or older API key)
+
+
+
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[a-fA-F0-9]{40}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)(private_key_id|google_api_key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\b|\z
+```
+
+</details>
+
+## OpenStack password/API key
+
+
+OpenStack password or API key
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^'",\r\n\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)OPEN_?STACK_(PASSWORD|API_?KEY)[_A-Z]*['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n,]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^(ENV|[a-z_]+)\[$
+  ```
+- Not Match:
+
+  ```regex
+  ^<%=.*%>$
+  ```
+- Not Match:
+
+  ```regex
+  ^([a-z_]+\.api_?key|self\.[a-z_]+|os\.environ\.get\()$
+  ```
+- Not Match:
+
+  ```regex
+  ^(\$\{?[A-Z]+\}?|<password>)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(@?[a-z_]+\[:.*\]|@[a-z_]+)$
   ```
 
 </details>

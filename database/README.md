@@ -208,3 +208,122 @@ _version: v0.1_
 ```
 
 </details>
+
+## SQLAlchemy Database Connection String
+
+
+SQLAlchemy connection strings are used to connect to databases, often with embedded credentials.
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^$/?#@\s][^/?#@\s\x00-\x08]*
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(\A|\b)mysql\+[a-z]+://[^/?#:@\s\x00-\x08]*:
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+@
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
+  ```
+- Not Match:
+
+  ```regex
+  ^\$?\{[^}+]\}i\}$
+  ```
+- Not Match:
+
+  ```regex
+  ^%(?:\.\*)?s$
+  ```
+
+</details>
+
+## MongoDB Database Connection String
+
+
+MongoDB connection strings are used to connect to databases, often with embedded credentials.
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^'"<>/@\s\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(\A|\b)mongodb(\+[a-z]+)?://[^'"<>/:@\s\x00-\x08]+:
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+@
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^((test-?|a|my)?pass(word)?|%244to%40L8%3DMC)$
+  ```
+- Not Match:
+
+  ```regex
+  ^%(?:\.\*)?[sv]$
+  ```
+- Not Match:
+
+  ```regex
+  ^\$?\{[^}+]\}$
+  ```
+- Not Match:
+
+  ```regex
+  ^\$[A-Za-z_]+$
+  ```
+
+</details>
