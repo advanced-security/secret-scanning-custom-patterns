@@ -133,22 +133,6 @@ patterns:
       start_offset: 53
       end_offset: 58
 
-  - name: MongoDB Database Connection String
-    type: mongodb_connection_string
-    description: MongoDB connection strings are used to connect to databases, often with embedded credentials.
-    regex:
-      pattern: |
-        [^'"<>/@\s\x00-\x08]+
-      start: |
-        (\A|\b)mongodb(\+[a-z]+)?://[^'"<>/:@\s\x00-\x08]+:
-      end: |
-        @
-      additional_not_match:
-        - ^((test-?|a|my)?pass(word)?|%244to%40L8%3DMC)$
-        - ^%(?:\.\*)?[sv]$
-        - ^\$?\{[^}+]\}$
-        - ^\$[A-Za-z_]+$
-
   - name: MongoDB connection string
     type: mongodb_connection_string
     regex:
