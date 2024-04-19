@@ -641,9 +641,9 @@ patterns:
     description: Jenkins API token
     regex:
       pattern: |
-        [a-f0-9]{32}
+        [a-f0-9]{32,64}
       start: |
-        (?i)jenkins(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+        (?i)jenkins_?(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
       end: |
         ['"`\r\n,]|\z
     test:
