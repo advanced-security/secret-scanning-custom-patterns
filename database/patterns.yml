@@ -8,6 +8,22 @@ name: Database passwords
 # We don't account for connection strings encoded in UTF-16, but that will be a rare case, if it happens at all
 
 patterns:
+  - name: Database Connection String (full string)
+    type: database_connection_string_full
+    description: "Database connection strings are used to connect to databases, often with embedded credentials."
+    regex:
+      pattern: |
+        [^"'`\x00-\x08\r\n|]*([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=[^"'`\x00-\x08\r\n|]*
+      start: |
+        \A|["'`]|&quot;|[\r\n]|[=:-] 
+      end: |
+        \z|["'`]|&quot;|[\r\n]
+      additional_match:
+        - (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
+      additional_not_match:
+        # placeholders, variable substitutions, etc.
+        - (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=(%s\b|\{\{[^}]+\}\}|\{[0-9]+\}|\$?\{[^}]+\}|\[[A-Z_]+\]|['"`]|$)
+
   - name: Database Connection String (1)
     type: database_connection_string_1
     description: "Database connection strings are used to connect to databases, often with embedded credentials."
