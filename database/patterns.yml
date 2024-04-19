@@ -148,3 +148,21 @@ patterns:
         - ^%(?:\.\*)?[sv]$
         - ^\$?\{[^}+]\}$
         - ^\$[A-Za-z_]+$
+
+  - name: MongoDB connection string
+    type: mongodb_connection_string
+    regex:
+      version: 0.2
+      pattern: |
+        mongodb(\+[a-z]+)?://[^'"`<>/:@\s\x00-\x08]+:[^'"`<>/@\s\x00-\x08]+@[^?'"`\s\x00-\x08]+
+      start: |
+        \A|\b
+      end: |
+        \z|\s|['"`?]
+      additional_not_match:
+        - (?i):(test|a|my)?[_-]?pass(word)?@
+        - :%(?:\.\*)?[sv]@
+        - :\$?\{[^}+]\}@
+        - ^mongodb\+srv://b\*b%40f3tt%3D:%244to%40L8%3DMC@test3.test.build.10gen.cc/mydb%3F\?replicaSet=repl0
+    test:
+      data: mongodb+srv://foo:bar@mongodb.example.invalid/

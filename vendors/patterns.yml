@@ -501,24 +501,6 @@ patterns:
       start_offset: 57
       end_offset: 81
 
-  - name: MongoDB connection string
-    type: mongodb_connection_string
-    regex:
-      version: 0.1
-      pattern: |
-        mongodb\+srv://[^'"<>/:@\s\x00-\x08]+:[^'"<>/@\s\x00-\x08]+@[^/\s\x00-\x08]+\S*
-      start: |
-        \A|\b
-      end: |
-        \z|\s|['"`]
-      additional_not_match:
-        - ^mongodb\+srv://(test-)?user:(test-)?pass(word)?@
-        - ^mongodb\+srv://%s:%s@
-        - ^mongodb\+srv://auser:apass@
-        - ^mongodb\+srv://b\*b%40f3tt%3D:%244to%40L8%3DMC@test3.test.build.10gen.cc/mydb%3F\?replicaSet=repl0
-    test:
-      data: mongodb+srv://foo:bar@mongodb.example.invalid/
-
   - name: UUIDv4 Bearer token (maybe Heroku)
     type: uuidv4_bearer_token
     regex:
