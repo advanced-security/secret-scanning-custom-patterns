@@ -180,4 +180,12 @@ Custom Secret Scanning Patterns repository.
 - OpenStack password/API key
 
 - AlienVault OTX API key
+
+- Apollo.io API key
+
+- ClickUp API key
+
+- Amazon MWS Auth Token
+
+- Jenkins API token
   

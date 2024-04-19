@@ -1188,3 +1188,135 @@ _version: v0.1_
 ```
 
 </details>
+
+## Apollo.io API key
+
+
+Apollo.io API key
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+service:[A-Za-z0-9-]+:\S+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)key['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"`,]|\z|\s
+```
+
+</details>
+
+## ClickUp API key
+
+
+ClickUp API key
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+pk_[0-9]{6,8}_[A-Z0-9]{32}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\b|\A
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\b|\z
+```
+
+</details>
+
+## Amazon MWS Auth Token
+
+
+Amazon MWS Auth Token
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\b|\A
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\b|\z
+```
+
+</details>
+
+## Jenkins API token
+
+
+Jenkins API token
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[a-f0-9]{32}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)jenkins(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"`\r\n,]|\z
+```
+
+</details>

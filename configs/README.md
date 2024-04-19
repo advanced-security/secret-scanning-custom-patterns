@@ -321,3 +321,66 @@ _version: v0.1_
 ```
 
 </details>
+
+## .env file style secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Find .env file style secrets in configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix
+
+- Some false positives in code might appear
+
+- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
+
+- More restrictive than the Generic Passwords pattern, so less prone to false positives
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^\r\n\x00-\x08'"#]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)(ENV |export )?[A-Z_]*(?:SECRET|SERVICE_PASS(WD|WORD|CODE|PHRASE)|PASS(?:WD|WORD|CODE|PHRASE)?|KEY)=['"]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n#]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^\$\[{(]
+  ```
+- Not Match:
+
+  ```regex
+  ^<[^>]+>$
+  ```
+
+</details>
