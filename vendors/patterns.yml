@@ -571,3 +571,19 @@ patterns:
         OPENSTACK_PASSWORD: "password1234isnotagoodpassword"
       start_offset: 21
       end_offset: 51
+
+  - name: AlienVault OTX API key
+    type: alienvault_otx_api_key
+    description: AlienVault OTX API key
+    regex:
+      pattern: |
+        [a-f0-9]{64}|[a-f0-9]{40}
+      start: |
+        (?i)ALIENVAULT(_?OTX)?(_?API)?_?KEY['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+    test:
+      data: |
+        ALIENVAULT_OTX_API_KEY: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      start_offset: 25
+      end_offset: 89
