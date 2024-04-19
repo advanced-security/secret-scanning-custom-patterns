@@ -603,3 +603,51 @@ patterns:
         key: service:my-apollo-service:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
       start_offset: 5
       end_offset: 71
+
+  - name: ClickUp API key
+    type: clickup_api_key
+    description: ClickUp API key
+    regex:
+      pattern: |
+        pk_[0-9]{6,8}_[A-Z0-9]{32}
+      start: |
+        \b|\A
+      end: |
+        \b|\z
+    test:
+      data: |
+        CLICKUP_API_KEY: "pk_1234567_ABCDEFGHIJKLMNOPQRSTUVWXYZ123456"
+      start_offset: 18
+      end_offset: 61
+
+  - name: Amazon MWS Auth Token
+    type: amazon_mws_auth_token
+    description: Amazon MWS Auth Token
+    regex:
+      pattern: |
+        amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+      start: |
+        \b|\A
+      end: |
+        \b|\z
+    test:
+      data: |
+        amzn.mws.auth.token: "amzn.mws.12345678-1234-1234-1234-1234567890ab"
+      start_offset: 22
+      end_offset: 67
+
+  - name: Jenkins API token
+    type: jenkins_api_token
+    description: Jenkins API token
+    regex:
+      pattern: |
+        [a-f0-9]{32}
+      start: |
+        (?i)jenkins(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+    test:
+      data: |
+        jenkins_api_token="0123456789abcdef0123456789abcdef"
+      start_offset: 19
+      end_offset: 52
