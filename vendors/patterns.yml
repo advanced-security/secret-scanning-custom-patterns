@@ -587,3 +587,19 @@ patterns:
         ALIENVAULT_OTX_API_KEY: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
       start_offset: 25
       end_offset: 89
+
+  - name: Apollo.io API key
+    type: apollo_io_api_key
+    description: Apollo.io API key
+    regex:
+      pattern: |
+        service:[A-Za-z0-9-]+:\S+
+      start: |
+        (?i)key['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`,]|\z|\s
+    test:
+      data: |
+        key: service:my-apollo-service:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+      start_offset: 5
+      end_offset: 71
