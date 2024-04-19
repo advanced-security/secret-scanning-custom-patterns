@@ -187,3 +187,30 @@ patterns:
         <machineKey decryptionKey="ABAA84D7EC4BB56D75D217CECFFB9628809BDB8BF91CFCD64568A145BE59719F" decryption="AES" />
       start_offset: 27
       end_offset: 91
+
+  - name: .env file style secrets
+    type: env_passwords
+    description: |
+      Find .env file style secrets in configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n\x00-\x08'"#]+
+      start: |
+        (?:\n|\A)(ENV |export )?[A-Z_]*(?:SECRET|SERVICE_PASS(WD|WORD|CODE|PHRASE)|PASS(?:WD|WORD|CODE|PHRASE)?|KEY)=['"]?
+      end: |
+        ['"\r\n#]|\z
+      additional_not_match:
+        - ^\$\[{(]
+        - ^<[^>]+>$
+    comments:
+      - "Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix"
+      - "Some false positives in code might appear"
+      - "The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)"
+      - "More restrictive than the Generic Passwords pattern, so less prone to false positives"
+    test:
+      data: |
+        SECRET_KEY=password123
+      start_offset: 11
+      end_offset: 22
