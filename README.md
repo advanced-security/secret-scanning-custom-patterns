@@ -34,6 +34,8 @@ Custom Secret Scanning Patterns repository.
 
 
 
+- Database Connection String (full string)
+
 - Database Connection String (1)
 
 - Database Connection String (2)
@@ -188,4 +190,6 @@ Custom Secret Scanning Patterns repository.
 - Amazon MWS Auth Token
 
 - Jenkins API token
+
+- AWS S3 presigned URL
   

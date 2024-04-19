@@ -5,6 +5,59 @@
 
 # Database passwords
 
+## Database Connection String (full string)
+
+
+Database connection strings are used to connect to databases, often with embedded credentials.
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^"'`\x00-\x08\r\n|]*([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=[^"'`\x00-\x08\r\n|]*
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\A|["'`]|&quot;|[\r\n]|[=:-]
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|["'`]|&quot;|[\r\n]
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
+  ```
+- Not Match:
+
+  ```regex
+  (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=(%s\b|\{\{[^}]+\}\}|\{[0-9]+\}|\$?\{[^}]+\}|\[[A-Z_]+\]|['"`]|$)
+  ```
+
+</details>
+
 ## Database Connection String (1)
 
 

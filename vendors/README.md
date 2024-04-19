@@ -1320,3 +1320,36 @@ _version: v0.1_
 ```
 
 </details>
+
+## AWS S3 presigned URL
+
+
+AWS S3 presigned URL
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+https://[a-z-]+\.s3\.amazonaws\.com/[^?\s'"`\r\n]+\?[^\s'"`\r\n]+&X-Amz-Signature=[^\s'"`\r\n]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\b|\A
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"`\r\n,]|\z
+```
+
+</details>
