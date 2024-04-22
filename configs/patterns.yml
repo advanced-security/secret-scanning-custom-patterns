@@ -202,7 +202,7 @@ patterns:
       end: |
         ['"\r\n#]|\z
       additional_not_match:
-        - ^\$\[{(]
+        - ^\$[{(]
         - ^<[^>]+>$
     comments:
       - "Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix"
