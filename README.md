@@ -194,4 +194,6 @@ Custom Secret Scanning Patterns repository.
 - AWS S3 presigned URL
 
 - Azure Access Key (legacy format)
+
+- Azure Shared Access Signature (SAS) Token
   
