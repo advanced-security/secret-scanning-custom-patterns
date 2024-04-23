@@ -593,7 +593,7 @@ patterns:
     description: Apollo.io API key
     regex:
       pattern: |
-        service:[A-Za-z0-9-]+:\S+
+        service:[A-Za-z0-9-]+:[^\s'"`,\x00-\x08\x7f-\xff]+
       start: |
         (?i)key['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
       end: |
@@ -665,3 +665,25 @@ patterns:
     test:
       data: |
         https://snort-org-site.s3.amazonaws.com/production/document_files/files/000/000/596/original/Rules_Writers_Guide_to_Snort_3_Rules.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIXACIED2SPMSC7GA%2F20211011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211011T165700Z&X-Amz-Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=1d5134d3a84db0f7b1ece95fcf98387a0cc32ff131b6c95e6a80d3cd4b616a5c
+
+  - name: Azure Access Key (legacy format)
+    type: azure_access_key_legacy
+    description: Azure Access Key in context in a variable assignment - legacy key format without internal identifiable features
+    regex:
+      pattern: |
+        [A-Za-z0-9/+]+==
+      start: |
+        (\A|\b)(?i)(AZURE|ACCOUNT)(_?ACCESS|_?STORAGE(_?ACCOUNT)?)?_?KEY['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+      additional_match:
+        - ^[A-Za-z0-9/+]{86}==$
+    test:
+      data: |
+        AZURE_ACCESS_KEY: "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmn=="
+      start_offset: 19
+      end_offset: 107
+    comments:
+      - This is a legacy format for Azure Access Keys. The key is base64 encoded and encodes a fixed length key, so we know its length and that it always end in `==`.
+      - The key lacks internal identifiable features, which are used in modern keys issued by these Azure services.
+      - The use of `+` instead of `{86}` in the regex pattern is due to limitations of secret scanning - make sure you use the "additional match" to constrain the length
