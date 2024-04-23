@@ -375,7 +375,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^\$\[{(]
+  ^\$[{(]
   ```
 - Not Match:
 

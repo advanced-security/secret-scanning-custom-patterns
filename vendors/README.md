@@ -1201,7 +1201,7 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-service:[A-Za-z0-9-]+:\S+
+service:[A-Za-z0-9-]+:[^\s'"`,\x00-\x08\x7f-\xff]+
 ```
 
 </details>
@@ -1351,5 +1351,61 @@ https://[a-z-]+\.s3\.amazonaws\.com/[^?\s'"`\r\n]+\?[^\s'"`\r\n]+&X-Amz-Signatur
 ```regex
 ['"`\r\n,]|\z
 ```
+
+</details>
+
+## Azure Access Key (legacy format)
+
+
+Azure Access Key in context in a variable assignment - legacy key format without internal identifiable features
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- This is a legacy format for Azure Access Keys. The key is base64 encoded and encodes a fixed length key, so we know its length and that it always end in `==`.
+
+- The key lacks internal identifiable features, which are used in modern keys issued by these Azure services.
+
+- The use of `+` instead of `{86}` in the regex pattern is due to limitations of secret scanning - make sure you use the "additional match" to constrain the length
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[A-Za-z0-9/+]+==
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(\A|\b)(?i)(AZURE|ACCOUNT)(_?ACCESS|_?STORAGE(_?ACCOUNT)?)?_?KEY['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"`\r\n,]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  ^[A-Za-z0-9/+]{86}==$
+  ```
 
 </details>

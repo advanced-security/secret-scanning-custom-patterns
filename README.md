@@ -192,4 +192,6 @@ Custom Secret Scanning Patterns repository.
 - Jenkins API token
 
 - AWS S3 presigned URL
+
+- Azure Access Key (legacy format)
   
