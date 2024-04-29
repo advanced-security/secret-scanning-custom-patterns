@@ -166,3 +166,19 @@ patterns:
         - ^mongodb\+srv://b\*b%40f3tt%3D:%244to%40L8%3DMC@test3.test.build.10gen.cc/mydb%3F\?replicaSet=repl0
     test:
       data: mongodb+srv://foo:bar@mongodb.example.invalid/
+
+  - name: JDBC Database Connection String
+    type: jdbc_connection_string
+    regex:
+      version: 0.1
+      pattern: |
+        jdbc:[^:\x00-\x08]+:\/\/[^\/\x00-\x08]+\/[^?\x00-\x08]+\?user=[^&\x00-\x08]+&password=[^\s'"`<{$%*\x00-\x08]+
+      start: |
+        \A|\b
+      end: |
+        \z|\s|['"`<]
+    test:
+      data: |
+        jdbc:mysql://localhost:3306/mydb?user=root&password=toor
+      start_offset: 0
+      end_offset: 56
