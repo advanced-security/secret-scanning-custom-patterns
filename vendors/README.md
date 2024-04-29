@@ -1486,3 +1486,36 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
   ```
 
 </details>
+
+## CircleCI API token
+
+
+CircleCI API token
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[a-f0-9]{40}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?i)circle[_-]?(ci[_.-]?)?(api[_.-]?)?(token|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"`\r\n,]|\z
+```
+
+</details>

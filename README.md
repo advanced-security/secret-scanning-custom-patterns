@@ -198,4 +198,6 @@ Custom Secret Scanning Patterns repository.
 - Azure Access Key (legacy format)
 
 - Azure Shared Access Signature (SAS) Token
+
+- CircleCI API token
   
