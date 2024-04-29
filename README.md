@@ -47,6 +47,8 @@ Custom Secret Scanning Patterns repository.
 - SQLAlchemy Database Connection String
 
 - MongoDB connection string
+
+- JDBC Database Connection String
   
 
 ### [Generic Secrets / Passwords](./generic)

@@ -380,3 +380,36 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
   ```
 
 </details>
+
+## JDBC Database Connection String
+
+
+
+_version: v0.1_
+
+
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+jdbc:[^:\x00-\x08]+:\/\/[^\/\x00-\x08]+\/[^?\x00-\x08]+\?user=[^&\x00-\x08]+&password=[^\s'"`<{$%*\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+\A|\b
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\z|\s|['"`<]
+```
+
+</details>
