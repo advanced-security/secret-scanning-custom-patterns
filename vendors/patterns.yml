@@ -729,5 +729,5 @@ patterns:
     test:
       data: |
         circle_ci_api_token: "0123456789abcdef0123456789abcdef01234567"
-      start_offset: 21
-      end_offset: 61
+      start_offset: 22
+      end_offset: 62
