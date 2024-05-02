@@ -21,6 +21,7 @@ patterns:
       start_offset: 18
       end_offset: 26
 
+
   - name: Hardcoded Spring SQL passwords
     description: |
       Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
@@ -60,6 +61,7 @@ patterns:
       start_offset: 27
       end_offset: 35
 
+
   - name: Django Secret Key
     type: django_secret_key
     regex:
@@ -84,26 +86,26 @@ patterns:
   - name: YAML Static Password Fields
     type: yaml_static_password_fields
     description: |
-      Pattern to find Static passwords in YAML configuration files
+      Pattern to find hardcoded passwords in YAML configuration files
     experimental: true
     regex:
       version: 0.1
       pattern: |
-        [^\r\n'"]+
+        [^\r\n`'"]+
       start: |
-        (?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
+        (?:\n|\A)[ \t]*[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
       end: |
         ['"\r\n]|\z
       additional_not_match:
-        - ^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$
+        - ^(?:keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(?:str|string|int|bool)( +#.*)?),?$
         - ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
         - ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
         - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
         - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
-      - "The hardcoded password is between 12 and 32 chars long"
-      - "Some false positives in Code might appear"
-      - "The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)"
+      - "The hardcoded password is any length"
+      - "Some false positives in code might appear"
+      - "The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)"
     expected:
       - name: example.yml
         start_offset: 57
@@ -188,6 +190,7 @@ patterns:
       start_offset: 27
       end_offset: 91
 
+
   - name: .env file style secrets
     type: env_passwords
     description: |
@@ -214,3 +217,54 @@ patterns:
         SECRET_KEY=password123
       start_offset: 11
       end_offset: 22
+
+
+  - name: YAML with Base64 encoded secrets
+    type: yaml_base64
+    description: |
+      Pattern to find hardcoded Base64-encoded passwords in YAML configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        (([A-Za-z+/]){4})+[A-Za-z+/]{1,2}={0,2}
+      start: |
+        (?:\n|\A)[ \t]*[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
+      end: |
+        ['"\r\n]|\z
+      additional_match:
+        - '[0-9]'
+        - '[A-Za-z]'
+        - '^.{12,}$'
+    comments:
+      - "The Base64 must contain numbers and letters and be at least 12 characters long"
+      - "Some false positives in code might appear"
+    test:
+      data: "password: AAAAAAAAAAAA00=="
+      start_offset: 10
+      end_offset: 26
+
+
+  - name: YAML with hex token
+    type: yaml_token
+    description: |
+      Pattern to find hardcoded tokens in YAML configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+      start: |
+        (?:\n|\A)[ \t]*[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
+      end: |
+        ['"\r\n]|\z
+      additional_match:
+        - '[0-9]'
+        - '[a-f]'
+    comments:
+      - "The hex token must be 32, 40 or 64 characters long, and contain numbers and letters"
+      - "Some false positives in code might appear"
+    test:
+      data: "password: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      start_offset: 10
+      end_offset: 74
