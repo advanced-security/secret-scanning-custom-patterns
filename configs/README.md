@@ -118,25 +118,25 @@ _version: v0.1_
 ## YAML Static Password Fields
 
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
-Pattern to find Static passwords in YAML configuration files
+Pattern to find hardcoded passwords in YAML configuration files
 
 _version: v0.1_
 
 **Comments / Notes:**
 
 
-- The hardcoded password is between 12 and 32 chars long
+- The hardcoded password is any length
 
-- Some false positives in Code might appear
+- Some false positives in code might appear
 
-- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
+- The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)
   
 
 <details>
 <summary>Pattern Format</summary>
 
 ```regex
-[^\r\n'"]+
+[^\r\n`'"]+
 ```
 
 </details>
@@ -145,7 +145,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
+(?:\n|\A)[ \t]*[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
 ```
 
 </details><details>
@@ -166,7 +166,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$
+  ^(?:keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(?:str|string|int|bool)( +#.*)?),?$
   ```
 - Not Match:
 
@@ -381,6 +381,134 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 
   ```regex
   ^<[^>]+>$
+  ```
+
+</details>
+
+## YAML with Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Pattern to find hardcoded Base64-encoded passwords in YAML configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers and letters and be at least 12 characters long
+
+- Some false positives in code might appear
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z+/]){4})+[A-Za-z+/]{1,2}={0,2}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Za-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## YAML with hex token
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Pattern to find hardcoded tokens in YAML configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hex token must be 32, 40 or 64 characters long, and contain numbers and letters
+
+- Some false positives in code might appear
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [a-f]
   ```
 
 </details>
