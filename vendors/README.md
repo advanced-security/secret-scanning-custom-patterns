@@ -666,6 +666,27 @@ _version: v0.1_
 
 </details>
 
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Za-z]
+  ```
+
+</details>
+
 ## Flickr OAuth token
 
 
