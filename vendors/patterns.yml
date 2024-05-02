@@ -366,6 +366,9 @@ patterns:
         (\A|\b)(?i)pd_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
       end: |
         \z|\b
+      additional_match:
+        - '[0-9]'
+        - '[A-Za-z]'
     test:
       data: pd_api_key=AAAAAAAAAAAAAAAAAAAA
       start_offset: 11
