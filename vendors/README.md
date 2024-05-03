@@ -639,7 +639,13 @@ _version: v0.1_
 
 _version: v0.1_
 
+**Comments / Notes:**
 
+
+- Looks for surrounding context to confirm this is a PagerDuty API key, not some other 20-byte alphanumeric string
+
+- The `Token token=` prefix is used in an Authorization header; it's possible that a different vendor could use a similar key and this same prefix, causing results that are a different vendor's key
+  
 
 <details>
 <summary>Pattern Format</summary>
@@ -654,7 +660,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(\A|\b)(?i)pd_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
+(\A|\b)(?i)((pd|pagerduty)_(service|api)_key|Token token=)['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
 ```
 
 </details><details>
@@ -676,13 +682,18 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Match:
 
   ```regex
-  [0-9]
+  [A-Z]
   ```
 
 - Match:
 
   ```regex
-  [A-Za-z]
+  [a-z]
+  ```
+- Not Match:
+
+  ```regex
+  ^(pagerduty|pd)_(service|api)_
   ```
 
 </details>

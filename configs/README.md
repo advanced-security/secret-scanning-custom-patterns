@@ -395,7 +395,7 @@ _version: v0.1_
 **Comments / Notes:**
 
 
-- The Base64 must contain numbers and letters and be at least 12 characters long
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
 
 - Some false positives in code might appear
   
@@ -441,7 +441,13 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Match:
 
   ```regex
-  [A-Za-z]
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
   ```
 
 - Match:
