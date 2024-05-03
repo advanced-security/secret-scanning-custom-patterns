@@ -363,12 +363,14 @@ patterns:
       pattern: |
         [A-Za-z0-9_-]{20}
       start: |
-        (\A|\b)(?i)pd_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
+        (\A|\b)(?i)((pd|pagerduty)_(service|api)_key|Token token=)['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
       end: |
         \z|\b
       additional_match:
-        - '[0-9]'
-        - '[A-Za-z]'
+        - '[A-Z]'
+        - '[a-z]'
+      additional_not_match:
+        - ^(pagerduty|pd)_(service|api)_
     test:
       data: pd_api_key=AAAAAAAAAAAAAAAAAAAA
       start_offset: 11
