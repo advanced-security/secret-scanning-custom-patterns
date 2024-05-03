@@ -404,9 +404,9 @@ patterns:
       - "This will not match some isolated fragments of JSON, so be aware of that when testing it"
     test:
       data: |
-        "password": "AAAAAAAAAAAA00==",
-      start_offset: 13
-      end_offset: 29
+        {"password": "AAAAAAAAAAAA00==", "user": "admin"}
+      start_offset: 14
+      end_offset: 30
 
 
   - name: JSON with hex encoded secrets
