@@ -660,7 +660,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(\A|\b)(?i)((pd|pagerduty)_(service|api)_key|Token token=)['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
+(\A|\b)(?i)((pd|pagerduty)_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?|Token token=)
 ```
 
 </details><details>
