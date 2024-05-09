@@ -372,7 +372,7 @@ patterns:
       additional_not_match:
         - ^(pagerduty|pd)_(service|api)_
     test:
-      data: pd_api_key=AAAAAAAAAAAAAAAAAAAA
+      data: pd_api_key=AAAAAAAAAAAAAAAAAAAa
       start_offset: 11
     comments:
       - "Looks for surrounding context to confirm this is a PagerDuty API key, not some other 20-byte alphanumeric string"
