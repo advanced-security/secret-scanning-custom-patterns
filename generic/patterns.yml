@@ -4,7 +4,7 @@ patterns:
   - name: Generic Passwords
     type: generic_passwords
     regex:
-      version: 0.4
+      version: 0.5
       pattern: |
         [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
       start: |
@@ -14,23 +14,21 @@ patterns:
       additional_not_match:
         # something that means "password" or a placeholder name - either a variable or a placeholder
         # a literal value or config switch
-        - ^(?i)(?:[a-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:(?:user|key)_?)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase)|write|read|on|off|true|false|none|null|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?( or )?$
+        - ^(?i)(?:[a-z0-9_.]*,\s*)?(?:str\()?[[<(]?(?:(?:(?:user|key)_?)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase)|write|read|on|off|true|false|none|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?[\]>)]?(?:\)\s*\{)?\\?( or | \|\| )?$
         # Python type hints, Swift typing
         - ^\s*(?:(?:typing\.)?(?:(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*|(?:int|str|float|(?:typing.)?Any|None|bytes|bool|ReadableBuffer)\s*(?:[,|].*)?|(?:Int|Swift\.Int|Int32)\.*))\s*$
         # ..., \, , \n, \0, ',' and other single chars, smilies, hex, digits, nothing at all,
         # directories, regex, format string placeholder, urllib demo passphrase, "optional" in docs, a variable substitution, or surrounded by brackets of various kinds
         # all with possible ',' and surrounding whitespace, possibly with a following comment
-        - ^\s*(?:\.\.\.|\\|\\n|\\0|[,()[\]{}`.]\\?|-[)(]|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.)|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?))?,?\s*(?:\s*(?:/\*|#|//).*)?$
+        - ^\s*(?:\.\.\.|\\|\\n|\\0|\?|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.)|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
         # function definitions, e.g. Javascript, function calls or variable declaration
-        - ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new )?[a-zA-Z0-9_.]+\(.*|(?:public|private) [A-Za-z0-9_]+ \{)$
+        - ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new |\([A-Za-z]+\)\s*)?[a-zA-Z0-9_.]+\s*\(.*|(?:public|private) [A-Za-z0-9_]+ \{|[A-Za-z0-9_.-]+\s*\) \{)$
         # reference to a member variable, index into a variable, bash variables, perl hash key index, environment vars
         - ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$
-
     test:
       data: password=Password123
       start_offset: 9
       end_offset: -1
-
     expected:
       - name: passwords.js
         start_offset: 14
@@ -41,7 +39,6 @@ patterns:
       - name: passwords.js
         start_offset: 97
         end_offset: 112
-
     comments:
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
       - "Delimiters like `=` or `:` (with padding)"
