@@ -8,7 +8,7 @@ patterns:
       pattern: |
         [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
       start: |
-        (?:\A|[^a-zA-Z0-9])(?i)(?:api|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+        (?:\A|[^a-zA-Z0-9])(?i)(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z+])?([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
         (\z|[\r\n'"])
       additional_not_match:
@@ -45,6 +45,48 @@ patterns:
       - "String with a number of chars until a breaking char"
       - "Not matching variables, placeholders or common configuration constants such as 'read' and 'write'"
 
+
+  - name: Generic Password with hex encoded secrets
+    type: generic_passwords_hex
+    regex:
+      version: 0.1
+      pattern: |
+        [0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+      start: |
+        (?:\A|[^a-zA-Z0-9])(?i)(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z+])?([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+      end: |
+        (\z|[\r\n'"])
+    test:
+      data: password=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      start_offset: 9
+      end_offset: -1
+    comments:
+      - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
+      - "Delimiters like `=` or `:` (with padding)"
+      - "Has to be a token-like value"
+
+
+  - name: Generic Password with Base64 encoded secrets
+    type: generic_passwords_base64
+    regex:
+      version: 0.1
+      pattern: |
+        (([A-Za-z0-9+/]){4})+[A-Za-z0-9+/]{1,2}={0,2}
+      start: |
+        (?:\A|[^a-zA-Z0-9])(?i)(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z+])?([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+      end: |
+        (\z|[\r\n'"])
+      additional_match:
+        - '[0-9]'
+        - '[A-Z]'
+        - '[a-z]'
+        - '^.{12,}$'
+    comments:
+      - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
+      - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
+      - "Delimiters like `=` or `:` (with padding)"
+
+
   - name: UUIDs
     type: uuids
     regex:
@@ -60,12 +102,10 @@ patterns:
         - ^00000000-0000-0000-0000-000000000000$
         - ^(?i)00010203-0405-0607-0809-0a0b0c0d0e0f$
         - ^(?i)12345678-1234-1234-1234-123456789abc$
-
     test:
       - data: 10203040-5060-7080-90a0-b0c0d0e0f000
         start_offset: 0
         end_offset: -1
-
     expected:
       - name: uuids.txt
         start_offset: 12
