@@ -354,7 +354,7 @@ patterns:
       - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
       - "Some false positives in code might appear"
     test:
-      data: "password: AAAAAAAAAAAA00=="
+      data: "password: AAAAAAAAAAAa00=="
       start_offset: 10
       end_offset: 26
 
@@ -394,7 +394,7 @@ patterns:
       pattern: |
         (([A-Za-z0-9+/]){4})+[A-Za-z0-9+/]{1,2}={0,2}
       start: |
-        [{[,][ \t]*[ \t\r\n]*"(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+        [{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
       end: |
         "[ \t\r\n]*[,}\]]
       additional_match:
@@ -408,7 +408,7 @@ patterns:
       - "This will not match some isolated fragments of JSON, so be aware of that when testing it"
     test:
       data: |
-        {"password": "AAAAAAAAAAAA00==", "user": "admin"}
+        {"password": "AAAAAAAAAAAa00==", "user": "admin"}
       start_offset: 14
       end_offset: 30
 
