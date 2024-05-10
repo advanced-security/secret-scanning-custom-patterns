@@ -23,6 +23,11 @@ patterns:
       additional_not_match:
         # placeholders, variable substitutions, etc.
         - (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=(%s\b|\{\{[^}]+\}\}|\{[0-9]+\}|\$?\{[^}]+\}|\[[A-Z_]+\]|['"`]|$)
+    test:
+      data: connection_string = "Data Source=eee,1433;Initial Catalog=bbb;Integrated Security=False;User ID=ccc@aaa;Password=ddd;"
+      start_offset: 21
+      end_offset: 117
+
 
   - name: Database Connection String (1)
     type: database_connection_string_1
