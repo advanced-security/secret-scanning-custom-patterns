@@ -286,7 +286,7 @@ _version: v0.2_
 <summary>Start Pattern</summary>
 
 ```regex
-\b([Bb]earer|[Tt]oken)[ ]+
+\b([Bb]earer |[Tt]oken (token=)?)
 ```
 
 </details><details>
