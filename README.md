@@ -57,6 +57,10 @@ Custom Secret Scanning Patterns repository.
 
 - Generic Passwords
 
+- Generic Password with hex encoded secrets
+
+- Generic Password with Base64 encoded secrets
+
 - UUIDs
 
 - Bearer Tokens

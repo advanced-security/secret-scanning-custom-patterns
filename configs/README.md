@@ -183,7 +183,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(?:(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$
+  ^(?:(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref
   ```
 - Not Match:
 
@@ -261,7 +261,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
+  ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$|\$\{\{[^}]+\}\}
   ```
 - Not Match:
 
@@ -315,6 +315,20 @@ _version: v0.1_
 
 </details>
 
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  \{\{[^{}]+\}\}
+  ```
+
+</details>
+
 ## YAML hardcoded passwords (double quoted strings)
 
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
@@ -356,6 +370,20 @@ _version: v0.1_
 ```regex
 "([ \t]*[\r\n]|\z)
 ```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  \{\{[^{}]+\}\}
+  ```
 
 </details>
 
@@ -761,7 +789,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-[{[,][ \t]*[ \t\r\n]*"(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+[{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
 ```
 
 </details><details>
