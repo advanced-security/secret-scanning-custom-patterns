@@ -120,10 +120,12 @@ _version: v0.1_
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 Pattern to find hardcoded passwords in YAML configuration files
 
-_version: v0.1_
+_version: v0.2_
 
 **Comments / Notes:**
 
+
+- Expect large numbers of false positives on variables containing 'key' or 'token'
 
 - The hardcoded password is any length
 
@@ -846,7 +848,9 @@ _version: v0.1_
 
 - The hex token must be 32, 40 or 64 characters long, and contain numbers and letters
 
-- Some false positives in code might appear
+- This may match in code, such as Python, that resembles JSON
+
+- This will not match some isolated fragments of JSON, so be aware of that when testing it
   
 
 <details>

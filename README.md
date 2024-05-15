@@ -55,7 +55,7 @@ Custom Secret Scanning Patterns repository.
 
 
 
-- Generic Passwords
+- Generic Passwords (fewer FPs)
 
 - Generic Password with hex encoded secrets
 
