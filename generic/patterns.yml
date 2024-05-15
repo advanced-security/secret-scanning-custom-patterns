@@ -3,12 +3,13 @@ name: Generic Secrets / Passwords
 patterns:
   - name: Generic Passwords
     type: generic_passwords
+    experimental: true
     regex:
       version: 0.5
       pattern: |
         [a-zA-Z0-9!.,$%&*+?^_`{|}()[\]\\/~-][a-zA-Z0-9\t !.,$%&*+?^_`{|}()[\]\\/~-]*
       start: |
-        (?:\A|[^a-zA-Z0-9])(?i)(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+        (?:\A|[^a-zA-Z0-9])(?i)[a-z0-9_.-]*(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
         (\z|[\r\n'"])
       additional_not_match:
@@ -40,10 +41,41 @@ patterns:
         start_offset: 97
         end_offset: 112
     comments:
+      - "Likely to cause large numbers of false positives - use with caution"
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
       - "Delimiters like `=` or `:` (with padding)"
       - "String with a number of chars until a breaking char"
       - "Not matching variables, placeholders or common configuration constants such as 'read' and 'write'"
+
+
+  - name: Generic Passwords (fewer FPs)
+    type: generic_passwords_fewer_fps
+    regex:
+      version: 0.1
+      pattern: |
+        ((?i)[a-z0-9_.-]*(api|auth[a-z]*|jwt|mysql|db)[_.-]?)?((?i)pass?(wo?r?d|code|phrase)|secret|token|key)([_-][A-Za-z0-9]+){0,4}_{0,2}(["'`]|[ \t]+As[ \t]+String)?[\t ]*(?:=|>|:{1,3}=|\|\|:|<=|=>|:|\?=)[\t ]*([br]?"[A-Za-z0-9_/+.!-]+"|[br]?'[A-Za-z0-9_/+.!-]+')
+      start: |
+        \A|[^0-9A-Za-z]
+      end: |
+        \z|[^A-Za-z0-9]
+      additional_not_match:
+        - |-
+          ^[A-Za-z0-9_.-]*(key|KEY|[Tt]oken|TOKEN)(_[a-zA-Z]+)?['"]?\s*([:=]|=>)\s*["']([Ee]mploye[er]|[Ss]taff|([Ss]earch)?[Rr]esult|[a-z][a-zA-Z]+CSX[A-Z][A-Za-z]+|[A-Za-z]*[Bb]ase(64|32|58)|object|claret|assigns?|clean|contains|error|expand|generate|hoist|indent(ation)?|invert|jumps?|pairs?|param(eter)?s?|pop|rewrite|temp(orary)?|token(s|i[sz]e)?|type|((un)?(quote|shift|wrap|finished))|[a-z]{2,10}([A-Z][a-z]{1,15}){1,6}|(compile|is|has|make|add|each|check|close|cache|format|tag|get|set)([A-Z][A-Za-z]+)?|gadget|classic|(try_)?(base|mode|grade|model)|words|identifier|[a-z.-]+\.(jpe?g|(x|ht)ml|txt|docx?|xlsx?|pdf|png)|enabled|name\.invalidPattern|\.|\.data-api|expect|file|config|ansi|Default(Type)?|Cache-Control|((notD|d)eepE|e)qual|name|NAME|package|version|VERSION|start|end|step|async|Event|throws|ok|notOK|verbose|push(Result)?|slimAssertions|(p|notP)ropEqual|((notS|s)trict|not)Equal|value|prev|next|year|key[0-9]?|destroy|[a-z]+EventListeners|timeout|str(ing)?|hmac|uuid|update|find|true|false|[Nn][ui]ll|[Nn]one|[a-z_]+\.((tf)?state|id|key)|(hibernate|ws|err|i18n|employee|bs|org|com|sun|java)(\.[a-zA-Z0-9_]+){1,4}|[A-Z_]+_KEY)["']$
+        - |-
+          (?i)(token|key)[_-](name|format|type|enabled|success|type|method)\b
+        - |-
+          ^token(_[A-Z]+)?['"]?\s*[:=]\s*['"](barline|parenthesis|qualified|suport|symbol|statementEnd|singleLineTitle|character|pageBreak|operator|optionalTitle|option|zupfnoter|chordname|macro|error|escape|indent|term|titleUnderline|tag|link|literal|(other|table)Block|list|value|control|set|support|injections|array|doc|source|heading|tokens|storage|empty|newline|empty_line|keyword|comment|meta|[lr]?paren|class|punctuation|regexp?|constant|string|entity|invalid|support|variable|multiline|language|paren|markup|singleline|nospell|text|array|doc|source|heading|tokens)(\.{1,2}[A-Za-z0-9_-]+){0,6}[!.]?["']$
+        - "^KEY_[A-Z]+[0-9]{0,3}: 'k[a-zA-Z0-9]{1,6}'$"
+    test:
+      data: password="Password123"
+      start_offset: 0
+      end_offset: 22
+    comments:
+      - "Expect many false positives if run against vendored-in code, such as JS libraries - use with caution"
+      - "`password`, `secret`, `key`, `token` etc. password-like prefix (fuzzy)"
+      - "Delimiters like `=` or `:` (with padding)"
+      - "Matches fewer characters (A-Za-z0-9_/+.!-), and requires matching quotes around the string"
+      - "Attempts to remove variables, placeholders, and common configuration constants such as 'read' and 'write'"
 
 
   - name: Generic Password with hex encoded secrets
@@ -53,7 +85,7 @@ patterns:
       pattern: |
         [0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
       start: |
-        (?:\A|[^a-zA-Z0-9])(?i)(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+        (?:\A|[^a-zA-Z0-9])(?i)[a-z0-9._-]*(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
         (\z|[\r\n'"])
     test:
@@ -63,7 +95,7 @@ patterns:
     comments:
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
       - "Delimiters like `=` or `:` (with padding)"
-      - "Has to be a token-like value"
+      - "Has to be a token-like value - a 32, 40 or 64 character hex string"
 
 
   - name: Generic Password with Base64 encoded secrets
@@ -73,7 +105,7 @@ patterns:
       pattern: |
         (([A-Za-z0-9+/]){4})+[A-Za-z0-9+/]{1,2}={0,2}
       start: |
-        (?:\A|[^a-zA-Z0-9])(?i)(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+        (?:\A|[^a-zA-Z0-9])(?i)[a-z0-9._-]*(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
       end: |
         (\z|[\r\n'"])
       additional_match:
@@ -121,6 +153,7 @@ patterns:
         start_offset: 131
         end_offset: 167
 
+
   - name: Bearer Tokens
     type: bearer_tokens
     regex:
@@ -128,7 +161,7 @@ patterns:
       pattern: |
         [a-zA-Z0-9_.=/+:-]+
       start: |
-        \b([Bb]earer |[Tt]oken (token=)?)
+        (Authorization: |['"])([Bb]earer |[Tt]oken (token=)?)
       end: |
         \z|[\s'"]
       additional_not_match:

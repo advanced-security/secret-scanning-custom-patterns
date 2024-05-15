@@ -89,7 +89,7 @@ patterns:
       Pattern to find hardcoded passwords in YAML configuration files
     experimental: true
     regex:
-      version: 0.1
+      version: 0.2
       pattern: |
         [^\r\n`'"\x00-\x08]+
       start: |
@@ -103,6 +103,7 @@ patterns:
         - ^(?:(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref 
         - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
+      - "Expect large numbers of false positives on variables containing 'key' or 'token'"
       - "The hardcoded password is any length"
       - "Some false positives in code might appear"
       - "The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)"
@@ -431,7 +432,8 @@ patterns:
         - '[a-f]'
     comments:
       - "The hex token must be 32, 40 or 64 characters long, and contain numbers and letters"
-      - "Some false positives in code might appear"
+      - "This may match in code, such as Python, that resembles JSON"
+      - "This will not match some isolated fragments of JSON, so be aware of that when testing it"
     test:
       data: |
         {"password": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "user": "admin"}
