@@ -363,7 +363,7 @@ patterns:
       pattern: |
         [A-Za-z0-9_-]{20}
       start: |
-        (\A|\b)(?i)((pd|pagerduty)_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?|Token token=)
+        (\A|\b)(?i)((pd|pagerduty)_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>)\s*['"`]?|Token token=)
       end: |
         \z|\b
       additional_match:
