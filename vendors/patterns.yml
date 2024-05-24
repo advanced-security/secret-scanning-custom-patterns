@@ -58,7 +58,7 @@ patterns:
       pattern: |
         [a-fA-F0-9]{64}
       start: |
-        (?:\A|[\r\n])(?:\[auth\][^[]*\ntoken\s*=|(?:export )?SENTRY_AUTH_TOKEN\s*=|sentry-cli [^\r\n]*--auth-token |auth\.token\s*=)\s*['"`]?
+        (?:(?:\A|[\r\n])\[auth\][^[]*\ntoken\s*=|(?:\A|\b)SENTRY_AUTH_TOKEN\s*=|(?:\A|\b)sentry-cli [^\r\n]*--auth-token |(?:\A|\b)auth\.token\s*=)\s*['"`]?
       end: |
         \z|\s|['"`]
       additional_match:
@@ -88,7 +88,7 @@ patterns:
       pattern: |
         [a-fA-F0-9]{32}
       start: |
-        (?:\A|[\r\n])(?:\[auth\][^[]*\napi_key\s*=|(?:export )?SENTRY_API_KEY\s*=|sentry-cli [^\r\n]*--api-key |auth\.api_key\s*=)\s*['"`]?
+        (?:(?:\A|[\r\n])\[auth\][^[]*\napi_key\s*=|(?:\A|\b)SENTRY_API_KEY\s*=|(?:\A|\b)sentry-cli [^\r\n]*--api-key |(?:\A|\b)auth\.api_key\s*=)\s*['"`]?
       end: |
         \z|\s|['"`]
       additional_match:
