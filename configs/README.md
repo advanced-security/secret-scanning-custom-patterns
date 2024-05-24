@@ -401,11 +401,9 @@ _version: v0.1_
 
 - The hardcoded password is any length
 
-- Some false positives in code might appear
+- Some false positives in code or YAML files might appear, especially where the variable is called 'key' or 'token'
 
-- The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)
-
-- This will catch the start of a multiline password, but the end will not be found if it is on a different line
+- The pattern checks for certain key words to end the variable name (`secret`, `password`, etc.)
   
 
 <details>
@@ -567,7 +565,7 @@ _version: v0.1_
 ## .env file style secrets
 
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
-Find .env file style secrets in configuration files
+Find .env file style secrets in configuration files such as .env, Dockerfile, shell scripts etc.
 
 _version: v0.1_
 
@@ -576,7 +574,9 @@ _version: v0.1_
 
 - Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix
 
-- Some false positives in code might appear
+- Allows no whitespace in the secret, to cut false positives
+
+- Some false positives in code might appear, especially where the variable name is 'key' or 'token'
 
 - The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
 
@@ -596,14 +596,14 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:\n|\A)(ENV |export )?[A-Z_]*(?:SECRET|SERVICE_PASS(WD|WORD|CODE|PHRASE)|PASS(?:WD|WORD|CODE|PHRASE)?|KEY)=['"]?
+(?:\n|\A)((export|ENV|ARG) )?[A-Z_]*(?:SECRET|PASS(?:WD|WOR[TD]|CODE|PHRASE)?|KEY|TOKEN)=['"]?
 ```
 
 </details><details>
 <summary>End Pattern</summary>
 
 ```regex
-['"\r\n#]|\z
+[\r\n#]|['"]\s*[\r\n]|\z
 ```
 
 </details>
@@ -617,12 +617,27 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^\$[{(]
+  ^\$(\{[^}]+\}|\([^)]+)|[A-Za-z_]+|[0-9])$
   ```
 - Not Match:
 
   ```regex
-  ^<[^>]+>$
+  ^(<[^>]+>|\[[^]+\]|\{[^}+\}|(your|my|the|a)_[a-z_]+|.*(passwor[t]|key|secret|token|密码).*|\.\.\.|xxx+|yyy+|zzz+|aaa+|bbb+|ccc+)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(test|value)([._-][a-z_.-]+)?$
+  ```
+- Not Match:
+
+  ```regex
+  ^(?i)(true|false|y(es)?|no?|on|off|0|1|nill|null|none|(\\x[a-f0-9]{2})+)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(/|file:///|[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$
   ```
 
 </details>
