@@ -98,7 +98,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:\A|[\r\n])(?:\[auth\][^[]*\ntoken\s*=|(?:export )?SENTRY_AUTH_TOKEN\s*=|sentry-cli [^\r\n]*--auth-token |auth\.token\s*=)\s*['"`]?
+(?:(?:\A|[\r\n])\[auth\][^[]*\ntoken\s*=|(?:\A|\b)SENTRY_AUTH_TOKEN\s*=|(?:\A|\b)sentry-cli [^\r\n]*--auth-token |(?:\A|\b)auth\.token\s*=)\s*['"`]?
 ```
 
 </details><details>
@@ -146,7 +146,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:\A|[\r\n])(?:\[auth\][^[]*\napi_key\s*=|(?:export )?SENTRY_API_KEY\s*=|sentry-cli [^\r\n]*--api-key |auth\.api_key\s*=)\s*['"`]?
+(?:(?:\A|[\r\n])\[auth\][^[]*\napi_key\s*=|(?:\A|\b)SENTRY_API_KEY\s*=|(?:\A|\b)sentry-cli [^\r\n]*--api-key |(?:\A|\b)auth\.api_key\s*=)\s*['"`]?
 ```
 
 </details><details>
