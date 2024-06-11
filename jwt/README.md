@@ -47,7 +47,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIs
+  eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIs
   ```
 
 </details>
