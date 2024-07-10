@@ -617,7 +617,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^\$(\{[^}]+\}|\([^)]+)|[A-Za-z_]+|[0-9])$
+  ^\$(\{[^}]+\}|\([^)]+\)|[A-Za-z_]+|[0-9])$
   ```
 - Not Match:
 
