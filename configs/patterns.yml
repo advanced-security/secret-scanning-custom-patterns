@@ -215,7 +215,7 @@ patterns:
       pattern: |
         [^\x00-\x08]+?
       start: |
-        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*[|>][+-]?[ \t]*\n[ \t]+
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*[|>][+-]?[ \t]*(\n|\r\n)[ \t]+
       end: |
         \n\n|\r\n\r\n|(\n|\r\n)[ \t]+\S+:|(\n|\r\n)\.\.\.[ \t\n\r]|\z
     comments:
