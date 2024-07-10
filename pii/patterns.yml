@@ -251,6 +251,8 @@ patterns:
     test:
       data: |
         41018512346
+      start_offset: 0
+      end_offset: 11
     comments:
       - With no validation of the checksum this can cause a lot of false positives
       - The example test data does not have a valid checksum - it is one of the examples used with one digit in the checksum changed
