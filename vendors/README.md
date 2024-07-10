@@ -1133,7 +1133,7 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-[^'",\r\n\x00-\x08]+
+[^'",\r\n \t\x00-\x08]+
 ```
 
 </details>
@@ -1178,7 +1178,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(\$\{?[A-Z]+\}?|<password>)$
+  ^(\$\{?[A-Z]+\}?|<password>|\s+)$
   ```
 - Not Match:
 
