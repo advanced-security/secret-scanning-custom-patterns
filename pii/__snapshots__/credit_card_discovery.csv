@@ -1,3 +1,0 @@
-secret_type,secret_type_display_name,secret,path,start_line,end_line,start_column,end_column
-"credit_card_discovery","Credit Card (Discovery)","19ff47cc8024c133d5845d3f8938caca289929031e7d508c3adf7adff177f0c2","pii/credit-cards.txt","46","46","1","17",
-"credit_card_discovery","Credit Card (Discovery)","d8086d483c15c711ebba19f966b97d3c2adcba74025ff8d7e07c3698c9531deb","pii/credit-cards.txt","47","47","1","17",
