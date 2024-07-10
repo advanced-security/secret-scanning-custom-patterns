@@ -414,7 +414,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(\bSSWS\s{1,5}|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s{0,32}([:=]|[=-]>|to|[!=]={1,2}|<>)\s{0,32}['"`]?)
+(\bSSWS\s{1,5}|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s{0,28}([:=]|[=-]>|to|[!=]={1,2}|<>)\s{0,28}['"`]?)
 ```
 
 </details><details>
