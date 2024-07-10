@@ -556,7 +556,7 @@ patterns:
       data: |
         google_api_key: 0123456789abcdef0123456789abcdef01234567
       start_offset: 16
-      end_offset: -1
+      end_offset: 56
 
   - name: OpenStack password/API key
     type: openstack_password_or_key
@@ -610,7 +610,7 @@ patterns:
       data: |
         key: service:my-apollo-service:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
       start_offset: 5
-      end_offset: 71
+      end_offset: 67
 
   - name: ClickUp API key
     type: clickup_api_key
@@ -658,7 +658,7 @@ patterns:
       data: |
         jenkins_api_token="0123456789abcdef0123456789abcdef"
       start_offset: 19
-      end_offset: 52
+      end_offset: 51
 
   - name: AWS S3 presigned URL
     type: aws_s3_presigned_url
@@ -673,6 +673,8 @@ patterns:
     test:
       data: |
         https://snort-org-site.s3.amazonaws.com/production/document_files/files/000/000/596/original/Rules_Writers_Guide_to_Snort_3_Rules.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIXACIED2SPMSC7GA%2F20211011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211011T165700Z&X-Amz-Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=1d5134d3a84db0f7b1ece95fcf98387a0cc32ff131b6c95e6a80d3cd4b616a5c
+      start_offset: 0
+      end_offset: 402
 
   - name: Azure Access Key (legacy format)
     type: azure_access_key_legacy

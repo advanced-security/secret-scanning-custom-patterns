@@ -173,8 +173,8 @@ patterns:
       - "Only allows for only single-quoted passwords, to better control false positives"
     test:
       data: "password: 'password123'"
-      start_offset: 10
-      end_offset: 21
+      start_offset: 11
+      end_offset: 22
 
 
   - name: YAML hardcoded passwords (double quoted strings)
@@ -201,8 +201,8 @@ patterns:
       data: |
         password: "password123"
 
-      start_offset: 10
-      end_offset: 21
+      start_offset: 11
+      end_offset: 22
 
 
   - name: YAML hardcoded passwords (multiline strings)
@@ -228,7 +228,8 @@ patterns:
           password123
           andsomemore
         other_field: foo
-      # TODO: add start_offset and end_offset
+      start_offset: 14
+      end_offset: 56
 
 
   - name: GitHub Actions SHA Checker
