@@ -419,7 +419,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*[|>][+-]?[ \t]*\n[ \t]+
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*[|>][+-]?[ \t]*(\n|\r\n)[ \t]+
 ```
 
 </details><details>
