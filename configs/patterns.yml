@@ -320,7 +320,7 @@ patterns:
         [\r\n#]|['"]\s*[\r\n]|\z
       additional_not_match:
         # variable, process substitution
-        - ^\$(\{[^}]+\}|\([^)]+)|[A-Za-z_]+|[0-9])$
+        - ^\$(\{[^}]+\}|\([^)]+\)|[A-Za-z_]+|[0-9])$
         # placeholders
         - ^(<[^>]+>|\[[^]+\]|\{[^}+\}|(your|my|the|a)_[a-z_]+|.*(passwor[t]|key|secret|token|密码).*|\.\.\.|xxx+|yyy+|zzz+|aaa+|bbb+|ccc+)$
         # non-secret related "key" content
