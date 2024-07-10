@@ -717,8 +717,8 @@ patterns:
     test:
       data: |
         AZURE_SAS_TOKEN: "?sv=2019-12-12&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-10-11T16:57:00Z&st=2021-10-11T08:57:00Z&spr=https&sig=abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmn%3D"
-      start_offset: 18
-      end_offset: 169
+      start_offset: 19
+      end_offset: 214
     comments:
       - This is a Shared Access Signature (SAS) token for Azure services. See [these examples](https://learn.microsoft.com/en-us/rest/api/storageservices/service-sas-examples)
       - The token is a URL query string parameter, and the signature is a base64 encoded HMAC-SHA256 hash, so is a fixed length in plain text and always ends in =
