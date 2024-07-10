@@ -1497,19 +1497,19 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Match:
 
   ```regex
-  [?&]sv=[0-9]{4}-[0-9]{2}-[0-9]{2}
+  (^|&)sv=[0-9]{4}-[0-9]{2}-[0-9]{2}
   ```
 
 - Match:
 
   ```regex
-  [?&]se=[0-9]{4}-[0-9]{2}-[0-9]{2}
+  (^|&)se=[0-9]{4}-[0-9]{2}-[0-9]{2}
   ```
 
 - Match:
 
   ```regex
-  [?&]st=[0-9]{4}-[0-9]{2}-[0-9]{2}
+  (^|&)st=[0-9]{4}-[0-9]{2}-[0-9]{2}
   ```
 - Not Match:
 
