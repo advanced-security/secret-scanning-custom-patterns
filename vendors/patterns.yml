@@ -563,7 +563,7 @@ patterns:
     description: OpenStack password or API key
     regex:
       pattern: |
-        [^'",\r\n\x00-\x08]+
+        [^'",\r\n \t\x00-\x08]+
       start: |
         (?i)OPEN_?STACK_(PASSWORD|API_?KEY)[_A-Z]*['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
       end: |
@@ -572,7 +572,7 @@ patterns:
         - ^(ENV|[a-z_]+)\[$
         - ^<%=.*%>$
         - ^([a-z_]+\.api_?key|self\.[a-z_]+|os\.environ\.get\()$
-        - ^(\$\{?[A-Z]+\}?|<password>)$
+        - ^(\$\{?[A-Z]+\}?|<password>|\s+)$
         - ^(@?[a-z_]+\[:.*\]|@[a-z_]+)$
     test:
       data: |
