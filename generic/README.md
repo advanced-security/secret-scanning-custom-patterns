@@ -59,7 +59,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  _?)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase)|write|read|on|off|true|false|none|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?\s*\){0,2}[\]>)]?(?:\)\s*\{)?\\?(( or | \|\| ).*)?$
+  _?\)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase)|write|read|on|off|true|false|none|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?\s*\){0,2}[\]>)]?(?:\)\s*\{)?\\?(( or | \|\| ).*)?$
   ```
 - Not Match:
 
