@@ -223,7 +223,7 @@ patterns:
       - "Some false positives in code or YAML files might appear, especially where the variable is called 'key' or 'token'"
       - "The pattern checks for certain key words to end the variable name (`secret`, `password`, etc.)"
     test:
-      data: |
+      data: |-
         password: |
           password123
           andsomemore
