@@ -219,7 +219,83 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-(([A-Za-z0-9+/]){4})+[A-Za-z0-9+/]{1,2}={0,2}
+(([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\A|[^a-zA-Z0-9])(?i)[a-z0-9._-]*(?:api|auth[a-z]+|jwt|mysql|db)?[_.-]?(?:pass?(?:wo?r?d|code|phrase)|secret|key|token)([_-][a-z0-9]+){0,3}([ \t]+As[ \t]+String)?[\t ]*(={1,3}|:)[\t ]*(?:["']|b["'])?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+(\z|[\r\n'"])
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## Generic Password with URI-safe Base64 encoded secrets
+
+
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- `password`, `secret`, `key`, or password like prefix (fuzzy)
+
+- Delimiters like `=` or `:` (with padding)
+
+- This matches _- instead of +/, for URI-safe Base64
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
 ```
 
 </details>

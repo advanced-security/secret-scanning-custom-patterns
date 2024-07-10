@@ -661,7 +661,82 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-(([A-Za-z0-9+/]){4})+[A-Za-z0-9+/]{1,2}={0,2}
+(([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## YAML with URI-safe Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded URI-safe Base64-encoded passwords in YAML configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- Some false positives in code might appear
+
+- This matches _- instead of +/, for URI-safe Base64
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
 ```
 
 </details>
@@ -797,7 +872,84 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-(([A-Za-z0-9+/]){4})+[A-Za-z0-9+/]{1,2}={0,2}
+(([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+[{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+"[ \t\r\n]*[,}\]]
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## JSON with URI-safe Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded URI-safe Base64-encoded passwords in JSON configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- This may match in code, such as Python, that resembles JSON
+
+- This will not match some isolated fragments of JSON, so be aware of that when testing it
+
+- This matches _- instead of +/, for URI-safe Base64
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
 ```
 
 </details>

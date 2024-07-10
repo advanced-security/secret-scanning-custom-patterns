@@ -61,6 +61,8 @@ Custom Secret Scanning Patterns repository.
 
 - Generic Password with Base64 encoded secrets
 
+- Generic Password with URI-safe Base64 encoded secrets
+
 - UUIDs
 
 - Bearer Tokens
