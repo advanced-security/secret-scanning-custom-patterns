@@ -37,6 +37,9 @@ patterns:
       - name: passwords.js
         start_offset: 41
         end_offset: 62
+      - name: passwords.js
+        start_offset: 97
+        end_offset: 112
     comments:
       - "Likely to cause large numbers of false positives - use with caution"
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
