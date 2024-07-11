@@ -100,7 +100,7 @@ patterns:
         - ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
         - ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
         - ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
-        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^/[a-zA-Z0-9.-/]+/[a-zA-Z0-9]{5,}\.(pem|crt|key)$|^=|\(\) => |\([^)]+\) => \{
+        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^/[a-zA-Z0-9./_-]+/[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
         - ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
       - "Expect large numbers of false positives on variables containing 'key' or 'token'"
@@ -138,7 +138,7 @@ patterns:
         - ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
         - ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
         - ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
-        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^/[a-zA-Z0-9.-/]+/[a-zA-Z0-9]{5,}\.(pem|crt|key)$|^=|\(\) => |\([^)]+\) => \{
+        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^/[a-zA-Z0-9./_-]+/[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
         - ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
       - "The hardcoded password is any length"
@@ -200,7 +200,6 @@ patterns:
     test:
       data: |
         password: "password123"
-
       start_offset: 11
       end_offset: 22
 
@@ -328,7 +327,7 @@ patterns:
         # non-secret related content
         - ^(?i)(true|false|y(es)?|no?|on|off|0|1|nill|null|none|(\\x[a-f0-9]{2})+)$
         # a path
-        - '^(/|file:///|[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$'
+        - '^(/|file:///|https?://[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$'
     comments:
       - "Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix"
       - "Allows no whitespace in the secret, to cut false positives"
