@@ -15,17 +15,17 @@ patterns:
       additional_not_match:
         # something that means "password" or a placeholder name - either a variable or a placeholder
         # a literal value or config switch
-        - _?\)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase|write|read|on|off|true|false|none|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?\s*\){0,2}[\]>)]?(?:\)\s*\{)?\\?(( or | \|\| ).*)?$
+        - (?i)_?\)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|key|tok|redacted|placeholder|dummy|pw|thephrase|write|read|on|off|true|false|none|value|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n|f[0-9]{1,2}|[a-zA-Z]),?\s*\){0,2}[\]>)]?(?:\)\s*\{)?\\?(( or | \|\| ).*)?$
         # Python type hints, Swift typing
         - ^\s*(?:(?:typing\.)?(?:(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*|(?:int|str|float|(?:typing.)?Any|None|bytes|bool|ReadableBuffer)\s*(?:[,|].*)?|(?:Int|Swift\.Int|Int32)\.*))\s*$
         # ..., \, , \n, \0, ',' and other single chars, smilies, hex, digits, nothing at all,
         # directories, regex, format string placeholder, urllib demo passphrase, "optional" in docs, a variable substitution, or surrounded by brackets of various kinds
         # all with possible ',' and surrounding whitespace, possibly with a following comment
-        - ^\s*(?:\.\.\.|\\|\\n|\\0|\?|\$\(|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.)|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover|focus)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
+        - ^\s*(?:\.\.\.|\\|\\n|\\0|\?|\$\(|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.|/[a-zA-Z/.-]+/[a-zA-Z0-9]+\.(pem|crt|key))|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover|focus)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
         # function definitions, e.g. Javascript, function calls or variable declaration
-        - ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new |\([A-Za-z]+\)\s*)?[a-zA-Z0-9_.]+\s*\(.*|(?:public|private) [A-Za-z0-9_]+ \{|[A-Za-z0-9_.-]+\s*\) \{)$|\{\{[^}]+\}\}|\$\{\{ 
+        - ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new |\([A-Za-z]+\)\s*)?[a-zA-Z0-9_.]+\s*\(.*|(?:public|private) [A-Za-z0-9_]+ \{|[A-Za-z0-9_.-]+\s*\) \{)$|\{\{[^}]+\}\}|\$\{\{|\{\}$|\[\]$|(0x)?%[0-9]+x|%[dusx]\.$
         # reference to a member variable, index into a variable, bash variables, perl hash key index, environment vars
-        - ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$
+        - ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$|`(%s|\+)
     test:
       data: password=Password123
       start_offset: 9
@@ -182,7 +182,7 @@ patterns:
     regex:
       version: 0.2
       pattern: |
-        [a-zA-Z0-9_.=/+:-]+
+        [a-zA-Z0-9_.=/+:-]{12,}
       start: |
         (Authorization: |['"])([Bb]earer |[Tt]oken (token=)?)
       end: |
@@ -191,8 +191,7 @@ patterns:
         - ^(?:letmein|Oracle|SuperSecretString|foo|ababbdbbebbbebdbbe5538003023|XYZ_INVALID_ACCESTOKEN_XYZ|QQ==|Shizuku|mF_9.B5f-4.1JqM|h480djs93hd8|SlAV32hkKG|YmVlcDpib29w)$
         - ^(?i)(?:dummy|fake|bearer|auth|invalid|your|my|the|undefined|github|oidc|database)(?:_api)?(?:_?token|key|secret)?$
         - ^(?i)(?:[a-z0-9]|XYZ|ABC|123|.*_token)$
-        - (?i)x{5}
-        - ^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$
+        - (^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$|(?i)x{5}
     expected:
       - name: bearer.txt
         start_offset: 45
@@ -205,8 +204,9 @@ patterns:
         start_offset: 23
         end_offset: 42
     comments:
-      - "As used in an Authorization header"
-      - "We try to remove common placeholders"
+      - As used in an Authorization header
+      - We try to remove common placeholders
+      - Lower length limit of 12 to remove common false positives on "Token <common word>", since most words are below 12 characters in length
 
 
   - name: OAuth client secret and ID pair

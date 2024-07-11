@@ -97,11 +97,11 @@ patterns:
       end: |
         ['"\r\n]|\z
       additional_not_match:
-        - ^(?:keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(?:str|string|int|bool)( +#.*)?),?$
-        - ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
-        - ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
-        - ^(?:(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref 
-        - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+        - ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
+        - ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+        - ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
+        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^/[a-zA-Z0-9.-/]+/[a-zA-Z0-9]{5,}\.(pem|crt|key)$|^=|\(\) => |\([^)]+\) => \{
+        - ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
       - "Expect large numbers of false positives on variables containing 'key' or 'token'"
       - "The hardcoded password is any length"
@@ -135,11 +135,11 @@ patterns:
       end: |
         [\r\n]|\z
       additional_not_match:
-        - ^(?:keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(?:str|string|int|bool)( +#.*)?),?$
-        - ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
-        - '^(?:(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)|([!&*{}[\],#|>@`"''%]|[:?-] ).*)$'
-        - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$|\$\{\{[^}]+\}\}
-        - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+        - ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
+        - ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+        - ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
+        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^/[a-zA-Z0-9.-/]+/[a-zA-Z0-9]{5,}\.(pem|crt|key)$|^=|\(\) => |\([^)]+\) => \{
+        - ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
       - "The hardcoded password is any length"
       - "Some false positives in code might appear"
@@ -313,7 +313,7 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [^\r\n\x00-\x08'"#]+
+        [^\r\n\x00-\x08'"#]{8,}
       start: |
         (?:\n|\A)((export|ENV|ARG) )?[A-Z_]*(?:SECRET|PASS(?:WD|WOR[TD]|CODE|PHRASE)?|KEY|TOKEN)=['"]?
       end: |
@@ -335,6 +335,7 @@ patterns:
       - "Some false positives in code might appear, especially where the variable name is 'key' or 'token'"
       - "The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)"
       - "More restrictive than the Generic Passwords pattern, so less prone to false positives"
+      - "Lower length limit of 8 to remove FPs"
     test:
       data: |
         SECRET_KEY=password123
