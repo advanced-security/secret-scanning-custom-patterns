@@ -59,7 +59,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  _?\)?(?:[a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|tok|redacted|placeholder|dummy|pw|thephrase|write|read|on|off|true|false|none|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n),?\s*\){0,2}[\]>)]?(?:\)\s*\{)?\\?(( or | \|\| ).*)?$
+  ^(?i)_?\)?((a-zA-Z0-9._]+[_.])?(?:the )?(?:pass?(wo?r?d|code|phrase)|pass|pwd|secret|token|key|tok|pw)|redacted|placeholder|dummy|thephrase|write|read|on|off|true|false|none|value|null( \? )?|nil|undefined|eof|ignore|eol|git|yes|no|y|n|f[0-9]{1,2}|[a-zA-Z]),?\s*\){0,2}[\]>)]?(?:\)\s*\{)?\\?(( or | \|\| ).*)?$
   ```
 - Not Match:
 
@@ -69,17 +69,17 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^\s*(?:\.\.\.|\\|\\n|\\0|\?|\$\(|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.)|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover|focus)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
+  ^\s*(?:\.\.\.|\\|\\n|\\0|\?|\$\(|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.|(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9]+(\.(pem|crt|key|cer|pub|der)|_rsa))|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover|focus)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new |\([A-Za-z]+\)\s*)?[a-zA-Z0-9_.]+\s*\(.*|(?:public|private) [A-Za-z0-9_]+ \{|[A-Za-z0-9_.-]+\s*\) \{)$|\{\{[^}]+\}\}|\$\{\{
+  ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new |\([A-Za-z]+\)\s*)?[a-zA-Z0-9_.]+\s*\(.*|(?:public|private) [A-Za-z0-9_]+ \{|[A-Za-z0-9_.-]+\s*\) \{)$|\{\{[^}]+\}\}|\$\{\{|\{\}$|\[\]$|(0x)?%[0-9]+x|%[dusx]\.$
   ```
 - Not Match:
 
   ```regex
-  ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$
+  ^\s*(?:(?:self|this)\.[a-zA-Z_][a-zA-Z0-9_.]+[,[]?|[a-zA-Z0-9_.]+\[(?:[a-zA-Z0-9_.]+)?\]?|\$(?:[1-9]|[A-Za-z0-9_]+)\{?|os\.environ\[[^\]]\]|process\.env\.[A-Z0-9_]+)\s*(?:,|\|\||&&)?\s*$|`(%s|\+)
   ```
 
 </details>
@@ -138,7 +138,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^[A-Za-z0-9_.-]*(key|KEY|[Tt]oken|TOKEN)(_[a-zA-Z]+)?['"]?\s*([:=]|=>)\s*["']([Ee]mploye[er]|[Ss]taff|([Ss]earch)?[Rr]esult|[a-z][a-zA-Z]+CSX[A-Z][A-Za-z]+|[A-Za-z]*[Bb]ase(64|32|58)|object|claret|assigns?|clean|contains|error|expand|generate|hoist|indent(ation)?|invert|jumps?|pairs?|param(eter)?s?|pop|rewrite|temp(orary)?|token(s|i[sz]e)?|type|((un)?(quote|shift|wrap|finished))|[a-z]{2,10}([A-Z][a-z]{1,15}){1,6}|(compile|is|has|make|add|each|check|close|cache|format|tag|get|set)([A-Z][A-Za-z]+)?|gadget|classic|(try_)?(base|mode|grade|model)|words|identifier|[a-z.-]+\.(jpe?g|(x|ht)ml|txt|docx?|xlsx?|pdf|png)|enabled|name\.invalidPattern|\.|\.data-api|expect|file|config|ansi|Default(Type)?|Cache-Control|((notD|d)eepE|e)qual|name|NAME|package|version|VERSION|start|end|step|async|Event|throws|ok|notOK|verbose|push(Result)?|slimAssertions|(p|notP)ropEqual|((notS|s)trict|not)Equal|value|prev|next|year|key[0-9]?|destroy|[a-z]+EventListeners|timeout|str(ing)?|hmac|uuid|update|find|true|false|[Nn][ui]ll|[Nn]one|[a-z_]+\.((tf)?state|id|key)|(hibernate|ws|err|i18n|employee|bs|org|com|sun|java)(\.[a-zA-Z0-9_]+){1,4}|[A-Z_]+_KEY)["']$
+  ^[A-Za-z0-9_.-]*(key|KEY|[Tt]oken|TOKEN)(_[a-zA-Z]+)?['"]?\s*([:=]|=>)\s*["']([Ee]mploye[er]|[Ss]taff|([Ss]earch)?[Rr]esult|[a-z][a-zA-Z]+CSX[A-Z][A-Za-z]+|[A-Za-z]*[Bb]ase(64|32|58)|object|claret|assigns?|clean|contains|error|expand|generate|hoist|indent(ation)?|invert|jumps?|pairs?|param(eter)?s?|pop|rewrite|temp(orary)?|token(s|i[sz]e)?|type|((un)?(quote|shift|wrap|finished))|[a-z]{2,10}([A-Z][a-z]{1,15}){1,6}|(compile|is|has|make|add|each|check|close|cache|format|tag|get|set)([A-Z][A-Za-z]+)?|gadget|classic|(try_)?(base|mode|grade|model)|words|identifier|[a-z.-]+\.(jpe?g|(x|ht)ml|txt|docx?|xlsx?|pdf|png)|enabled|name\.invalidPattern|\.|\.data-api|expect|file|config|ansi|Default(Type)?|Cache-Control|((notD|d)eepE|e)qual|name|NAME|package|version|VERSION|start|end|step|async|Event|throws|ok|notOK|verbose|push(Result)?|slimAssertions|(p|notP)ropEqual|((notS|s)trict|not)Equal|value|prev|next|year|key[0-9]?|destroy|[a-z]+EventListeners|timeout|str(ing)?|hmac|uuid|update|find|true|false|val|VAL|REDACTED|redacted|nop|F[0-9]{1,2}|[A-Za-z0-9]|[Nn][ui]ll|[Nn]one|[a-z_]+\.((tf)?state|id|key)|(hibernate|ws|err|i18n|employee|bs|org|com|sun|java)(\.[a-zA-Z0-9_]+){1,4}|[A-Z_]+_KEY)["']$
   ```
 - Not Match:
 
@@ -148,12 +148,17 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^token(_[A-Z]+)?['"]?\s*[:=]\s*['"](barline|parenthesis|qualified|suport|symbol|statementEnd|singleLineTitle|character|pageBreak|operator|optionalTitle|option|zupfnoter|chordname|macro|error|escape|indent|term|titleUnderline|tag|link|literal|(other|table)Block|list|value|control|set|support|injections|array|doc|source|heading|tokens|storage|empty|newline|empty_line|keyword|comment|meta|[lr]?paren|class|punctuation|regexp?|constant|string|entity|invalid|support|variable|multiline|language|paren|markup|singleline|nospell|text|array|doc|source|heading|tokens)(\.{1,2}[A-Za-z0-9_-]+){0,6}[!.]?["']$
+  ^(?i)token(_[A-Z]+)?['"]?\s*[:=]\s*['"](barline|parenthesis|qualified|suport|symbol|statementEnd|singleLineTitle|character|pageBreak|operator|optionalTitle|option|zupfnoter|chordname|macro|error|escape|indent|term|titleUnderline|tag|link|literal|(other|table)Block|list|value|control|set|support|injections|array|doc|source|heading|tokens|storage|empty|newline|empty_line|keyword|(line)?comment|meta|[lr]?paren|class|punctuation|regexp?|constant|string|entity|invalid|support|variable|multiline|language|paren|markup|singleline|nospell|text|array|doc|source|heading|tokens)(\.{1,2}[A-Za-z0-9_-]+){0,6}[!.]?["']$
   ```
 - Not Match:
 
   ```regex
   ^KEY_[A-Z]+[0-9]{0,3}: 'k[a-zA-Z0-9]{1,6}'$
+  ```
+- Not Match:
+
+  ```regex
+  ['"` ](/dev/u?random|(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)|https?://.*|file://.*)['"`]$
   ```
 
 </details>
@@ -423,13 +428,15 @@ _version: v0.2_
 - As used in an Authorization header
 
 - We try to remove common placeholders
+
+- Lower length limit of 12 to remove common false positives on "Token <common word>", since most words are below 12 characters in length
   
 
 <details>
 <summary>Pattern Format</summary>
 
 ```regex
-[a-zA-Z0-9_.=/+:-]+
+[a-zA-Z0-9_.=/+:-]{12,}
 ```
 
 </details>
@@ -474,12 +481,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  (?i)x{5}
-  ```
-- Not Match:
-
-  ```regex
-  ^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$
+  (^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$|(?i)x{5})
   ```
 
 </details>

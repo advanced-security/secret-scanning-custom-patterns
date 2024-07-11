@@ -170,27 +170,27 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(?:keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(?:str|string|int|bool)( +#.*)?),?$
+  ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+  ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
+  ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
   ```
 - Not Match:
 
   ```regex
-  ^(?:(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref
+  ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
   ```
 - Not Match:
 
   ```regex
-  ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+  ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
   ```
 
 </details>
@@ -248,27 +248,27 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(?:keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(?:str|string|int|bool)( +#.*)?),?$
+  ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+  ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)|([!&*{}[\],#|>@`"'%]|[:?-] ).*)$
+  ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
   ```
 - Not Match:
 
   ```regex
-  ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$|\$\{\{[^}]+\}\}
+  ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
   ```
 - Not Match:
 
   ```regex
-  ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+  ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
   ```
 
 </details>
@@ -581,13 +581,15 @@ _version: v0.1_
 - The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
 
 - More restrictive than the Generic Passwords pattern, so less prone to false positives
+
+- Lower length limit of 8 to remove FPs
   
 
 <details>
 <summary>Pattern Format</summary>
 
 ```regex
-[^\r\n\x00-\x08'"#]+
+[^\r\n\x00-\x08'"#]{8,}
 ```
 
 </details>
@@ -637,7 +639,7 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(/|file:///|[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$
+  ^(/|file:///|https?://[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$
   ```
 
 </details>
