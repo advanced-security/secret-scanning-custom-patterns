@@ -191,7 +191,7 @@ patterns:
         - ^(?:letmein|Oracle|SuperSecretString|foo|ababbdbbebbbebdbbe5538003023|XYZ_INVALID_ACCESTOKEN_XYZ|QQ==|Shizuku|mF_9.B5f-4.1JqM|h480djs93hd8|SlAV32hkKG|YmVlcDpib29w)$
         - ^(?i)(?:dummy|fake|bearer|auth|invalid|your|my|the|undefined|github|oidc|database)(?:_api)?(?:_?token|key|secret)?$
         - ^(?i)(?:[a-z0-9]|XYZ|ABC|123|.*_token)$
-        - (^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$|(?i)x{5}
+        - (^(?i)(x+|y+|z+|a+|\.+|.*\.\.\.)$|(?i)x{5})
     expected:
       - name: bearer.txt
         start_offset: 45
