@@ -21,6 +21,7 @@ patterns:
       start_offset: 18
       end_offset: 26
 
+
   - name: Hardcoded Spring SQL passwords
     description: |
       Hardcoded JDBC / Spring datasource passwords which typically are in property files or passed in at runtime
@@ -60,6 +61,7 @@ patterns:
       start_offset: 27
       end_offset: 35
 
+
   - name: Django Secret Key
     type: django_secret_key
     regex:
@@ -84,26 +86,28 @@ patterns:
   - name: YAML Static Password Fields
     type: yaml_static_password_fields
     description: |
-      Pattern to find Static passwords in YAML configuration files
+      Pattern to find hardcoded passwords in YAML configuration files
     experimental: true
     regex:
-      version: 0.1
+      version: 0.2
       pattern: |
-        [^\r\n'"]+
+        [^\r\n`'"\x00-\x08]+
       start: |
-        (?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
       end: |
         ['"\r\n]|\z
       additional_not_match:
-        - ^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$
-        - ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
-        - ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
-        - ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
-        - ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+        - ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
+        - ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+        - ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
+        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
+        - ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
     comments:
-      - "The hardcoded password is between 12 and 32 chars long"
-      - "Some false positives in Code might appear"
-      - "The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)"
+      - "Expect large numbers of false positives on variables containing 'key' or 'token'"
+      - "The hardcoded password is any length"
+      - "Some false positives in code might appear"
+      - "The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)"
+      - "Does not allow for multline blocks"
     expected:
       - name: example.yml
         start_offset: 57
@@ -115,6 +119,117 @@ patterns:
       data: "password: password123"
       start_offset: 10
       end_offset: 21
+
+
+  - name: YAML hardcoded passwords (plain scalars)
+    type: yaml_passwords_plain
+    description: |
+      Hardcoded passwords in YAML configuration files, using plain scalars
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n`'"\x00-\x08]+
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*
+      end: |
+        [\r\n]|\z
+      additional_not_match:
+        - ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
+        - ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+        - ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
+        - ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
+        - ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+    comments:
+      - "The hardcoded password is any length"
+      - "Some false positives in code might appear"
+      - "The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)"
+      - "Only allows for plain scalars, not quoted or multi-line, to better control false positives"
+    test:
+      data: "password: password123"
+      start_offset: 10
+      end_offset: 21
+
+
+  - name: YAML hardcoded passwords (single quoted strings)
+    type: yaml_passwords_single_quoted
+    description: |
+      Hardcoded passwords in YAML configuration files, using single quotes
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n'\x00-\x08]+
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*'
+      end: |
+        '([ \t]*[\r\n]|\z)
+      additional_not_match:
+        - \{\{[^{}]+\}\}
+    comments:
+      - "The hardcoded password is any length"
+      - "Some false positives in code might appear"
+      - "The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)"
+      - "Only allows for only single-quoted passwords, to better control false positives"
+    test:
+      data: "password: 'password123'"
+      start_offset: 11
+      end_offset: 22
+
+
+  - name: YAML hardcoded passwords (double quoted strings)
+    type: yaml_passwords_single_quoted
+    description: |
+      Hardcoded passwords in YAML configuration files, using single quotes
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n"\x00-\x08]+
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*"
+      end: |
+        "([ \t]*[\r\n]|\z)
+      additional_not_match:
+        - \{\{[^{}]+\}\}
+    comments:
+      - "The hardcoded password is any length"
+      - "Some false positives in code might appear"
+      - "The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)"
+      - "Only allows for only double-quoted passwords, to better control false positives"
+    test:
+      data: |
+        password: "password123"
+      start_offset: 11
+      end_offset: 22
+
+
+  - name: YAML hardcoded passwords (multiline strings)
+    type: yaml_passwords_multiline
+    description: |
+      Hardcoded passwords in YAML configuration files, using multiline strings
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\x00-\x08]+?
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*[|>][+-]?[ \t]*(\n|\r\n)[ \t]+
+      end: |
+        \n\n|\r\n\r\n|(\n|\r\n)[ \t]+\S+:|(\n|\r\n)\.\.\.[ \t\n\r]|\z
+    comments:
+      - "The hardcoded password is any length"
+      - "Some false positives in code or YAML files might appear, especially where the variable is called 'key' or 'token'"
+      - "The pattern checks for certain key words to end the variable name (`secret`, `password`, etc.)"
+    test:
+      data: |-
+        password: |
+          password123
+          andsomemore
+        other_field: foo
+      start_offset: 14
+      end_offset: 56
+
 
   - name: GitHub Actions SHA Checker
     type: github_actions_sha_checker
@@ -187,3 +302,207 @@ patterns:
         <machineKey decryptionKey="ABAA84D7EC4BB56D75D217CECFFB9628809BDB8BF91CFCD64568A145BE59719F" decryption="AES" />
       start_offset: 27
       end_offset: 91
+
+
+  - name: .env file style secrets
+    type: env_passwords
+    description: |
+      Find .env file style secrets in configuration files such as .env, Dockerfile, shell scripts etc.
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [^\r\n\x00-\x08'"#]{8,}
+      start: |
+        (?:\n|\A)((export|ENV|ARG) )?[A-Z_]*(?:SECRET|PASS(?:WD|WOR[TD]|CODE|PHRASE)?|KEY|TOKEN)=['"]?
+      end: |
+        [\r\n#]|['"]\s*[\r\n]|\z
+      additional_not_match:
+        # variable, process substitution
+        - ^\$(\{[^}]+\}|\([^)]+\)|[A-Za-z_]+|[0-9])$
+        # placeholders
+        - ^(<[^>]+>|\[[^]+\]|\{[^}+\}|(your|my|the|a)_[a-z_]+|.*(passwor[t]|key|secret|token|密码).*|\.\.\.|xxx+|yyy+|zzz+|aaa+|bbb+|ccc+)$
+        # non-secret related "key" content
+        - ^(test|value)([._-][a-z_.-]+)?$
+        # non-secret related content
+        - ^(?i)(true|false|y(es)?|no?|on|off|0|1|nill|null|none|(\\x[a-f0-9]{2})+)$
+        # a path
+        - '^(/|file:///|https?://[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$'
+    comments:
+      - "Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix"
+      - "Allows no whitespace in the secret, to cut false positives"
+      - "Some false positives in code might appear, especially where the variable name is 'key' or 'token'"
+      - "The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)"
+      - "More restrictive than the Generic Passwords pattern, so less prone to false positives"
+      - "Lower length limit of 8 to remove FPs"
+    test:
+      data: |
+        SECRET_KEY=password123
+      start_offset: 11
+      end_offset: 22
+
+
+  - name: YAML with Base64 encoded secrets
+    type: yaml_base64
+    description: |
+      Hardcoded Base64-encoded passwords in YAML configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        (([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+      end: |
+        ['"\r\n]|\z
+      additional_match:
+        - '[0-9]'
+        - '[A-Z]'
+        - '[a-z]'
+        - '^.{12,}$'
+    comments:
+      - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
+      - "Some false positives in code might appear"
+    test:
+      data: "password: AAAAAAAAAAAa00=="
+      start_offset: 10
+      end_offset: 26
+
+
+  - name: YAML with URI-safe Base64 encoded secrets
+    type: yaml_base64_uri
+    description: |
+      Hardcoded URI-safe Base64-encoded passwords in YAML configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        (([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+      end: |
+        ['"\r\n]|\z
+      additional_match:
+        - '[0-9]'
+        - '[A-Z]'
+        - '[a-z]'
+        - '^.{12,}$'
+    comments:
+      - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
+      - "Some false positives in code might appear"
+      - "This matches _- instead of +/, for URI-safe Base64"
+    test:
+      data: "password: AAAAAAAAAAAa00=="
+      start_offset: 10
+      end_offset: 26
+
+
+  - name: YAML with hex token
+    type: yaml_token
+    description: |
+      Hardcoded hex-encoded tokens in YAML configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+      start: |
+        (?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+      end: |
+        ['"\r\n]|\z
+      additional_match:
+        - '[0-9]'
+        - '[a-f]'
+    comments:
+      - "The hex token must be 32, 40 or 64 characters long, and contain numbers and letters"
+      - "Some false positives in code might appear"
+    test:
+      data: "password: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      start_offset: 10
+      end_offset: 74
+
+
+  - name: JSON with Base64 encoded secrets
+    type: json_base64
+    description: |
+      Hardcoded Base64-encoded passwords in JSON configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        (([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+      start: |
+        [{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+      end: |
+        "[ \t\r\n]*[,}\]]
+      additional_match:
+        - '[0-9]'
+        - '[A-Z]'
+        - '[a-z]'
+        - '^.{12,}$'
+    comments:
+      - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
+      - "This may match in code, such as Python, that resembles JSON"
+      - "This will not match some isolated fragments of JSON, so be aware of that when testing it"
+    test:
+      data: |
+        {"password": "AAAAAAAAAAAa00==", "user": "admin"}
+      start_offset: 14
+      end_offset: 30
+
+
+  - name: JSON with URI-safe Base64 encoded secrets
+    type: json_base64_uri
+    description: |
+      Hardcoded URI-safe Base64-encoded passwords in JSON configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        (([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
+      start: |
+        [{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+      end: |
+        "[ \t\r\n]*[,}\]]
+      additional_match:
+        - '[0-9]'
+        - '[A-Z]'
+        - '[a-z]'
+        - '^.{12,}$'
+    comments:
+      - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
+      - "This may match in code, such as Python, that resembles JSON"
+      - "This will not match some isolated fragments of JSON, so be aware of that when testing it"
+      - "This matches _- instead of +/, for URI-safe Base64"
+    test:
+      data: |
+        {"password": "AAAAAAAAAAAa00==", "user": "admin"}
+      start_offset: 14
+      end_offset: 30
+
+
+  - name: JSON with hex encoded secrets
+    type: json_token
+    description: |
+      Hardcoded hex-encoded tokens in JSON configuration files
+    experimental: true
+    regex:
+      version: 0.1
+      pattern: |
+        [0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+      start: |
+        [{[,][ \t]*[ \t\r\n]*"(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+      end: |
+        "[ \t\r\n]*[,}\]]
+      additional_match:
+        - '[0-9]'
+        - '[a-f]'
+    comments:
+      - "The hex token must be 32, 40 or 64 characters long, and contain numbers and letters"
+      - "This may match in code, such as Python, that resembles JSON"
+      - "This will not match some isolated fragments of JSON, so be aware of that when testing it"
+    test:
+      data: |
+        {"password": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef", "user": "admin"}
+      start_offset: 14
+      end_offset: 78

@@ -58,7 +58,7 @@ patterns:
       pattern: |
         [a-fA-F0-9]{64}
       start: |
-        (?:\A|[\r\n])(?:\[auth\][^[]*\ntoken\s*=|(?:export )?SENTRY_AUTH_TOKEN\s*=|sentry-cli [^\r\n]*--auth-token |auth\.token\s*=)\s*['"`]?
+        (?:(?:\A|[\r\n])\[auth\][^[]*\ntoken\s*=|(?:\A|\b)SENTRY_AUTH_TOKEN\s*=|(?:\A|\b)sentry-cli [^\r\n]*--auth-token |(?:\A|\b)auth\.token\s*=)\s*['"`]?
       end: |
         \z|\s|['"`]
       additional_match:
@@ -88,7 +88,7 @@ patterns:
       pattern: |
         [a-fA-F0-9]{32}
       start: |
-        (?:\A|[\r\n])(?:\[auth\][^[]*\napi_key\s*=|(?:export )?SENTRY_API_KEY\s*=|sentry-cli [^\r\n]*--api-key |auth\.api_key\s*=)\s*['"`]?
+        (?:(?:\A|[\r\n])\[auth\][^[]*\napi_key\s*=|(?:\A|\b)SENTRY_API_KEY\s*=|(?:\A|\b)sentry-cli [^\r\n]*--api-key |(?:\A|\b)auth\.api_key\s*=)\s*['"`]?
       end: |
         \z|\s|['"`]
       additional_match:
@@ -227,9 +227,25 @@ patterns:
       - name: okta.txt
         start_offset: 180
         end_offset: 222
-
     comments:
       - Okta token, starting with `00` and 40 random alphanumeric with _ and -
+
+  - name: Okta API key (precise)
+    type: okta_token_precise
+    regex:
+      version: 0.1
+      pattern: |
+        0{2}[0-9A-Za-z_-]{40}
+      start: |
+        (\bSSWS\s{1,5}|(?i)okta[_-]?(api[_-]?)?(token|key|secret)\s{0,28}([:=]|[=-]>|to|[!=]={1,2}|<>)\s{0,28}['"`]?)
+      end: |
+        \z|[^0-9A-Za-z_+/=-]
+    test:
+      data: SSWS 00RCsRGyrF9QzBe0rnWmw221UeclqRXFQGEJFdhAFM
+      start_offset: 5
+    comments:
+      - Uses surrounding context to reduce false positives
+      - Either `SSWS ` then the token, or a variable starting `okta` followed by an assignment operator, then the token
 
   - name: DataDog API key
     type: datadog_api_key
@@ -328,10 +344,11 @@ patterns:
 
   - name: LaunchDarkly API key
     type: launchdarkly_api_key
+    description: LaunchDarkly API or SDK key
     regex:
       version: 0.1
       pattern: |
-        api-[a-f0-9-]{8}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{12}
+        (api|sdk)-[a-f0-9-]{8}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{4}-[a-f0-9-]{12}
       start: |
         \A|\b
       end: |
@@ -346,12 +363,20 @@ patterns:
       pattern: |
         [A-Za-z0-9_-]{20}
       start: |
-        (\A|\b)(?i)pd_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>|,)\s*['"`]?
+        (\A|\b)(?i)((pd|pagerduty)_(service|api)_key['"`]?\s*([:=]|[?:]=|[=-]>)\s*['"`]?|Token token=)
       end: |
         \z|\b
+      additional_match:
+        - '[A-Z]'
+        - '[a-z]'
+      additional_not_match:
+        - ^(pagerduty|pd)_(service|api)_
     test:
-      data: pd_api_key=AAAAAAAAAAAAAAAAAAAA
+      data: pd_api_key=AAAAAAAAAAAAAAAAAAAa
       start_offset: 11
+    comments:
+      - "Looks for surrounding context to confirm this is a PagerDuty API key, not some other 20-byte alphanumeric string"
+      - "The `Token token=` prefix is used in an Authorization header; it's possible that a different vendor could use a similar key and this same prefix, causing results that are a different vendor's key"
 
   - name: Flickr OAuth token
     type: flickr_oauth_token
@@ -484,24 +509,6 @@ patterns:
       start_offset: 57
       end_offset: 81
 
-  - name: MongoDB connection string
-    type: mongodb_connection_string
-    regex:
-      version: 0.1
-      pattern: |
-        mongodb\+srv://[^'"<>/:@\s\x00-\x08]+:[^'"<>/@\s\x00-\x08]+@[^/\s\x00-\x08]+\S*
-      start: |
-        \A|\b
-      end: |
-        \z|\s|['"`]
-      additional_not_match:
-        - ^mongodb\+srv://(test-)?user:(test-)?pass(word)?@
-        - ^mongodb\+srv://%s:%s@
-        - ^mongodb\+srv://auser:apass@
-        - ^mongodb\+srv://b\*b%40f3tt%3D:%244to%40L8%3DMC@test3.test.build.10gen.cc/mydb%3F\?replicaSet=repl0
-    test:
-      data: mongodb+srv://foo:bar@mongodb.example.invalid/
-
   - name: UUIDv4 Bearer token (maybe Heroku)
     type: uuidv4_bearer_token
     regex:
@@ -534,3 +541,203 @@ patterns:
       data: ClientSecret = "kc3KP75a~edN1cV.rs~_r6F-O7-C-55-Ts"
       start_offset: 16
       end_offset: 50
+
+  - name: Google private key id (or older API key)
+    type: google_private_key_id_or_old_api_token
+    regex:
+      version: 0.1
+      pattern: |
+        [a-fA-F0-9]{40}
+      start: |
+        (?i)(private_key_id|google_api_key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        \b|\z
+    test:
+      data: |
+        google_api_key: 0123456789abcdef0123456789abcdef01234567
+      start_offset: 16
+      end_offset: 56
+
+  - name: OpenStack password/API key
+    type: openstack_password_or_key
+    description: OpenStack password or API key
+    regex:
+      pattern: |
+        [^'",\r\n \t\x00-\x08]+
+      start: |
+        (?i)OPEN_?STACK_(PASSWORD|API_?KEY)[_A-Z]*['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"\r\n,]|\z
+      additional_not_match:
+        - ^(ENV|[a-z_]+)\[$
+        - ^<%=.*%>$
+        - ^([a-z_]+\.api_?key|self\.[a-z_]+|os\.environ\.get\()$
+        - ^(\$\{?[A-Z]+\}?|<password>|\s+)$
+        - ^(@?[a-z_]+\[:.*\]|@[a-z_]+)$
+    test:
+      data: |
+        OPENSTACK_PASSWORD: "password1234isnotagoodpassword"
+      start_offset: 21
+      end_offset: 51
+
+  - name: AlienVault OTX API key
+    type: alienvault_otx_api_key
+    description: AlienVault OTX API key
+    regex:
+      pattern: |
+        [a-f0-9]{64}|[a-f0-9]{40}
+      start: |
+        (?i)ALIENVAULT(_?OTX)?(_?API)?_?KEY['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+    test:
+      data: |
+        ALIENVAULT_OTX_API_KEY: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      start_offset: 25
+      end_offset: 89
+
+  - name: Apollo.io API key
+    type: apollo_io_api_key
+    description: Apollo.io API key
+    regex:
+      pattern: |
+        service:[A-Za-z0-9-]+:[^\s'"`,\x00-\x08\x7f-\xff]+
+      start: |
+        (?i)key['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`,]|\z|\s
+    test:
+      data: |
+        key: service:my-apollo-service:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+      start_offset: 5
+      end_offset: 67
+
+  - name: ClickUp API key
+    type: clickup_api_key
+    description: ClickUp API key
+    regex:
+      pattern: |
+        pk_[0-9]{6,8}_[A-Z0-9]{32}
+      start: |
+        \b|\A
+      end: |
+        \b|\z
+    test:
+      data: |
+        CLICKUP_API_KEY: "pk_1234567_ABCDEFGHIJKLMNOPQRSTUVWXYZ123456"
+      start_offset: 18
+      end_offset: 61
+
+  - name: Amazon MWS Auth Token
+    type: amazon_mws_auth_token
+    description: Amazon MWS Auth Token
+    regex:
+      pattern: |
+        amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+      start: |
+        \b|\A
+      end: |
+        \b|\z
+    test:
+      data: |
+        amzn.mws.auth.token: "amzn.mws.12345678-1234-1234-1234-1234567890ab"
+      start_offset: 22
+      end_offset: 67
+
+  - name: Jenkins API token
+    type: jenkins_api_token
+    description: Jenkins API token
+    regex:
+      pattern: |
+        [a-f0-9]{32,64}
+      start: |
+        (?i)jenkins_?(api[_-]?)?(token|secret|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+    test:
+      data: |
+        jenkins_api_token="0123456789abcdef0123456789abcdef"
+      start_offset: 19
+      end_offset: 51
+
+  - name: AWS S3 presigned URL
+    type: aws_s3_presigned_url
+    description: AWS S3 presigned URL
+    regex:
+      pattern: |
+        https://[a-z-]+\.s3\.amazonaws\.com/[^?\s'"`\r\n]+\?[^\s'"`\r\n]+&X-Amz-Signature=[^\s'"`\r\n]+
+      start: |
+        \b|\A
+      end: |
+        ['"`\r\n,]|\z
+    test:
+      data: |
+        https://snort-org-site.s3.amazonaws.com/production/document_files/files/000/000/596/original/Rules_Writers_Guide_to_Snort_3_Rules.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIXACIED2SPMSC7GA%2F20211011%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20211011T165700Z&X-Amz-Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=1d5134d3a84db0f7b1ece95fcf98387a0cc32ff131b6c95e6a80d3cd4b616a5c
+      start_offset: 0
+      end_offset: 402
+
+  - name: Azure Access Key (legacy format)
+    type: azure_access_key_legacy
+    description: Azure Access Key in context in a variable assignment - legacy key format without internal identifiable features
+    regex:
+      pattern: |
+        [A-Za-z0-9/+]+==
+      start: |
+        (\A|\b)(?i)(AZURE|ACCOUNT)(_?ACCESS|_?STORAGE(_?ACCOUNT)?)?_?KEY['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+      additional_match:
+        - ^[A-Za-z0-9/+]{86}==$
+    test:
+      data: |
+        AZURE_ACCESS_KEY: "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmn=="
+      start_offset: 19
+      end_offset: 107
+    comments:
+      - This is a legacy format for Azure Access Keys. The key is base64 encoded and encodes a fixed length key, so we know its length and that it always end in `==`.
+      - The key lacks internal identifiable features, which are used in modern keys issued by these Azure services.
+      - The use of `+` instead of `{86}` in the regex pattern is due to limitations of secret scanning - make sure you use the "additional match" to constrain the length
+
+  - name: Azure Shared Access Signature (SAS) Token
+    type: azure_sas_token
+    description: Azure Shared Access Signature (SAS) Token
+    regex:
+      pattern: |
+        (https://[^?]+\?)?[^\s?/]*\bsig=([A-Za-z0-9]|%2[bfBF]){43,}%3[dD][^\s?/]*
+      start: |
+        \b|\A
+      end: |
+        \z|\s|['"`]
+      additional_match:
+        - '(^|&)sv=[0-9]{4}-[0-9]{2}-[0-9]{2}'
+        - '(^|&)se=[0-9]{4}-[0-9]{2}-[0-9]{2}'
+        - '(^|&)st=[0-9]{4}-[0-9]{2}-[0-9]{2}'
+      additional_not_match:
+        - '^https://files\.oaiusercontent\.com/'
+    test:
+      data: |
+        AZURE_SAS_TOKEN: "?sv=2019-12-12&ss=bfqt&srt=sco&sp=rwdlacupx&se=2021-10-11T16:57:00Z&st=2021-10-11T08:57:00Z&spr=https&sig=abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmn%3D"
+      start_offset: 19
+      end_offset: 214
+    comments:
+      - This is a Shared Access Signature (SAS) token for Azure services. See [these examples](https://learn.microsoft.com/en-us/rest/api/storageservices/service-sas-examples)
+      - The token is a URL query string parameter, and the signature is a base64 encoded HMAC-SHA256 hash, so is a fixed length in plain text and always ends in =
+      - When encoded in a URL, the `+` character is replaced with `%2B`, the `/` character is replaced with `%2F`, and the `=` character is replaced with `%3D`
+      - Because of the variable length of the characters (beacuse of the URL encoding), we use `{43,}` to match the signature
+      - We ignore `https://files.oaiusercontent.com/` because they are URLs for images generated by ChatGPT
+
+  - name: CircleCI API token
+    type: circleci_api_token
+    description: CircleCI API token
+    regex:
+      pattern: |
+        [a-f0-9]{40}
+      start: |
+        (?i)circle[_-]?(ci[_.-]?)?(api[_.-]?)?(token|key)['"`]?(\s*[\]\)])?\s*([:,=]|[=-]>|to|[!=]={1,2}|<>)?\s*([[{])?['"`]?
+      end: |
+        ['"`\r\n,]|\z
+    test:
+      data: |
+        circle_ci_api_token: "0123456789abcdef0123456789abcdef01234567"
+      start_offset: 22
+      end_offset: 62

@@ -118,25 +118,29 @@ _version: v0.1_
 ## YAML Static Password Fields
 
 **⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
-Pattern to find Static passwords in YAML configuration files
+Pattern to find hardcoded passwords in YAML configuration files
 
-_version: v0.1_
+_version: v0.2_
 
 **Comments / Notes:**
 
 
-- The hardcoded password is between 12 and 32 chars long
+- Expect large numbers of false positives on variables containing 'key' or 'token'
 
-- Some false positives in Code might appear
+- The hardcoded password is any length
 
-- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
+- Some false positives in code might appear
+
+- The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)
+
+- Does not allow for multline blocks
   
 
 <details>
 <summary>Pattern Format</summary>
 
 ```regex
-[^\r\n'"]+
+[^\r\n`'"\x00-\x08]+
 ```
 
 </details>
@@ -145,7 +149,7 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-(?:\n|\A)[ \t]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key)[ \t]*:[ \t]*['"]?
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*['"]?
 ```
 
 </details><details>
@@ -166,28 +170,264 @@ Add these additional matches to the [Secret Scanning Custom Pattern](https://doc
 - Not Match:
 
   ```regex
-  ^(?:keyPassphrase|password|key|[ \t]+|\$\{[A-Za-z0-9_-]+\}|(?:str|string|int|bool)( +#.*)?),?$
+  ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:.* = )?(?:None|[Tt]rue|[Ff]alse|[Nn]ull|Default(?:Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+  ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
   ```
 - Not Match:
 
   ```regex
-  ^(?:(?:this|self|obj)\.)(?:[A-Za-z_]+\,|[A-Za-z_].*)$
+  ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
   ```
 - Not Match:
 
   ```regex
-  ^(?:[a-zA-Z_]+(?:\(\))?\.)*[a-zA-Z_]+\(\)$
+  ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
   ```
 - Not Match:
 
   ```regex
-  ^\s*(?:typing\.)?(?:[Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+  ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
   ```
+
+</details>
+
+## YAML hardcoded passwords (plain scalars)
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded passwords in YAML configuration files, using plain scalars
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hardcoded password is any length
+
+- Some false positives in code might appear
+
+- The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)
+
+- Only allows for plain scalars, not quoted or multi-line, to better control false positives
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^\r\n`'"\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+[\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^(keyPassphrase|password|key|[ \t]+|\$\{[^}]+}|(str|string|int|bool)( +#.*)?),?$
+  ```
+- Not Match:
+
+  ```regex
+  ^(.* = )?(None|[Tt]rue|[Ff]alse|[Nn]ull|Default(Type)?|Event|[A-Z]+_KEY|VERSION|NAME|update|destroy|(?:dis|en)ableEventListeners|\.\.\.),?$
+  ```
+- Not Match:
+
+  ```regex
+  ^(((this|self|obj)\.)([A-Za-z_]+\,|[A-Za-z_].*)|\{\}|\[\]|[0-9a-zA-Z],|\{)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(([a-zA-Z_]+(\(\))?\.)*[a-zA-Z_]+\(\)|\|\s*)$|\{\{[^}]+\}\}|\$\{\{ |^!Ref |^\$\(.*\)|^(https?|file)://|^(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)$|^=|\(\) => |\([^)]+\) => \{
+  ```
+- Not Match:
+
+  ```regex
+  ^\s*(typing\.)?([Tt]uple|[Ll]ist|[Dd]ict|Callable|Iterable|Sequence|Optional|Union)\[.*$
+  ```
+
+</details>
+
+## YAML hardcoded passwords (single quoted strings)
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded passwords in YAML configuration files, using single quotes
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hardcoded password is any length
+
+- Some false positives in code might appear
+
+- The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)
+
+- Only allows for only single-quoted passwords, to better control false positives
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^\r\n'\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*'
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+'([ \t]*[\r\n]|\z)
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  \{\{[^{}]+\}\}
+  ```
+
+</details>
+
+## YAML hardcoded passwords (double quoted strings)
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded passwords in YAML configuration files, using single quotes
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hardcoded password is any length
+
+- Some false positives in code might appear
+
+- The pattern only checks for certain key words to end the variable name (`secret`, `password`, etc.)
+
+- Only allows for only double-quoted passwords, to better control false positives
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^\r\n"\x00-\x08]+
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*"
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+"([ \t]*[\r\n]|\z)
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  \{\{[^{}]+\}\}
+  ```
+
+</details>
+
+## YAML hardcoded passwords (multiline strings)
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded passwords in YAML configuration files, using multiline strings
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hardcoded password is any length
+
+- Some false positives in code or YAML files might appear, especially where the variable is called 'key' or 'token'
+
+- The pattern checks for certain key words to end the variable name (`secret`, `password`, etc.)
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^\x00-\x08]+?
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*[|>][+-]?[ \t]*(\n|\r\n)[ \t]+
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+\n\n|\r\n\r\n|(\n|\r\n)[ \t]+\S+:|(\n|\r\n)\.\.\.[ \t\n\r]|\z
+```
 
 </details>
 
@@ -319,5 +559,511 @@ _version: v0.1_
 ```regex
 \"
 ```
+
+</details>
+
+## .env file style secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Find .env file style secrets in configuration files such as .env, Dockerfile, shell scripts etc.
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- Looks for secrets in the format of `SECRET=secret` at the start of a line, possibly with an `ENV ` or `export ` prefix
+
+- Allows no whitespace in the secret, to cut false positives
+
+- Some false positives in code might appear, especially where the variable name is 'key' or 'token'
+
+- The pattern only checks for certain key words to begin the pattern (`secret`, `password`, etc.)
+
+- More restrictive than the Generic Passwords pattern, so less prone to false positives
+
+- Lower length limit of 8 to remove FPs
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[^\r\n\x00-\x08'"#]{8,}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)((export|ENV|ARG) )?[A-Z_]*(?:SECRET|PASS(?:WD|WOR[TD]|CODE|PHRASE)?|KEY|TOKEN)=['"]?
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+[\r\n#]|['"]\s*[\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+- Not Match:
+
+  ```regex
+  ^\$(\{[^}]+\}|\([^)]+\)|[A-Za-z_]+|[0-9])$
+  ```
+- Not Match:
+
+  ```regex
+  ^(<[^>]+>|\[[^]+\]|\{[^}+\}|(your|my|the|a)_[a-z_]+|.*(passwor[t]|key|secret|token|密码).*|\.\.\.|xxx+|yyy+|zzz+|aaa+|bbb+|ccc+)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(test|value)([._-][a-z_.-]+)?$
+  ```
+- Not Match:
+
+  ```regex
+  ^(?i)(true|false|y(es)?|no?|on|off|0|1|nill|null|none|(\\x[a-f0-9]{2})+)$
+  ```
+- Not Match:
+
+  ```regex
+  ^(/|file:///|https?://[A-Za-z]:/)[A-Za-z0-9._-]{3,}+(/[a-z._-]{1,}){2,}/?$
+  ```
+
+</details>
+
+## YAML with Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded Base64-encoded passwords in YAML configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- Some false positives in code might appear
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## YAML with URI-safe Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded URI-safe Base64-encoded passwords in YAML configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- Some false positives in code might appear
+
+- This matches _- instead of +/, for URI-safe Base64
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## YAML with hex token
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded hex-encoded tokens in YAML configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hex token must be 32, 40 or 64 characters long, and contain numbers and letters
+
+- Some false positives in code might appear
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+(?:\n|\A)[ \t]*(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)[ \t]*:[ \t]*(['"]?|[|>]-?[ \t]*\n[ \t]*)
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+['"\r\n]|\z
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [a-f]
+  ```
+
+</details>
+
+## JSON with Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded Base64-encoded passwords in JSON configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- This may match in code, such as Python, that resembles JSON
+
+- This will not match some isolated fragments of JSON, so be aware of that when testing it
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9+/]){4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+[{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+"[ \t\r\n]*[,}\]]
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## JSON with URI-safe Base64 encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded URI-safe Base64-encoded passwords in JSON configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The Base64 must contain numbers, upper case and lower case and be at least 12 characters long
+
+- This may match in code, such as Python, that resembles JSON
+
+- This will not match some isolated fragments of JSON, so be aware of that when testing it
+
+- This matches _- instead of +/, for URI-safe Base64
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+(([A-Za-z0-9_-]){4})*([A-Za-z0-9_-]{4}|[A-Za-z0-9_-]{3}=|[A-Za-z0-9_-]{2}==)
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+[{[,][ \t]*[ \t\r\n]*"(?i)[a-z_.-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+"[ \t\r\n]*[,}\]]
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [A-Z]
+  ```
+
+- Match:
+
+  ```regex
+  [a-z]
+  ```
+
+- Match:
+
+  ```regex
+  ^.{12,}$
+  ```
+
+</details>
+
+## JSON with hex encoded secrets
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+Hardcoded hex-encoded tokens in JSON configuration files
+
+_version: v0.1_
+
+**Comments / Notes:**
+
+
+- The hex token must be 32, 40 or 64 characters long, and contain numbers and letters
+
+- This may match in code, such as Python, that resembles JSON
+
+- This will not match some isolated fragments of JSON, so be aware of that when testing it
+  
+
+<details>
+<summary>Pattern Format</summary>
+
+```regex
+[0-9a-f]{32}|[0-9a-f]{40}|[0-9a-f]{64}
+```
+
+</details>
+
+<details>
+<summary>Start Pattern</summary>
+
+```regex
+[{[,][ \t]*[ \t\r\n]*"(?i)[a-z_-]*(?:secret|service_pass(wd|word|code|phrase)|pass(?:wd|word|code|phrase)?|key|token)"[ \t]*:[ \t]*"
+```
+
+</details><details>
+<summary>End Pattern</summary>
+
+```regex
+"[ \t\r\n]*[,}\]]
+```
+
+</details>
+
+<details>
+<summary>Additional Matches</summary>
+
+Add these additional matches to the [Secret Scanning Custom Pattern](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning#example-of-a-custom-pattern-specified-using-additional-requirements).
+
+
+
+- Match:
+
+  ```regex
+  [0-9]
+  ```
+
+- Match:
+
+  ```regex
+  [a-f]
+  ```
 
 </details>

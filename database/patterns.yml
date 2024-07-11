@@ -8,6 +8,27 @@ name: Database passwords
 # We don't account for connection strings encoded in UTF-16, but that will be a rare case, if it happens at all
 
 patterns:
+  - name: Database Connection String (full string)
+    type: database_connection_string_full
+    description: "Database connection strings are used to connect to databases, often with embedded credentials."
+    regex:
+      pattern: |
+        [^"'`\x00-\x08\r\n|]*([Ss]erver|[Pp]rovider|[Dd]atabase|[Uu]ser [Ii]d|[Dd]ata [Ss]ource|[Ee]ndpoint|[Dd]efault[Ee]nd[Pp]oints[Pp]rotocol|[Aa]ccountName|[Da]ata[Ss]ource|[Aa]uthentication|[Ll]ogin|[Ii]nitial[Cc]atalog|DB|Trusted_Connection|authenticationType|DSN|[Dd]ata[Ss]ource[Nn]ame|[Ii]ntegrated[Ss]ecurity|[Ll]ocation|[Ee]ncrypt|[Ss]ystem|[Pp]rotocol|[Hh]ost|[Pp]ort|SRVR|[Dd]river|Dbq|[Ss]sl[Mm]ode|SSL|[Uu]id|DBNAME|SystemDB|[Pp]ersist [Ss]ecurity [Ii]nfo|[Cc]onnection [Tt]ype|[Dd]ata[Ss]ource[Nn]ame|[Ee]xcel [Ff]ile|[Ss]erver [Nn]ame|URL)=[^"'`\x00-\x08\r\n|]*
+      start: |
+        \A|["'`]|&quot;|[\r\n]|[=:-] 
+      end: |
+        \z|["'`]|&quot;|[\r\n]
+      additional_match:
+        - (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=
+      additional_not_match:
+        # placeholders, variable substitutions, etc.
+        - (^|;)([Pp]assword|[Pp]wd|[Ss]hared[Ss]ecret[Vv]alue|[Aa]ccount[Kk]ey|PW|pw|[Cc]ipher [Kk]ey|OAuth Access Token Secret)=(%s\b|\{\{[^}]+\}\}|\{[0-9]+\}|\$?\{[^}]+\}|\[[A-Z_]+\]|['"`]|$)
+    test:
+      data: connection_string = "Data Source=eee,1433;Initial Catalog=bbb;Integrated Security=False;User ID=ccc@aaa;Password=ddd;"
+      start_offset: 21
+      end_offset: 117
+
+
   - name: Database Connection String (1)
     type: database_connection_string_1
     description: "Database connection strings are used to connect to databases, often with embedded credentials."
@@ -113,5 +134,56 @@ patterns:
     comments:
       - This is specific to Microsoft SQL Server TSQL syntax
 
+  - name: SQLAlchemy Database Connection String
+    type: sqlalchemy_connection_string
+    description: SQLAlchemy connection strings are used to connect to databases, often with embedded credentials.
+    regex:
+      pattern: |
+        [^$/?#@\s][^/?#@\s\x00-\x08]*
+      start: |
+        (\A|\b)mysql\+[a-z]+://[^/?#:@\s\x00-\x08]*:
+      end: |
+        @
+      additional_not_match:
+        - (?i)^[[{(<]?(?:password|passwd|secret)[\]})>]?$
+        - ^\$?\{[^}+]\}i\}$
+        - ^%(?:\.\*)?s$
+    test:
+      data: |
+        engine = create_engine('mysql+mysqlconnector://scott:tiger@localhost/foo')
+      start_offset: 53
+      end_offset: 58
 
+  - name: MongoDB connection string
+    type: mongodb_connection_string
+    regex:
+      version: 0.2
+      pattern: |
+        mongodb(\+[a-z]+)?://[^'"`<>/:@\s\x00-\x08]+:[^'"`<>/@\s\x00-\x08]+@[^?'"`\s\x00-\x08]+
+      start: |
+        \A|\b
+      end: |
+        \z|\s|['"`?]
+      additional_not_match:
+        - (?i):(test|a|my)?[_-]?pass(word)?@
+        - :%(?:\.\*)?[sv]@
+        - :\$?\{[^}+]\}@
+        - ^mongodb\+srv://b\*b%40f3tt%3D:%244to%40L8%3DMC@test3.test.build.10gen.cc/mydb%3F\?replicaSet=repl0
+    test:
+      data: mongodb+srv://foo:bar@mongodb.example.invalid/
 
+  - name: JDBC Database Connection String
+    type: jdbc_connection_string
+    regex:
+      version: 0.1
+      pattern: |
+        jdbc:[^:\x00-\x08]+:\/\/[^\/\x00-\x08]+\/[^?\x00-\x08]+\?user=[^&\x00-\x08]+&password=[^\s'"`<{$%*\x00-\x08]+
+      start: |
+        \A|\b
+      end: |
+        \z|\s|['"`<]
+    test:
+      data: |
+        jdbc:mysql://localhost:3306/mydb?user=root&password=toor
+      start_offset: 0
+      end_offset: 56
