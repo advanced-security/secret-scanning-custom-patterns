@@ -21,7 +21,7 @@ patterns:
         # ..., \, , \n, \0, ',' and other single chars, smilies, hex, digits, nothing at all,
         # directories, regex, format string placeholder, urllib demo passphrase, "optional" in docs, a variable substitution, or surrounded by brackets of various kinds
         # all with possible ',' and surrounding whitespace, possibly with a following comment
-        - ^\s*(?:\.\.\.|\\|\\n|\\0|\?|\$\(|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.|/[a-zA-Z/.-]+/[a-zA-Z0-9]+(\.(pem|crt|key|cer|pub|der)|_rsa))|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover|focus)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
+        - ^\s*(?:\.\.\.|\\|\\n|\\0|\?|\$\(|[,()[\]{}`.]\\?|-[)(]|\\f21b|0x[A-Fa-f0-9]+|[0-9]{1,4}|(?:~|/tmp|\.\.|\.|(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9]+(\.(pem|crt|key|cer|pub|der)|_rsa))|\\{1,2}w\+/g,( \\?)?|%[sr]|geheim\$parole|\([Oo]ptional\).*|\$?(?:\{\{?[^}]+\}\}?|\(\(?[^)]+\)\)?|\[\[?[^\]+]\]\]?)|(before|hover|focus)(,| \{))?,?\s*(?:\s*(?:/\*|#|//).*)?$
         # function definitions, e.g. Javascript, function calls or variable declaration
         - ^(?:function\s*\([^)]*\)\s*{\s*.*|\([^)]*\)\s*=>\s*(?:{\s*|[^;)]+[;)])|(?:new |\([A-Za-z]+\)\s*)?[a-zA-Z0-9_.]+\s*\(.*|(?:public|private) [A-Za-z0-9_]+ \{|[A-Za-z0-9_.-]+\s*\) \{)$|\{\{[^}]+\}\}|\$\{\{|\{\}$|\[\]$|(0x)?%[0-9]+x|%[dusx]\.$
         # reference to a member variable, index into a variable, bash variables, perl hash key index, environment vars
@@ -64,7 +64,7 @@ patterns:
           ^(?i)token(_[A-Z]+)?['"]?\s*[:=]\s*['"](barline|parenthesis|qualified|suport|symbol|statementEnd|singleLineTitle|character|pageBreak|operator|optionalTitle|option|zupfnoter|chordname|macro|error|escape|indent|term|titleUnderline|tag|link|literal|(other|table)Block|list|value|control|set|support|injections|array|doc|source|heading|tokens|storage|empty|newline|empty_line|keyword|(line)?comment|meta|[lr]?paren|class|punctuation|regexp?|constant|string|entity|invalid|support|variable|multiline|language|paren|markup|singleline|nospell|text|array|doc|source|heading|tokens)(\.{1,2}[A-Za-z0-9_-]+){0,6}[!.]?["']$
         - "^KEY_[A-Z]+[0-9]{0,3}: 'k[a-zA-Z0-9]{1,6}'$"
         - |-
-          ['"` ](/dev/u?random|(^/[a-zA-Z0-9./_-]+/[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)|https?://.*|file://.*)['"`]$
+          ['"` ](/dev/u?random|(/[a-zA-Z0-9./_-]+/)?[a-zA-Z0-9_-]{5,}(\.(pem|crt|key|cer|pub|der)|_rsa)|https?://.*|file://.*)['"`]$
     test:
       data: password="Password123"
       start_offset: 0
