@@ -121,11 +121,11 @@ patterns:
       end_offset: 26
     expected:
       - name: auth-secret.yaml
-        start_offset: 14
-        end_offset: 25
+        start_offset: 159
+        end_offset: 160
       - name: auth-secret.yaml
-        start_offset: 41
-        end_offset: 62      
+        start_offset: 381
+        end_offset: 421   
     comments:
       - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
