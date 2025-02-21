@@ -119,6 +119,13 @@ patterns:
       data: password="AAAAAAAAAAAa00=="
       start_offset: 10
       end_offset: 26
+    expected:
+      - name: auth-secret.yaml
+        start_offset: 14
+        end_offset: 25
+      - name: auth-secret.yaml
+        start_offset: 41
+        end_offset: 62      
     comments:
       - "The Base64 must contain numbers, upper case and lower case and be at least 12 characters long"
       - "`password`, `secret`, `key`, or password like prefix (fuzzy)"
