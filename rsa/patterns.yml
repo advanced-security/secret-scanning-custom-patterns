@@ -101,3 +101,19 @@ patterns:
       start_offset: 0
       end_offset: 64
       
+  - name: SSH Private Keys2
+    type: ssh_private_keys
+    regex:
+      pattern: |
+        --BEGIN OPENSSH PRIVATE KEY--+[a-zA-Z0-9+/=\s]+--+END OPENSSH PRIVATE KEY--
+    comments:
+      - "*SSH Password:* `MyPassword`"
+    expected:
+      - name: ssh_rsa
+        start_offset: 3
+        end_offset: 2631
+    test:
+      data: |
+          --BEGIN OPENSSH PRIVATE KEY--AAAA--END OPENSSH PRIVATE KEY--
+      start_offset: 0
+      end_offset: 60
