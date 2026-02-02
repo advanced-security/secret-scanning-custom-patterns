@@ -20,7 +20,7 @@ jobs:
 
       - name: Get Token
         id: get_workflow_token
-        uses: actions/create-github-app-token@29824e64a8bfe573206ff59ef199e74d2aaf6ecf # v2.2.1
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
           private-key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
