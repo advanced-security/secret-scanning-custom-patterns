@@ -1,0 +1,32 @@
+name: Security Misconfigurations
+
+patterns:
+  - name: GitHub Actions pull_request_target
+    type: github_actions_pull_request_target
+    description: |
+      Detects the use of the pull_request_target trigger in GitHub Actions workflow files.
+      This trigger runs in the context of the base repository with access to secrets,
+      even for pull requests from forks, which can lead to secret exfiltration if
+      combined with untrusted input execution or code checkout from the PR branch.
+    comments:
+      - "Detects pull_request_target trigger in GitHub Actions workflow YAML files"
+      - "This trigger grants access to secrets and is dangerous when combined with untrusted code execution"
+      - "See: https://jessehouwing.net/github-actions-learnings-from-the-recent-nx-hack/"
+    regex:
+      version: 0.1
+      pattern: |
+        pull_request_target
+      start: |
+        (?:(?:\n|\r\n|\A)[ \t]*(?:-[ \t]+)?|[\[,][ \t]*)
+      end: |
+        [ \t]*(?:[:\],\n\r]|\z)
+    expected:
+      - name: pull_request_target.yml
+        start_offset: 23
+        end_offset: 42
+    test:
+      data: |-
+        on:
+          pull_request_target:
+      start_offset: 6
+      end_offset: 25

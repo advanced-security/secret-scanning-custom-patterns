@@ -1,0 +1,21 @@
+name: PR Checks
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Create PR message file
+        run: |
+          mkdir -p /tmp
+          cat > /tmp/pr-message.txt << 'EOF'
+          ${{ github.event.pull_request.title }}
+
+          ${{ github.event.pull_request.body }}
+          EOF

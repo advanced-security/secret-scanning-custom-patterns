@@ -109,6 +109,13 @@ Custom Secret Scanning Patterns repository.
 - UK National Insurance Number
   
 
+### [Security Misconfigurations](./security-misconfigurations)
+
+
+
+- GitHub Actions pull_request_target
+  
+
 ### [RSA Keys](./rsa)
 
 
