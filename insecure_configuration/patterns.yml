@@ -6,6 +6,7 @@ patterns:
     description: |
       Cleartext ldap:// URL. LDAP binds (including the bind DN and password) are
       transmitted unencrypted (CWE-319). Use ldaps:// or STARTTLS instead.
+    experimental: true
     comments:
       - "Only matches the insecure ldap:// scheme; ldaps:// is intentionally not matched"
       - "Pair with a CodeQL query to confirm the URL reaches an LDAP context/bind sink"
@@ -32,6 +33,7 @@ patterns:
       Setting the JDBC trustServerCertificate property to true disables TLS
       certificate validation (CWE-295), so the driver accepts any server
       certificate and the encrypted channel is unauthenticated (man-in-the-middle).
+    experimental: true
     comments:
       - "Matches only the insecure '=true' value; '=false' is not matched"
       - "Case-insensitive on the property name and value, allows spaces around '='"
@@ -68,6 +70,7 @@ patterns:
       A cleartext http:// endpoint configured against a URL/endpoint key
       (CWE-319). Traffic to the endpoint, including any credentials it carries,
       crosses the network unencrypted. Use https:// instead.
+    experimental: true
     comments:
       - "Anchored on a preceding URL/endpoint-style config key to cut false positives from unrelated http:// URLs (e.g. XML namespaces, schema locations)"
       - "Loopback/localhost endpoints (localhost, 127.0.0.0/8, 0.0.0.0, ::1) are not matched"
