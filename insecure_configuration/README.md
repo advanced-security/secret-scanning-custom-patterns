@@ -69,7 +69,7 @@ _version: v0.1_
 <summary>Pattern Format</summary>
 
 ```regex
-[tT]rust[sS]erver[cC]ertificate[ \t]*=[ \t]*[tT]rue
+(?i)trustServerCertificate[ \t]*=[ \t]*true
 ```
 
 </details>

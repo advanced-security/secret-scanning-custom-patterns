@@ -39,7 +39,7 @@ patterns:
     regex:
       version: 0.1
       pattern: |
-        [tT]rust[sS]erver[cC]ertificate[ \t]*=[ \t]*[tT]rue
+        (?i)trustServerCertificate[ \t]*=[ \t]*true
       start: |
         \A|[^a-zA-Z]
       end: |
