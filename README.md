@@ -70,6 +70,17 @@ Custom Secret Scanning Patterns repository.
 - OAuth client secret and ID pair
   
 
+### [Insecure Configuration](./insecure_configuration)
+
+
+
+- Cleartext LDAP URL
+
+- Insecure trustServerCertificate
+
+- Cleartext HTTP endpoint
+  
+
 ### [JWT](./jwt)
 
 

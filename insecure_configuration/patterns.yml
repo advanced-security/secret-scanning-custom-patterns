@@ -1,0 +1,97 @@
+name: Insecure Configuration
+
+patterns:
+  - name: Cleartext LDAP URL
+    type: cleartext_ldap_url
+    description: |
+      Cleartext ldap:// URL. LDAP binds (including the bind DN and password) are
+      transmitted unencrypted (CWE-319). Use ldaps:// or STARTTLS instead.
+    comments:
+      - "Only matches the insecure ldap:// scheme; ldaps:// is intentionally not matched"
+      - "Pair with a CodeQL query to confirm the URL reaches an LDAP context/bind sink"
+    regex:
+      version: 0.1
+      pattern: |
+        ldap://[a-zA-Z0-9._:\-/]+
+      start: |
+        \A|[^a-zA-Z0-9]
+      end: |
+        \z|["'`\s,;]
+    expected:
+      - name: WebSecurityConfig.java
+        start_offset: 1364
+        end_offset: 1393
+    test:
+      data: ldap://ldap.corp.acme.com:389
+      start_offset: 0
+      end_offset: 29
+
+  - name: Insecure trustServerCertificate
+    type: insecure_trust_server_certificate
+    description: |
+      trustServerCertificate=true disables TLS certificate validation on a JDBC
+      connection (CWE-295), so the driver accepts any server certificate and the
+      encrypted channel is unauthenticated (man-in-the-middle).
+    comments:
+      - "Matches only the insecure '=true' value; '=false' is not matched"
+      - "Case-insensitive on the property name and value, allows spaces around '='"
+      - "Pair with a CodeQL query to confirm the URL reaches a JDBC/DB connection sink"
+    regex:
+      version: 0.1
+      pattern: |
+        [tT]rust[sS]erver[cC]ertificate[ \t]*=[ \t]*[tT]rue
+      start: |
+        \A|[^a-zA-Z]
+      end: |
+        \z|[^a-zA-Z]
+    expected:
+      - name: DbConnectivityCheck.java
+        start_offset: 693
+        end_offset: 720
+      - name: DbConnectivityCheck.java
+        start_offset: 1258
+        end_offset: 1285
+      - name: application-prod.yaml
+        start_offset: 190
+        end_offset: 217
+      - name: application-prod.yaml
+        start_offset: 347
+        end_offset: 374
+    test:
+      data: trustServerCertificate=true
+      start_offset: 0
+      end_offset: 27
+
+  - name: Cleartext HTTP endpoint
+    type: cleartext_http_endpoint
+    description: |
+      A cleartext http:// endpoint configured against a URL/endpoint key
+      (CWE-319). Traffic to the endpoint, including any credentials it carries,
+      crosses the network unencrypted. Use https:// instead.
+    comments:
+      - "Anchored on a preceding URL/endpoint-style config key to cut false positives from unrelated http:// URLs (e.g. XML namespaces, schema locations)"
+      - "Loopback/localhost endpoints (localhost, 127.0.0.0/8, 0.0.0.0, ::1) are not matched"
+      - "Only matches http://; https:// is intentionally not matched"
+      - "Pair with a CodeQL query to confirm the URL reaches a network request sink"
+    regex:
+      version: 0.1
+      pattern: |
+        http://[^\s"'`<>\\]+
+      start: |
+        (?:\A|[^a-zA-Z0-9])(?i)(?:url|uri|endpoint|base[_-]?url|base[_-]?uri|href|callback|webhook|target|location)[ \t]*[:=][ \t]*['"]?
+      end: |
+        \z|['"`\s<>]
+      additional_not_match:
+        # loopback / localhost / unspecified address
+        - ^http://(?:localhost|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|0\.0\.0\.0|\[::1\]|::1)(?:[:/?#]|$)
+    expected:
+      - name: application-prod.yaml
+        start_offset: 2317
+        end_offset: 2363
+      - name: application-prod.yaml
+        start_offset: 2605
+        end_offset: 2657
+    test:
+      data: "url: http://reports.corp.acme.com:8080/ReportServer"
+      start_offset: 5
+      end_offset: 51
