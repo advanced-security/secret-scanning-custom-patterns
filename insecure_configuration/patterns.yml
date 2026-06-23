@@ -19,8 +19,8 @@ patterns:
         \z|["'`\s,;]
     expected:
       - name: WebSecurityConfig.java
-        start_offset: 1364
-        end_offset: 1393
+        start_offset: 1344
+        end_offset: 1373
     test:
       data: ldap://ldap.corp.acme.com:389
       start_offset: 0
@@ -29,9 +29,9 @@ patterns:
   - name: Insecure trustServerCertificate
     type: insecure_trust_server_certificate
     description: |
-      trustServerCertificate=true disables TLS certificate validation on a JDBC
-      connection (CWE-295), so the driver accepts any server certificate and the
-      encrypted channel is unauthenticated (man-in-the-middle).
+      Setting the JDBC trustServerCertificate property to true disables TLS
+      certificate validation (CWE-295), so the driver accepts any server
+      certificate and the encrypted channel is unauthenticated (man-in-the-middle).
     comments:
       - "Matches only the insecure '=true' value; '=false' is not matched"
       - "Case-insensitive on the property name and value, allows spaces around '='"
@@ -46,17 +46,17 @@ patterns:
         \z|[^a-zA-Z]
     expected:
       - name: DbConnectivityCheck.java
-        start_offset: 693
-        end_offset: 720
+        start_offset: 671
+        end_offset: 698
       - name: DbConnectivityCheck.java
-        start_offset: 1258
-        end_offset: 1285
+        start_offset: 1228
+        end_offset: 1255
       - name: application-prod.yaml
-        start_offset: 190
-        end_offset: 217
+        start_offset: 185
+        end_offset: 212
       - name: application-prod.yaml
-        start_offset: 347
-        end_offset: 374
+        start_offset: 341
+        end_offset: 368
     test:
       data: trustServerCertificate=true
       start_offset: 0
@@ -86,11 +86,11 @@ patterns:
         - ^http://(?:localhost|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|0\.0\.0\.0|\[::1\]|::1)(?:[:/?#]|$)
     expected:
       - name: application-prod.yaml
-        start_offset: 2317
-        end_offset: 2363
+        start_offset: 2232
+        end_offset: 2278
       - name: application-prod.yaml
-        start_offset: 2605
-        end_offset: 2657
+        start_offset: 2511
+        end_offset: 2563
     test:
       data: "url: http://reports.corp.acme.com:8080/ReportServer"
       start_offset: 5

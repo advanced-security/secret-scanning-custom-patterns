@@ -8,7 +8,6 @@
 ## Cleartext LDAP URL
 
 
-
 Cleartext ldap:// URL. LDAP binds (including the bind DN and password) are
 transmitted unencrypted (CWE-319). Use ldaps:// or STARTTLS instead.
 
@@ -50,10 +49,9 @@ ldap://[a-zA-Z0-9._:\-/]+
 ## Insecure trustServerCertificate
 
 
-
-trustServerCertificate=true disables TLS certificate validation on a JDBC
-connection (CWE-295), so the driver accepts any server certificate and the
-encrypted channel is unauthenticated (man-in-the-middle).
+Setting the JDBC trustServerCertificate property to true disables TLS
+certificate validation (CWE-295), so the driver accepts any server
+certificate and the encrypted channel is unauthenticated (man-in-the-middle).
 
 _version: v0.1_
 
@@ -93,7 +91,6 @@ _version: v0.1_
 </details>
 
 ## Cleartext HTTP endpoint
-
 
 
 A cleartext http:// endpoint configured against a URL/endpoint key
