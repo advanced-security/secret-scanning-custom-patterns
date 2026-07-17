@@ -7,6 +7,8 @@
 
 ## Cleartext LDAP URL
 
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
+
 
 Cleartext ldap:// URL. LDAP binds (including the bind DN and password) are
 transmitted unencrypted (CWE-319). Use ldaps:// or STARTTLS instead.
@@ -47,6 +49,8 @@ ldap://[a-zA-Z0-9._:\-/]+
 </details>
 
 ## Insecure trustServerCertificate
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 
 
 Setting the JDBC trustServerCertificate property to true disables TLS
@@ -91,6 +95,8 @@ _version: v0.1_
 </details>
 
 ## Cleartext HTTP endpoint
+
+**⚠️ WARNING: THIS RULE IS EXPERIMENTAL AND MIGHT CAUSE A HIGH FALSE POSITIVE RATE (test before commiting to org level) ⚠️**
 
 
 A cleartext http:// endpoint configured against a URL/endpoint key
