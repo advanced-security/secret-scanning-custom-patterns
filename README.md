@@ -73,12 +73,6 @@ Custom Secret Scanning Patterns repository.
 ### [Insecure Configuration](./insecure_configuration)
 
 
-
-- Cleartext LDAP URL
-
-- Insecure trustServerCertificate
-
-- Cleartext HTTP endpoint
   
 
 ### [JWT](./jwt)
