@@ -78,14 +78,14 @@ _version: v0.1_
 <summary>Start Pattern</summary>
 
 ```regex
-\A|[^a-zA-Z]
+\A|[^0-9A-Za-z]
 ```
 
 </details><details>
 <summary>End Pattern</summary>
 
 ```regex
-\z|[^a-zA-Z]
+\z|[^0-9A-Za-z]
 ```
 
 </details>

@@ -43,9 +43,9 @@ patterns:
       pattern: |
         (?i)trustServerCertificate[ \t]*=[ \t]*true
       start: |
-        \A|[^a-zA-Z]
+        \A|[^0-9A-Za-z]
       end: |
-        \z|[^a-zA-Z]
+        \z|[^0-9A-Za-z]
     expected:
       - name: DbConnectivityCheck.java
         start_offset: 671
