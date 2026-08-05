@@ -1,0 +1,95 @@
+spring:
+  application:
+    name: acme-portal
+  datasource:
+    # CWE-798: Hardcoded credential — low-entropy/generic password caught by Fortify, missed by GitHub tools
+    # CWE-295: trustServerCertificate=true disables TLS certificate validation
+    url: jdbc:sqlserver://prod-db01.corp.acme.com:1433;databaseName=AcmePortal;encrypt=true;trustServerCertificate=true;loginTimeout=30;applicationName=AcmePortal
+    username: acme_app_prod
+    password: ProdDB#2024!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      leak-detection-threshold: 60000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        jdbc:
+          batch_size: 50
+  cache:
+    type: redis
+  redis:
+    host: prod-redis-primary.corp.acme.com
+    port: 6379
+    password: ProdRedis@SecureP@ss1
+    ssl: true
+    timeout: 2000
+  mail:
+    host: smtp.corp.acme.com
+    port: 587
+    username: noreply@acme.com
+    password: ProdMail#Smtp04
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+logging:
+  level:
+    root: ERROR
+    com.acme: WARN
+  file:
+    name: /var/log/acme-portal/prod.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: /etc/acme/prod-keystore.p12
+    key-store-password: ProdKeystore@2024
+    key-store-type: PKCS12
+    key-alias: acme-prod
+  servlet:
+    context-path: /acme-portal
+  tomcat:
+    max-threads: 200
+    accept-count: 100
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+acme:
+  feature-flags:
+    enable-beta-dashboard: false
+    enable-audit-log: true
+  storage:
+    base-path: /data/acme-prod-uploads
+    max-file-size-mb: 100
+  # CWE-319: Report server configured over plaintext HTTP — no TLS in production
+  reporting:
+    server:
+      # Internal SSRS / report server endpoint — HTTP not HTTPS
+      url: http://reports.corp.acme.com:8080/ReportServer
+      username: svc-reports
+      password: Rpt$vc#Prod1
+      timeout-seconds: 60
+      retry-attempts: 3
+  audit:
+    retention-days: 365
+    export:
+      # CWE-319: Audit log export sink also over plaintext HTTP
+      endpoint: http://audit-collector.corp.acme.com:9200/acme-audit
