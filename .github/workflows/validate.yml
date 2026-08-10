@@ -20,10 +20,10 @@ jobs:
 
       - name: Get Token
         id: get_workflow_token
-        uses: peter-murray/workflow-application-token-action@dc0413987a085fa17d19df9e47d4677cf81ffef3 #v3.0.0
+        uses: actions/create-github-app-token@v2
         with:
-          application_id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
-          application_private_key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
+          app-id: ${{ secrets.ADVANCED_SECURITY_APP_ID }}
+          private-key: ${{ secrets.ADVANCED_SECURITY_APP_KEY }}
 
       - name: Validate results against snapshot
         uses: advanced-security/secret-scanning-tools@v1
